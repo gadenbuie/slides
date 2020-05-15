@@ -1,0 +1,2069 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Talk Title</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Garrick Aden-Buie" />
+    <meta name="date" content="2020-05-15" />
+    <script src="assets/libs/header-attrs/header-attrs.js"></script>
+    <link href="assets/libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="assets/libs/tile-view/tile-view.js"></script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xa6fee245c2545f4b5d7531d04e73c78","expires":14}</script>
+    <script src="assets/libs/himalaya/himalaya.js"></script>
+    <script src="assets/libs/js-cookie/js.cookie.js"></script>
+    <link href="assets/libs/editable/editable.css" rel="stylesheet" />
+    <script src="assets/libs/editable/editable.js"></script>
+    <link href="assets/libs/js4shiny/css/_variables-fonts.css" rel="stylesheet" />
+    <link href="assets/libs/js4shiny/css/_variables.css" rel="stylesheet" />
+    <link href="assets/libs/js4shiny/css/code.css" rel="stylesheet" />
+    <link href="assets/libs/js4shiny/jsonview/jsonview.css" rel="stylesheet" />
+    <script src="assets/libs/js4shiny/jsonview/jsonview.min.js"></script>
+    <link href="assets/libs/js4shiny-redirectConsoleLog/jslog.css" rel="stylesheet" />
+    <script src="assets/libs/js4shiny-redirectConsoleLog/redirectConsoleLog.js"></script>
+    <link href="assets/libs/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="assets/libs/font-awesome/css/v4-shims.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/js4shiny-xaringan-base.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/tachyons.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/js4shiny-xaringan-extra.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: middle right hide-count
+background-image: url(https://source.unsplash.com/jiUNAQb6Cfk/1600x900)
+background-size: cover
+
+
+
+
+
+# .purple[10,000 Reasons to&lt;br&gt;Love Functions]
+
+## .gray[Garrick Aden-Buie]
+
+---
+exclude: true
+
+1. Farkle, rules and example
+1. Declarative programming
+1. Refactor into a function... what is a function?
+1. Functions reduce copy/paste
+1. Functions encapsulate logic
+ - Declare assumptions
+1. Functions simplify logic
+1. Functions can be **composed** (`magrittr`, `purrr`)
+1. Functions can be **parallel** (`furrr`)
+1. Functions can be packaged (`usethis`)
+1. Functions can be tested (`testthat`)
+1. Functions can be debugged
+1. Functions can be modified
+1. Functions can be documented (`roxygen2`)
+1. Documentation can be beautiful (`pkgdown`)
+1. Functions can be coordinated (`drake`)
+
+---
+class: fullscreen
+background-image: url(assets/img/farkle.jpg)
+background-size: contain
+
+---
+layout: true
+
+# Farkle Rules
+
+.w-50.h-100.fl.mt3.pr4[
+![](assets/img/farkle-rules.jpg)
+]
+
+---
+
+.w-50.fl.mt3[
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#lsuwprtpbe .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#lsuwprtpbe .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lsuwprtpbe .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#lsuwprtpbe .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#lsuwprtpbe .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lsuwprtpbe .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lsuwprtpbe .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#lsuwprtpbe .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#lsuwprtpbe .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#lsuwprtpbe .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#lsuwprtpbe .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#lsuwprtpbe .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#lsuwprtpbe .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#lsuwprtpbe .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#lsuwprtpbe .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#lsuwprtpbe .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#lsuwprtpbe .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#lsuwprtpbe .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#lsuwprtpbe .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lsuwprtpbe .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#lsuwprtpbe .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lsuwprtpbe .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#lsuwprtpbe .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lsuwprtpbe .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lsuwprtpbe .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#lsuwprtpbe .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lsuwprtpbe .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#lsuwprtpbe .gt_left {
+  text-align: left;
+}
+
+#lsuwprtpbe .gt_center {
+  text-align: center;
+}
+
+#lsuwprtpbe .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#lsuwprtpbe .gt_font_normal {
+  font-weight: normal;
+}
+
+#lsuwprtpbe .gt_font_bold {
+  font-weight: bold;
+}
+
+#lsuwprtpbe .gt_font_italic {
+  font-style: italic;
+}
+
+#lsuwprtpbe .gt_super {
+  font-size: 65%;
+}
+
+#lsuwprtpbe .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="lsuwprtpbe" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Combination</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Score</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">Single 5</td>
+      <td class="gt_row gt_left">50</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Single 1</td>
+      <td class="gt_row gt_left">100</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">3 x N of a kind</td>
+      <td class="gt_row gt_left">N * 100</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">4:6 of a Kind</td>
+      <td class="gt_row gt_left">(n - 3) * 1000</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">3 Pairs</td>
+      <td class="gt_row gt_left">1500</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Straight</td>
+      <td class="gt_row gt_left">1500</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2 Triplets</td>
+      <td class="gt_row gt_left">2500</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+]
+
+---
+
+
+
+.w-50.fr.f7[
+You rolled...
+
+<span class="red">
+<i class="fa fa-dice-one fa-lg"></i>
+</span>
+<span class="purple">
+<i class="fa fa-dice-four fa-lg"></i>
+</span>
+<span class="dark-green">
+<i class="fa fa-dice-five fa-lg"></i>
+</span>
+<span class="purple">
+<i class="fa fa-dice-four fa-lg"></i>
+</span>
+<span class="dark-green">
+<i class="fa fa-dice-five fa-lg"></i>
+</span>
+<span class="purple">
+<i class="fa fa-dice-four fa-lg"></i>
+</span>
+]
+
+--
+
+.w-50.fr.f7[
+- <span class="purple">
+<i class="fa fa-dice-four fa-lg"></i>
+</span>
+<span class="purple">
+<i class="fa fa-dice-four fa-lg"></i>
+</span>
+<span class="purple">
+<i class="fa fa-dice-four fa-lg"></i>
+</span> = 400
+
+- <span class="red">
+<i class="fa fa-dice-one fa-lg"></i>
+</span> = 100
+
+- <span class="dark-green">
+<i class="fa fa-dice-five fa-lg"></i>
+</span>
+<span class="dark-green">
+<i class="fa fa-dice-five fa-lg"></i>
+</span> = 50 x 2
+]
+
+--
+
+.w-50.fr.f7[
+And you get to roll again
+]
+
+---
+
+.w-50.fr.f7[
+Score: **600**. On your next roll...
+
+<span class="gold">
+<i class="fa fa-dice-two fa-lg"></i>
+</span>
+<span class="gold">
+<i class="fa fa-dice-two fa-lg"></i>
+</span>
+<span class="dark-green">
+<i class="fa fa-dice-five fa-lg"></i>
+</span>
+<span class="purple">
+<i class="fa fa-dice-four fa-lg"></i>
+</span>
+<span class="red">
+<i class="fa fa-dice-one fa-lg"></i>
+</span>
+<span class="blue">
+<i class="fa fa-dice-three fa-lg"></i>
+</span>
+]
+
+--
+
+.w-50.fr.f7[
+You can choose one or both of
+
+- <span class="red">
+<i class="fa fa-dice-one fa-lg"></i>
+</span> = 100
+
+- <span class="dark-green">
+<i class="fa fa-dice-five fa-lg"></i>
+</span> = 50
+]
+
+--
+
+.w-50.fr.f7[
+Pick the <span class="red">
+<i class="fa fa-dice-one fa-lg"></i>
+</span>, roll **5** dice
+]
+
+---
+
+.w-50.fr.f7[
+Current Score: **700**
+
+<span class="dark-green">
+<i class="fa fa-dice-five fa-lg"></i>
+</span>
+<span class="purple">
+<i class="fa fa-dice-four fa-lg"></i>
+</span>
+<span class="dark-green">
+<i class="fa fa-dice-five fa-lg"></i>
+</span>
+<span class="purple">
+<i class="fa fa-dice-four fa-lg"></i>
+</span>
+<span class="navy">
+<i class="fa fa-dice-six fa-lg"></i>
+</span>
+]
+
+--
+
+.w-50.fr.f7[
+You can choose one or both of
+
+- <span class="dark-green">
+<i class="fa fa-dice-five fa-lg"></i>
+</span> = 50
+
+- <span class="dark-green">
+<i class="fa fa-dice-five fa-lg"></i>
+</span> = 50
+]
+
+--
+
+.w-50.fr.f7[
+Pick both <span class="dark-green">
+<i class="fa fa-dice-five fa-lg"></i>
+</span>, roll **3** dice
+]
+
+---
+
+.w-50.fr.f7[
+Current Score: **800**
+]
+
+--
+
+.w-50.fr.f7[
+<span class="navy">
+<i class="fa fa-dice-six fa-lg"></i>
+</span>
+<span class="gold">
+<i class="fa fa-dice-two fa-lg"></i>
+</span>
+<span class="blue">
+<i class="fa fa-dice-three fa-lg"></i>
+</span>
+]
+
+--
+
+.w-50.fr.f7[
+.red.b[FARKLE! &amp;#x1F622;]
+
+Final Score: ~~800~~
+]
+
+---
+layout: true
+
+# How to roll computer dice
+
+---
+
+
+```r
+n_dice_to_roll &lt;- 6
+dice_values &lt;- 1:6
+sample(dice_values, size = n_dice_to_roll, replace = FALSE)
+```
+
+```
+## [1] 5 3 6 1 2 4
+```
+
+--
+
+
+```r
+*roll_dice &lt;- function(n_dice_to_roll) {
+  dice_values &lt;- 1:6
+  sample(dice_values, size = n_dice_to_roll, replace = FALSE)
+*} 
+```
+
+
+```r
+roll_dice(6)
+```
+
+```
+## [1] 1 3 4 5 2 6
+```
+
+---
+
+
+```r
+roll_dice &lt;- function(n) {
+  sample(1:6, size = n, replace = FALSE)
+}
+```
+
+--
+
+
+```r
+(dice_rolled &lt;- roll_dice(6))
+```
+
+```
+## [1] 3 6 2 4 5 1
+```
+
+--
+
+
+```r
+html_dice(dice_rolled, size = "3x")
+```
+
+<span class="blue">
+<i class="fa fa-dice-three fa-3x"></i>
+</span>
+<span class="navy">
+<i class="fa fa-dice-six fa-3x"></i>
+</span>
+<span class="gold">
+<i class="fa fa-dice-two fa-3x"></i>
+</span>
+<span class="purple">
+<i class="fa fa-dice-four fa-3x"></i>
+</span>
+<span class="dark-green">
+<i class="fa fa-dice-five fa-3x"></i>
+</span>
+<span class="red">
+<i class="fa fa-dice-one fa-3x"></i>
+</span>
+
+---
+
+
+```r
+lapply(1:5, function(...) roll_dice(n = 6))
+```
+
+```
+## [[1]]
+## [1] 6 4 1 3 2 5
+## 
+## [[2]]
+## [1] 3 1 2 6 5 4
+## 
+## [[3]]
+## [1] 1 4 6 5 2 3
+## 
+## [[4]]
+## [1] 5 1 2 4 3 6
+## 
+## [[5]]
+## [1] 2 5 1 6 3 4
+```
+
+---
+
+
+```r
+roll_dice &lt;- function(n) {
+* sample(1:6, size = n, replace = TRUE)
+}
+```
+
+--
+
+
+```r
+html_dice(roll_dice(6), size = "3x")
+```
+
+<span class="dark-green">
+<i class="fa fa-dice-five fa-3x"></i>
+</span>
+<span class="blue">
+<i class="fa fa-dice-three fa-3x"></i>
+</span>
+<span class="navy">
+<i class="fa fa-dice-six fa-3x"></i>
+</span>
+<span class="gold">
+<i class="fa fa-dice-two fa-3x"></i>
+</span>
+<span class="navy">
+<i class="fa fa-dice-six fa-3x"></i>
+</span>
+<span class="dark-green">
+<i class="fa fa-dice-five fa-3x"></i>
+</span>
+
+--
+
+
+```r
+html_dice(roll_dice(6), size = "3x")
+```
+
+<span class="dark-green">
+<i class="fa fa-dice-five fa-3x"></i>
+</span>
+<span class="red">
+<i class="fa fa-dice-one fa-3x"></i>
+</span>
+<span class="purple">
+<i class="fa fa-dice-four fa-3x"></i>
+</span>
+<span class="purple">
+<i class="fa fa-dice-four fa-3x"></i>
+</span>
+<span class="blue">
+<i class="fa fa-dice-three fa-3x"></i>
+</span>
+<span class="dark-green">
+<i class="fa fa-dice-five fa-3x"></i>
+</span>
+
+---
+
+
+```r
+lapply(1:5, function(...) roll_dice(n = 6))
+```
+
+```
+## [[1]]
+## [1] 6 1 2 2 6 1
+## 
+## [[2]]
+## [1] 1 4 1 2 6 3
+## 
+## [[3]]
+## [1] 5 2 5 6 3 6
+## 
+## [[4]]
+## [1] 4 2 5 1 3 6
+## 
+## [[5]]
+## [1] 6 2 4 4 4 2
+```
+
+---
+layout: true
+
+# Anatomy of a Function
+
+.f5.mt5[
+```
+roll_dice &lt;- function(n) {
+  sample(1:6, size = n, replace = TRUE)
+}
+```
+]
+
+---
+
+---
+background-image: url(assets/img/function-anatomy-3.jpg)
+background-size: cover
+
+---
+background-image: url(assets/img/function-anatomy-4.jpg)
+background-size: cover
+
+---
+background-image: url(assets/img/function-anatomy-5.jpg)
+background-size: cover
+
+---
+layout: true
+
+# Anatomy of a Function
+
+---
+
+.f5[
+
+```r
+roll_dice &lt;- function(n) {
+* if (n &gt; 6) {
+*   stop("Can't roll more than 6 dice")
+* }
+  sample(1:6, size = n, replace = TRUE)
+}
+```
+]
+
+---
+
+.f5[
+
+```r
+roll_dice &lt;- function(n) {
+  if (n &gt; 6) {
+    stop("Can't roll more than 6 dice")
+  }
+* if (n &lt; 1) {
+*   stop("Must roll at least 1 die")
+* }
+  sample(1:6, size = n, replace = TRUE)
+}
+```
+]
+
+---
+layout: false
+class: break center middle break-blue-pink
+
+# A Farkle Roll
+
+.w-50.f6.mh-auto.tl[
+- Roll the dice in your hand
+]
+--
+
+.w-50.f6.mh-auto.tl[
+- Count the dice you rolled
+]
+--
+
+.w-50.f6.mh-auto.tl[
+- Score the dice combinations
+]
+--
+
+.w-50.f6.mh-auto.tl[
+- Choose which dice to keep and which dice to re-roll
+]
+
+---
+
+# Roll the dice in your hand
+
+
+```r
+set.seed(2020-05+15)
+dice_rolled &lt;- roll_dice(6)
+```
+
+
+```r
+html_dice(dice_rolled, "3x")
+```
+
+<span class="red">
+<i class="fa fa-dice-one fa-3x"></i>
+</span>
+<span class="red">
+<i class="fa fa-dice-one fa-3x"></i>
+</span>
+<span class="purple">
+<i class="fa fa-dice-four fa-3x"></i>
+</span>
+<span class="gold">
+<i class="fa fa-dice-two fa-3x"></i>
+</span>
+<span class="gold">
+<i class="fa fa-dice-two fa-3x"></i>
+</span>
+<span class="gold">
+<i class="fa fa-dice-two fa-3x"></i>
+</span>
+
+---
+layout: true
+
+# Count the dice you rolled
+
+
+```r
+library(dplyr, warn.conflicts = FALSE)
+tibble(value = dice_rolled) %&gt;% count(value)
+```
+
+---
+
+
+```
+## # A tibble: 3 x 2
+##   value     n
+##   &lt;int&gt; &lt;int&gt;
+## 1     1     2
+## 2     2     3
+## 3     4     1
+```
+
+---
+
+
+```r
+count_dice &lt;- function(dice) {
+  dplyr::tibble(value = dice) %&gt;% dplyr::count(value)
+}
+```
+
+--
+
+
+```r
+(dice_counted &lt;- count_dice(dice_rolled))
+```
+
+```
+## # A tibble: 3 x 2
+##   value     n
+##   &lt;int&gt; &lt;int&gt;
+## 1     1     2
+## 2     2     3
+## 3     4     1
+```
+
+---
+layout: false
+
+# Score the dice combinations
+
+.w-third.fl[
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#cjzdiluzfi .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#cjzdiluzfi .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cjzdiluzfi .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#cjzdiluzfi .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#cjzdiluzfi .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cjzdiluzfi .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cjzdiluzfi .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#cjzdiluzfi .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#cjzdiluzfi .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#cjzdiluzfi .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#cjzdiluzfi .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#cjzdiluzfi .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#cjzdiluzfi .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#cjzdiluzfi .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#cjzdiluzfi .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#cjzdiluzfi .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#cjzdiluzfi .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#cjzdiluzfi .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#cjzdiluzfi .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cjzdiluzfi .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#cjzdiluzfi .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cjzdiluzfi .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#cjzdiluzfi .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cjzdiluzfi .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cjzdiluzfi .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#cjzdiluzfi .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cjzdiluzfi .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#cjzdiluzfi .gt_left {
+  text-align: left;
+}
+
+#cjzdiluzfi .gt_center {
+  text-align: center;
+}
+
+#cjzdiluzfi .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#cjzdiluzfi .gt_font_normal {
+  font-weight: normal;
+}
+
+#cjzdiluzfi .gt_font_bold {
+  font-weight: bold;
+}
+
+#cjzdiluzfi .gt_font_italic {
+  font-style: italic;
+}
+
+#cjzdiluzfi .gt_super {
+  font-size: 65%;
+}
+
+#cjzdiluzfi .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="cjzdiluzfi" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Combination</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Score</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">2 Triplets</td>
+      <td class="gt_row gt_left">2500</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Straight</td>
+      <td class="gt_row gt_left">1500</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">3 Pairs</td>
+      <td class="gt_row gt_left">1500</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">4:6 of a Kind</td>
+      <td class="gt_row gt_left">(n - 3) * 1000</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">3 x N of a kind</td>
+      <td class="gt_row gt_left">N * 100</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Single 1</td>
+      <td class="gt_row gt_left">100</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Single 5</td>
+      <td class="gt_row gt_left">50</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+]
+
+--
+
+.w-two-thirds.fr.pl3[
+- Check if we have the combination
+
+- Identify the dice used
+
+- Score the dice combination
+
+- Remove dice used from future scoring
+]
+
+--
+
+.w-two-thirds.fr[
+
+```r
+dice_rolled_ex &lt;- 1:6
+dice_counted_ex &lt;- count_dice(dice_rolled_ex)
+
+if (identical(dice_counted_ex$value, 1:6)) {
+  score &lt;- 1500
+  dice_counted_ex$n &lt;- 0
+}
+```
+]
+
+---
+layout: true
+
+# Score 3 of a Kind
+
+.w-30.fl.pr2[
+- Check for combo
+
+- Identify dice
+
+- Score combination
+
+- Remove dice
+
+
+```r
+dice_counted
+```
+
+```
+## # A tibble: 3 x 2
+##   value     n
+##   &lt;int&gt; &lt;int&gt;
+## 1     1     2
+## 2     2     3
+## 3     4     1
+```
+
+]
+
+---
+
+.w-70.fr.can-edit[
+
+```r
+# Pseudo-code is okay
+if (condition) {
+  
+}
+```
+]
+
+---
+
+.w-70.fr[
+
+```r
+dice_counts &lt;- dice_counted$n
+dice_values &lt;- dice_counted$value
+
+*if (any(dice_counts == 3)) {
+* # 3 of a kind
+* for (used in which(dice_counts == 3)) {
+*   value &lt;- dice_values[used]
+*   # three ones is 300
+*   if (value == 1) value &lt;- 3
+*   score &lt;- value * 100
+*   dice_counts[used] &lt;- 0
+* }
+*} 
+```
+]
+
+---
+layout: true
+class: last-output-only
+
+# Score 3 of a Kind with Functions
+
+---
+
+
+```r
+has_3_of_kind &lt;- function(dice_counted) {
+  if (sum(dice_counted$n) &lt; 3) return(FALSE)
+  any(dice_counted$n == 3)
+}
+
+identify_3_of_kind &lt;- function(dice_counted) {
+  # get largest dice value first
+  dice_counted %&gt;%
+    filter(n == 3) %&gt;%
+    tail(n = 1) %&gt;%
+    transmute(value, use = 3)
+}
+
+score_3_of_kind &lt;- function(dice_identified) {
+  tibble(used = 3, score = dice_identified$value * 100)
+}
+```
+
+---
+
+
+```r
+*has_3_of_kind &lt;- function(dice_counted) {
+  if (sum(dice_counted$n) &lt; 3) return(FALSE)
+  any(dice_counted$n == 3)
+}
+
+*identify_3_of_kind &lt;- function(dice_counted) {
+  # get largest dice value first
+  dice_counted %&gt;%
+    filter(n == 3) %&gt;%
+    tail(n = 1) %&gt;%
+    transmute(value, use = 3)
+}
+
+*score_3_of_kind &lt;- function(dice_identified) {
+  value &lt;- dice_identified$value
+  tibble(used = 3, score = ifelse(value ==1, 3, value) * 100)
+}
+```
+
+---
+
+
+```r
+dice_counted
+```
+
+```
+## # A tibble: 3 x 2
+##   value     n
+##   &lt;int&gt; &lt;int&gt;
+## 1     1     2
+## 2     2     3
+## 3     4     1
+```
+
+--
+
+
+```r
+has_3_of_kind(dice_counted)
+```
+
+```
+## [1] TRUE
+```
+
+--
+
+
+```r
+(dice_used &lt;- identify_3_of_kind(dice_counted))
+```
+
+```
+## # A tibble: 1 x 2
+##   value   use
+##   &lt;int&gt; &lt;dbl&gt;
+## 1     2     3
+```
+
+--
+
+
+```r
+(combo_score &lt;- score_3_of_kind(dice_used))
+```
+
+```
+## # A tibble: 1 x 2
+##    used score
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1     3   200
+```
+
+---
+
+.flex[
+.w-50.pr4[
+
+```r
+dice_counted
+```
+
+```
+## # A tibble: 3 x 2
+##   value     n
+##   &lt;int&gt; &lt;int&gt;
+## 1     1     2
+## 2     2     3
+## 3     4     1
+```
+]
+.w-50[
+
+```r
+dice_used
+```
+
+```
+## # A tibble: 1 x 2
+##   value   use
+##   &lt;int&gt; &lt;dbl&gt;
+## 1     2     3
+```
+
+]
+]
+
+--
+
+
+```r
+use_dice &lt;- function(dice_counted, dice_used) {
+  left_join(dice_counted, dice_used, by = "value") %&gt;%
+    mutate(use = ifelse(is.na(use), 0, use)) %&gt;%
+    transmute(value, n = n - use) %&gt;%
+    filter(n &gt; 0)
+}
+```
+
+---
+
+.flex[
+.w-third.pr1[
+
+```r
+dice_counted
+```
+
+```
+## # A tibble: 3 x 2
+##   value     n
+##   &lt;int&gt; &lt;int&gt;
+## 1     1     2
+## 2     2     3
+## 3     4     1
+```
+]
+.w-third.pr1[
+
+```r
+dice_used
+```
+
+```
+## # A tibble: 1 x 2
+##   value   use
+##   &lt;int&gt; &lt;dbl&gt;
+## 1     2     3
+```
+]
+.w-third[
+
+```r
+combo_score
+```
+
+```
+## # A tibble: 1 x 2
+##    used score
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1     3   200
+```
+]
+]
+
+--
+
+.dummy[
+
+```r
+(dice_left &lt;- use_dice(dice_counted, dice_used))
+```
+
+```
+## # A tibble: 2 x 2
+##   value     n
+##   &lt;int&gt; &lt;dbl&gt;
+## 1     1     2
+## 2     4     1
+```
+]
+
+---
+layout: false
+
+# Score a Roll
+
+
+```r
+score_roll &lt;- function(dice) {
+  n_dice &lt;- length(dice)
+  dice_counted &lt;- count_dice(dice)
+  
+  score_combos &lt;- NULL
+  
+  # ... check for high points first ...
+  
+  if (has_3_of_kind(dice_counted)) {
+    dice_used    &lt;- identify_3_of_kind(dice_counted)
+    combo_score  &lt;- score_3_of_kind(dice_used)
+    score_combos &lt;- bind_rows(score, combo_score)
+    dice_counted &lt;- use_dice(dice_counted, dice_used)
+  }
+  
+  # ... return score options ...
+}
+```
+
+---
+
+# When to use functions?
+
+--
+
+.w-80[
+&gt; You should consider writing a function whenever you’ve **copied and pasted** a block of code **more than twice** (i.e. you now have three copies of the same code).
+&gt; &lt;cite&gt;R for Data Science&lt;/cite&gt;
+]
+
+--
+
+.w-two-thirds.tr.fr[
+&gt; Sure, but functions are useful&lt;br&gt;**even if you only call them once**&lt;br&gt;
+&gt; &lt;cite&gt;Me, right now&lt;/cite&gt;
+]
+
+---
+class: break bg-purple middle
+
+# .white[A few reasons to love functions]
+
+--
+
+.absolute.bottom-0.right-1.white[
+.f6[*]The exact moment when this talk went off the rails
+]
+
+---
+
+# Functions can be **packaged**
+
+.f5.code[
+[usethis.r-lib.org](https://usethis.r-lib.org)
+]
+
+
+```r
+usethis::create_package("farkle")
+```
+
+.absolute.bottom-1.right-1[
+![](https://usethis.r-lib.org/reference/figures/logo.png)
+]
+
+---
+
+# Functions can be **tested**
+
+.f5.code[
+[testthat.r-lib.org](https://testthat.r-lib.org)
+]
+
+
+```r
+usethis::use_testthat()
+# Open your R file
+usethis::use_test()
+```
+
+.absolute.bottom-1.right-1[
+![](https://testthat.r-lib.org/reference/figures/logo.png)
+]
+
+---
+
+# Functions can be **debugged**
+
+- Use your tests
+
+- Use break points
+
+- Use `debug()` or `debugOnce()`
+
+- Use `options(error = recover)`
+
+---
+
+# Functions can be **modified**
+
+- Use your tests as a safety net
+
+- You know what .green.b[goes in] and what should .b.red[come out]
+
+---
+
+# Functions can be **documented**
+
+.f5.code[
+[roxygen2.r-lib.org](https://roxygen2.r-lib.org)
+]
+
+
+```r
+#' Function Title
+#' 
+#' Function description (paragraph)
+#' 
+#' @param n Number of dice to roll
+#' @export
+roll_dice &lt;- function(n) {
+  # ...
+}
+```
+
+.absolute.bottom-1.right-1[
+![](https://roxygen2.r-lib.org/reference/figures/logo.png)
+]
+
+---
+
+# Functions documentation can be **beautiful**
+
+.f5.code[
+[pkgdown.r-lib.org](https://pkgdown.r-lib.org)
+]
+
+
+```r
+pkgdown::init_site()
+pkgdown::build_site()
+```
+
+.absolute.bottom-1.right-1[
+![](https://pkgdown.r-lib.org/reference/figures/logo.png)
+]
+
+---
+
+# Functions can be tested, **continuously**
+
+.f5.code[
+[maxheld.de/ghactions](https://www.maxheld.de/ghactions/)
+]
+
+
+```r
+ghactions::use_ghactions(workflow = ghactions::website())
+```
+
+.absolute.bottom-1.right-2.w-20[
+![](https://raw.githubusercontent.com/maxheld83/ghactions/master/logo.png)
+]
+
+---
+
+# Functions can be **coordinated**
+
+.f5.code[
+[docs.ropensci.org/drake](https://docs.ropensci.org/drake)
+]
+
+
+```r
+drake::use_drake()
+```
+
+.absolute.bottom-1.right-2.w-20[
+![](https://camo.githubusercontent.com/44749362ca36c9e3295f2bcf18975d811564c121/68747470733a2f2f646f63732e726f70656e7363692e6f72672f6472616b652f7265666572656e63652f666967757265732f6c6f676f2e737667)
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="assets/js/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"slideNumberFormat": "%current%",
+"highlightStyle": "docco",
+"highlightLines": true,
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<script>
+(function (d) {
+  d.addEventListener('DOMContentLoaded', function () {
+    // find code chunks that get special colors
+    const langSpecial = ['r', 'js', 'yaml', 'json', 'bash']
+    const codeSpecial = d.querySelectorAll(langSpecial.map(l => 'pre code.' + l))
+
+    // find code chunks with highlighted lines
+    const hlines = d.querySelectorAll('.remark-code-line-highlighted')
+    const preHLParents = []
+
+    const findPreParent = function (line, p = 0) {
+      if (p > 1) return null // traverse up no further than grandparent
+      const el = line.parentElement
+      if (el.tagName === 'PRE') {
+        return el
+      } else {
+        return findPreParent(el, ++p)
+      }
+    }
+
+    // add the code language to the parent <pre> element
+    for (const code of codeSpecial) {
+      const pre = findPreParent(code)
+      const codeLang = code.className.split(' ').filter(c => langSpecial.includes(c))
+      pre.classList += ` ${codeLang}`
+    }
+
+    // add remark-code-has-line-highlighted to parent <pre> element
+    for (const line of hlines) {
+      const pre = findPreParent(line)
+      if (pre && !preHLParents.includes(pre)) {
+        preHLParents.push(pre)
+      }
+    }
+    preHLParents.forEach(p => p.classList.add('remark-code-has-line-highlighted'))
+  })
+})(document)
+</script>
+<style>
+  .remark-code-has-line-highlighted .remark-code-line:not(.remark-code-line-highlighted) {
+    opacity: 0.4;
+  }
+
+  .remark-code-line-highlighted {
+    background-color: inherit; /* Override highlight color */
+    /* font-weight: 500; */
+  }
+
+  /* Line Hover Indicator */
+  .remark-code-line:hover {
+    font-weight: bold;
+    opacity: 1 !important;
+  }
+
+  .remark-code-line:hover:before {
+    content: "\25B6";
+    color: #6d7e8a;
+    position: absolute;
+    transform: translateX(-1.2em);
+    animation: hover 0.66s alternate 8 cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  }
+
+  @keyframes hover {
+    0% {
+      transform: translateX(-1.2em);
+    }
+    100% {
+      transform: translateX(-1.5em);
+    }
+  }
+</style>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
