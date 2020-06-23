@@ -1,5 +1,5 @@
 (function(window, document) {
-	const videoOpts = {}
+	const videoOpts = {first: true}
 
 	function setVideoOptions() {
 		if (!videoOpts.width) {
@@ -43,13 +43,10 @@
 			return;
 		}
 
-		const vid = createVideoElement()
-		videoOpts.el = vid
-		document.body.appendChild(vid)
-
-		vid.addEventListener('dragstart', dragStart, false)
-		document.body.addEventListener('dragover', dragOver, false)
-		document.body.addEventListener('drop', dragDrop, false)
+		if (!navigator.mediaDevices) {
+			alert('Webcam is not available. Are you using https for this site?')
+			return;
+		}
 
 		navigator
 		.mediaDevices
@@ -58,8 +55,23 @@
 			width: {ideal: videoOpts.width},
 			height: {ideal: videoOpts.height}
 		}})
-		.then(stream => vid.srcObject = stream)
-		.catch(err => console.error(err))
+		.then(function(stream) {
+			const vid = createVideoElement()
+			videoOpts.el = vid
+			document.body.appendChild(vid)
+
+			vid.addEventListener('dragstart', dragStart, false)
+			document.body.addEventListener('dragover', dragOver, false)
+			document.body.addEventListener('drop', dragDrop, false)
+			vid.srcObject = stream
+		})
+		.catch(err => {
+			if (videoOpts.first) {
+				alert("Webcam is not available in this browser.\n\nAre you using https for this site?")
+				videoOpts.first = false
+			}
+			console.error(err)
+		})
 	}
 
 	function stopVideo() {
