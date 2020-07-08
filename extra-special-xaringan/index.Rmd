@@ -38,6 +38,18 @@ class: title-slide middle
 options(htmltools.dir.version = FALSE)
 ```
 
+```{r metathis, echo=FALSE}
+metathis::meta_social(
+  title = "Your Slides Are So Extra!",
+  description = "Extra-Special Presentations with xaringanExtra. A lightning talk for UseR!2020",
+  twitter_card_type = "summary_large_image",
+  image = "https://slides.garrickadenbuie.com/extra-special-xaringan/images/social-card.png",
+  twitter_creator = "@grrrck",
+  url = "https://slides.garrickadenbuie.com/extra-special-xaringan"
+)
+```
+
+
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
 library(xaringanthemer)
 style_duo_accent(
