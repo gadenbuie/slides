@@ -65,7 +65,7 @@ style_duo_accent(
   )
 )
 
-xaringanExtra::use_xaringan_extra(c("tile_view", "panelset", "editable", "animate", "tachyons"))
+xaringanExtra::use_xaringan_extra(c("tile_view", "panelset", "editable", "animate", "tachyons", "share_again"))
 xaringanExtra::use_webcam(300 * 1.5, 300 / 4 * 3 * 1.5)
 ```
 

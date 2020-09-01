@@ -1,8 +1,7 @@
 ---
-title: "Talk Title"
-subtitle: "Talk Subtitler"  
+title: "10,000 Reasons to Love Functions"
 author: "Garrick Aden-Buie"
-date: '`r Sys.Date()`'
+date: '2020-05-15'
 output:
   xaringan::moon_reader:
     lib_dir: assets/libs
@@ -36,7 +35,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r js4shiny, echo=FALSE}
-xaringanExtra::use_xaringan_extra(c("tile_view", "editable"))
+xaringanExtra::use_xaringan_extra(c("tile_view", "editable", "share_again"))
 js4shiny::html_setup(stylize = c("fonts", "variables", "code"))
 ```
 

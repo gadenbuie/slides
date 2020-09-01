@@ -20,41 +20,95 @@
     [...document.querySelectorAll('.panel-name')]
       .map(el => el.textContent.trim())
 
-    const randId = () => {
-      // https://gist.github.com/6174/6062387
-      return Math.random().toString(36).substring(2, 8) +
-    Math.random().toString(36).substring(2, 8)
+    const panelIds = {}
+
+    const uniquePanelId = (name) => {
+      name = encodeURIComponent(name.toLowerCase().replace(/[\s]/g, '-'))
+      if (Object.keys(panelIds).includes(name)) {
+        name += ++panelIds[name]
+      } else {
+        panelIds[name] = 1
+      }
+      return name
+    }
+
+    const identifyPanelName = (item) => {
+      let name = 'Panel'
+
+      // In R Markdown when header-attrs.js is present, we may have found a
+      // section header but the class attributes won't be duplicated on the <hX> tag
+      if (
+        (item.tagName === 'SECTION' || item.classList.contains('section')) &&
+        /^H[1-6]/.test(item.children[0].tagName)
+      ) {
+        name = item.children[0].textContent
+        item.classList.remove('panel-name')
+        item.removeChild(item.children[0])
+        return name
+      }
+
+      const nameDiv = item.querySelector('.panel-name')
+      if (!nameDiv) return name
+
+      // In remarkjs the .panel-name span might be in a paragraph tag
+      // and if the <p> is empty, we'll remove it
+      if (
+        nameDiv.tagName === 'SPAN' &&
+        nameDiv.parentNode.tagName === 'P' &&
+        nameDiv.textContent === nameDiv.parentNode.textContent
+      ) {
+        name = nameDiv.textContent
+        item.removeChild(nameDiv.parentNode)
+        return name
+      }
+
+      // If none of the above, remove the nameDiv and return the name
+      name = nameDiv.textContent
+      nameDiv.parentNode.removeChild(nameDiv)
+      return name
     }
 
     const processPanelItem = (item) => {
-      const nameDiv = item.querySelector('.panel-name')
-      let name = 'Panel'
-      if (nameDiv) {
-        name = nameDiv.textContent.trim()
-        if (nameDiv.tagName === 'SPAN' && nameDiv.parentNode.tagName === 'P') {
-          item.removeChild(nameDiv.parentNode)
-        } else {
-          item.removeChild(nameDiv)
-        }
-      }
-      return { name, content: item.children, id: randId() }
+      const name = identifyPanelName(item)
+      return { name, content: item.children, id: uniquePanelId(name) }
     }
 
-    const reflowPanelSet = (panels) => {
+    const getCurrentPanelFromUrl = (panelset) => {
+      const params = new URLSearchParams(window.location.search)
+      return params.get(panelset)
+    }
+
+    const reflowPanelSet = (panels, idx) => {
       const res = document.createElement('div')
       res.className = 'panelset'
+      res.id = 'panelset' + (idx > 0 ? idx : '')
+      const panelSelected = getCurrentPanelFromUrl(res.id)
 
       // create header row
-      const headerRow = document.createElement('div')
+      const headerRow = document.createElement('ul')
       headerRow.className = 'panel-tabs'
+      headerRow.setAttribute('role', 'tablist')
       panels
         .map((p, idx) => {
-          const panelHeaderItem = document.createElement('div')
+          const panelHeaderItem = document.createElement('li')
           panelHeaderItem.className = 'panel-tab'
+          panelHeaderItem.setAttribute('role', 'tab')
+          const thisPanelIsActive = panelSelected ? panelSelected === p.id : idx === 0
+          if (thisPanelIsActive) {
+            panelHeaderItem.classList.add('panel-tab-active')
+            panelHeaderItem.setAttribute('aria-selected', true)
+          }
           panelHeaderItem.tabIndex = 0
-          panelHeaderItem.classList.toggle('panel-tab-active', idx === 0)
-          panelHeaderItem.innerHTML = p.name
-          panelHeaderItem.dataset.for = p.id
+          panelHeaderItem.id = res.id + '_' + p.id // #panelsetid_panelid
+
+          const panelHeaderLink = document.createElement('a')
+          panelHeaderLink.href = '?' + res.id + '=' + p.id + '#' + panelHeaderItem.id
+          panelHeaderLink.setAttribute('onclick', 'return false;')
+          panelHeaderLink.tabIndex = -1 // list item is tabable, not link
+          panelHeaderLink.innerHTML = p.name
+          panelHeaderLink.setAttribute('aria-controls', p.id)
+
+          panelHeaderItem.appendChild(panelHeaderLink)
           return panelHeaderItem
         })
         .forEach(el => headerRow.appendChild(el))
@@ -63,10 +117,13 @@
 
       panels
         .map((p, idx) => {
-          const panelContent = document.createElement('div')
+          const panelContent = document.createElement('section')
           panelContent.className = 'panel'
-          panelContent.classList.toggle('panel-active', idx === 0)
+          panelContent.setAttribute('role', 'tabpanel')
+          const thisPanelIsActive = panelSelected ? panelSelected === p.id : idx === 0
+          panelContent.classList.toggle('panel-active', thisPanelIsActive)
           panelContent.id = p.id
+          panelContent.setAttribute('aria-labelledby', p.id)
           Array.from(p.content).forEach(el => panelContent.appendChild(el))
           return panelContent
         })
@@ -75,7 +132,23 @@
       return res
     }
 
+    const updateUrl = (panelset, panel) => {
+      let params = new URLSearchParams(window.location.search)
+      if (panel) {
+        params.set(panelset, panel)
+      } else {
+        params.delete(panelset)
+      }
+      params = params.toString() ? ('?' + params.toString()) : ''
+      const { pathname, hash } = window.location
+      const uri = pathname + params + hash
+      window.history.replaceState(uri, '', uri)
+    }
+
     const togglePanel = (clicked) => {
+      if (clicked.nodeName.toUpperCase() === 'A') {
+        clicked = clicked.parentElement
+      }
       if (!clicked.classList.contains('panel-tab')) return
       if (clicked.classList.contains('panel-tab-active')) return
 
@@ -83,32 +156,63 @@
         .querySelectorAll('.panel-tab')
       const panels = clicked.parentNode.parentNode
         .querySelectorAll('.panel')
+      const panelTabClicked = clicked.children[0].getAttribute('aria-controls')
+      const panelClicked = clicked.parentNode.parentNode.id
 
       Array.from(tabs)
-        .forEach(t => t.classList.remove('panel-tab-active'))
+        .forEach(t => {
+          t.classList.remove('panel-tab-active')
+          t.removeAttribute('aria-selected')
+        })
       Array.from(panels)
-        .forEach(p => p.classList.toggle('panel-active', p.id === clicked.dataset.for))
+        .forEach(p => {
+          const active = p.id === panelTabClicked
+          p.classList.toggle('panel-active', active)
+          // make inactive panels inaccessible by keyboard navigation
+          if (active) {
+            p.removeAttribute('tabIndex')
+            p.removeAttribute('aria-hidden')
+          } else {
+            p.setAttribute('tabIndex', -1)
+            p.setAttribute('aria-hidden', true)
+          }
+        })
 
       clicked.classList.add('panel-tab-active')
+      clicked.setAttribute('aria-selected', true)
+
+      // update query string
+      updateUrl(panelClicked, panelTabClicked)
     }
 
-    const initPanelSet = (panelset) => {
+    const initPanelSet = (panelset, idx) => {
       const panels = Array.from(panelset.querySelectorAll('.panel'))
+      if (!panels.length) return
+
       const contents = panels.map(processPanelItem)
-      const newPanelSet = reflowPanelSet(contents)
+      const newPanelSet = reflowPanelSet(contents, idx)
       panelset.parentNode.insertBefore(newPanelSet, panelset)
       panelset.parentNode.removeChild(panelset)
 
-      newPanelSet
-        .querySelector('.panel-tabs')
-        .addEventListener('click', (ev) => togglePanel(ev.target))
+      // click and touch events
+      const panelTabs = newPanelSet.querySelector('.panel-tabs');
+      ['click', 'touchend'].forEach(eventType => {
+        panelTabs.addEventListener(eventType, function (ev) {
+          togglePanel(ev.target)
+          ev.stopPropagation()
+        })
+      })
+      panelTabs.addEventListener('touchmove', function (ev) {
+        ev.preventDefault()
+      })
 
+      // key events
       newPanelSet
         .querySelector('.panel-tabs')
         .addEventListener('keydown', (ev) => {
-          const self = ev.target
+          const self = ev.currentTarget.querySelector('.panel-tab-active')
           if (ev.code === 'Space' || ev.code === 'Enter') {
-            togglePanel(self)
+            togglePanel(ev.target)
             ev.stopPropagation()
           } else if (ev.code === 'ArrowLeft' && self.previousSibling) {
             togglePanel(self.previousSibling)
@@ -120,21 +224,46 @@
             ev.stopPropagation()
           }
         })
+
+      return panels
     }
 
-    Array.from(
-      document.querySelectorAll('.panelset')
-    ).map(initPanelSet)
+    // initialize panels
+    Array.from(document.querySelectorAll('.panelset')).map(initPanelSet)
 
     if (typeof slideshow !== 'undefined') {
-      slideshow.on('afterShowSlide', slide => {
+      const getVisibleActivePanelInfo = () => {
+        const slidePanels = document.querySelectorAll('.remark-visible .panel-tab-active')
+
+        if (!slidePanels.length) return null
+
+        return slidePanels.map(panel => {
+          return {
+            panel,
+            panelId: panel.children[0].getAttribute('aria-controls'),
+            panelSetId: panel.parentNode.parentNode.id
+          }
+        })
+      }
+
+      slideshow.on('hideSlide', slide => {
         // clear focus if we had a panel-tab selected
         document.activeElement.blur()
 
-        const slidePanel = document
-          .querySelector('.remark-visible .panel-tab-active')
+        // clear search query for panelsets in current slide
+        document.querySelectorAll('.remark-visible .panelset')
+          .forEach(ps => updateUrl(ps.id, null))
+      })
 
-        if (slidePanel) slidePanel.focus()
+      slideshow.on('afterShowSlide', slide => {
+        const slidePanels = getVisibleActivePanelInfo()
+
+        if (slidePanels) {
+          // only first panel gets focus
+          slidePanels[0].panel.focus()
+          // but still update the url to reflect all active panels
+          slidePanels.forEach(({ panelId, panelSetId }) => updateUrl(panelSetId, panelId))
+        }
       })
     }
   })

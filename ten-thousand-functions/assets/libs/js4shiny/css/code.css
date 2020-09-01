@@ -24,7 +24,7 @@ pre::after {
 
 pre.js {
   border-color: var(--yellow);
-  background-color: var(--washed-yellow);
+  /* background-color: var(--washed-yellow); */
 }
 
 pre.js::after {
@@ -35,7 +35,7 @@ pre.js::after {
 
 pre.r {
   border-color: var(--blue);
-  background-color: var(--washed-blue);
+  /* background-color: var(--washed-blue); */
 }
 
 pre.r::after {
@@ -45,7 +45,7 @@ pre.r::after {
 
 pre.json {
   border-color: var(--purple);
-  background-color: var(--washed-purple);
+  /* background-color: var(--washed-purple); */
 }
 
 pre.json::after {
@@ -57,7 +57,7 @@ pre.node,
 pre.bash,
 pre.sh {
   border-color: var(--green);
-  background-color: var(--washed-green);
+  /* background-color: var(--washed-green); */
 }
 
 pre.node::after {
@@ -77,7 +77,7 @@ pre.md,
 pre.markdown,
 pre.yaml {
   border-color: var(--red);
-  background-color: var(--washed-red);
+  /* background-color: var(--washed-red); */
 }
 
 pre.yaml::after {
