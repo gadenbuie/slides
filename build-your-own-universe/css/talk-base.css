@@ -1,0 +1,81 @@
+#slide-title {
+  background-color: #f9faff;
+  background-size: 100%;
+  background-position: 0 -530px;
+  background-repeat: repeat-y
+}
+.talk-title {
+  margin-bottom: 110px
+}
+.talk-meta {
+  left: 1em;
+  width: 100%
+}
+.talk-author {
+  font-size: 1em
+}
+.talk-date {
+  font-size: .8em
+}
+.blueprint1 {
+  background-image: url(../figures/star-trek-blueprint-1.jpg);
+  background-size: cover
+}
+.blueprint2 {
+  background-image: url(../figures/star-trek-blueprint-2.jpg);
+  background-size: cover
+}
+hr {
+  box-sizing: content-box;
+  height: 3px;
+  overflow: visible;
+  border: none;
+  background: var(--moffitt-gray)
+}
+.remark-container {
+  background: #fff
+}
+.remark-slide-scaler {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  outline: 2px solid #eee
+}
+.city-360-rotate {
+  background-image: url(../figures/city-360-square.jpg);
+  background-size: contain;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  position: absolute;
+  animation-name: rotate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-duration: 120s
+}
+.city-360-top {
+  top: -60%;
+  left: 250px
+}
+.city-360-bottom {
+  top: 60%;
+  left: 250px
+}
+.city-360-bg {
+  background-color: #f9faff;
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0)
+  }
+  to {
+    transform: rotate(360deg)
+  }
+}
+.highlight-last-item > ul > li, 
+.highlight-last-item > ol > li {
+  opacity: 0.5;
+}
+.highlight-last-item > ul > li:last-of-type,
+.highlight-last-item > ol > li:last-of-type {
+  opacity: 1;
+}

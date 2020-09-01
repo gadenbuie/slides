@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Build your own universe</title>
+    <meta charset="utf-8" />
+    <meta name="author" content=".b[Travis Gerke] .gray-2[@travisgerke]" />
+    <meta name="author" content=".b[Garrick Aden-Buie] .gray-2[@grrrck]" />
+    <meta name="date" content="2020-08-28" />
+    <link href="libs/moffitt-tachyons/tachyons.moffitt.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400;1,600&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"> 
+    <link href="libs/animate.css/animate.min.css" rel="stylesheet" />
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/shareon/shareon.min.css" rel="stylesheet" />
+    <script src="libs/shareon/shareon.min.js"></script>
+    <link href="libs/xaringanExtra-shareagain/shareagain.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-shareagain/shareagain.js"></script>
+    <meta name="description" content="Build your own universe: Scale high-quality research data provisioning with R packages"/>
+    <meta name="generator" content="xaringan and remark.js"/>
+    <meta name="github-repo" content="tgerke/build-your-own-universe"/>
+    <meta name="twitter:title" content="Build your own universe: Scale high-quality research data provisioning with R packages"/>
+    <meta name="twitter:description" content="Build your own universe: Scale high-quality research data provisioning with R packages"/>
+    <meta name="twitter:url" content="https://build-your-own-universe.netlify.app"/>
+    <meta name="twitter:image:src" content="https://build-your-own-universe.netlify.app/social-card.png"/>
+    <meta name="twitter:image:alt" content="Title slide of Build your own universe: Scale high-quality research data provisioning with R packages, presented at R/Medicine 2020 by Travis Gerke and Garrick Aden-Buie"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:creator" content="@grrrck"/>
+    <meta name="twitter:site" content="@travisgerke"/>
+    <meta property="og:title" content="Build your own universe: Scale high-quality research data provisioning with R packages"/>
+    <meta property="og:description" content="Build your own universe: Scale high-quality research data provisioning with R packages"/>
+    <meta property="og:url" content="https://build-your-own-universe.netlify.app"/>
+    <meta property="og:image" content="https://build-your-own-universe.netlify.app/social-card.png"/>
+    <meta property="og:image:alt" content="Title slide of Build your own universe: Scale high-quality research data provisioning with R packages, presented at R/Medicine 2020 by Travis Gerke and Garrick Aden-Buie"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="article:author" content="Travis Gerke"/>
+    <link rel="stylesheet" href="css/moffitt-xaringan.css" type="text/css" />
+    <link rel="stylesheet" href="css/moffitt-xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="css/talk-base.css" type="text/css" />
+    <link rel="stylesheet" href="css/build-your-universe.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+name: title
+class: left bottom hide-count
+background-color: #FBFCFF;
+
+
+
+
+&lt;!-- Title Slide --&gt;
+
+&lt;div class="city-360-rotate city-360-top"&gt;&lt;/div&gt;
+&lt;div class="city-360-rotate city-360-bottom"&gt;&lt;/div&gt;
+
+<div class="talk-meta">
+<div class="talk-title">
+<h1>Build your own universe</h1>
+<p>Scale high-quality research data provisioning with R packages</p>
+</div>
+<div class="talk-author">
+.b[Travis Gerke] .gray-2[&amp;commat;travisgerke] &lt;br&gt; .b[Garrick Aden-Buie]  .gray-2[&amp;commat;grrrck]
+<br/>
+<span>.small[.blue-medium[Moffitt Cancer Center]]</span>
+</div>
+<div class="talk-date">August 28, 2020</div>
+</div>
+
+&lt;svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="-5.00 -4.75 213.75 247.00" style="stroke: var(--blue);fill: var(--blue);position: absolute;width: 150px;height: 150px;bottom: 1em;right: 10px;"&gt;&lt;path d="M103.02.13l-.18-.13h-1.09l-.22.15a88.23 88.23 0 0 1-7.92 4.89C62.42 23.04 31.33 41.2.1 59.13c-.2 36.89 0 73.79-.1 110.68 0 2.88.06 5.76.1 8.64 29.69 17 59.26 34.3 88.91 51.43 4.26 2.6 8.59 4.58 12.51 7.68h1.14c3.87-2.61 8.05-4.88 12.09-7.24 29.75-17.3 59.77-34.48 89.43-51.88V59.05L115.9 7.92c-4.33-2.59-8.81-4.82-12.88-7.79zm88.49 170.41c-29.77 17.2-59.49 34.51-89.29 51.66q-44.59-25.92-89.24-51.72V67.09q41.11-23.92 82.31-47.71c2.28-1.33 4.58-2.75 6.94-3.89 3.32 1.59 6.47 3.62 9.67 5.44q39.81 23 79.6 46.09.11 51.77.01 103.52z" class="cls-1"/&gt;&lt;path d="M80.41 74.91a5.19 5.19 0 1 0-8.78 1.6 5.22 5.22 0 0 0 8.78-1.6z" class="cls-1"/&gt;&lt;path d="M75.94 81.5c2.69-.07 4-1.81 5.91-3.38-2.46.62-5.19 1.82-7.71 1.3-1.49-.19-3-.45-4.44-.7 2.04 1.44 3.52 3.03 6.24 2.78zm-3.16 6.72l5.53-.62c.07-1.63.12-3.27.18-4.9l-5.83-.07c.03 1.87.07 3.73.12 5.59zm11.31.72c-5.68 0-13.07-.17-17.77 3.47s-5.66 10.55-2.39 15.36c2 3.17 5 4.52 8.21 6.25-.07-2-.14-4-.23-5.94-2-2.12-4.41-3.66-4.18-6.92.19-4 4-5.42 7.41-6.07 3.77-.84 6.41 1.39 9.94 2.17 2.46.42 5.15-.19 7.61-.44-1.71-3.79-3.84-7.9-8.6-7.88zm2.77 4.25l-.65-.37v-.74l.64-.38.65.36v.75z" class="cls-1"/&gt;&lt;path d="M78.09 96.11q-2.53.32-5.07.6c.1 10.19.45 20.38.72 30.57 1.22-.61 2.44-1.2 3.67-1.8.15-9.79.51-19.57.68-29.37zm14.36 1.74c-.33 1.2 2.08 2.22 2.93 1.51.37-1.19-2.1-2.08-2.93-1.51zm-39.36 23.24a8.8 8.8 0 0 0 .31-13.72c-2.16-1.82-4.62-1.84-7.31-2-4.73-.08-9.47 0-14.2 0v30h6.52v-11.62c2.78.27 7.59-.72 9.74 1.34 1.1 3.17.87 7 1.29 10.3h7.5a39.71 39.71 0 0 1-1.51-9.81c.03-1.89-1.21-2.98-2.34-4.49zm-5.43-3c-2.94.67-6.19.39-9.2.41v-7.42c3 0 6.19-.27 9.12.38 2.79.92 2.97 5.69.11 6.6zm56.71-12.71h-9.45v30.08h6.25c.11-7.11-.14-14.24.21-21.34 1.62 7.11 3.16 14.24 4.75 21.36h6.55c1.61-6.94 2.95-14 4.82-20.81.29 6.94.1 13.86.15 20.81h6.24c.08-10 0-20 0-30.07h-9.39c-1.7 7.3-3.3 14.62-5 21.9-1.79-7.3-3.35-14.64-5.13-21.93zm60.82 28.9l1 1.2h5.63v-30l-6.29-.06q0 4.77.06 9.52c-4-3.41-10.1-3.24-13.14 1.27-3.2 5-3.29 13.17 1 17.62 3.35 3.26 7.99 2.83 11.74.45zm-5.91-15.7a3.86 3.86 0 0 1 4.71 1c2 2.23 2.13 7 .33 9.37a4 4 0 0 1-6.71-.22c-1.72-2.81-1.52-8.33 1.67-10.13z" class="cls-1"/&gt;&lt;path d="M78.99 111.59v5.18c1.6 2 4.05 3.37 2.59 6.29-2.8 4.42-9.94 5.21-13.62 9a6.61 6.61 0 0 0-1.44 8.31c1.38 2.32 4.09 3.21 6.35 4.47 0-1.18-.05-2.35-.09-3.53-1.24-1.57-4.38-3.06-2.73-5.4 3.64-4.11 10.63-4.69 14.41-9a8.5 8.5 0 0 0 .72-10.65c-1.53-2.39-3.82-3.3-6.19-4.67zm64.86 23.2c2.6-1.41 3.35-3.75 4.62-6.22a32.63 32.63 0 0 0-5.68.11c-2.22.6-3.7 3-6.18 2.08-2-.68-2.5-2.9-3.41-4.55 5.09-.11 10.17-.05 15.26-.06-.25-4.43-.19-8.36-3.86-11.46-4.37-3.47-12.92-2.91-15.62 2.52-2 3.62-2.21 8.52-1.1 12.45 1.89 6.18 10.81 8.14 15.97 5.13zm-6.54-16.87c2.91-.34 3.51 1.9 4.92 3.8-3 .12-5.95.13-8.94 0 1.02-1.26 2.08-3.96 4.02-3.8z" class="cls-1"/&gt;&lt;path d="M76.69 152.67c.23-6.74.39-13.51.38-20.27-1.21 1-3.08 1.22-3 3.06-.17 6.78.26 13.63.47 20.42 1.05-1 2.17-1.55 2.15-3.21z" class="cls-1"/&gt;&lt;path d="M78.01 143.39c.09 1.1.19 2.19.32 3.28 1.14 1.85 4.42 4 2.41 6.3-2.88 2.76-7.66 3.7-10.48 6.69a21.86 21.86 0 0 0-2 4.08 32.22 32.22 0 0 1 7-4.48c2.36-1.06 5.34-1.94 7.23-3.73a6.27 6.27 0 0 0 1-7.61c-1.19-1.99-3.66-3.28-5.48-4.53zm-1.53 16.2c-.62.41-1.23.82-1.83 1.25a46.57 46.57 0 0 0 .51 10.48c2.06-3.23 1.2-8.04 1.32-11.73z" class="cls-1"/&gt;&lt;/svg&gt;
+
+???
+Thanks to the amazing organizers of R/Medicine! Intro self.
+
+This is a co-presented talk with Garrick Aden-Buie; I'll hand off to him at the conclusion of my slides
+
+Since I do not own the last slide, I'll inject a couple formalities here:
+- You're about to see some really cool slides, and I can personally take credit for effectively none of them. Garrick is the wizard.
+- We're hiring multiple positions with a specific eye out for R devs/DS over the next few months; feel free to reach out
+
+To orient you to the origin of this talk, where Garrick and I are coming from, and how it came to be that we gain high value from an R pkg universe, I'll begin with a story which is based on Moffitt's experience but could represent any institution's data-related journey...
+
+---
+class: hide-count no-logo no-border bg-black
+
+---
+class: hide-count no-logo no-border bg-black
+
+&lt;div class="carina-nebula fullscreen-blur-fade-in"&gt;&lt;/div&gt;
+
+???
+Once upon a time, our organization conducted all data-related business in an amorphous cloud known as the IT department.
+
+This is a common paradigm for many healthcare organizations in early stages of data maturity.
+
+---
+class: hide-count no-logo no-border bg-black carina-nebula-soft animated fadeIn
+
+&lt;div class="moons moons-1"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Help you make a dashboard!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-2"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Fulfill your research data request!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-3"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Remember how the data got here!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-4"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Help you find that database!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="world world-it world-it1 rotate-zoom-in"&gt;&lt;/div&gt;
+
+???
+The IT dept had many roles. 
+
+---
+class: hide-count no-logo no-border bg-black carina-nebula-soft
+
+&lt;div class="moons moons-1-static moons-text-reveal"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Help you make a dashboard!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-2-static"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Fulfill your research data request!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-4-static"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Help you find that database!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-3-static"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Remember how the data got here!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="world world-it world-it1"&gt;&lt;/div&gt;
+
+???
+Hospital operations needed dashboards for planning purposes
+
+---
+class: hide-count no-logo no-border bg-black carina-nebula-soft
+
+&lt;div class="moons moons-1-static moons-text-reveal"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Help you make a dashboard!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-2-static moons-text-reveal"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Fulfill your research data request!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-4-static"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Help you find that database!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-3-static"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Remember how the data got here!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="world world-it world-it1"&gt;&lt;/div&gt;
+
+???
+Researchers needed patient or biospecimen data for their IRB-approved protocols
+
+---
+class: hide-count no-logo no-border bg-black carina-nebula-soft
+
+&lt;div class="moons moons-1-static moons-text-reveal"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Help you make a dashboard!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-2-static moons-text-reveal"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Fulfill your research data request!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-3-static moons-text-reveal"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Remember how the data got here!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-4-static"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Help you find that database!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="world world-it world-it1"&gt;&lt;/div&gt;
+
+???
+Somebody needed to know about data lineage as well as coding or metadata standards; basically, how the data got here why it looks like it does
+
+---
+class: hide-count no-logo no-border bg-black carina-nebula-soft
+
+&lt;div class="moons moons-1-static moons-text-reveal"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Help you make a dashboard!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-2-static moons-text-reveal"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Fulfill your research data request!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-4-static moons-text-reveal"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Help you find that database!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-3-static moons-text-reveal"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Remember how the data got here!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="world world-it world-it1"&gt;&lt;/div&gt;
+
+???
+Organizing databases into a warehouse and granting access was important. We had someone for that!
+
+But eventually, some of these teams were operating at a scale which would be better situated as independent of the IT gravity field
+
+---
+name: world-bi
+class: hide-count no-logo no-border bg-black carina-nebula-soft fullscreen
+
+&lt;div class="absolute top-0 left-0 right-0 bottom-0 zoomToStepOne"&gt;
+&lt;div class="moons moons-1-static moons-text-reveal animated fadeOut"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Help you make a dashboard!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-2-static moons-text-reveal"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Fulfill your research data request!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-3-static moons-text-reveal"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Remember how the data got here!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-4-static moons-text-reveal"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Help you find that database!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="world world-it world-it1"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="world world-bi world-bi-entrance" style="width: 160px; height: 160px; top: 10%; left: 60%;"&gt;&lt;/div&gt;
+&lt;div class="world-label world-label-bi white"&gt;Business&lt;br&gt;Intelligence&lt;/div&gt;
+
+???
+One of these, was business intelligence. That person who was making dashboards for operational, i.e. non-research stakeholders, is now part of a larger team that creates such products at scale
+
+---
+name: world-cdsc
+class: hide-count no-logo no-border bg-black carina-nebula-soft fullscreen
+
+&lt;div class="absolute top-0 left-0 right-0 bottom-0 zoomToStepTwo"&gt;
+&lt;div class="moons moons-2-static moons-text-reveal animated fadeOut"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Fulfill your research data request!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-4-static moons-text-reveal"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Help you find that database!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-3-static moons-text-reveal"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Remember how the data got here!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="world world-it world-it1"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="world world-bi"&gt;&lt;/div&gt;
+&lt;div class="world-label world-label-bi white"&gt;Business&lt;br&gt;Intelligence&lt;/div&gt;
+
+&lt;div class="world world-cdsc"&gt;&lt;/div&gt;
+&lt;div class="world-label world-label-cdsc white"&gt;Collaborative&lt;br&gt;Data&lt;br&gt;Services&lt;/div&gt;
+
+???
+Next, our research-focused stakeholders had many of the same needs as the operational end-users, such as reporting/dashboarding and, importantly data provisioning. The twist in the research space is that such activities must be conducted in accordance with IRB and ethical approval, and study design feasibility as it relates to data availability and structure requires specialized training. Hence, the CDS team was formed. This is one of the groups that Garrick and I are representing today.
+
+---
+name: world-dqs
+class: hide-count no-logo no-border bg-black carina-nebula-soft fullscreen
+
+&lt;div class="absolute top-0 left-0 right-0 bottom-0 zoomToStepThree"&gt;
+&lt;div class="moons moons-3-static moons-text-reveal animated fadeOut"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Remember how the data got here!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="moons moons-4-static moons-text-reveal"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Help you find that database!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="world world-it world-it1"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="world world-bi"&gt;&lt;/div&gt;
+&lt;div class="world-label world-label-bi white"&gt;Business&lt;br&gt;Intelligence&lt;/div&gt;
+
+&lt;div class="world world-cdsc"&gt;&lt;/div&gt;
+&lt;div class="world-label world-label-cdsc white"&gt;Collaborative&lt;br&gt;Data&lt;br&gt;Services&lt;/div&gt;
+
+&lt;div class="world world-dqs"&gt;&lt;/div&gt;
+&lt;div class="world-label world-label-dqs white"&gt;Data&lt;br&gt;Quality&lt;/div&gt;
+
+???
+But CDS can't operate at scale in a vacuum either. A critical and complementary team, Data Quality and Standards, formed from IT's "data historian." They ensure that data dictionaries are robust and data lineage is understood by the BI and CDS teams for appropriate downstream data usage. 
+
+---
+name: data-engineering
+class: hide-count no-logo no-border bg-black carina-nebula-soft fullscreen
+
+&lt;div class="absolute top-0 left-0 right-0 bottom-0 zoomStepThree"&gt;
+&lt;div class="moons moons-4-static moons-text-reveal"&gt;&lt;span class="moon-circle" style="background-color: #8FD3EE;"&gt;&lt;/span&gt;&lt;span class="moons-text"&gt;Help you find that database!&lt;/span&gt;&lt;/div&gt;
+&lt;div class="world world-it world-it2"&gt;&lt;/div&gt;
+&lt;div class="world world-it world-it1"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="world world-bi"&gt;&lt;/div&gt;
+&lt;div class="world-label world-label-bi white"&gt;Business&lt;br&gt;Intelligence&lt;/div&gt;
+
+&lt;div class="world world-cdsc"&gt;&lt;/div&gt;
+&lt;div class="world-label world-label-cdsc white"&gt;Collaborative&lt;br&gt;Data&lt;br&gt;Services&lt;/div&gt;
+
+&lt;div class="world world-dqs"&gt;&lt;/div&gt;
+&lt;div class="world-label world-label-dqs white"&gt;Data&lt;br&gt;Quality&lt;/div&gt;
+
+???
+As institutional data assets grew, warehousing and access rules became necessarily complex. Data engineering formed a new continent within IT to meet the challenge.
+
+---
+name: rocket
+class: hide-count no-logo no-border bg-black carina-nebula-soft fullscreen
+
+&lt;div class="absolute top-0 left-0 right-0 bottom-0 zoomStepThree"&gt;
+&lt;div class="world world-it world-it2"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="world world-bi"&gt;&lt;/div&gt;
+&lt;div class="world-label world-label-bi white"&gt;Business&lt;br&gt;Intelligence&lt;/div&gt;
+
+&lt;div class="world world-cdsc"&gt;&lt;/div&gt;
+&lt;div class="world-label world-label-cdsc white"&gt;Collaborative&lt;br&gt;Data&lt;br&gt;Services&lt;/div&gt;
+
+&lt;div class="world world-dqs"&gt;&lt;/div&gt;
+&lt;div class="world-label world-label-dqs white"&gt;Data&lt;br&gt;Quality&lt;/div&gt;
+
+&lt;div class="rocket rocket-entrance"&gt;&lt;/div&gt;
+
+???
+Now, with so many teams completing data-related operations at a rapid pace, we needed a shuttlecraft to coordinate technology strategy, inform general data governance, and mine valuable software ore from the astRoid belt
+
+---
+name: app-dev
+class: hide-count no-logo no-border bg-black carina-nebula-soft fullscreen animated fadeIn
+
+&lt;div class="absolute top-0 left-0 right-0 bottom-0 zoomStepThree"&gt;
+&lt;div class="world world-it world-it2"&gt;&lt;/div&gt;
+&lt;div class="world world-it world-it3"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="world world-bi"&gt;&lt;/div&gt;
+&lt;div class="world-label world-label-bi white"&gt;Business&lt;br&gt;Intelligence&lt;/div&gt;
+
+&lt;div class="world world-cdsc"&gt;&lt;/div&gt;
+&lt;div class="world-label world-label-cdsc white"&gt;Collaborative&lt;br&gt;Data&lt;br&gt;Services&lt;/div&gt;
+
+&lt;div class="world world-dqs"&gt;&lt;/div&gt;
+&lt;div class="world-label world-label-dqs white"&gt;Data&lt;br&gt;Quality&lt;/div&gt;
+
+&lt;div class="rocket"&gt;&lt;/div&gt;
+
+&lt;div class="world-label-it"&gt;IT&lt;/div&gt;
+
+???
+When those tools are ready for placement and maintenance in the institutionally supported production environment, the new Applications Development land mass within IT can help out. For example, they would maintain software such as RStudio Server or GitHub Enterprise.
+
+---
+name: cdo
+class: hide-count no-logo no-border bg-black carina-nebula-soft fullscreen animated fadeIn
+
+&lt;div class="absolute top-0 left-0 right-0 bottom-0 zoomStepThree"&gt;
+&lt;div class="world world-it world-it3"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="world world-bi"&gt;&lt;/div&gt;
+&lt;div class="world-label world-label-bi white"&gt;Business&lt;br&gt;Intelligence&lt;/div&gt;
+
+&lt;div class="world world-cdsc"&gt;&lt;/div&gt;
+&lt;div class="world-label world-label-cdsc white"&gt;Collaborative&lt;br&gt;Data&lt;br&gt;Services&lt;/div&gt;
+
+&lt;div class="world world-dqs"&gt;&lt;/div&gt;
+&lt;div class="world-label world-label-dqs white"&gt;Data&lt;br&gt;Quality&lt;/div&gt;
+
+&lt;div class="rocket"&gt;&lt;/div&gt;
+
+&lt;div class="world-label-it"&gt;IT&lt;/div&gt;
+
+&lt;div class="space-person vibrate-1"&gt;&lt;/div&gt;
+
+???
+This whole story, admittedly with some shortcuts for clarity, mirrors the rise of the Chief Data Officer role across the healthcare industry. Indeed, all of these groups tend to roll up or be horizontally aligned in some way with the CDO's vertical.
+
+---
+class: left middle blueprint2
+
+.f4[
+Scaling .b.blue[provisioning]&lt;br&gt;
+by scaling .b.em.red[people]
+]
+
+.absolute.bottom-1.right-1[
+
+]
+
+???
+Taken together, this is our first hint that scaling data provisioning isn't just about scaling data: it's about scaling the people who are doing the provisioning. In part 2, Garrick is going to tell you more about the "how"
+
+---
+class: left middle blueprint2
+
+.f4[
+[...continued in part 2 &amp;rarr;](part-two.html)
+]
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "atom-one-light",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

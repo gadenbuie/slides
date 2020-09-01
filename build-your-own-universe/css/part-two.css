@@ -1,0 +1,489 @@
+.remark-code-line-highlighted {
+  background-color: #f0f0f0;
+}
+.remark-code-line-highlighted {
+  border-top: 2px solid #ddd;
+  border-left: 2px solid #ddd;
+  border-right: 2px solid #ddd;
+}
+.remark-code-line-highlighted + .remark-code-line-highlighted {
+  border-top: none;
+  border-bottom: none;
+}
+.remark-code-line-highlighted:last-of-type {
+  border-bottom: 2px solid #ddd;
+}
+.remark-code-line-highlighted + div {
+  border-top: 2px solid #aaa;
+}
+pre code.remark-code.hljs {
+  background: white;
+}
+/*! ---- thought bubble ---- */
+.bubble p {
+  position: relative;
+  width: 300px;
+  text-align: center;
+  line-height: 1.4em;
+  margin: 40px auto;
+  background-color: #fff;
+  border: 8px solid #333;
+  border-radius: 30px;
+  font-size: 1.25em
+}
+.thought p {
+  width: 500px;
+  border-radius: 200px;
+  padding: 30px
+}
+.bubble p:after,
+.bubble p:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0
+}
+.speech p:before {
+  left: 30px;
+  bottom: -50px;
+  border: 25px solid;
+  border-color: #333 transparent transparent #333
+}
+.speech p:after {
+  left: 38px;
+  bottom: -30px;
+  border: 15px solid;
+  border-color: #fff transparent transparent #fff
+}
+.thought p:after,
+.thought p:before {
+  right: 10px;
+  bottom: -30px;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border: 8px solid #666;
+  -webkit-border-radius: 28px;
+  -moz-border-radius: 28px;
+  border-radius: 28px
+}
+.thought p:after {
+  width: 20px;
+  height: 20px;
+  right: 5px;
+  bottom: -40px;
+  border-color: #999;
+  -webkit-border-radius: 18px;
+  -moz-border-radius: 18px;
+  border-radius: 18px
+}
+/*! https://github.com/miniMAC/magic/blob/master/dist/magic.css */
+.remark-visible .vanishIn {
+  -webkit-animation-name: vanishIn;
+  animation-name: vanishIn;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both
+}
+@-webkit-keyframes vanishIn {
+  0% {
+    opacity: 0;
+    transform-origin: 50% 50%;
+    transform: scale(2,2);
+    -webkit-filter: blur(90px);
+    filter: blur(90px)
+  }
+  100% {
+    opacity: 1;
+    transform-origin: 50% 50%;
+    transform: scale(1,1);
+    -webkit-filter: blur(0);
+    filter: blur(0)
+  }
+}
+@keyframes vanishIn {
+  0% {
+    opacity: 0;
+    transform-origin: 50% 50%;
+    transform: scale(2,2);
+    -webkit-filter: blur(90px);
+    filter: blur(90px)
+  }
+  100% {
+    opacity: 1;
+    transform-origin: 50% 50%;
+    transform: scale(1,1);
+    -webkit-filter: blur(0);
+    filter: blur(0)
+  }
+}
+/*! ---- typing animation ---- */
+.remark-visible .css-typing p {
+  opacity: 0;
+  border-right: .15em solid orange;
+  white-space: nowrap;
+  overflow: hidden;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards
+}
+.remark-visible .css-typing p:nth-child(1) {
+  width: 870px;
+  -webkit-animation: type 3s steps(70,end);
+  animation: type 3s steps(70,end);
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards
+}
+.remark-visible .css-typing p:nth-child(2) {
+  width: 390px;
+  -webkit-animation: type 2s steps(31,end);
+  animation: type 2s steps(31,end);
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 4s;
+  animation-delay: 4s
+}
+.remark-visible .css-typing p:nth-child(3) {
+  width: 110px;
+  -webkit-animation: type .5s steps(7,end);
+  animation: type .5s steps(7,end);
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 7s;
+  animation-delay: 7s
+}
+.remark-visible .css-typing p:nth-child(4) {
+  width: 100px;
+  -webkit-animation: type .5s steps(7,end);
+  animation: type .5s steps(7,end);
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 7.5s;
+  animation-delay: 7.5s
+}
+@keyframes type {
+  0% {
+    width: 0
+  }
+  1% {
+    opacity: 1
+  }
+  99.9% {
+    border-right: .15em solid orange
+  }
+  100% {
+    opacity: 1;
+    border: none
+  }
+}
+@-webkit-keyframes type {
+  0% {
+    width: 0
+  }
+  1% {
+    opacity: 1
+  }
+  99.9% {
+    border-right: .15em solid orange
+  }
+  100% {
+    opacity: 1;
+    border: none
+  }
+}
+@keyframes blink {
+  50% {
+    border-color: transparent
+  }
+}
+@-webkit-keyframes blink {
+  50% {
+    border-color: tranparent
+  }
+}
+/*! ---- email attachment ---- */
+#email-attachment:hover {
+  color: #eb1455
+}
+.zoomForward {
+  animation: zoomForward 1s cubic-bezier(.45,-.12,.51,.71);
+  transform-origin: center
+}
+@keyframes zoomForward {
+  0% {
+    transform: scale(1)
+  }
+  100% {
+    opacity: 0;
+    transform: scale(25)
+  }
+}
+@-webkit-keyframes zoomForward {
+  0% {
+    transform: scale(1)
+  }
+  100% {
+    opacity: 0;
+    transform: scale(25)
+  }
+}
+/*! ---- sql code two column ---- */
+.code-two-column .remark-code {
+  font-size: .33em;
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;
+  -webkit-column-gap: 20px;
+  -moz-column-gap: 20px;
+  column-gap: 20px
+}
+.code-two-column pre {
+  margin-top: 0;
+  padding-left: 1em;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px
+}
+.code-window-title-bar {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding-top: 10px
+}
+.code-window-circle {
+  width: 17px;
+  height: 18px;
+  margin-right: 6px
+}
+.code-window-circles {
+  position: absolute;
+  left: 12px;
+  top: 11px
+}
+#sql-magnifier {
+	position: absolute;
+	width: 90%;
+	font-size: 1em;
+  top: 20px;
+}
+#sql-magnifier .hljs {
+	background-color: white;
+	height: 60px;
+}
+.code-two-column pre {
+  cursor: url(../figures/magnifying-glass.cur), zoom-in;
+}
+/*! ---- ms word ---- */
+.word-doc {
+  background-image: url(../figures/word-doc.png);
+  background-size: cover;
+  overflow: hidden;
+  height: 100%;
+  padding-top: 5em
+}
+.word-doc pre {
+  max-height: 66%;
+  overflow: hidden;
+  position: absolute;
+  width: 90%
+}
+.word-doc pre code.sql {
+  background: #fff;
+  font-family: sans-serif;
+  max-width: 100%;
+  overflow-x: hidden
+}
+.word-doc pre code.sql .remark-code-line:hover {
+  font-weight: normal;
+}
+
+.word-doc pre code.sql .remark-code-line:hover:before {
+  content: none;
+  color: #6d7e8a;
+  position: absolute;
+  transform: none;
+  animation: none;
+}
+#sql-font-size-down {
+  background: 0 0;
+  width: 35px;
+  height: 30px;
+  position: absolute;
+  top: 77px;
+  left: 404px;
+  border: none;
+  cursor: pointer
+}
+#sql-font-size-up {
+  background: 0 0;
+  width: 35px;
+  height: 30px;
+  position: absolute;
+  top: 77px;
+  left: 365px;
+  border: none;
+  cursor: pointer
+}
+#sql-font-comic-sans {
+  background: 0 0;
+  text-align: center;
+  width: 125px;
+  height: 30px;
+  padding: 0;
+  position: absolute;
+  top: 77px;
+  left: 138px;
+  border: none;
+  cursor: pointer;
+  font-size: 21px
+}
+/*! magic.css https://github.com/miniMAC/magic/blob/master/dist/magic.css */
+.remark-fading .boingOutDown {
+  -webkit-animation-name: boingOutDown;
+  animation-name: boingOutDown
+}
+@-webkit-keyframes boingOutDown {
+  0% {
+    opacity: 1;
+    transform-origin: 100% 100%;
+    transform: perspective(800px) rotateX(0) rotateY(0)
+  }
+  20% {
+    opacity: 1;
+    transform-origin: 100% 100%;
+    transform: perspective(800px) rotateX(0) rotateY(10deg)
+  }
+  30% {
+    opacity: 1;
+    transform-origin: 0 100%;
+    transform: perspective(800px) rotateX(0) rotateY(0)
+  }
+  40% {
+    opacity: 1;
+    transform-origin: 0 100%;
+    transform: perspective(800px) rotateX(10deg) rotateY(10deg)
+  }
+  100% {
+    opacity: 0;
+    transform-origin: 100% 100%;
+    transform: perspective(800px) rotateX(90deg) rotateY(0)
+  }
+}
+@keyframes boingOutDown {
+  0% {
+    opacity: 1;
+    transform-origin: 100% 100%;
+    transform: perspective(800px) rotateX(0) rotateY(0)
+  }
+  20% {
+    opacity: 1;
+    transform-origin: 100% 100%;
+    transform: perspective(800px) rotateX(0) rotateY(10deg)
+  }
+  30% {
+    opacity: 1;
+    transform-origin: 0 100%;
+    transform: perspective(800px) rotateX(0) rotateY(0)
+  }
+  40% {
+    opacity: 1;
+    transform-origin: 0 100%;
+    transform: perspective(800px) rotateX(10deg) rotateY(10deg)
+  }
+  100% {
+    opacity: 0;
+    transform-origin: 100% 100%;
+    transform: perspective(800px) rotateX(90deg) rotateY(0)
+  }
+}
+/*! ---- css-focus-sliding-bg ---- */
+.focus-ul {
+  background-image: linear-gradient(90deg,#eb1455,#eb1455);
+  background-size: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size .25s ease-in,color .5s ease-in
+}
+.focus-ul:focus {
+  outline: 0;
+  color: #fff;
+  background-size: 100% 100%
+}
+del {
+  text-decoration-color: #eb1455;
+  text-decoration-thickness: 10px
+}
+/*! ---- Code Example ---- */
+.code-example {
+  position: absolute;
+  top: 100px
+}
+.leader-line {
+  z-index: 100
+}
+[class^=leader-start] {
+  color: var(--orange);
+  font-size: 1.1em;
+  width: 450px;
+  margin: 0;
+  position: absolute;
+  text-align: center
+}
+.leader-start-1 {
+  top: 10%;
+  right: 30%
+}
+.leader-start-2 {
+  top: 15%;
+  right: 20%
+}
+.expand-in {
+  max-height: 0;
+  overflow: hidden
+}
+.remark-fading .expand-in {
+  max-height: 600px
+}
+.remark-visible .expand-in {
+  animation: expand-in 1.5s linear;
+  animation-fill-mode: forwards
+}
+@keyframes expand-in {
+  0% {
+    max-height: 0
+  }
+  100% {
+    max-height: 600px
+  }
+}
+.leader-start-3 {
+  top: 20%;
+  right: 10%
+}
+.reveal-focus {
+  position: relative;
+  cursor: pointer
+}
+.reveal-focus:focus {
+  outline: 0
+}
+.reveal-focus .reveal-shown {
+  transition: opacity 150ms linear
+}
+.reveal-focus .reveal-other {
+  position: absolute;
+  transition: opacity 150ms linear;
+  width: 1000px;
+  left: 0
+}
+.reveal-focus:not(:focus) .reveal-other {
+  opacity: 0
+}
+.reveal-focus:focus .reveal-shown {
+  opacity: 0
+}
+.leader-start-4 {
+  top: 45%;
+  right: 0
+}
+.leader-start-5 {
+  bottom: 15%;
+  right: 5%
+}
