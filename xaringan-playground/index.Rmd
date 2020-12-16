@@ -202,9 +202,9 @@ To include an RStudio IDE embedded in the slides, add the following as inline R 
 
 iframe_fullscreen("http://localhost:8765", placeholder_text = "Embedded RStudio IDE...")
 
-You also need to be running the docker container from the ../docker/ folder
+You also need to be running the docker container from the ./docker/ folder
 
-cd ../docker
+cd ./docker
 docker build -t grrrck/xaringan-playground .
 docker run -d --rm -p 8765:8787 -e DISABLE_AUTH="true" --name xp grrrck/xaringan-playground
 
