@@ -1,0 +1,60 @@
+{
+    "highlight_selected_line": true,
+    "panes": {
+        "quadrants": [
+            "Source",
+            "TabSet1",
+            "Console",
+            "TabSet2"
+        ],
+        "tabSet1": [
+            "History",
+            "Connections",
+            "Packages",
+            "Presentation"
+        ],
+        "tabSet2": [
+            "Environment",
+            "Files",
+            "Plots",
+            "Help",
+            "Build",
+            "VCS",
+            "Viewer"
+        ],
+        "hiddenTabSet": [],
+        "console_left_on_top": false,
+        "console_right_on_top": true,
+        "additional_source_columns": 0
+    },
+    "show_indent_guides": false,
+    "continue_comments_on_newline": true,
+    "editor_keybindings": "vim",
+    "check_arguments_to_r_function_calls": true,
+    "check_unexpected_assignment_in_function_call": true,
+    "auto_append_newline": true,
+    "strip_trailing_whitespace": false,
+    "syntax_color_console": true,
+    "scroll_past_end_of_document": true,
+    "highlight_r_function_calls": true,
+    "save_files_before_build": true,
+    "font_size_points": 12,
+    "default_project_location": "/home/rstudio",
+    "document_author": "xaringan author",
+    "rmd_chunk_output_inline": false,
+    "show_hidden_files": false,
+    "latex_preview_on_cursor_idle": "inline_only",
+    "wrap_tab_navigation": false,
+    "save_workspace": "never",
+    "reuse_sessions_for_project_links": true,
+    "rmd_viewer_type": "pane",
+    "posix_terminal_shell": "bash",
+    "jobs_tab_visibility": "shown",
+    "shiny_viewer_type": "pane",
+    "vertically_align_arguments_indent": false,
+    "load_workspace": false,
+    "editor_theme": "Texmate (default)",
+    "console_double_click_select": true,
+    "initial_working_directory": "/home/rstudio",
+    "rainbow_parentheses": true
+}

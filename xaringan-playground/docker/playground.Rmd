@@ -1,0 +1,17 @@
+---
+title: A Live Playground for xaringan
+author: Garrick Aden-Buie
+date: rstudio::conf(2021L)
+output:
+  xaringan::moon_reader:
+    seal: false
+    anchor_sections: false
+    nature:
+      ratio: 16:9
+      countIncrementalSlides: true
+      slideNumberFormat: "%current%"
+      highlightStyle: atom-one-light
+      highlightLines: true
+---
+
+

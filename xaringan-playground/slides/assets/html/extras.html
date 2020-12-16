@@ -1,0 +1,166 @@
+<script type="text/javascript" charset="utf-8">
+function replaceIframePlaceholders () {
+  document
+    .querySelectorAll('.remark-slides-area .remark-visible div[data-iframe]')
+    .forEach(el => replaceIframePlaceholder(el))
+}
+
+function replaceIframePlaceholder (el) {
+    const iframe = document.createElement('iframe')
+    if (el.childNodes) {
+      el.childNodes.forEach(e => iframe.appendChild(e))
+    }
+    iframe.src = el.dataset.src
+    iframe.classList = el.classList
+    el.parentElement.replaceChild(iframe, el)
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  /* iframe placeholders */
+  slideshow.on('afterShowSlide', function (slide) {
+    replaceIframePlaceholders()
+  })
+  replaceIframePlaceholders()
+
+  /* click on block boxes */
+  const slideWebNutshell = document.getElementById('slide-web-nutshell');
+
+  ['block', 'inline'].map(function(cls) {
+    slideWebNutshell.querySelector('.' + cls)
+      .addEventListener('click', function() {
+        slideWebNutshell.classList.toggle(cls)
+      })
+  })
+
+  const codePre = document.getElementById("css-classes-rules-code")
+  const code = codePre.querySelector('code')
+  const style = document.getElementById('css-classes-rules')
+  code.innerText = '<style>\n' + style.innerText.trim() + '\n</style>'
+
+  function setStyle() { style.innerText = code.innerText.replaceAll('\n', '').replaceAll(/<\/?style>/g, '') }
+  function blockEvents(ev) { ev.stopPropagation() }
+
+  codePre.addEventListener('focus', function () {
+    codePre.addEventListener('keyup', blockEvents)
+    codePre.addEventListener('keydown', blockEvents)
+    codePre.addEventListener('keypress', blockEvents)
+    codePre.addEventListener('keyup', setStyle)
+  })
+  codePre.addEventListener('blur', function () {
+    codePre.removeEventListener('keyup', blockEvents)
+    codePre.removeEventListener('keydown', blockEvents)
+    codePre.removeEventListener('keypress', blockEvents)
+  })
+})
+</script>
+<style>
+.talk-title h1 {
+  padding-bottom: 0.2em;
+  margin-bottom: 0;
+  font-size: 7em;
+  line-height: 1;
+  text-align: center;
+  background: url('https://source.unsplash.com/E0BmfKjeQrw/1600x900');
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-size: cover;
+  font-weight: 400;
+  background-position: center;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: var(--gray);
+}
+.talk-author {
+	font-weight: bold;
+	color: var(--blue);
+	margin-bottom: 0.1em;
+	font-size: 2rem;
+	margin-top: 1.2em;
+}
+.talk-date {
+	margin-top: 0;
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
+}
+.talk-twitter {
+	position: absolute;
+	bottom: 1em;
+}
+.rstudio-slide {
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+.rstudio-slide .fullscreen-iframe-container {
+  height: 100%;
+  width: 100%;
+}
+.rstudio-slide .fullscreen-iframe-container iframe {
+  height: 100%;
+  width: 100%;
+  border: none;
+}
+.about-xaringan {
+	padding-left: 480px;
+}
+.about-xaringan { font-size: 2em; }
+.about-xaringan h1 { font-size: 3em; }
+.about-xaringan .remark-slide-number { font-size: 1rem; }
+
+#slide-web-nutshell * {
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+
+#slide-web-nutshell .pointer.block {
+  border-color: transparent;
+  border-bottom-color: #75AADB;
+  border-width: 3px;
+}
+#slide-web-nutshell .pointer.block:hover {
+  background-color: #75AADB88;
+}
+#slide-web-nutshell.block h1,
+#slide-web-nutshell.block p,
+#slide-web-nutshell.block div,
+#slide-web-nutshell.block ul {
+  border: 2px solid #75AADBAA;
+}
+
+#slide-web-nutshell .pointer.inline {
+  border-color: transparent;
+  border-bottom-color: #E7553C;
+  border-width: 3px;
+}
+#slide-web-nutshell .pointer.inline:hover {
+  background-color: #E7553C88;
+}
+#slide-web-nutshell.inline li,
+#slide-web-nutshell.inline span,
+#slide-web-nutshell.inline em,
+#slide-web-nutshell.inline strong,
+#slide-web-nutshell.inline img {
+  border: 2px solid #E7553CAA;
+}
+
+pre[contenteditable] {
+  outline-offset: 5px;
+  transition: outline-offset 0.25s linear;
+}
+
+pre[contenteditable]:hover {
+  outline: 1px dashed #ccc;
+}
+
+pre[contenteditable]:focus {
+	outline: 1px solid #bbb;
+  outline-offset: 10px;
+  transition: outline-offset 0.5s linear;
+}
+.pull-right ~ * {
+	clear: unset;
+}
+.pull-right ~ :not(.pull-right) {
+	clear: both;
+}
+</style>

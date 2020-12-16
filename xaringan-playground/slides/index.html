@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>xaringan playground</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Garrick Aden-Buie" />
+    <script src="assets/libs/header-attrs/header-attrs.js"></script>
+    <link href="assets/libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="assets/libs/tile-view/tile-view.js"></script>
+    <link href="assets/libs/tachyons/tachyons.min.css" rel="stylesheet" />
+    <script src="assets/libs/xaringanExtra-webcam/webcam.js"></script>
+    <script id="xaringanExtra-webcam-options" type="application/json">{"width":"300","height":"225","margin":"1em"}</script>
+    <link href="assets/libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-rstudio.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+name: title
+class: bottom hide-count
+
+
+
+
+
+&lt;!-- Title Slide --&gt;
+.talk-meta[
+.talk-title.center[
+# .f-carter[xaringan playground]
+
+## .pink.f-pompiere[Using xaringan to learn web development]
+]
+
+&lt;div class="talk-author f-zilla"&gt;Garrick Aden-Buie&lt;/div&gt;
+&lt;div class="talk-twitter code"&gt;&amp;commat;grrrck&lt;/div&gt;
+&lt;div class="talk-date code"&gt;rstudio::global(2021)&lt;/div&gt;
+]
+
+---
+background-image: url(assets/img/umbrella-card.jpg)
+background-size: 437px 681px
+background-position: left center
+background-repeat: no-repeat
+class: about-xaringan
+
+
+# xaringan
+
+&lt;div class="f3 code mv0"&gt;
+install.packages("xaringan")
+&lt;/div&gt;
+
+--
+
+1. Write in R Markdown+
+
+--
+2. Render slides &amp;rarr; web pages
+
+--
+3. Style with CSS
+
+---
+exclude: true
+background-image: url('https://source.unsplash.com/guzobeWoOAo/1600x900')
+background-size: cover
+background-position: center center
+background-repeat: no-repeat
+class: white center middle
+
+.f1[
+# .white.f-carter[What is xaringan?]
+]
+
+.f2.code[
+install.packages("xaringan")
+]
+
+---
+
+# CSS Classes and Rules
+
+.pull-left[
+### CSS Styles
+
+&lt;pre id="css-classes-rules-code" class="css-editable" contenteditable="true" autocorrect="off" autocomplete="off" spellcheck="false"&gt;&lt;code style="font-size: 1.1em"&gt;
+&lt;/code&gt;&lt;/pre&gt;
+]
+
+.pull-right[
+### Markdown
+
+&lt;pre&gt;&lt;code style="font-size: 1.1em"&gt;.compliment&amp;#8203;[
+.rstudio-blue&amp;#8203;[RStudio] is cool.
+]
+&lt;/code&gt;&lt;/pre&gt;
+
+.mt5[
+### HTML
+
+&lt;p class="compliment"&gt;&lt;span class="rstudio-blue"&gt;RStudio&lt;/span&gt; is cool&lt;/p&gt;
+]
+]
+
+&lt;style id="css-classes-rules"&gt;
+.compliment {
+  font-size: 2em;
+}
+
+.rstudio-blue {
+  color: #4d8dc9;
+}
+&lt;/style&gt;
+
+---
+name: web-nutshell
+class: middle
+
+.pull-left.tc[
+# The Web in a Nutshell
+
+&lt;h1 class="green"&gt;&lt;em&gt;Everything&lt;/em&gt;&lt;br/&gt;is in a box&lt;/h1&gt;
+]
+
+&lt;div class="code pull-right mv4"&gt;.compliment&amp;#8203;[&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&lt;span&gt;.rstudio-blue&amp;#8203;[RStudio]&lt;/span&gt; is cool.&lt;br&gt;
+]
+&lt;/div&gt;
+
+&lt;div class="pull-right f4"&gt;
+There are .b[two types] of box:&lt;br&gt;
+.block.bb.pointer[block boxes] and .inline.bb.pointer[inline boxes].
+&lt;/div&gt;
+
+---
+class: middle
+
+.center[
+# Infinite Moon Reader
+
+![](assets/img/infinite-moon-reader.png)
+]
+
+---
+class: rstudio-slide hide-count
+background-image: url(assets/img/rstudio-project-demo.png)
+background-size: cover
+
+&lt;!--
+
+To include an RStudio IDE embedded in the slides, add the following as inline R code
+
+iframe_fullscreen("http://localhost:8765", placeholder_text = "Embedded RStudio IDE...")
+
+You also need to be running the docker container from the ../docker/ folder
+
+cd ../docker
+docker build -t grrrck/xaringan-playground .
+docker run -d --rm -p 8765:8787 -e DISABLE_AUTH="true" --name xp grrrck/xaringan-playground
+
+Then use xaringan::inf_mr() or js4shiny::live_preview() to serve the slides.
+
+--&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": false,
+"highlightLines": false,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+<script type="text/javascript" charset="utf-8">
+function replaceIframePlaceholders () {
+  document
+    .querySelectorAll('.remark-slides-area .remark-visible div[data-iframe]')
+    .forEach(el => replaceIframePlaceholder(el))
+}
+
+function replaceIframePlaceholder (el) {
+    const iframe = document.createElement('iframe')
+    if (el.childNodes) {
+      el.childNodes.forEach(e => iframe.appendChild(e))
+    }
+    iframe.src = el.dataset.src
+    iframe.classList = el.classList
+    el.parentElement.replaceChild(iframe, el)
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  /* iframe placeholders */
+  slideshow.on('afterShowSlide', function (slide) {
+    replaceIframePlaceholders()
+  })
+  replaceIframePlaceholders()
+
+  /* click on block boxes */
+  const slideWebNutshell = document.getElementById('slide-web-nutshell');
+
+  ['block', 'inline'].map(function(cls) {
+    slideWebNutshell.querySelector('.' + cls)
+      .addEventListener('click', function() {
+        slideWebNutshell.classList.toggle(cls)
+      })
+  })
+
+  const codePre = document.getElementById("css-classes-rules-code")
+  const code = codePre.querySelector('code')
+  const style = document.getElementById('css-classes-rules')
+  code.innerText = '<style>\n' + style.innerText.trim() + '\n</style>'
+
+  function setStyle() { style.innerText = code.innerText.replaceAll('\n', '').replaceAll(/<\/?style>/g, '') }
+  function blockEvents(ev) { ev.stopPropagation() }
+
+  codePre.addEventListener('focus', function () {
+    codePre.addEventListener('keyup', blockEvents)
+    codePre.addEventListener('keydown', blockEvents)
+    codePre.addEventListener('keypress', blockEvents)
+    codePre.addEventListener('keyup', setStyle)
+  })
+  codePre.addEventListener('blur', function () {
+    codePre.removeEventListener('keyup', blockEvents)
+    codePre.removeEventListener('keydown', blockEvents)
+    codePre.removeEventListener('keypress', blockEvents)
+  })
+})
+</script>
+<style>
+.talk-title h1 {
+  padding-bottom: 0.2em;
+  margin-bottom: 0;
+  font-size: 7em;
+  line-height: 1;
+  text-align: center;
+  background: url('https://source.unsplash.com/E0BmfKjeQrw/1600x900');
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-size: cover;
+  font-weight: 400;
+  background-position: center;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: var(--gray);
+}
+.talk-author {
+	font-weight: bold;
+	color: var(--blue);
+	margin-bottom: 0.1em;
+	font-size: 2rem;
+	margin-top: 1.2em;
+}
+.talk-date {
+	margin-top: 0;
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
+}
+.talk-twitter {
+	position: absolute;
+	bottom: 1em;
+}
+.rstudio-slide {
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+.rstudio-slide .fullscreen-iframe-container {
+  height: 100%;
+  width: 100%;
+}
+.rstudio-slide .fullscreen-iframe-container iframe {
+  height: 100%;
+  width: 100%;
+  border: none;
+}
+.about-xaringan {
+	padding-left: 480px;
+}
+.about-xaringan { font-size: 2em; }
+.about-xaringan h1 { font-size: 3em; }
+.about-xaringan .remark-slide-number { font-size: 1rem; }
+
+#slide-web-nutshell * {
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+
+#slide-web-nutshell .pointer.block {
+  border-color: transparent;
+  border-bottom-color: #75AADB;
+  border-width: 3px;
+}
+#slide-web-nutshell .pointer.block:hover {
+  background-color: #75AADB88;
+}
+#slide-web-nutshell.block h1,
+#slide-web-nutshell.block p,
+#slide-web-nutshell.block div,
+#slide-web-nutshell.block ul {
+  border: 2px solid #75AADBAA;
+}
+
+#slide-web-nutshell .pointer.inline {
+  border-color: transparent;
+  border-bottom-color: #E7553C;
+  border-width: 3px;
+}
+#slide-web-nutshell .pointer.inline:hover {
+  background-color: #E7553C88;
+}
+#slide-web-nutshell.inline li,
+#slide-web-nutshell.inline span,
+#slide-web-nutshell.inline em,
+#slide-web-nutshell.inline strong,
+#slide-web-nutshell.inline img {
+  border: 2px solid #E7553CAA;
+}
+
+pre[contenteditable] {
+  outline-offset: 5px;
+  transition: outline-offset 0.25s linear;
+}
+
+pre[contenteditable]:hover {
+  outline: 1px dashed #ccc;
+}
+
+pre[contenteditable]:focus {
+	outline: 1px solid #bbb;
+  outline-offset: 10px;
+  transition: outline-offset 0.5s linear;
+}
+.pull-right ~ * {
+	clear: unset;
+}
+.pull-right ~ :not(.pull-right) {
+	clear: both;
+}
+</style>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
