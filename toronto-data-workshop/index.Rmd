@@ -1,0 +1,85 @@
+---
+title: "R Markdown"
+subtitle: "R's Secret Ingredient"
+author: Garrick Aden-Buie
+location: "Toronto Data Workshop"
+date: "2021-02-11"
+output:
+  xaringan::moon_reader:
+    lib_dir: assets/libs
+    css: 
+      - assets/css/xaringan-rstudio.css
+      - assets/css/title-slide.css
+    seal: false
+    anchor_sections: false
+    self_contained: false
+    # includes:
+    #   after_body: assets/html/extras.html
+    nature:
+      titleSlideClass: ["bottom", "left"]
+      slideNumberFormat: "%current%"
+      highlightStyle: false
+      highlightLines: false
+      ratio: 16:9
+      countIncrementalSlides: true
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE, width = 70)
+
+knitr::opts_chunk$set(
+  fig.width=9, fig.height=3.5, fig.retina=3,
+  out.width = "100%",
+  cache = FALSE,
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  hiline = TRUE
+)
+```
+
+name: title
+class: middle hide-count
+
+```{r xaringan-extras, echo=FALSE, results="asis"}
+xaringanExtra::use_xaringan_extra(c(
+  "tile_view",
+  "tachyons",
+  "editable"
+))
+xaringanExtra::use_extra_styles(hover_code_line = FALSE, mute_unhighlighted_code = TRUE)
+```
+
+<!-- Title Slide -->
+.talk-meta[
+.talk-title.center[
+# `r rmarkdown::metadata$title`
+
+## .pink.f-pompiere[`r rmarkdown::metadata$subtitle`]
+]
+
+<div class="talk-band left">
+<div class="talk-author f-zilla">`r rmarkdown::metadata$author`</div>
+<div class="talk-twitter code">&commat;grrrck</div>
+</div>
+<div class="talk-band right">
+<div class="code">`r paste(rmarkdown::metadata$location, collapse = ", ")`</div>
+<div class="code">`r paste(rmarkdown::metadata$date, collapse = ", ")`</div>
+</div>
+]
+
+---
+background-image: url('https://source.unsplash.com/2LJ4rqK2qfU')
+background-size: cover
+background-position: center center
+background-repeat: no-repeat
+class: right top
+
+# What is R Markdown?
+
+(wrong answers only)
+
+.can-edit.f-pen.f2[
+one  
+two
+]

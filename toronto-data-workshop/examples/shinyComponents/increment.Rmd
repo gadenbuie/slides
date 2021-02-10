@@ -1,0 +1,47 @@
+---
+dependencies:
+  - rmarkdown::html_dependency_font_awesome
+  - name: animate.css
+    version: 4.1.1
+    src:
+      href: https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/
+    stylesheet: animate.min.css
+---
+
+```{r}
+starting_value <- 12
+```
+
+```{ui button, ... = list(label = "Plus One", icon = "plus", class = "btn-default")}
+tagList(
+  actionButton(ns("increment"), HTML(format(shiny::icon(icon)), label), class = class),
+  self$dependencies$`font-awesome`
+)
+```
+
+```{ui number}
+uiOutput(ns("number"), inline = TRUE, .noWS = "outside")
+```
+
+```{ui, .tagList = TRUE}
+self$ui$button(id = id)
+p(
+  "The current value is ", strong(self$ui$number(id = id), .noWS = "outside"), ".",
+  .noWS = "inside"
+)
+verbatimTextOutput(ns("debug"))
+```
+
+```{server, ... = list(initial_value = starting_value, class = NULL)}
+output$debug <- renderPrint(input$increment)
+output$number <- renderUI(tags$span(
+  input$increment + initial_value, 
+  .noWS = "outside",
+  class = paste("animate__animated animate__bounce", class),
+  style = "display: inline-block",
+  self$dependencies$animate.css
+))
+
+reactive(input$increment + initial_value)
+```
+

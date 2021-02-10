@@ -1,0 +1,71 @@
+.talk-title h1 {
+  padding-bottom: 0.2em;
+  margin-bottom: 0;
+  font-size: 7em;
+  line-height: 1;
+  text-align: center;
+  font-weight: 400;
+  background-position: center;
+}
+.talk-title {
+  margin-bottom: 2em;
+}
+
+.talk-band {
+  position: absolute;
+}
+
+.talk-band > * {
+  padding: 1em 4em;
+  font-family: var(--code-font-family);
+  font-weight: 600;
+  text-align: center;
+  width: 500px;
+  white-space: nowrap;
+}
+
+.talk-band :first-child {
+  background-color: var(--blue);
+  color: var(--white);
+  height: 70px;
+}
+
+.talk-band :last-child {
+  background-color: var(--pink);
+  color: var(--white);
+  height: 200px
+}
+
+.talk-band.left {
+  left: -20px;
+  bottom: calc(270px / 4);
+  transform: rotate(45deg);
+  transform-origin: top left;
+}
+
+.talk-band.right {
+  right: -20px;
+  bottom: calc(270px / 4);
+  transform: rotate(-45deg);
+  transform-origin: top right;
+}
+
+/*
+.talk-author {
+	font-weight: bold;
+	color: var(--blue);
+	margin-bottom: 0.1em;
+	font-size: 2rem;
+	margin-top: 1.2em;
+}
+.talk-date {
+	margin-top: 0;
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
+}
+.talk-twitter {
+	position: absolute;
+	bottom: 1em;
+}
+*/

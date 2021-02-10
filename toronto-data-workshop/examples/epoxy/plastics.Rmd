@@ -1,0 +1,245 @@
+---
+title: Sitka Trees
+subtitle: An {epoxy} example
+output: html_document
+---
+
+## A basic knitr example
+
+```{r include=FALSE}
+rewrite_chunk <- function(label, include_label = FALSE, nbt = 3) {
+  chunk <- knitr::knit_code$get(label)
+  opts <- attr(chunk, "chunk_opts")
+  bt <- strrep("`", nbt)
+  engine <- opts$engine
+  exclude <- c("engine")
+  if (!isTRUE(include_label)) {
+    exclude <- c(exclude, "label")
+  }
+  opts <- opts[setdiff(names(opts), exclude)]
+  opts <- paste(
+    vapply(names(opts), FUN.VALUE = character(1), function(on) {
+      paste0(
+        if (on != "label") paste(on, "= "), 
+        if (is.character(opts[[on]])) dQuote(opts[[on]], q = 0) else deparse(opts[[on]])
+      )
+    }),
+    collapse = ", "
+  )
+  header <- paste0(bt, "{", engine, if (length(opts) && nzchar(opts)) " ", opts, "}")
+  paste(
+    header,
+    paste(chunk, collapse = "\n"),
+    bt,
+    sep = "\n"
+  )
+}
+```
+
+
+```{r setup, message=FALSE, warning=FALSE, results="hide"}
+# remotes::install_github("gadenbuie/epoxy")
+library(epoxy)
+
+library(dplyr, warn.conflicts = FALSE)
+```
+
+```{r load-plastics, message=FALSE, warning=FALSE, results="hide"}
+# https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-01-26/
+# https://www.breakfreefromplastic.org/globalbrandauditreport2020/
+plastics <- tidytuesdayR::tt_load(2021, week = 5)$plastics
+
+
+plastics_grand_summary <- 
+  plastics %>% 
+  group_by(country, year, num_events, volunteers) %>% 
+  summarize(
+    grand_total = sum(grand_total, na.rm = TRUE),
+    .groups = "drop"
+  ) %>% 
+  arrange(year, desc(grand_total))
+
+plastics_2020_summary <- plastics_grand_summary %>% filter(year == 2020)
+
+n_volunteers <- sum(plastics_2020_summary$volunteers, na.rm = TRUE)
+n_countries <- nrow(plastics_2020_summary)
+n_audits <- sum(plastics_2020_summary$num_events)
+n_pieces <- sum(plastics_2020_summary$grand_total)
+```
+
+### Normal R Markdown
+
+````markdown
+```{asis}
+_Break Free From Plastic_ engaged `r n_volunteers` volunteers in 
+`r n_countries` countries to conduct `r n_audits` brand audits. 
+These volunteers collected `r n_pieces` pieces of plastic waste.
+```
+````
+
+_Break Free From Plastic_ engaged `r n_volunteers` volunteers in 
+`r n_countries` countries to conduct `r n_audits` brand audits.
+These volunteers collected `r n_pieces` pieces of plastic waste.
+
+### With epoxy glue chunk
+
+````markdown
+`r rewrite_chunk("glue-example-1")`
+````
+
+```{glue glue-example-1}
+_Break Free From Plastic_ engaged {n_volunteers} volunteers in 
+{n_countries} countries to conduct {n_audits} brand audits. 
+These volunteers collected {n_pieces} pieces of plastic waste.
+```
+
+## Tracking Updates
+
+### Variables make life easier
+
+```{r echo=TRUE}
+knitted_when <- format(Sys.Date())
+knitted_where <- knitr::current_input()
+knitted_with <- packageVersion("knitr")
+knitted_status <- emo::ji("smile")
+knitted_doc_url <- downlit::autolink_url("knitr::knit()")
+```
+
+`````markdown
+```{asis}
+Report prepared on `r knitted_when` from ``r knitted_where`` 
+with knitr version `r knitted_with` `r knitted_status`. 
+Read more about [`knitr::knit()`](`r knitted_doc_url`). 
+```
+`````
+
+Report prepared on `r knitted_when` from ``r knitted_where`` 
+with knitr version `r knitted_with` `r knitted_status`. 
+Read more about [`knitr::knit()`](`r knitted_doc_url`).
+
+### Lists make variables easy
+
+```{r echo=TRUE}
+knitted <- list(
+  when = format(Sys.Date()),
+  where = knitr::current_input(),
+  with = packageVersion("knitr"),
+  status = emo::ji("smile"),
+  doc_url = downlit::autolink_url("knitr::knit()")
+)
+```
+
+`````markdown
+```{asis}
+Report prepared on `r knitted$when` from ``r knitted$where`` 
+with knitr version `r knitted$with` `r knitted$status`. 
+Read more about [`knitr::knit()`](`r knitted$doc_url`). 
+```
+`````
+
+Report prepared on `r knitted$when` from ``r knitted$where`` 
+with knitr version `r knitted$with` `r knitted$status`. 
+Read more about [`knitr::knit()`](`r knitted$doc_url`).
+
+### Glue makes inline data easier
+
+`````markdown
+`r rewrite_chunk("glue-list-example-1")`
+`````
+
+```{glue glue-list-example-1, data = knitted}
+Report prepared on {when} from `{where}` with knitr version {with} {status}.
+Read more about [`knitr::knit()`]({doc_url}).
+```
+
+### Another look at our summary sentence
+
+```{r}
+n_2020 <-
+  plastics_2020_summary %>%
+  summarize(
+    countries = n(),
+    across(c(num_events, volunteers, grand_total), sum, na.rm = TRUE)
+  )
+```
+
+````markdown
+`r rewrite_chunk("glue-2020-example")`
+````
+
+```{glue glue-2020-example, data = n_2020}
+_Break Free From Plastic_ engaged {volunteers} volunteers in 
+{countries} countries to conduct {num_events} brand audits. 
+These volunteers collected {grand_total} pieces of plastic waste.
+```
+
+
+## Summarizing
+
+### Multiple Years
+
+```{r}
+n_all <-
+  plastics_grand_summary %>%
+  group_by(year) %>% 
+  summarize(
+    countries = n(),
+    across(c(num_events, volunteers, grand_total), sum, na.rm = TRUE)
+  ) %>%
+  mutate(across(-(1:2), format, big.mark = ","))
+
+n_all
+```
+
+````markdown
+`r rewrite_chunk("glue-all-summary")`
+````
+
+```{glue glue-all-summary, data = n_all}
+- **In {year}**, _Break Free From Plastic_ engaged {volunteers} volunteers in 
+  {countries} countries to conduct {num_events} brand audits. 
+  These volunteers collected {grand_total} pieces of plastic waste.
+
+```
+
+### Say it boldly
+
+````markdown
+`r rewrite_chunk("glue-bold-transformer")`
+````
+
+```{glue glue-bold-transformer, data = n_all, .transformer = epoxy_style_bold()}
+- In {year}, _Break Free From Plastic_ engaged {volunteers} volunteers in 
+  {countries} countries to conduct {num_events} brand audits. 
+  These volunteers collected {grand_total} pieces of plastic waste.
+
+```
+
+### As HTML
+
+
+````markdown
+`r rewrite_chunk("glue-html-example")`
+````
+
+
+::: row
+
+```{glue_html glue-html-example, data = top_n(plastics_2020_summary, 6, grand_total)}
+<div class="col-sm-6 col-md-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{country}}</h3>
+    </div>
+    <div class="panel-body">
+      <ul class="list-unstyled">
+        <li><strong>Volunteers:</strong> {{volunteers}}</li>
+        <li><strong>Events:</strong> {{num_events}}</li>
+        <li><strong>Pieces of Plastic:</strong> {{format(grand_total, big.mark = ",")}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+```
+
+:::
