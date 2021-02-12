@@ -1,0 +1,125 @@
+.hl {
+  background-image: url('../img/highlight.svg');
+  background-size: 0 83%;
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  margin: 0em -0.3em -10px;
+  padding: 0em 0.3em 10px;
+}
+.remark-visible .hl {
+  animation: highlight 1s ease-out;
+  animation-fill-mode: forwards;
+}
+.hl:nth-of-type(3) {
+  animation-delay: 500ms;
+}
+.hl:nth-of-type(4) {
+  animation-delay: 1s;
+}
+.hl:nth-of-type(5) {
+  animation-delay: 1.5s;
+}
+@keyframes highlight {
+  0% {
+    color: var(--text-color);
+    background-size: 0 83%;
+  }
+  50% {
+    background-size: 100% 83%;
+  }
+  100% {
+    color: var(--pink);
+    background-size: 100% 83%;
+  }
+}
+
+.side-foot-note {
+  transform: rotate(270deg);
+  transform-origin: bottom right;
+  position: absolute;
+  right: 0.66em;
+  bottom: 9em;
+  font-style: italic;
+}
+
+.faded-knuth .knuth {
+  opacity: 25%;
+}
+
+.hide-knuth .knuth {
+  opacity: 0%;
+}
+
+.no-margins p,
+.no-margins pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.sweave {
+  position: absolute;
+  top: 150px;
+  right: 100px;
+  box-shadow: 0px 24px 38px 3px rgba(0,0,0,0.14) , 0px 9px 46px 8px rgba(0,0,0,0.12) , 0px 11px 15px -7px rgba(0,0,0,0.2);
+}
+
+pre.markdown {
+	border-left: 4px solid #bbb;
+	background-color: #f8f8f8;
+	margin-left: -10px;
+	padding: 10px 15px;
+	display: inline-block;
+	width: 100%;
+}
+
+#slide-figure1 pre.markdown + * {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  height: 400px;
+  width: 400px;
+  box-shadow: 0px 24px 38px 3px rgba(0,0,0,0.14) , 0px 9px 46px 8px rgba(0,0,0,0.12) , 0px 11px 15px -7px rgba(0,0,0,0.2);
+}
+
+.code-window-title-bar {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding-top: 10px
+}
+.code-window-circle {
+  width: 17px;
+  height: 18px;
+  margin-right: 6px
+}
+.code-window-circles {
+  position: absolute;
+  left: 12px;
+  top: 11px
+}
+.shadow-6 {
+  box-shadow: 0px 20px 25px -5px rgba(0,0,0,0.1) , 0px 10px 10px -5px rgba(0,0,0,0.04);
+}
+
+.apple-gradient {
+  color: var(--white);
+  background: rgb(128,124,138);
+  background: -moz-linear-gradient(0deg, rgba(128,124,138,1) 0%, rgba(48,48,56,1) 25%, rgba(48,48,56,1) 100%);
+  background: -webkit-linear-gradient(0deg, rgba(128,124,138,1) 0%, rgba(48,48,56,1) 25%, rgba(48,48,56,1) 100%);
+  background: linear-gradient(0deg, rgba(128,124,138,1) 0%, rgba(48,48,56,1) 25%, rgba(48,48,56,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#807c8a",endColorstr="#303038",GradientType=1);
+}
+
+.lh-extra {
+  line-height: 2;
+}
+
+.rmarkdown-workflow {
+  background-image: url(../img/rmarkdown-cookbook-workflow.png);
+  background-size: auto 78%;
+  background-position: center left;
+  background-repeat: no-repeat;
+}
+
+.hljs {
+  background: transparent;
+}

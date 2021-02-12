@@ -161,6 +161,18 @@
       "Repository": "CRAN",
       "Hash": "fd2844b3a43ae2d27e70ece2df1b4e2a"
     },
+    "emo": {
+      "Package": "emo",
+      "Version": "0.0.0.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "emo",
+      "RemoteUsername": "hadley",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "3f03b11491ce3d6fc5601e210927eff73bf8e350",
+      "Hash": "10f2391a926b0087a671ed9965ea30a3"
+    },
     "epoxy": {
       "Package": "epoxy",
       "Version": "0.0.2.9000",
@@ -358,6 +370,18 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "61e4a10781dd00d7d81dd06ca9b94e95"
+    },
+    "metathis": {
+      "Package": "metathis",
+      "Version": "1.0.3",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "metathis",
+      "RemoteUsername": "gadenbuie",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "7b547da65e5cd12d0d97003634ee37aa2992aeea",
+      "Hash": "e269a342db06ba876e081dc3da2ab84a"
     },
     "mime": {
       "Package": "mime",
@@ -591,6 +615,19 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "f0b0ba735febac9a8344253ae6fa93f5"
+    },
+    "tweetrmd": {
+      "Package": "tweetrmd",
+      "Version": "0.0.8",
+      "Source": "GitHub",
+      "Remotes": "rstudio/webshot2",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "tweetrmd",
+      "RemoteUsername": "gadenbuie",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "50bcdf8fe7d289a20a974932e27a1e91d45aeae8",
+      "Hash": "8b8df82273febb68ee78bc1d70fa1257"
     },
     "usethis": {
       "Package": "usethis",

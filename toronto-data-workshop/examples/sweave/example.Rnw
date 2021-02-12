@@ -1,0 +1,61 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amscd}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\title{An Sweave Demo}
+\author{Charles J. Geyer}
+\maketitle
+
+This is a demo for using the \verb@Sweave@ command in R.  To
+get started make a regular \LaTeX\ file (like this one) but
+give it the suffix \verb@.Rnw@ instead of \verb@.tex@ and then
+turn it into a \LaTeX\ file (\verb@foo.tex@) with the (unix) command
+\begin{verbatim}
+R CMD Sweave foo.Rnw
+\end{verbatim}
+
+Well, we can now include R in our document.  Here's a simple example
+<<two>>=
+2 + 2
+@
+
+Plots get a little more complicated.  First we make something to plot
+(simulate regression data).
+<<reg>>=
+n <- 50
+x <- seq(1, n)
+a.true <- 3
+b.true <- 1.5
+y.true <- a.true + b.true * x
+s.true <- 17.3
+y <- y.true + s.true * rnorm(n)
+out1 <- lm(y ~ x)
+@
+(for once we won't show the code chunk itself, look at \verb@foo.Rnw@
+if you want to see what the actual code chunk was).
+
+Figure~\ref{fig:one} (p.~\pageref{fig:one})
+is produced by the following code
+<<label=fig1plot,include=FALSE>>=
+plot(x, y)
+abline(out1)
+@
+\begin{figure}
+\begin{center}
+<<label=fig1,fig=TRUE,echo=FALSE>>=
+<<fig1plot>>
+@
+\end{center}
+\caption{Scatter Plot with Regression Line}
+\label{fig:one}
+\end{figure}
+Note that \verb@x@, \verb@y@, and \verb@out1@ are remembered from
+the preceding code chunk.  We don't have to regenerate them.
+All code chunks are part of one R ``session''.
+
+\end{document}

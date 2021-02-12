@@ -8,7 +8,7 @@
   background-position: center;
 }
 .talk-title {
-  margin-bottom: 2em;
+  margin-top: 6em;
 }
 
 .talk-band {
@@ -17,20 +17,23 @@
 
 .talk-band > * {
   padding: 1em 4em;
+  margin-bottom: 0;
   font-family: var(--code-font-family);
   font-weight: 600;
   text-align: center;
   width: 500px;
   white-space: nowrap;
+  box-shadow: 0px -10px 15px -3px rgba(0,0,0,0.2) , 0px -4px 6px -2px rgba(0,0,0,0.05);
 }
 
 .talk-band :first-child {
   background-color: var(--blue);
   color: var(--white);
-  height: 70px;
+  height: 80px;
 }
 
 .talk-band :last-child {
+  margin-top: -4px;
   background-color: var(--pink);
   color: var(--white);
   height: 200px
@@ -38,14 +41,15 @@
 
 .talk-band.left {
   left: -20px;
-  bottom: calc(270px / 4);
+  bottom: 60px;
   transform: rotate(45deg);
   transform-origin: top left;
+  box-shadow: ;
 }
 
 .talk-band.right {
   right: -20px;
-  bottom: calc(270px / 4);
+  bottom: 60px;
   transform: rotate(-45deg);
   transform-origin: top right;
 }

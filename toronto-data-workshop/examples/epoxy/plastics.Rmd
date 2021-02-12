@@ -1,5 +1,5 @@
 ---
-title: Sitka Trees
+title: Plastic Pollution
 subtitle: An {epoxy} example
 output: html_document
 ---
@@ -47,7 +47,7 @@ library(dplyr, warn.conflicts = FALSE)
 ```{r load-plastics, message=FALSE, warning=FALSE, results="hide"}
 # https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-01-26/
 # https://www.breakfreefromplastic.org/globalbrandauditreport2020/
-plastics <- tidytuesdayR::tt_load(2021, week = 5)$plastics
+plastics <- readr::read_csv(here::here("data", "plastics.csv"))
 
 
 plastics_grand_summary <- 

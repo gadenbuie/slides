@@ -13,9 +13,9 @@ xaringanthemer::style_duo_accent(
   table_row_even_background_color = "var(--gray-light)",
   # code_highlight_color = "#FFFBB1",
   code_highlight_color = NULL,
-  inverse_background_color = "#447099",
-  inverse_text_color = "#F8F8F8",
-  inverse_header_color = "#FFFFFF",
+  inverse_background_color = "var(--gray)",
+  inverse_text_color = "var(--gray-light)",
+  inverse_header_color = "var(--white)",
   colors = c(
     blue = "#4D8DC9",
     gray = "#404040",
@@ -37,10 +37,12 @@ xaringanthemer::style_duo_accent(
   ),
   extra_fonts = list(
     xaringanthemer::google_font("Nanum Pen Script"),
+    xaringanthemer::google_font("Special Elite"),
     xaringanthemer::google_font("Pompiere")
   ),
   extra_css = list(
     ".f-pen" = list("font-family" = "'Nanum Pen Script', var(--text-font-family), var(--text-font-family-fallback)"),
+    ".f-typewriter" = list("font-family" = "'Special Elite', var(--code-font-family), monospace"),
     ".f-zilla" = list("font-family" = "Zilla Slab"),
     ".f-pompiere" = list("font-family" = "Pompiere"),
     ".remark-slide h1, .remark-slide h2, .remark-slide h3, .remark-slide h4" = list(

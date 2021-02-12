@@ -22,6 +22,7 @@
 @import url(https://fonts.googleapis.com/css?family=Zilla+Slab&display=swap);
 @import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&display=swap);
 @import url(https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Special+Elite&display=swap);
 @import url(https://fonts.googleapis.com/css?family=Pompiere&display=swap);
 
 :root {
@@ -49,9 +50,9 @@
   --link-color: #447099;
   --text-bold-color: #E7553C;
   --code-highlight-color: ;
-  --inverse-text-color: #F8F8F8;
-  --inverse-background-color: #447099;
-  --inverse-header-color: #FFFFFF;
+  --inverse-text-color: var(--gray-light);
+  --inverse-background-color: var(--gray);
+  --inverse-header-color: var(--white);
   --title-slide-background-color: #4D8DC9;
   --title-slide-text-color: #000000;
   --header-background-color: #4D8DC9;
@@ -384,6 +385,9 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
 /* Extra CSS */
 .f-pen {
   font-family: 'Nanum Pen Script', var(--text-font-family), var(--text-font-family-fallback);
+}
+.f-typewriter {
+  font-family: 'Special Elite', var(--code-font-family), monospace;
 }
 .f-zilla {
   font-family: Zilla Slab;

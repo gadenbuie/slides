@@ -1,0 +1,22 @@
+---
+title: Simple Shiny Component
+---
+
+```{r}
+starting_value <- 12
+```
+
+```{ui .tagList = TRUE}
+actionButton(ns("increment"), "Plus One")
+```
+
+```{server}
+number <- reactive(input$increment + starting_value)
+
+observe({
+  message("value: ", number())
+})
+
+reactive(number())
+```
+
