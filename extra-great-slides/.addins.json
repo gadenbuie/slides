@@ -1,9 +1,6 @@
 {
-    "rsthemes::use_theme_toggle": "Ctrl+Alt+D",
-    "rsthemes::use_theme_favorite": "Ctrl+Alt+N",
-    "styler:::style_selection": "Ctrl+Shift+S",
-    "styler::style_file": "Ctrl+Shift+Cmd+S",
-    "xaringan::inf_mr": "Cmd+Shift+I",
-    "js4shiny::live_preview", "Cmd+Shift+L",
-    "js4shiny::live_preview_stop", "Cmd+Ctrl+Shift+L"
+    "rsthemes::use_theme_favorite": "Ctrl+Cmd+N",
+    "xaringan::inf_mr": "Ctrl+Shift+Cmd+I",
+    "js4shiny::live_preview_addin": "Ctrl+Shift+Cmd+L",
+    "js4shiny::live_preview_stop": "Ctrl+Alt+Shift+Cmd+L"
 }
