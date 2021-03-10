@@ -132,11 +132,16 @@ March 10, 2021
   }
 }
 
+.remark-visible .title-slide h1,
+.remark-visible .title-slide .side-text,
+.remark-visible .title-slide .title-where {
+  animation-duration: 13s;
+}
+
 .title-slide h1 {
   font-size: 100px;
   font-family: Jost, sans;
-  /* animation-name: title-text; */
-  animation-duration: 13s;
+  animation-name: title-text;
   animation-direction: alternate;
   animation-iteration-count: infinite;
 }
@@ -150,8 +155,7 @@ March 10, 2021
   top: 130px;
   right: -130px;
   transition: opacity 0.5s ease-in-out;
-  /* animation-name: enter-right; */
-  animation-duration: 13s;
+  animation-name: enter-right;
   animation-direction: alternate;
   animation-iteration-count: infinite;
 }
@@ -170,8 +174,7 @@ March 10, 2021
   font-size: 40px;
   position: absolute;
   bottom: 10px;
-  /* animation-name: enter-left; */
-  animation-duration: 13s;
+  animation-name: enter-left;
   animation-direction: alternate;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
@@ -1041,7 +1044,7 @@ class: center middle
 
 ## Once upon a time...
 
-<div class="countdown" id="timer_60494c06" style="right:0;bottom:0;position: relative; width: min-content; margin: 1em auto;" data-warnwhen="5">
+<div class="countdown" id="timer_60495334" style="right:0;bottom:0;position: relative; width: min-content; margin: 1em auto;" data-warnwhen="5">
 <code class="countdown-time"><span class="countdown-digits minutes">00</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">10</span></code>
 </div>
 
@@ -1130,6 +1133,72 @@ Big list at [pkg.garrickadenbuie.com/xaringanExtra/](https://pkg.garrickadenbuie
 ## Animations with Animate.css
 
 - https://animate.style/
+
+---
+name: bonus
+layout: false
+class: center middle inverse
+
+# Bonus Round
+
+---
+name: metathis
+layout: false
+class: center middle inverse
+
+# metathis
+
+---
+
+# Add metadata and social media cards to your slides
+
+
+```r
+install.packages("metathis")
+```
+
+````markdown
+```{r metadata, echo=FALSE}
+library(metathis)
+meta() %&gt;% 
+  meta_description(paste(
+    "xaringan, xaringanthemer and xaringanExtra. Presented at", 
+    "the New York Open Statistical Programming Meetup on March 10, 2021"
+  )) %&gt;% 
+  meta_social(
+    title = "Making Extra Great Slides",
+    url = "https://gadenbuie.github.io/extra-great-slides",
+    image = "https://gadenbuie.github.io/extra-great-slides/intro/extra-great-slides.png",
+    twitter_card_type = "summary_large_image",
+    twitter_creator = "grrrck"
+  )
+```
+````
+
+
+---
+name: xaringanBuilder
+layout: false
+class: center middle inverse
+
+# xaringanBuilder
+
+---
+
+# Build PDFs, images, and more
+
+
+```r
+remotes::install_github("jhelvy/xaringanBuilder")
+```
+
+````r
+xaringanBuilder::build_all()
+
+xaringanBuilder::build_pdf()
+
+# etc...
+````
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="libs/remark-latest.min.js"></script>
@@ -1137,7 +1206,7 @@ Big list at [pkg.garrickadenbuie.com/xaringanExtra/](https://pkg.garrickadenbuie
 "highlightStyle": "github",
 "highlightLines": true,
 "countIncrementalSlides": true,
-"ratio": "191:100",
+"ratio": "16:9",
 "slideNumberFormat": "%current%"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {

@@ -211,11 +211,16 @@ March 10, 2021
   }
 }
 
+.remark-visible .title-slide h1,
+.remark-visible .title-slide .side-text,
+.remark-visible .title-slide .title-where {
+  animation-duration: 13s;
+}
+
 .title-slide h1 {
   font-size: 100px;
   font-family: Jost, sans;
-  /* animation-name: title-text; */
-  animation-duration: 13s;
+  animation-name: title-text;
   animation-direction: alternate;
   animation-iteration-count: infinite;
 }
@@ -229,8 +234,7 @@ March 10, 2021
   top: 130px;
   right: -130px;
   transition: opacity 0.5s ease-in-out;
-  /* animation-name: enter-right; */
-  animation-duration: 13s;
+  animation-name: enter-right;
   animation-direction: alternate;
   animation-iteration-count: infinite;
 }
@@ -249,8 +253,7 @@ March 10, 2021
   font-size: 40px;
   position: absolute;
   bottom: 10px;
-  /* animation-name: enter-left; */
-  animation-duration: 13s;
+  animation-name: enter-left;
   animation-direction: alternate;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
@@ -1179,3 +1182,67 @@ Big list at [pkg.garrickadenbuie.com/xaringanExtra/](https://pkg.garrickadenbuie
 ## Animations with Animate.css
 
 - https://animate.style/
+
+---
+name: bonus
+layout: false
+class: center middle inverse
+
+# Bonus Round
+
+---
+name: metathis
+layout: false
+class: center middle inverse
+
+# metathis
+
+---
+
+# Add metadata and social media cards to your slides
+
+```{r eval=FALSE}
+install.packages("metathis")
+```
+
+````markdown
+```{r metadata, echo=FALSE}`r ''`
+library(metathis)
+meta() %>% 
+  meta_description(paste(
+    "xaringan, xaringanthemer and xaringanExtra. Presented at", 
+    "the New York Open Statistical Programming Meetup on March 10, 2021"
+  )) %>% 
+  meta_social(
+    title = "Making Extra Great Slides",
+    url = "https://gadenbuie.github.io/extra-great-slides",
+    image = "https://gadenbuie.github.io/extra-great-slides/intro/extra-great-slides.png",
+    twitter_card_type = "summary_large_image",
+    twitter_creator = "grrrck"
+  )
+```
+````
+
+
+---
+name: xaringanBuilder
+layout: false
+class: center middle inverse
+
+# xaringanBuilder
+
+---
+
+# Build PDFs, images, and more
+
+```{r eval=FALSE}
+remotes::install_github("jhelvy/xaringanBuilder")
+```
+
+````r
+xaringanBuilder::build_all()
+
+xaringanBuilder::build_pdf()
+
+# etc...
+````
