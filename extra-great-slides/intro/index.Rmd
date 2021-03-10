@@ -1012,19 +1012,20 @@ class: center middle inverse
 
 # Resources
 
-1. The xaringan intro slides  
-   <https://slides.yihui.org/xaringan>
-   
-1. The xaringan wiki  
-   <https://github.com/yihui/xaringan/wiki>
-   
-1. The remarkjs wiki
-   <https://github.com/gnab/remark/wiki>
+1. Reference Pages
+    - [The xaringan intro slides](https://slides.yihui.org/xaringan)
+    - [The xaringan wiki](https://github.com/yihui/xaringan/wiki)
+    - [The remarkjs wiki](https://github.com/gnab/remark/wiki)
    
 1. Awesome xaringan resources
     - [Meet xaringan | Alison Hill](https://alison.rbind.io/talk/2019-rsc-xaringan/)
     - [Sharing Your Work with xaringan](https://spcanelon.github.io/xaringan-basics-and-beyond/index.html)
     - [Chapter 7 xaringan Presentations | R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/xaringan.html)
+    
+1. Finishing Up Your Slides
+    - [Sharing Your xaringan Slides · Garrick Aden‑Buie](https://www.garrickadenbuie.com/blog/sharing-xaringan-slides/)
+    - [Sharing on Short Notice](https://rstudio-education.github.io/sharing-short-notice)
+    - [xaringanBuilder](https://github.com/jhelvy/xaringanBuilder)
 
 ---
 name: xaringanthemer
