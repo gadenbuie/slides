@@ -4,4 +4,4 @@ RUN apt-get update && apt-get install -y libavfilter-dev
 COPY deps.R /tmp/deps.R
 RUN Rscript /tmp/deps.R && rm /tmp/deps.R
 COPY . /home/rstudio/extra-great-slides
-
+RUN chown rstudio:rstudio -R /home/rstudio
