@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Extra Awesome xaringan Presentations - Tampa R Users Group</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Garrick Aden-Buie" />
+    <meta name="date" content="2020-02-25" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <link href="libs/animate.css/animate.xaringan.css" rel="stylesheet" />
+    <link href="libs/tachyons/tachyons.min.css" rel="stylesheet" />
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <meta name="description" content="xaringan, xaringanthemer and xaringanExtra. Presented at the  New York Open Statistical Programming Meetup on March 10, 2021"/>
+    <meta name="twitter:title" content="Making Extra Great Slides"/>
+    <meta name="twitter:description" content="xaringan, xaringanthemer and xaringanExtra. Presented at the  New York Open Statistical Programming Meetup on March 10, 2021"/>
+    <meta name="twitter:url" content="https://gadenbuie.github.io/extra-great-slides"/>
+    <meta name="twitter:image:src" content="https://gadenbuie.github.io/extra-great-slides/intro/extra-great-slides.png"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:creator" content="grrrck"/>
+    <meta name="twitter:site" content="grrrck"/>
+    <meta property="og:title" content="Making Extra Great Slides"/>
+    <meta property="og:description" content="xaringan, xaringanthemer and xaringanExtra. Presented at the  New York Open Statistical Programming Meetup on March 10, 2021"/>
+    <meta property="og:url" content="https://gadenbuie.github.io/extra-great-slides"/>
+    <meta property="og:image" content="https://gadenbuie.github.io/extra-great-slides/intro/extra-great-slides.png"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <link href="libs/countdown/countdown.css" rel="stylesheet" />
+    <script src="libs/countdown/countdown.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+
+
+class: left title-slide
+background-image: url('unsplash-yUvZYHV2Zbw.png')
+background-size: cover
+background-position: top center
+
+[remarkjs]: https://github.com/gnab/remark
+[remark-wiki]: https://github.com/gnab/remark/wiki
+[xaringan]: https://slides.yihui.org/xaringan/
+[xaringan-wiki]: https://github.com/yihui/xaringan/wiki
+[xaringanthemer]: https://pkg.garrickadenbuie.com/xaringanthemer
+[xaringanExtra]: https://pkg.garrickadenbuie.com/xaringanExtra
+[metathis]: https://pkg.garrickadenbuie.com/metathis
+[grrrck]: https://twitter.com/grrrck
+[gab]: https://www.garrickadenbuie.com
+[rsthemes]: https://www.garrickdenbuie.com/projects/rsthemes
+[regexplain]: https://www.garrickdenbuie.com/projects/regexplain
+[shrtcts]: https://pkg.garricakdenbuie.com/shrtcts
+
+# Making&lt;br&gt;Extra Great Slides&lt;br&gt;with xaringan
+
+.side-text[
+[&amp;commat;grrrck][grrrck] | [garrickadenbuie.com][gab]
+]
+
+.title-where[
+NY Open Stat Programming Meetup&lt;br&gt;
+March 10, 2021
+]
+
+&lt;style type="text/css"&gt;
+@keyframes title-text{
+  0% {
+      opacity: 0;
+      text-shadow: -20px 30px 5px rgba(0,0,0,0.25);
+      transform: translate(15px, -15px);
+  }
+  10% {
+      opacity: 0;
+      text-shadow: -20px 30px 5px rgba(0,0,0,0.25);
+      transform: translate(15px, -15px);
+  }
+  80% {
+      opacity: 1;
+      text-shadow: -5px 5px 10px rgba(0,0,0,0.25);
+      transform: translate(0, 0);
+  }
+  100% {
+      opacity: 1;
+      text-shadow: -5px 5px 10px rgba(0,0,0,0.25);
+      transform: translate(0, 0);
+  }
+}
+
+@keyframes enter-right {
+  0% {
+    opacity: 0;
+    transform: rotate(90deg) translateY(-50px)
+  }
+  20% {
+    opacity: 0;
+    transform: rotate(90deg) translateY(-50px)
+  }
+  80% {
+    opacity: 1;
+    transform: rotate(90deg) translateY(0)
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(90deg) translateY(0)
+  }
+}
+
+@keyframes enter-left {
+  0% {
+    opacity: 0;
+    transform: translateY(100px)
+  }
+  20% {
+    opacity: 0;
+    transform: translateY(100px)
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(0)
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0)
+  }
+}
+
+.title-slide h1 {
+  font-size: 100px;
+  font-family: Jost, sans;
+  /* animation-name: title-text; */
+  animation-duration: 13s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+.side-text {
+  color: white;
+  opacity: 0.66;
+  transform: rotate(90deg);
+  position: absolute;
+  font-size: 20px;
+  top: 130px;
+  right: -130px;
+  transition: opacity 0.5s ease-in-out;
+  /* animation-name: enter-right; */
+  animation-duration: 13s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+.side-text:hover {
+  opacity: 1;
+}
+
+.side-text a {
+  color: white;
+}
+
+.title-where {
+  color: white;
+  font-family: 'Amatic SC', sans;
+  font-size: 40px;
+  position: absolute;
+  bottom: 10px;
+  /* animation-name: enter-left; */
+  animation-duration: 13s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+&lt;/style&gt;
+
+---
+layout: false
+
+# About Me
+
+.f3[
+&amp;#x1F44B; Hi, I'm **Garrick Aden-Buie**
+]
+
+--
+
+.f3[
+&amp;#x1F426; [&amp;commat;grrrck](https://twitter.com/grrrck)
+]
+
+--
+
+.f3[
+&amp;#x1F9D1;&amp;#x200D;&amp;#x1F4BB; [garrickadenbuie.com](https://garrickadenbuie.com)
+]
+
+--
+
+.f3[
+&amp;#x1F4BC; [RStudio Education](https://rstudio.com): [.code[gradethis]](https://github.com/rstudio-education/gradethis), [.code[learnr]](https://github.com/rstudio/learnr)
+]
+
+--
+
+.f3[
+&amp;#x1F379; .code[[rsthemes][rsthemes]], .code[[regexplain][regexplain]], .code[[shrtcts][shrtcts]]
+]
+
+---
+
+# Try it Yourself (Later)
+
+.f3[
+&amp;#x1F371; [github.com/gadenbuie/slides](https://github.com/gadenbuie/slides/tree/gh-pages/extra-great-slides)
+
+&gt; &amp;#x1F4C2; extra-great-slides
+
+&amp;#x1F4BD; [grrrck/extra-great-slides](https://hub.docker.com/r/grrrck/extra-great-slides)
+
+&gt; `docker pull grrrck/extra-great-slides`
+]
+
+---
+class: inverse, center, middle
+
+# xaringan crash course
+
+---
+class: center, middle
+
+# xaringan
+
+### /ʃæ.'riŋ.ɡæn/
+
+--
+
+.f1[
+&amp;#x1F937;&amp;#x200D;
+]
+
+---
+
+# How To Get xaringan
+
+
+```r
+install.packages("xaringan")
+```
+
+--
+
+&lt;img class="center" src="naruto.gif" width="75%" /&gt;
+
+---
+background-image: url(rmarkdown-workflow.png)
+background-size: contain
+---
+background-image: url(rmarkdown-workflow-xaringan.png)
+background-size: contain
+
+---
+class: inverse center middle
+
+# Anatomy of a Slide
+
+---
+
+# Anatomy of a Slide
+
+```markdown
+---
+class: middle right
+background-image: url('banana.jpg')
+background-size: cover
+
+
+# Knock-Knock
+
+## Who's there?
+
+--
+
+## Banana!
+
+```
+
+---
+
+class: hide-count
+background-image: url('anatomy/xaringan-slides-1.jpg')
+background-size: contain
+background-position: top left
+
+---
+class: hide-count
+background-image: url('anatomy/xaringan-slides-2.jpg')
+background-size: contain
+background-position: top left
+
+---
+class: hide-count
+background-image: url('anatomy/xaringan-slides-3.jpg')
+background-size: contain
+background-position: top left
+
+---
+class: hide-count
+background-image: url('anatomy/xaringan-slides-4.jpg')
+background-size: contain
+background-position: top left
+
+
+---
+class: middle right
+background-image: url('banana.jpg')
+background-size: cover
+
+
+# Knock-Knock
+
+## Who's there?
+
+--
+
+## Banana!
+
+---
+
+# Slide Properties
+
+.w-30.fl[
+&lt;div class="f3 mt0 pt0 code"&gt;class:&lt;/div&gt;
+
+**Horizontal**
+
+- `left`
+- `center`
+- `right`
+
+**Vertical**
+
+- `top`
+- `middle`
+- `bottom`
+]
+
+--
+
+.w-70.fl[
+&lt;div class="f3 mt0 pt0 code"&gt;background-image:&lt;/div&gt;
+
+`url('image.png')`  
+
+&lt;div class="f3 mt3 pt0 code"&gt;background-size:&lt;/div&gt;
+
+`160px 90px`
+
+&lt;div class="f3 mt3 pt0 code"&gt;background-position:&lt;/div&gt;
+
+`top right`  
+`bottom left`  
+`5% 5%`
+]
+
+---
+
+# Using `layout: true`
+
+.smallish[
+```markdown
+---
+layout: true
+
+# Something I want to tell you
+
+---
+
+It's so important
+
+--
+
+And dramatic
+
+--
+
+And full of suspense
+
+---
+
+That it takes a few slides to get to my point
+```
+]
+
+---
+layout: true
+
+# Something I want to tell you
+
+---
+
+It's so important
+
+--
+
+And dramatic
+
+--
+
+And full of suspense
+
+---
+
+That it takes a few slides to get to my point
+
+---
+
+&lt;img src="one-more-thing.gif" width="60%" class="fl" /&gt;
+
+.fr.w-30.pink[
+Don't forget to reset!  
+.code[layout: false]
+]
+
+
+---
+layout: false
+class: inverse center middle
+
+# Slide Content Syntax
+
+---
+# Markdown .green-dark[Text]
+
+.fl.w-50[
+### What you see
+
+The _fuzzy_ bunny ran `foo::foo()` and promptly **disappeared**.
+
+1. Flopsy
+1. Cottontail
+1. Peter
+1. Bunnicula
+1. Roger
+]
+
+--
+
+.fl.w-50[
+### How you write it
+
+```markdown
+### What you see
+
+The _fuzzy_ bunny ran `foo::foo()`
+and promptly **disappeared**.
+```
+]
+
+---
+layout: true
+
+# Markdown .green-dark[Lists]
+
+---
+
+.w-50.fl[
+### What you see
+
+- Flopsy
+- Cottontail
+- Peter
+- Bunnicula
+- Roger
+]
+
+--
+
+.w-50.fr[
+### How you write it
+
+```markdown
+- Flopsy
+- Cottontail
+- Peter
+- Bunnicula
+- Roger
+```
+]
+
+---
+
+.w-50.fl[
+### What you see
+
+1. Flopsy
+1. Cottontail
+1. Peter
+1. Bunnicula
+1. Roger
+]
+
+.w-50.fr[
+### How you write it
+
+```markdown
+1. Flopsy
+1. Cottontail
+1. Peter
+1. Bunnicula
+1. Roger
+```
+]
+
+---
+
+.w-50.fl[
+### What you see
+
+1. Flopsy
+
+1. Cottontail
+
+1. Peter
+
+1. Bunnicula
+
+1. Roger
+]
+
+.w-50.fr[
+### How you write it
+
+```markdown
+1. Flopsy
+
+1. Cottontail
+
+1. Peter
+
+1. Bunnicula
+
+1. Roger
+```
+]
+
+
+---
+layout: false
+
+# Markdown .green-dark[Links]
+
+.fl.w-50[
+### What you see
+
+Check out [xaringanthemer](https://pkg.garrickadenbuie.com) it's pretty &amp;#x1F60E;
+]
+
+--
+
+.fr.w-50[
+### How you write it
+
+```markdown
+Check out 
+[xaringanthemer](https://...)
+it's pretty &amp;#x1F60E;
+```
+]
+
+---
+
+# Markdown .green-dark[Images]
+
+.w-30.fl[
+### What you see
+
+&lt;img src="monday.gif" width="100%" /&gt;
+]
+
+--
+
+.w-50.fr[
+### How you write it
+
+```markdown
+![](monday.gif)
+```
+]
+
+---
+class: center middle
+
+# Learn Markdown in 15 Minutes
+
+.f2[
+[commonmark.org/help/tutorial](https://commonmark.org/help/tutorial/)
+]
+
+---
+layout: true
+
+# Markdown .green-dark[remarkjs]
+
+---
+
+.pull-left[
+You can put something on the left,  
+like a list of Beatrix Potter books.
+
+**The Tale of ...**
+
+* Peter Rabbit
+
+* Jemima Puddle-Duck
+
+* The Flopsy Bunnies
+
+* Ginger and Pickles
+
+* Timmy Tiptoes
+]
+
+.pull-right[
+![](https://upload.wikimedia.org/wikipedia/commons/d/d1/The_Tale_of_the_Flopsy_Bunnies_cover.jpg)
+]
+
+???
+
+---
+
+.code.light-silver[
+&lt;span class="green-dark"&gt;.pull-left\[&lt;/span&gt;&lt;br&gt;
+You&amp;nbsp;can&amp;nbsp;put&amp;nbsp;something&amp;nbsp;on&amp;nbsp;the&amp;nbsp;left,&amp;nbsp;&amp;nbsp;&lt;br&gt;
+like&amp;nbsp;a&amp;nbsp;list&amp;nbsp;of&amp;nbsp;Beatrix Potter&amp;nbsp;books.&lt;br&gt;&lt;br&gt;
+The&amp;nbsp;Tale&amp;nbsp;of ...&lt;br&gt;&lt;br&gt;
+1...&lt;br&gt;&lt;br&gt;
+2...&lt;br&gt;&lt;br&gt;
+&lt;span class="green-dark"&gt;\]&lt;/span&gt;&lt;br&gt;&lt;br&gt;
+&lt;span class="green-dark"&gt;.pull-right\[&lt;/span&gt;&lt;br&gt;
+!\[\](Flopsy_Bunnies_cover.jpg)&lt;br&gt;
+&lt;span class="green-dark"&gt;\]&lt;/span&gt;
+]
+
+---
+
+```html
+*&lt;div class="pull-left"&gt;
+  &lt;p&gt;
+    You can put something on the left, like a list of Beatrix Potter books.
+  &lt;/p&gt;
+  &lt;p&gt;&lt;strong&gt;The Tale of ...&lt;/strong&gt;&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;p&gt;Peter Rabbit&lt;/p&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;p&gt;Jemima Puddle-Duck&lt;/p&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;p&gt;The Flopsy Bunnies&lt;/p&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;p&gt;Ginger and Pickles&lt;/p&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;p&gt;Timmy Tiptoes&lt;/p&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+*&lt;/div&gt;
+*&lt;div class="pull-right"&gt;
+  &lt;p&gt;&lt;img src="Flopsy_Bunnies_cover.jpg"&gt;&lt;/p&gt;
+*&lt;/div&gt;
+```
+
+
+---
+layout: true
+
+# Markdown .green-dark[remarkjs]
+
+.mb5[
+### What you want to see
+
+.f3[This .purple[word] is purple.]
+]
+
+---
+
+---
+
+### What you write
+
+```markdown
+This .purple[word] is purple.
+```
+
+---
+
+### What you could have written
+
+```html
+This &lt;span class="purple"&gt;word&lt;/span&gt; is purple.
+```
+
+---
+layout: false
+
+# CSS Classes and Rules
+
+.pull-left[
+### CSS Styles
+
+
+```css
+.title {
+  font-size: 1.25em;
+  font-style: italic;
+  font-family: Georgia, serif;
+}
+
+.purple {
+  color: #887ba3;
+}
+```
+
+
+&lt;style type="text/css"&gt;
+.title {
+  font-size: 1.25em;
+  font-style: italic;
+  font-family: Georgia, serif;
+}
+
+.purple {
+  color: #887ba3;
+}
+&lt;/style&gt;
+]
+
+.pull-right[
+### Markdown
+
+&lt;pre&gt;&lt;code style="font-size: 1.1em"&gt;.title&amp;#8203;[
+The Tale of&lt;br&gt;The .purple&amp;#8203;[Flopsy Bunnies]
+]
+&lt;/code&gt;&lt;/pre&gt;
+
+### HTML
+
+&lt;p class="title"&gt;The Tale of The &lt;span class="purple"&gt;Flopsy Bunnies&lt;/span&gt;&lt;/p&gt;
+]
+
+---
+name: yaml
+layout: false
+class: center middle inverse
+
+# xaringan's YAML
+
+.absolute.bottom-1.left-1[[.white[skip]](#resources)]
+
+--
+
+.light-gray.o-40.f3[yet another mother loving thing to ~~learn~~ lookup]
+
+---
+
+```yaml
+title: "Your Presentation Name"
+subtitle: "Another tag line"  
+author: "Dr. Mrs. Fancy Pants"
+date: '2021-03-10'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    chakra: libs/remark-latest.min.js
+    css: [default, default-fonts]
+    seal: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: true
+      slideNumberFormat: "%current%"
+      ratio: 16:9
+```
+
+---
+
+```yaml
+title: "Your Presentation Name"
+subtitle: "Another tag line"  
+author: "Dr. Mrs. Fancy Pants"
+date: '2021-03-10'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+*   chakra: libs/remark-latest.min.js
+    css: [default, default-fonts]
+    seal: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: true
+      slideNumberFormat: "%current%"
+      ratio: 16:9
+```
+
+Enable "offline" use and make sure your slides work a year from now
+
+```r
+xaringan::summon_remark()
+```
+
+---
+
+```yaml
+title: "Your Presentation Name"
+subtitle: "Another tag line"  
+author: "Dr. Mrs. Fancy Pants"
+date: '2021-03-10'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    chakra: libs/remark-latest.min.js
+*   css: [default, default-fonts]
+    seal: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: true
+      slideNumberFormat: "%current%"
+      ratio: 16:9
+```
+
+https://github.com/yihui/xaringan/wiki/Themes
+
+`[metropolis, metropolis-fonts]`  
+`[rladies, rladies-fonts]`  
+`[robot, robot-fonts]`
+
+---
+
+```yaml
+title: "Your Presentation Name"
+subtitle: "Another tag line"  
+author: "Dr. Mrs. Fancy Pants"
+date: '2021-03-10'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    chakra: libs/remark-latest.min.js
+    css: [default, default-fonts]
+*   seal: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: true
+      slideNumberFormat: "%current%"
+      ratio: 16:9
+```
+
+I usually make my own title slides
+
+---
+
+```yaml
+title: "Your Presentation Name"
+subtitle: "Another tag line"  
+author: "Dr. Mrs. Fancy Pants"
+date: '2021-03-10'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    chakra: libs/remark-latest.min.js
+    css: [default, default-fonts]
+    seal: false
+    nature:
+*     highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: true
+      slideNumberFormat: "%current%"
+      ratio: 16:9
+```
+
+Pick the code syntax theme that works for you!
+
+&lt;https://highlightjs.org/static/demo/&gt;
+
+---
+
+```yaml
+title: "Your Presentation Name"
+subtitle: "Another tag line"  
+author: "Dr. Mrs. Fancy Pants"
+date: '2021-03-10'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    chakra: libs/remark-latest.min.js
+    css: [default, default-fonts]
+    seal: false
+    nature:
+      highlightStyle: github
+*     highlightLines: true
+      countIncrementalSlides: true
+      slideNumberFormat: "%current%"
+      ratio: 16:9
+```
+
+```r
+data %&gt;% 
+  filter(!boring) %&gt;% #&lt;&lt;
+  summarize(awesome = sum(fun))
+```
+
+---
+
+```yaml
+title: "Your Presentation Name"
+subtitle: "Another tag line"  
+author: "Dr. Mrs. Fancy Pants"
+date: '2021-03-10'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    chakra: libs/remark-latest.min.js
+    css: [default, default-fonts]
+    seal: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+*     countIncrementalSlides: true
+*     slideNumberFormat: "%current%"
+      ratio: 16:9
+```
+
+Every slide counts, but don't give away how many slides are in your presentation
+
+---
+
+```yaml
+title: "Your Presentation Name"
+subtitle: "Another tag line"  
+author: "Dr. Mrs. Fancy Pants"
+date: '2021-03-10'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    chakra: libs/remark-latest.min.js
+    css: [default, default-fonts]
+    seal: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: true
+      slideNumberFormat: "%current%"
+*     ratio: 16:9
+```
+
+Either `4:3` or `16:9`
+
+**Check your venue!**
+
+---
+name: resources
+layout: false
+class: center middle inverse
+
+# Learning xaringan
+
+---
+
+# Resources
+
+1. The xaringan intro slides  
+   &lt;https://slides.yihui.org/xaringan&gt;
+   
+1. The xaringan wiki  
+   &lt;https://github.com/yihui/xaringan/wiki&gt;
+   
+1. The remarkjs wiki
+   &lt;https://github.com/gnab/remark/wiki&gt;
+   
+1. Awesome xaringan resources
+    - [Meet xaringan | Alison Hill](https://alison.rbind.io/talk/2019-rsc-xaringan/)
+    - [Sharing Your Work with xaringan](https://spcanelon.github.io/xaringan-basics-and-beyond/index.html)
+    - [Chapter 7 xaringan Presentations | R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/xaringan.html)
+
+---
+name: xaringanthemer
+layout: false
+class: center middle inverse
+
+# xaringanthemer
+
+--
+
+.f3[[.light-gray.o-40[pkg.garrickadenbuie.com/xaringanthemer]][xaringanthemer]]
+
+---
+
+# Custom xaringan themes
+
+
+```r
+install.packages("xaringanthemer")
+```
+
+--
+
+**In your slides `.Rmd`**
+
+````markdown
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+style_mono_light()
+```
+````
+
+--
+
+**In your slides YAML front-matter**
+
+```yaml
+---
+output:
+  xaringan::moon_reader:
+*    css: xaringan-themer.css
+---
+```
+
+
+---
+name: xaringanextra
+layout: false
+class: center middle inverse
+
+# xaringanExtra
+
+--
+
+.f3[[.light-gray.o-40[pkg.garrickadenbuie.com/xaringanExtra]][xaringanExtra]]
+
+---
+class: center middle
+
+## Once upon a time...
+
+<div class="countdown" id="timer_60494c06" style="right:0;bottom:0;position: relative; width: min-content; margin: 1em auto;" data-warnwhen="5">
+<code class="countdown-time"><span class="countdown-digits minutes">00</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">10</span></code>
+</div>
+
+---
+layout: true
+
+# xaringan plus something .purple[extra]
+
+---
+
+
+```r
+remotes::install_github("gadenbuie/xaringanExtra")
+```
+
+--
+
+**In your slides `.Rmd`**
+
+````markdown
+```{r xaringan-extra, include=FALSE}
+xaringanExtra::use_xaringan_extra()
+```
+````
+
+--
+
+&lt;img src="money.gif" class="absolute bottom-2 right-2"&gt;
+
+---
+class: highlight-last-item
+
+Big list at [pkg.garrickadenbuie.com/xaringanExtra/](https://pkg.garrickadenbuie.com/xaringanExtra/)
+
+- &amp;#x1F5FA;&amp;#xFE0F; [Tile View](https://pkg.garrickadenbuie.com/xaringanExtra/#/tile-view)
+
+--
+
+- &amp;#x1F4DD; [Editable](https://pkg.garrickadenbuie.com/xaringanExtra/editable/#2)
+
+--
+
+- &amp;#x1F5C2;&amp;#xFE0F; [Panelset](https://pkg.garrickadenbuie.com/xaringanExtra/panelset/#1)
+
+--
+
+- &amp;#x1F4FC; [Share Again](https://pkg.garrickadenbuie.com/xaringanExtra/share-again/share-again.html#2)
+
+--
+
+- &amp;#x1F50D; [Search](https://pkg.garrickadenbuie.com/xaringanExtra/search)
+
+--
+
+- &amp;#x1F9D1;&amp;#x200D;&amp;#x1F3A8; [Scribble](https://pkg.garrickadenbuie.com/xaringanExtra/scribble)
+
+--
+
+- &amp;#x1F4E1; [Broadcast](https://pkg.garrickadenbuie.com/xaringanExtra/broadcast)
+
+--
+
+- &amp;#x1F933; [Webcam](https://pkg.garrickadenbuie.com/xaringanExtra/webcam)
+
+&lt;style type="text/css"&gt;
+.highlight-last-item &gt; ul &gt; li, 
+.highlight-last-item &gt; ol &gt; li {
+  opacity: 0.5;
+}
+.highlight-last-item &gt; ul &gt; li:last-of-type,
+.highlight-last-item &gt; ol &gt; li:last-of-type {
+  opacity: 1;
+}
+&lt;/style&gt;
+
+---
+
+## Utility Classes with Tachyons
+
+- http://tachyons.io/
+
+- https://roperzh.github.io/tachyons-cheatsheet/
+
+--
+
+## Animations with Animate.css
+
+- https://animate.style/
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": true,
+"ratio": "191:100",
+"slideNumberFormat": "%current%"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

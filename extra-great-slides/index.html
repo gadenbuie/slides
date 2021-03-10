@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Making Extra Great Slides</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+
+  <script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+  <link href="data:text/css,%3Aroot%20%7B%0A%2D%2Dnc%2Dfont%2Dsans%3A%20%27Inter%27%2C%20%2Dapple%2Dsystem%2C%20BlinkMacSystemFont%2C%20%27Segoe%20UI%27%2C%20Roboto%2C%20Oxygen%2C%20Ubuntu%2C%20Cantarell%2C%20%27Open%20Sans%27%2C%20%27Helvetica%20Neue%27%2C%20sans%2Dserif%2C%20%22Apple%20Color%20Emoji%22%2C%20%22Segoe%20UI%20Emoji%22%2C%20%22Segoe%20UI%20Symbol%22%3B%0A%2D%2Dnc%2Dfont%2Dmono%3A%20Consolas%2C%20monaco%2C%20%27Ubuntu%20Mono%27%2C%20%27Liberation%20Mono%27%2C%20%27Courier%20New%27%2C%20Courier%2C%20monospace%3B%0A%2D%2Dnc%2Dtx%2D1%3A%20%23000000%3B%0A%2D%2Dnc%2Dtx%2D2%3A%20%231A1A1A%3B%0A%2D%2Dnc%2Dbg%2D1%3A%20%23FFFFFF%3B%0A%2D%2Dnc%2Dbg%2D2%3A%20%23F6F8FA%3B%0A%2D%2Dnc%2Dbg%2D3%3A%20%23E5E7EB%3B%0A%2D%2Dnc%2Dlk%2D1%3A%20%230070F3%3B%0A%2D%2Dnc%2Dlk%2D2%3A%20%230366D6%3B%0A%2D%2Dnc%2Dlk%2Dtx%3A%20%23FFFFFF%3B%0A%2D%2Dnc%2Dac%2D1%3A%20%2379FFE1%3B%0A%2D%2Dnc%2Dac%2Dtx%3A%20%230C4047%3B%0A%7D%0A%40media%20%28prefers%2Dcolor%2Dscheme%3A%20dark%29%20%7B%0A%3Aroot%20%7B%0A%2D%2Dnc%2Dtx%2D1%3A%20%23ffffff%3B%0A%2D%2Dnc%2Dtx%2D2%3A%20%23eeeeee%3B%0A%2D%2Dnc%2Dbg%2D1%3A%20%23000000%3B%0A%2D%2Dnc%2Dbg%2D2%3A%20%23111111%3B%0A%2D%2Dnc%2Dbg%2D3%3A%20%23222222%3B%0A%2D%2Dnc%2Dlk%2D1%3A%20%233291FF%3B%0A%2D%2Dnc%2Dlk%2D2%3A%20%230070F3%3B%0A%2D%2Dnc%2Dlk%2Dtx%3A%20%23FFFFFF%3B%0A%2D%2Dnc%2Dac%2D1%3A%20%237928CA%3B%0A%2D%2Dnc%2Dac%2Dtx%3A%20%23FFFFFF%3B%0A%7D%0A%7D%0A%2A%20%7B%0A%0Amargin%3A%200%3B%0Apadding%3A%200%3B%0A%7D%0Aaddress%2C%0Aarea%2C%0Aarticle%2C%0Aaside%2C%0Aaudio%2C%0Ablockquote%2C%0Adatalist%2C%0Adetails%2C%0Adl%2C%0Afieldset%2C%0Afigure%2C%0Aform%2C%0Ainput%2C%0Aiframe%2C%0Aimg%2C%0Ameter%2C%0Anav%2C%0Aol%2C%0Aoptgroup%2C%0Aoption%2C%0Aoutput%2C%0Ap%2C%0Apre%2C%0Aprogress%2C%0Aruby%2C%0Asection%2C%0Atable%2C%0Atextarea%2C%0Aul%2C%0Avideo%20%7B%0A%0Amargin%2Dbottom%3A%201rem%3B%0A%7D%0Ahtml%2Cinput%2Cselect%2Cbutton%20%7B%0A%0Afont%2Dfamily%3A%20var%28%2D%2Dnc%2Dfont%2Dsans%29%3B%0A%7D%0Abody%20%7B%0A%0Amargin%3A%200%20auto%3B%0Amax%2Dwidth%3A%20750px%3B%0Apadding%3A%202rem%3B%0Aborder%2Dradius%3A%206px%3B%0Aoverflow%2Dx%3A%20hidden%3B%0Aword%2Dbreak%3A%20break%2Dword%3B%0Aoverflow%2Dwrap%3A%20break%2Dword%3B%0Abackground%3A%20var%28%2D%2Dnc%2Dbg%2D1%29%3B%0A%0Acolor%3A%20var%28%2D%2Dnc%2Dtx%2D2%29%3B%0Afont%2Dsize%3A%201%2E03rem%3B%0Aline%2Dheight%3A%201%2E5%3B%0A%7D%0A%3A%3Aselection%20%7B%0A%0Abackground%3A%20var%28%2D%2Dnc%2Dac%2D1%29%3B%0Acolor%3A%20var%28%2D%2Dnc%2Dac%2Dtx%29%3B%0A%7D%0Ah1%2Ch2%2Ch3%2Ch4%2Ch5%2Ch6%20%7B%0Aline%2Dheight%3A%201%3B%0Acolor%3A%20var%28%2D%2Dnc%2Dtx%2D1%29%3B%0Apadding%2Dtop%3A%20%2E875rem%3B%0A%7D%0Ah1%2C%0Ah2%2C%0Ah3%20%7B%0Acolor%3A%20var%28%2D%2Dnc%2Dtx%2D1%29%3B%0Apadding%2Dbottom%3A%202px%3B%0Amargin%2Dbottom%3A%208px%3B%0Aborder%2Dbottom%3A%201px%20solid%20var%28%2D%2Dnc%2Dbg%2D2%29%3B%0A%7D%0Ah4%2C%0Ah5%2C%0Ah6%20%7B%0Amargin%2Dbottom%3A%20%2E3rem%3B%0A%7D%0Ah1%20%7B%0Afont%2Dsize%3A%202%2E25rem%3B%0A%7D%0Ah2%20%7B%0Afont%2Dsize%3A%201%2E85rem%3B%0A%7D%0Ah3%20%7B%0Afont%2Dsize%3A%201%2E55rem%3B%0A%7D%0Ah4%20%7B%0Afont%2Dsize%3A%201%2E25rem%3B%0A%7D%0Ah5%20%7B%0Afont%2Dsize%3A%201rem%3B%0A%7D%0Ah6%20%7B%0Afont%2Dsize%3A%20%2E875rem%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20var%28%2D%2Dnc%2Dlk%2D1%29%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20var%28%2D%2Dnc%2Dlk%2D2%29%3B%0A%7D%0Aabbr%3Ahover%20%7B%0A%0Acursor%3A%20help%3B%0A%7D%0Ablockquote%20%7B%0Apadding%3A%201%2E5rem%3B%0Abackground%3A%20var%28%2D%2Dnc%2Dbg%2D2%29%3B%0Aborder%2Dleft%3A%205px%20solid%20var%28%2D%2Dnc%2Dbg%2D3%29%3B%0A%7D%0Aabbr%20%7B%0Acursor%3A%20help%3B%0A%7D%0Ablockquote%20%2A%3Alast%2Dchild%20%7B%0Apadding%2Dbottom%3A%200%3B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Aheader%20%7B%0Abackground%3A%20var%28%2D%2Dnc%2Dbg%2D2%29%3B%0Aborder%2Dbottom%3A%201px%20solid%20var%28%2D%2Dnc%2Dbg%2D3%29%3B%0Apadding%3A%202rem%201%2E5rem%3B%0A%0Amargin%3A%20%2D2rem%20calc%280px%20%2D%20%2850vw%20%2D%2050%25%29%29%202rem%3B%0A%0Apadding%2Dleft%3A%20calc%2850vw%20%2D%2050%25%29%3B%0Apadding%2Dright%3A%20calc%2850vw%20%2D%2050%25%29%3B%0A%7D%0Aheader%20h1%2C%0Aheader%20h2%2C%0Aheader%20h3%20%7B%0Apadding%2Dbottom%3A%200%3B%0Aborder%2Dbottom%3A%200%3B%0A%7D%0Aheader%20%3E%20%2A%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%0Apadding%2Dtop%3A%200%3B%0A%7D%0Aheader%20%3E%20%2A%3Alast%2Dchild%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Aa%20button%2C%0Abutton%2C%0Ainput%5Btype%3D%22submit%22%5D%2C%0Ainput%5Btype%3D%22reset%22%5D%2C%0Ainput%5Btype%3D%22button%22%5D%20%7B%0Afont%2Dsize%3A%201rem%3B%0Adisplay%3A%20inline%2Dblock%3B%0Apadding%3A%206px%2012px%3B%0Atext%2Dalign%3A%20center%3B%0Atext%2Ddecoration%3A%20none%3B%0Awhite%2Dspace%3A%20nowrap%3B%0Abackground%3A%20var%28%2D%2Dnc%2Dlk%2D1%29%3B%0Acolor%3A%20var%28%2D%2Dnc%2Dlk%2Dtx%29%3B%0Aborder%3A%200%3B%0Aborder%2Dradius%3A%204px%3B%0Abox%2Dsizing%3A%20border%2Dbox%3B%0Acursor%3A%20pointer%3B%0Acolor%3A%20var%28%2D%2Dnc%2Dlk%2Dtx%29%3B%0A%7D%0Aa%20button%5Bdisabled%5D%2C%0Abutton%5Bdisabled%5D%2C%0Ainput%5Btype%3D%22submit%22%5D%5Bdisabled%5D%2C%0Ainput%5Btype%3D%22reset%22%5D%5Bdisabled%5D%2C%0Ainput%5Btype%3D%22button%22%5D%5Bdisabled%5D%20%7B%0Acursor%3A%20default%3B%0Aopacity%3A%20%2E5%3B%0A%0Acursor%3A%20not%2Dallowed%3B%0A%7D%0A%2Ebutton%3Afocus%2C%0A%2Ebutton%3Ahover%2C%0Abutton%3Afocus%2C%0Abutton%3Ahover%2C%0Ainput%5Btype%3D%22submit%22%5D%3Afocus%2C%0Ainput%5Btype%3D%22submit%22%5D%3Ahover%2C%0Ainput%5Btype%3D%22reset%22%5D%3Afocus%2C%0Ainput%5Btype%3D%22reset%22%5D%3Ahover%2C%0Ainput%5Btype%3D%22button%22%5D%3Afocus%2C%0Ainput%5Btype%3D%22button%22%5D%3Ahover%20%7B%0Abackground%3A%20var%28%2D%2Dnc%2Dlk%2D2%29%3B%0A%7D%0Acode%2C%0Apre%2C%0Akbd%2C%0Asamp%20%7B%0A%0Afont%2Dfamily%3A%20var%28%2D%2Dnc%2Dfont%2Dmono%29%3B%0A%7D%0Acode%2C%0Asamp%2C%0Akbd%2C%0Apre%20%7B%0A%0Abackground%3A%20var%28%2D%2Dnc%2Dbg%2D2%29%3B%0Aborder%3A%201px%20solid%20var%28%2D%2Dnc%2Dbg%2D3%29%3B%0Aborder%2Dradius%3A%204px%3B%0Apadding%3A%203px%206px%3B%0Afont%2Dsize%3A%200%2E9rem%3B%0A%7D%0Akbd%20%7B%0A%0Aborder%2Dbottom%3A%203px%20solid%20var%28%2D%2Dnc%2Dbg%2D3%29%3B%0A%7D%0Apre%20%7B%0Apadding%3A%201rem%201%2E4rem%3B%0Amax%2Dwidth%3A%20100%25%3B%0Aoverflow%3A%20auto%3B%0A%7D%0Apre%20code%20%7B%0A%0Abackground%3A%20inherit%3B%0Afont%2Dsize%3A%20inherit%3B%0Acolor%3A%20inherit%3B%0Aborder%3A%200%3B%0Apadding%3A%200%3B%0Amargin%3A%200%3B%0A%7D%0Acode%20pre%20%7B%0A%0Adisplay%3A%20inline%3B%0Abackground%3A%20inherit%3B%0Afont%2Dsize%3A%20inherit%3B%0Acolor%3A%20inherit%3B%0Aborder%3A%200%3B%0Apadding%3A%200%3B%0Amargin%3A%200%3B%0A%7D%0Adetails%20%7B%0A%0Apadding%3A%20%2E6rem%201rem%3B%0Abackground%3A%20var%28%2D%2Dnc%2Dbg%2D2%29%3B%0Aborder%3A%201px%20solid%20var%28%2D%2Dnc%2Dbg%2D3%29%3B%0Aborder%2Dradius%3A%204px%3B%0A%7D%0Asummary%20%7B%0A%0Acursor%3A%20pointer%3B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Adetails%5Bopen%5D%20%7B%0A%0Apadding%2Dbottom%3A%20%2E75rem%3B%0A%7D%0Adetails%5Bopen%5D%20summary%20%7B%0A%0Amargin%2Dbottom%3A%206px%3B%0A%7D%0Adetails%5Bopen%5D%3E%2A%3Alast%2Dchild%20%7B%0A%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Adt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Add%3A%3Abefore%20%7B%0A%0Acontent%3A%20%27%E2%86%92%20%27%3B%0A%7D%0Ahr%20%7B%0A%0Aborder%3A%200%3B%0Aborder%2Dbottom%3A%201px%20solid%20var%28%2D%2Dnc%2Dbg%2D3%29%3B%0Amargin%3A%201rem%20auto%3B%0A%7D%0Afieldset%20%7B%0Amargin%2Dtop%3A%201rem%3B%0Apadding%3A%202rem%3B%0Aborder%3A%201px%20solid%20var%28%2D%2Dnc%2Dbg%2D3%29%3B%0Aborder%2Dradius%3A%204px%3B%0A%7D%0Alegend%20%7B%0Apadding%3A%20auto%20%2E5rem%3B%0A%7D%0Atable%20%7B%0A%0Aborder%2Dcollapse%3A%20collapse%3B%0Awidth%3A%20100%25%0A%7D%0Atd%2C%0Ath%20%7B%0Aborder%3A%201px%20solid%20var%28%2D%2Dnc%2Dbg%2D3%29%3B%0Atext%2Dalign%3A%20left%3B%0Apadding%3A%20%2E5rem%3B%0A%7D%0Ath%20%7B%0Abackground%3A%20var%28%2D%2Dnc%2Dbg%2D2%29%3B%0A%7D%0Atr%3Anth%2Dchild%28even%29%20%7B%0A%0Abackground%3A%20var%28%2D%2Dnc%2Dbg%2D2%29%3B%0A%7D%0Atable%20caption%20%7B%0Afont%2Dweight%3A%20bold%3B%0Amargin%2Dbottom%3A%20%2E5rem%3B%0A%7D%0Atextarea%20%7B%0A%0Amax%2Dwidth%3A%20100%25%3B%0A%7D%0Aol%2C%0Aul%20%7B%0A%0Apadding%2Dleft%3A%202rem%3B%0A%7D%0Ali%20%7B%0Amargin%2Dtop%3A%20%2E4rem%3B%0A%7D%0Aul%20ul%2C%0Aol%20ul%2C%0Aul%20ol%2C%0Aol%20ol%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Amark%20%7B%0Apadding%3A%203px%206px%3B%0Abackground%3A%20var%28%2D%2Dnc%2Dac%2D1%29%3B%0Acolor%3A%20var%28%2D%2Dnc%2Dac%2Dtx%29%3B%0A%7D%0Atextarea%2C%0Aselect%2C%0Ainput%20%7B%0Apadding%3A%206px%2012px%3B%0Amargin%2Dbottom%3A%20%2E5rem%3B%0Abackground%3A%20var%28%2D%2Dnc%2Dbg%2D2%29%3B%0Acolor%3A%20var%28%2D%2Dnc%2Dtx%2D2%29%3B%0Aborder%3A%201px%20solid%20var%28%2D%2Dnc%2Dbg%2D3%29%3B%0Aborder%2Dradius%3A%204px%3B%0Abox%2Dshadow%3A%20none%3B%0Abox%2Dsizing%3A%20border%2Dbox%3B%0A%7D%0Aimg%20%7B%0Amax%2Dwidth%3A%20100%25%3B%0A%7D" rel="stylesheet" />
+  <meta name="description" content="xaringan, xaringanthemer and xaringanExtra. Presented at the  New York Open Statistical Programming Meetup on March 10, 2021" />
+  <meta name="twitter:title" content="Making Extra Great Slides" />
+  <meta name="twitter:description" content="xaringan, xaringanthemer and xaringanExtra. Presented at the  New York Open Statistical Programming Meetup on March 10, 2021" />
+  <meta name="twitter:url" content="https://gadenbuie.github.io/extra-great-slides" />
+  <meta name="twitter:image:src" content="https://gadenbuie.github.io/extra-great-slides/intro/extra-great-slides.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:creator" content="grrrck" />
+  <meta name="twitter:site" content="grrrck" />
+  <meta property="og:title" content="Making Extra Great Slides" />
+  <meta property="og:description" content="xaringan, xaringanthemer and xaringanExtra. Presented at the  New York Open Statistical Programming Meetup on March 10, 2021" />
+  <meta property="og:url" content="https://gadenbuie.github.io/extra-great-slides" />
+  <meta property="og:image" content="https://gadenbuie.github.io/extra-great-slides/intro/extra-great-slides.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+</head>
+<body>
+<style type="text/css" charset="utf-8">
+main {
+  max-width: 48em;
+  margin: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  main {
+    max-width: 100%;
+  }
+}
+
+img {
+  max-width: 100%;
+}
+</style>
+
+
+<main>
+<header>
+<h1 id="title" class="toc-ignore">Making Extra Great Slides</h1>
+<h2 id="subtitle" class="toc-ignore">With xaringan, xaringanthemer, and xaringanExtra</h2>
+<p id="date">New York Open Statistical Programming Meetup<br>March 10, 2021</p>
+
+</header>
+
+
+<h2 id="slides">Slides</h2>
+<ul>
+<li><p><a href="intro/index.html">Introduction to xaringan</a></p></li>
+<li><p><a href="default/index.html">Default xaringan slides</a></p></li>
+</ul>
+<h2 id="packages">Packages</h2>
+<ul>
+<li><a href="https://slides.yihui.org/xaringan/">xaringan</a></li>
+<li><a href="https://pkg.garrickadenbuie.com/xaringanthemer">xaringanthemer</a></li>
+<li><a href="https://pkg.garrickadenbuie.com/xaringanExtra">xaringanExtra</a></li>
+<li><a href="https://github.com/jhelvy/xaringanBuilder">xaringanBuilder</a></li>
+<li><a href="https://pkg.garrickadenbuie.com/metathis">metathis</a></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On CRAN</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;xaringan&quot;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;xaringanthemer&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;metathis&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># From GitHub</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;remotes&quot;)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;gadenbuie/xaringanExtra&quot;</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;jhelvy/xaringanBuilder&quot;</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;gadenbuie/countdown&quot;</span>)</span></code></pre></div>
+
+</main>
+
+
+</body>
+</html>

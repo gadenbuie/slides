@@ -1,0 +1,189 @@
+---
+output: 
+  cleanrmd::html_document_clean:
+    theme: new
+---
+
+```{r setup, include=FALSE}
+xaringanExtra::use_clipboard()
+```
+
+# Outline
+
+## Intro
+
+### about me ... xaringan intro
+
+### anatomy of a slide
+
+```
+---
+class: middle right
+background-image: url('banana.jpg')
+background-size: cover
+
+
+# Knock-Knock
+
+## Who's there?
+
+--
+
+## Banana!
+```
+
+### Using `class`
+
+- `left` `center` `right`
+- `top` `middle` `bottom`
+
+```
+---
+
+# Be classy and move me around!
+
+```
+
+### Using background
+
+- `background-image`
+    - url(image)
+- `background-size`
+    - `cover`
+    - `160px 90px`
+    - `contain`
+- `background-position`
+    - `top right`
+    - `5% 5%`
+
+```
+---
+
+Provoke thought with a great background: <https://unsplash.com>
+```
+
+### Slide Continuations
+
+```
+---
+
+# Something I want to tell you
+--
+It's so important
+--
+And dramatic
+--
+And full of suspense
+--
+That it takes a few slides to get to my point
+
+```
+
+### Markdown 
+
+Go back to slides
+
+### Remark's Special Sauce
+
+do in slides
+
+### CSS Classes and Rules
+
+Open and run infinite moon reader..
+
+`demo/css-inf-mr.Rmd`
+
+```
+.title[
+The Tale of The .purple[Flopsy Bunnies]
+]
+
+<style>
+.title {
+  font-size: 5em;
+  font-style: italic;
+}
+.purple {
+  color: pink;
+}
+</style>
+```
+
+
+### Resources
+
+Jump to `#resources`
+
+## xaringanThemer
+
+- slides
+
+- [default slides](https://slides.yihui.org/xaringan)
+
+- create a new xaringanthemer doc
+
+- Go to coolers.co to find colors
+
+- Go to fonts.google.com
+
+- Try colors and fonts
+
+- Try adding extra colors
+
+- Showcase the ggplot2 theme
+
+## xaringan Extra
+
+### Demo things from slides
+
+### Tachyons
+
+<https://roperzh.github.io/tachyons-cheatsheet/>
+
+```
+---
+
+.w-70.pr4.mid-gray.avenir.f2.lh-copy[
+The computer is doing something that you’re telling it to do. 
+You’re figuring out how to tell a computer ... how to jump through the hoops to make it happen. 
+It’s creating something. .blue.i.b[It’s very much like being an artist.]
+]
+
+.w-30.absolute.right-2.bottom-2[
+![](doogie.jpg)
+.right.i.gray[Jared Lander]
+]
+
+```
+
+### Animation
+
+```
+xaringanExtra::use_animate_all("slide_left")
+```
+
+Try `slide_up` and `roll` and `fade`
+
+Then add
+
+```
+xaringanExtra::use_animate_css()
+```
+
+```
+.animated.heartBeat.infinite[
+# A
+]
+```
+
+```
+.animated.tada.infinite[
+# A
+]
+```
+
+```
+.animated.jackInTheBox.delay-2s[
+# A
+]
+```

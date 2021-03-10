@@ -1,0 +1,60 @@
+---
+title: Making Extra Great Slides
+subtitle: With xaringan, xaringanthemer, and xaringanExtra
+date: New York Open Statistical Programming Meetup<br>March 10, 2021
+output: 
+  cleanrmd::html_document_clean:
+    theme: new
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r metadata, include=FALSE}
+library(metathis)
+meta() %>% 
+  meta_description("xaringan, xaringanthemer and xaringanExtra. Presented at the  New York Open Statistical Programming Meetup on March 10, 2021") %>% 
+  meta_social(
+    title = "Making Extra Great Slides",
+    url = "https://gadenbuie.github.io/extra-great-slides",
+    image = "https://gadenbuie.github.io/extra-great-slides/intro/extra-great-slides.png",
+    twitter_card_type = "summary_large_image",
+    twitter_creator = "grrrck"
+  )
+```
+
+## Slides
+
+- [Introduction to xaringan](intro/index.html)
+
+- [Default xaringan slides](default/index.html)
+
+## Packages
+
+[xaringan]: https://slides.yihui.org/xaringan/
+[xaringanthemer]: https://pkg.garrickadenbuie.com/xaringanthemer
+[xaringanExtra]: https://pkg.garrickadenbuie.com/xaringanExtra
+[xaringanBuilder]: https://github.com/jhelvy/xaringanBuilder
+[metathis]: https://pkg.garrickadenbuie.com/metathis
+[grrrck]: https://twitter.com/grrrck
+[gab]: https://www.garrickadenbuie.com
+
+- [xaringan]
+- [xaringanthemer]
+- [xaringanExtra]
+- [xaringanBuilder]
+- [metathis]
+
+```r
+# On CRAN
+install.packages("xaringan")
+install.packages("xaringanthemer")
+install.packages("metathis")
+
+# From GitHub
+# install.packages("remotes")
+remotes::install_github("gadenbuie/xaringanExtra")
+remotes::install_github("jhelvy/xaringanBuilder")
+remotes::install_github("gadenbuie/countdown")
+```
