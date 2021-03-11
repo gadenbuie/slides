@@ -79,8 +79,8 @@ meta() %>%
   meta_description("xaringan, xaringanthemer and xaringanExtra. Presented at the  New York Open Statistical Programming Meetup on March 10, 2021") %>% 
   meta_social(
     title = "Making Extra Great Slides",
-    url = "https://gadenbuie.github.io/extra-great-slides/intro/",
-    image = "https://gadenbuie.github.io/extra-great-slides/intro/extra-great-slides.png",
+    url = "https://gadenbuie.github.io/slides/extra-great-slides/intro/",
+    image = "https://gadenbuie.github.io/slides/extra-great-slides/intro/extra-great-slides.png",
     twitter_card_type = "summary_large_image",
     twitter_creator = "grrrck"
   )
