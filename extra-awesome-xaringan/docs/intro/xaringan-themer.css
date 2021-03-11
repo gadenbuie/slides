@@ -15,7 +15,7 @@
  *    - xaringan wiki: https://github.com/yihui/xaringan/wiki
  *    - remarkjs wiki: https://github.com/gnab/remark/wiki
  *
- *  Version: 0.2.0.9100
+ *  Version: 0.3.2
  *
  * ------------------------------------------------------- */
 @import url(https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&display=swap);
@@ -32,6 +32,7 @@
   --text-font-base: sans-serif;
   --header-font-family: 'Roboto Slab';
   --header-font-is-google: 1;
+  --header-font-family-fallback: Georgia, serif;
   --code-font-family: 'Source Code Pro';
   --code-font-is-google: 1;
   --base-font-size: 25px;
@@ -52,36 +53,28 @@
   --inverse-text-color: #4242424;
   --inverse-background-color: #2c8475;
   --inverse-header-color: #eaeaea;
+  --inverse-link-color: #2c8475;
   --title-slide-background-color: #B56B6F;
   --title-slide-text-color: #FFFFFF;
   --header-background-color: #B56B6F;
   --header-background-text-color: #FFF;
+  --primary: #B56B6F;
+  --secondary: #2c8475;
+  --white: #FFF;
+  --black: #4242424;
   --green: #31b09e;
-
   --green-dark: #2c8475;
-
   --highlight: #87f9bb;
-
   --purple: #887ba3;
-
   --pink: #B56B6F;
-
   --orange: #f79334;
-
   --red: #dc322f;
-
   --blue-dark: #002b36;
-
   --text-dark: #202020;
-
   --text-darkish: #424242;
-
   --text-mild: #606060;
-
   --text-light: #9a9a9a;
-
   --text-lightest: #eaeaea;
-
 }
 
 html {
@@ -94,7 +87,7 @@ body {
   color: var(--text-color);
 }
 h1, h2, h3 {
-  font-family: var(--header-font-family);
+  font-family: var(--header-font-family), var(--header-font-family-fallback);
   font-weight: 400;
   color: var(--header-color);
 }
@@ -151,6 +144,9 @@ a, a > code {
 .inverse h1, .inverse h2, .inverse h3 {
   color: var(--inverse-header-color);
 }
+.inverse a, .inverse a > code {
+  color: var(--inverse-link-color);
+}
 .title-slide, .title-slide h1, .title-slide h2, .title-slide h3 {
   color: var(--title-slide-text-color);
 }
@@ -185,7 +181,7 @@ a, a > code {
   float: right;
   width: 47%;
 }
-.pull-right ~ * {
+.pull-right + * {
   clear: both;
 }
 img, video, iframe {
@@ -257,6 +253,30 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   }
 }
 
+.primary {
+  color: var(--primary);
+}
+.bg-primary {
+  background-color: var(--primary);
+}
+.secondary {
+  color: var(--secondary);
+}
+.bg-secondary {
+  background-color: var(--secondary);
+}
+.white {
+  color: var(--white);
+}
+.bg-white {
+  background-color: var(--white);
+}
+.black {
+  color: var(--black);
+}
+.bg-black {
+  background-color: var(--black);
+}
 .green {
   color: var(--green);
 }
@@ -343,9 +363,6 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   margin-bottom: 0;
   margin-top: 0;
 }
-
-
-/* Extra CSS */
 .smallish, .smallish .remark-code-line {
   font-size: 0.9em;
 }

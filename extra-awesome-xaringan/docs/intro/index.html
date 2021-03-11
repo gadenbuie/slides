@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="author" content="Garrick Aden-Buie" />
     <meta name="date" content="2020-02-25" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view/tile-view.js"></script>
     <link href="libs/animate.css/animate.xaringan.css" rel="stylesheet" />
@@ -12,17 +13,17 @@
     <meta name="description" content="Presented at the Tampa UseRs Group Meetup on February 25, 2020"/>
     <meta name="twitter:title" content="Extra Awesome xaringan Presentations"/>
     <meta name="twitter:description" content="Presented at the Tampa UseRs Group Meetup on February 25, 2020"/>
-    <meta name="twitter:url" content="https://gadenbuie.github.io/extra-awesome-xaringan"/>
-    <meta name="twitter:image:src" content="https://gadenbuie.github.io/extra-awesome-xaringan/intro/extra-awesome-xaringan-presentations.jpg"/>
+    <meta name="twitter:url" content="https://gadenbuie.github.io/slides/extra-awesome-xaringan"/>
+    <meta name="twitter:image:src" content="https://gadenbuie.github.io/slides/extra-awesome-xaringan/intro/extra-awesome-xaringan-presentations.jpg"/>
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:creator" content="grrrck"/>
     <meta name="twitter:site" content="grrrck"/>
-    <meta name="og:title" content="Extra Awesome xaringan Presentations"/>
-    <meta name="og:description" content="Presented at the Tampa UseRs Group Meetup on February 25, 2020"/>
-    <meta name="og:url" content="https://gadenbuie.github.io/extra-awesome-xaringan"/>
-    <meta name="og:image" content="https://gadenbuie.github.io/extra-awesome-xaringan/intro/extra-awesome-xaringan-presentations.jpg"/>
-    <meta name="og:type" content="website"/>
-    <meta name="og:locale" content="en_US"/>
+    <meta property="og:title" content="Extra Awesome xaringan Presentations"/>
+    <meta property="og:description" content="Presented at the Tampa UseRs Group Meetup on February 25, 2020"/>
+    <meta property="og:url" content="https://gadenbuie.github.io/slides/extra-awesome-xaringan"/>
+    <meta property="og:image" content="https://gadenbuie.github.io/slides/extra-awesome-xaringan/intro/extra-awesome-xaringan-presentations.jpg"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -634,7 +635,7 @@ yet another mother loving thing to ~~learn~~ lookup
 title: "Your Presentation Name"
 subtitle: "Another tag line"  
 author: "Dr. Mrs. Fancy Pants"
-date: '2020-02-27'
+date: '2021-03-11'
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -655,7 +656,7 @@ output:
 title: "Your Presentation Name"
 subtitle: "Another tag line"  
 author: "Dr. Mrs. Fancy Pants"
-date: '2020-02-27'
+date: '2021-03-11'
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -682,7 +683,7 @@ xaringan::summon_remark()
 title: "Your Presentation Name"
 subtitle: "Another tag line"  
 author: "Dr. Mrs. Fancy Pants"
-date: '2020-02-27'
+date: '2021-03-11'
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -709,7 +710,7 @@ https://github.com/yihui/xaringan/wiki/Themes
 title: "Your Presentation Name"
 subtitle: "Another tag line"  
 author: "Dr. Mrs. Fancy Pants"
-date: '2020-02-27'
+date: '2021-03-11'
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -732,7 +733,7 @@ I usually make my own title slides
 title: "Your Presentation Name"
 subtitle: "Another tag line"  
 author: "Dr. Mrs. Fancy Pants"
-date: '2020-02-27'
+date: '2021-03-11'
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -757,7 +758,7 @@ Pick the code syntax theme that works for you!
 title: "Your Presentation Name"
 subtitle: "Another tag line"  
 author: "Dr. Mrs. Fancy Pants"
-date: '2020-02-27'
+date: '2021-03-11'
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -784,7 +785,7 @@ data %&gt;%
 title: "Your Presentation Name"
 subtitle: "Another tag line"  
 author: "Dr. Mrs. Fancy Pants"
-date: '2020-02-27'
+date: '2021-03-11'
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -807,7 +808,7 @@ Every slide counts, but don't give away how many slides are in your presentation
 title: "Your Presentation Name"
 subtitle: "Another tag line"  
 author: "Dr. Mrs. Fancy Pants"
-date: '2020-02-27'
+date: '2021-03-11'
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -900,6 +901,32 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
 // adds .remark-code-has-line-highlighted class to <pre> parent elements
 // of code chunks containing highlighted lines with class .remark-code-line-highlighted
 (function(d) {
@@ -917,17 +944,6 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   }
   preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
 })(document);</script>
-
-<script>
-(function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-</script>
 
 <script>
 slideshow._releaseMath = function(el) {

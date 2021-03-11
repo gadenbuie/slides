@@ -18,8 +18,8 @@ meta() %>%
   meta_description("Presented at the Tampa UseRs Group Meetup on February 25, 2020") %>% 
   meta_social(
     title = "Extra Awesome xaringan Presentations",
-    url = "https://gadenbuie.github.io/extra-awesome-xaringan",
-    image = "https://gadenbuie.github.io/extra-awesome-xaringan/intro/extra-awesome-xaringan-presentations.jpg",
+    url = "https://gadenbuie.github.io/slides/extra-awesome-xaringan",
+    image = "https://gadenbuie.github.io/slides/extra-awesome-xaringan/intro/extra-awesome-xaringan-presentations.jpg",
     twitter_card_type = "summary_large_image",
     twitter_creator = "grrrck"
   )
