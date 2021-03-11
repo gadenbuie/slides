@@ -1,5 +1,6 @@
 ---
-title: "Extra Awesome xaringan Presentations - Tampa R Users Group"
+title: "Making Extra Great Slides with xaringan"
+subtitle: "NY Open Statistical Programming Meetup"
 author: "Garrick Aden-Buie"
 date: 'February 25, 2020'
 output:
@@ -68,7 +69,7 @@ style_duo_accent(
     ".smallish, .smallish .remark-code-line" = list(`font-size` = "0.9em")
   )
 )
-xaringanExtra::use_xaringan_extra(c("tile_view", "animate_css", "tachyons"))
+xaringanExtra::use_xaringan_extra(c("tile_view", "animate_css", "tachyons", "share_again"))
 xaringanExtra::use_extra_styles()
 ```
 
