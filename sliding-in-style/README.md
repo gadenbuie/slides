@@ -22,14 +22,11 @@ The [xaringan] package by YiHui Xie lets R users and R Markdown authors easily b
 
 Together we’ll create a completely customized xaringan slide style with [xaringanthemer], a package that lets you quickly create a complete slide theme from only a few color choices. Then we’ll talk about how you can take your slide design one step further with just a little bit of CSS.
 
-- [xaringanthemer]
-- [xaringanExtra]
-- [lorem]
-
 ## Packages
 
 [xaringan]: https://slides.yihui.org/xaringan/
 [xaringanthemer]: https://pkg.garrickadenbuie.com/xaringanthemer
+[xaringanExtra]: https://pkg.garrickadenbuie.com/xaringanExtra
 [grrrck]: https://twitter.com/grrrck
 [gab]: https://www.garrickadenbuie.com
 [htmlwidgets]: http://www.htmlwidgets.org/
@@ -38,6 +35,7 @@ Together we’ll create a completely customized xaringan slide style with [xarin
 - [xaringan]
 - [xaringanthemer]
 - [xaringanExtra]
+- [lorem]
 
 ```r
 # On CRAN
