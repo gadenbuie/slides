@@ -1,0 +1,38 @@
+---
+title: "Presentation Ninja"
+subtitle: "⚔<br/>with xaringan"
+author: "Yihui Xie"
+institute: "RStudio, PBC"
+date: "2016/12/12 (updated: `r Sys.Date()`)"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+<!-- Intentionally left blank. -->
+
+---
+class: middle right
+background-image: url('banana.jpg')
+background-size: cover
+
+
+# Knock-Knock
+
+## Who's there?
+
+--
+
+## Banana!
+
+---
+
+# Be classy and move me around!
+
+---
+
+Provoke thought with a great background: <https://unsplash.com>

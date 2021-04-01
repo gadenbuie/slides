@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Sliding in Style</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Garrick Aden-Buie" />
+    <meta name="date" content="2021-04-01" />
+    <script src="assets/libs/header-attrs/header-attrs.js"></script>
+    <link href="assets/libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="assets/libs/tile-view/tile-view.js"></script>
+    <link href="assets/libs/animate.css/animate.xaringan.css" rel="stylesheet" />
+    <link href="assets/libs/tachyons/tachyons.min.css" rel="stylesheet" />
+    <link href="assets/libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <meta name="description" content="Make stylish slides with {xaringanthemer} and a little bit of CSS.&#10; Presented at the South Coast MA UseR Group on April 1, 2021"/>
+    <meta name="twitter:title" content="Sliding in Style"/>
+    <meta name="twitter:description" content="Make stylish slides with {xaringanthemer} and a little bit of CSS.&#10; Presented at the South Coast MA UseR Group on April 1, 2021"/>
+    <meta name="twitter:url" content="https://gadenbuie.github.io/slides/sliding-in-style"/>
+    <meta name="twitter:image:src" content="https://slides.garrickadenbuie.com/sliding-in-style/assets/img/social.png"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:creator" content="grrrck"/>
+    <meta name="twitter:site" content="grrrck"/>
+    <meta property="og:title" content="Sliding in Style"/>
+    <meta property="og:description" content="Make stylish slides with {xaringanthemer} and a little bit of CSS.&#10; Presented at the South Coast MA UseR Group on April 1, 2021"/>
+    <meta property="og:url" content="https://gadenbuie.github.io/slides/sliding-in-style"/>
+    <meta property="og:image" content="https://slides.garrickadenbuie.com/sliding-in-style/assets/img/social.png"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <link rel="stylesheet" href="assets/css/xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+
+
+class: left title-slide
+background-image: url(assets/img/unsplash_W5qgKZj-qnk.jpg)
+background-size: 115%
+background-position: bottom center
+
+[remarkjs]: https://github.com/gnab/remark
+[remark-wiki]: https://github.com/gnab/remark/wiki
+[xaringan]: https://slides.yihui.org/xaringan/
+[xaringan-wiki]: https://github.com/yihui/xaringan/wiki
+[xaringanthemer]: https://pkg.garrickadenbuie.com/xaringanthemer
+[xaringanExtra]: https://pkg.garrickadenbuie.com/xaringanExtra
+[metathis]: https://pkg.garrickadenbuie.com/metathis
+[grrrck]: https://twitter.com/grrrck
+[gab]: https://www.garrickadenbuie.com
+[rsthemes]: https://www.garrickdenbuie.com/projects/rsthemes
+[regexplain]: https://www.garrickdenbuie.com/projects/regexplain
+[shrtcts]: https://pkg.garricakdenbuie.com/shrtcts
+
+# Sliding in Style
+
+&lt;div class="title-where"&gt;
+South Coast MA UseR Group&lt;br&gt;
+April 1, 2021
+&lt;/div&gt;
+
+.side-text[
+[&amp;commat;grrrck][grrrck] | [garrickadenbuie.com][gab]
+]
+
+&lt;style type="text/css"&gt;
+.remark-visible .title-slide h1,
+.remark-visible .title-slide .side-text,
+.remark-visible .title-slide .title-where {
+  animation-duration: 13s;
+}
+
+.remark-visible .title-slide {
+  animation: slide-style-color 20s linear infinite;
+}
+
+@keyframes slide-style-color {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+.title-slide h1 {
+  font-size: 100px;
+  font-family: Jost, sans;
+  margin-bottom: 0;
+  margin-top: 15px;
+}
+
+.side-text {
+  color: white;
+  position: absolute;
+  font-size: 20px;
+  bottom: 1em;
+  right: 1em;
+}
+
+.side-text:hover {
+  opacity: 1;
+}
+
+.side-text a {
+  color: white;
+}
+
+.title-where {
+  color: white;
+  font-family: 'Amatic SC', sans;
+  font-size: 40px;
+  font-weight: 800;
+}
+&lt;/style&gt;
+
+---
+layout: false
+
+# About Me
+
+.f3[
+&amp;#x1F44B; Hi, I'm **Garrick Aden-Buie**
+]
+
+--
+
+.f3[
+&amp;#x1F426; [&amp;commat;grrrck](https://twitter.com/grrrck)
+]
+
+--
+
+.f3[
+&amp;#x1F9D1;&amp;#x200D;&amp;#x1F4BB; [garrickadenbuie.com](https://garrickadenbuie.com)
+]
+
+--
+
+.f3[
+&amp;#x1F4BC; [RStudio Education](https://rstudio.com): [.code[gradethis]](https://github.com/rstudio-education/gradethis), [.code[learnr]](https://github.com/rstudio/learnr)
+]
+
+--
+
+.f3[
+&amp;#x1F379; .code[[rsthemes][rsthemes]], .code[[regexplain][regexplain]], .code[[shrtcts][shrtcts]]
+]
+
+---
+exclude: true
+
+# Try it Yourself (Later)
+
+.f3[
+&amp;#x1F371; [github.com/gadenbuie/slides](https://github.com/gadenbuie/slides/tree/gh-pages/extra-great-slides)
+
+&gt; &amp;#x1F4C2; extra-great-slides
+
+&amp;#x1F4BD; [grrrck/extra-great-slides](https://hub.docker.com/r/grrrck/extra-great-slides)
+
+&gt; `docker pull grrrck/extra-great-slides`
+]
+
+---
+class: inverse, center, middle
+
+# xaringan crash course
+
+---
+class: center, middle
+
+# xaringan
+
+### /ʃæ.'riŋ.ɡæn/
+
+--
+
+.f1[
+&amp;#x1F937;&amp;#x200D;
+]
+
+---
+
+# How To Get xaringan
+
+
+```r
+install.packages("xaringan")
+```
+
+--
+
+&lt;img class="center" src="assets/img/naruto.gif" width="75%" /&gt;
+
+---
+class: inverse center middle
+
+# Let's Make Some Slides
+
+---
+class: inverse center middle
+
+# Anatomy of a Slide
+
+---
+
+# Anatomy of a Slide
+
+```markdown
+---
+class: middle right
+background-image: url('banana.jpg')
+background-size: cover
+
+
+# Knock-Knock
+
+## Who's there?
+
+--
+
+## Banana!
+
+```
+
+---
+
+Slides to be generated from [assets/img/anatomy](assets/img/anatomy)
+
+---
+class: middle right
+background-image: url('assets/img/banana.jpg')
+background-size: cover
+
+
+# Knock-Knock
+
+## Who's there?
+
+--
+
+## Banana!
+
+---
+
+# Slide Properties
+
+.w-30.fl[
+&lt;div class="f3 mt0 pt0 code"&gt;class:&lt;/div&gt;
+
+**Horizontal**
+
+- `left`
+- `center`
+- `right`
+
+**Vertical**
+
+- `top`
+- `middle`
+- `bottom`
+]
+
+--
+
+.w-70.fl[
+&lt;div class="f3 mt0 pt0 code"&gt;background-image:&lt;/div&gt;
+
+`url('image.png')`  
+
+&lt;div class="f3 mt3 pt0 code"&gt;background-size:&lt;/div&gt;
+
+`160px 90px`
+
+&lt;div class="f3 mt3 pt0 code"&gt;background-position:&lt;/div&gt;
+
+`top right`  
+`bottom left`  
+`5% 5%`
+]
+
+---
+class: center middle
+
+# Learn Markdown in 15 Minutes
+
+.f2[
+[commonmark.org/help/tutorial](https://commonmark.org/help/tutorial/)
+]
+
+---
+layout: false
+
+# CSS Classes and Rules
+
+.pull-left[
+### CSS Styles
+
+
+```css
+.book-title {
+  font-size: 1.25em;
+  font-style: italic;
+  font-family: Georgia, serif;
+}
+
+.purple {
+  color: #887ba3;
+}
+```
+
+
+&lt;style type="text/css"&gt;
+.book-title {
+  font-size: 1.25em;
+  font-style: italic;
+  font-family: Georgia, serif;
+}
+
+.purple {
+  color: #887ba3;
+}
+&lt;/style&gt;
+]
+
+.pull-right[
+### Markdown
+
+&lt;pre&gt;&lt;code style="font-size: 1.1em"&gt;.book-title&amp;#8203;[
+The Tale of The&lt;br&gt;.purple&amp;#8203;[Flopsy Bunnies]
+]
+&lt;/code&gt;&lt;/pre&gt;
+
+### HTML
+
+&lt;p class="book-title"&gt;The Tale of The &lt;span class="purple"&gt;Flopsy Bunnies&lt;/span&gt;&lt;/p&gt;
+]
+
+---
+name: resources
+layout: false
+class: center middle inverse
+
+# Learning xaringan
+
+---
+
+# Resources
+
+1. Reference Pages
+    - [The xaringan intro slides](https://slides.yihui.org/xaringan)
+    - [The xaringan wiki](https://github.com/yihui/xaringan/wiki)
+    - [The remarkjs wiki](https://github.com/gnab/remark/wiki)
+   
+1. Awesome xaringan resources
+    - [Meet xaringan | Alison Hill](https://alison.rbind.io/talk/2019-rsc-xaringan/)
+    - [Sharing Your Work with xaringan](https://spcanelon.github.io/xaringan-basics-and-beyond/index.html)
+    - [Chapter 7 xaringan Presentations | R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/xaringan.html)
+    
+1. Finishing Up Your Slides
+    - [Sharing Your xaringan Slides · Garrick Aden‑Buie](https://www.garrickadenbuie.com/blog/sharing-xaringan-slides/)
+    - [Sharing on Short Notice](https://rstudio-education.github.io/sharing-short-notice)
+    - [xaringanBuilder](https://github.com/jhelvy/xaringanBuilder)
+
+---
+name: xaringanthemer
+layout: false
+class: center middle inverse
+
+# xaringanthemer
+
+--
+
+.f3[[.light-gray.o-40[pkg.garrickadenbuie.com/xaringanthemer]][xaringanthemer]]
+
+---
+
+# Custom xaringan themes
+
+#### Install
+
+
+```r
+install.packages("xaringanthemer")
+```
+
+--
+
+.w-50.fl[
+#### In your slides `.Rmd`
+
+````markdown
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+style_mono_light()
+```
+````
+]
+
+--
+
+.w-50.fl.pl3[
+#### In the YAML of your slide
+
+```yaml
+---
+output:
+  xaringan::moon_reader:
+*    css: xaringan-themer.css
+---
+```
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="assets/libs/remark-0.14.0.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": true,
+"ratio": "16:9",
+"slideNumberFormat": "%current%"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

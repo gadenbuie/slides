@@ -1,0 +1,431 @@
+---
+title: "Presentation Ninja"
+subtitle: "&#x2694;&#xFE0F; xaringan +<br/>&#x1F60E; xaringanthemer"  
+author: 
+  - "Yihui Xie"
+  - "Garrick Aden-Buie"
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    nature:
+      titleSlideClass: middle, left
+      slideNumberFormat: "%current%"
+      highlightStyle: github
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: true
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+  fig.width=9, fig.height=3.5, fig.retina=3,
+  out.width = "100%",
+  cache = FALSE,
+  echo = TRUE,
+  message = FALSE, 
+  warning = FALSE,
+  fig.show = TRUE,
+  hiline = TRUE
+)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+
+gwc_colors <- c(
+  black  = "#1a1918",
+  white  = "#ffffff",
+  teal   = "#0d9c90",
+  red    = "#ea3850",
+  orange = "#fa7815",
+  blue   = "#0d38d3",
+  yellow = "#fdd946"
+)
+
+style_mono_accent(
+  base_color = gwc_colors[["teal"]],
+  colors = gwc_colors,
+  header_font_google = google_font("Roboto Condensed", 700),
+  text_font_google = google_font("Roboto"),
+  code_font_google = google_font("Roboto Mono"),
+  header_color = gwc_colors["black"],
+  extra_css = list(
+    "h1, h2" = list(
+      "text-transform" = "uppercase"
+    )
+  )
+)
+```
+
+```{r xaringanExtra, echo=FALSE}
+xaringanExtra::use_xaringan_extra("tile_view")
+```
+
+
+# Photography & Type
+
+.pull-left[
+#### Adjacent
+
+Adipiscing aliquet molestie tempus mattis et curabitur dapibus aliquet natoque facilisi velit dapibus. Congue ultricies nunc.
+]
+
+.pull-right[
+#### Overlapping
+
+Elit ullamcorper porttitor rhoncus dis enim mollis curae tortor enim est mus erat etiam dis maecenas condimentum! Aptent litora sagittis faucibus scelerisque condimentum integer ridiculus curabitur gravida tincidunt? 
+
+*Ad tellus vivamus **mus fringilla interdum** et imperdiet donec. Gravida.*
+]
+
+<style>
+h4 {
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+em {
+  color: var(--teal);
+}
+em strong {
+  color: var(--blue);
+}
+</style>
+
+---
+
+# Photography and Type
+
+```html
+<div class="photo-box">
+  <div class="photo">
+    <p><img src="Campus2019-5151.jpg" alt=""></p>
+  </div>
+  <div class="content">
+    <p>Lorem quis ornare pharetra ...!</p>
+  </div>
+</div>
+```
+
+.photo-box.w-half[
+.photo[
+![](Campus2019-5151.jpg)
+]
+
+.content[
+Lorem quis ornare pharetra sociis bibendum hac taciti volutpat. 
+At morbi orci habitasse sodales conubia sociosqu metus gravida 
+condimentum laoreet semper enim placerat rhoncus placerat ad tellus!
+]
+]
+
+<style>
+.w-half {
+  width: 50%
+}
+.photo-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1.5em;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--teal);
+  padding: 1.5em;
+  color: white;
+  font-weight: bold;
+}
+</style>
+
+---
+
+## Typography
+
+Text can be **bold**, _italic_, ~~strikethrough~~, or `inline code`.
+
+[Link to another slide](#colors).
+
+### Lorem Ipsum
+
+Dolor imperdiet nostra sapien scelerisque praesent curae metus facilisis dignissim tortor. 
+Lacinia neque mollis nascetur neque urna velit bibendum. 
+Himenaeos suspendisse leo varius mus risus sagittis aliquet venenatis duis nec.
+
+- Dolor cubilia nostra nunc sodales
+
+- Consectetur aliquet mauris blandit
+
+- Ipsum dis nec porttitor urna sed
+
+---
+name: colors
+
+## Colors
+
+- <span style="color: var(--text-color)">Text Color</span>
+
+- <span style="color: var(--header-color); font-family: var(--header-font-family);">Header Color</span>
+
+- <span style="color: var(--link-color)">Link Color</span>
+
+- <span style="color: var(--text-bold-color); font-weight: bold;">Bold Color</span>
+
+- `inline code color`
+
+---
+
+# Big Topic or Inverse Slides `#`
+
+## Slide Headings `##`
+
+### Sub-slide Headings `###`
+
+#### Bold Call-Out `####`
+
+This is a normal paragraph text. Only use header levels 1-4.
+
+##### Possible, but not recommended `#####`
+
+###### Definitely don't use h6 `######`
+
+---
+class: inverse center middle
+
+# Topic Changing Interstitial
+
+--
+
+```
+class: inverse center middle
+```
+
+---
+layout: true
+
+## Blocks
+
+---
+
+### Blockquote
+
+> This is a blockquote following a header.
+>
+> When something is important enough, you do it even if the odds are not in your favor.
+
+---
+
+### Code Blocks
+
+#### R Code
+
+```{r eval=FALSE}
+ggplot(gapminder) +
+  aes(x = gdpPercap, y = lifeExp, size = pop, color = country) +
+  geom_point() +
+  facet_wrap(~year)
+```
+
+#### JavaScript
+
+```js
+var fun = function lang(l) {
+  dateformat.i18n = require('./lang/' + l)
+  return true;
+}
+```
+
+---
+
+### More R Code
+
+```{r eval=FALSE}
+dplyr::starwars %>% dplyr::slice_sample(n = 4)
+```
+
+---
+
+```{r message=TRUE}
+cli::cli_alert_success("It worked!")
+```
+
+--
+
+```{r message=TRUE}
+message("Just a friendly message")
+```
+
+--
+
+```{r warning=TRUE}
+warning("This could be bad...")
+```
+
+--
+
+```{r error=TRUE}
+stop("I hope you're sitting down for this")
+```
+
+
+---
+layout: true
+
+## Tables
+
+---
+
+```{r}
+tibble::as_tibble(mtcars)
+```
+
+---
+
+```{r}
+knitr::kable(head(mtcars), format = 'html')
+```
+
+---
+
+```{r}
+DT::datatable(head(mtcars), fillContainer = FALSE, options = list(pageLength = 4))
+```
+
+---
+layout: true
+
+## Lists
+
+---
+
+.pull-left[
+#### Here is an unordered list:
+
+*   Item foo
+*   Item bar
+*   Item baz
+*   Item zip
+]
+
+.pull-right[
+
+#### And an ordered list:
+
+1.  Item one
+1.  Item two
+1.  Item three
+1.  Item four
+]
+
+---
+
+### And a nested list:
+
+- level 1 item
+  - level 2 item
+  - level 2 item
+    - level 3 item
+    - level 3 item
+- level 1 item
+  - level 2 item
+  - level 2 item
+  - level 2 item
+- level 1 item
+  - level 2 item
+  - level 2 item
+- level 1 item
+
+---
+
+### Nesting an ol in ul in an ol
+
+- level 1 item (ul)
+  1. level 2 item (ol)
+  1. level 2 item (ol)
+    - level 3 item (ul)
+    - level 3 item (ul)
+- level 1 item (ul)
+  1. level 2 item (ol)
+  1. level 2 item (ol)
+    - level 3 item (ul)
+    - level 3 item (ul)
+  1. level 4 item (ol)
+  1. level 4 item (ol)
+    - level 3 item (ul)
+    - level 3 item (ul)
+- level 1 item (ul)
+
+---
+layout: true
+
+## Plots
+
+---
+
+```{r plot-example}
+library(ggplot2)
+(g <- ggplot(mpg) + aes(hwy, cty, color = class) + geom_point())
+```
+
+---
+
+```{r plot-example-themed}
+g + xaringanthemer::theme_xaringan(text_font_size = 16, title_font_size = 18) +
+  ggtitle("A Plot About Cars")
+```
+
+---
+layout: false
+
+## Square image
+
+<center><img src="https://octodex.github.com/images/labtocat.png" height="400px" /></center>
+
+.footnote[GitHub Octocat]
+
+---
+
+### Wide image
+
+![](https://guides.github.com/activities/hello-world/branching.png)
+
+.footnote[Wide images scale to 100% slide width]
+
+---
+
+## Two images
+
+.pull-left[
+![](https://octodex.github.com/images/motherhubbertocat.png)
+]
+
+.pull-right[
+![](https://octodex.github.com/images/dinotocat.png)
+]
+
+---
+
+### Definition lists can be used with HTML syntax.
+
+<dl>
+<dt>Name</dt>
+<dd>Godzilla</dd>
+<dt>Born</dt>
+<dd>1952</dd>
+<dt>Birthplace</dt>
+<dd>Japan</dd>
+<dt>Color</dt>
+<dd>Green</dd>
+</dl>
+
+---
+class: center, middle
+
+# Thanks!
+
+Slides created via the R packages:
+
+[**xaringan**](https://github.com/yihui/xaringan)<br>
+[gadenbuie/xaringanthemer](https://github.com/gadenbuie/xaringanthemer)
+
+The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](http://yihui.name/knitr), and [R Markdown](https://rmarkdown.rstudio.com).

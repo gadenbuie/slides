@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Presentation Ninja</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Yihui Xie" />
+    <meta name="author" content="Garrick Aden-Buie" />
+    <meta name="date" content="2021-04-01" />
+    <script src="demo-gwc_files/header-attrs/header-attrs.js"></script>
+    <link href="demo-gwc_files/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="demo-gwc_files/tile-view/tile-view.js"></script>
+    <script src="demo-gwc_files/htmlwidgets/htmlwidgets.js"></script>
+    <script src="demo-gwc_files/jquery/jquery.min.js"></script>
+    <link href="demo-gwc_files/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="demo-gwc_files/datatables-binding/datatables.js"></script>
+    <link href="demo-gwc_files/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="demo-gwc_files/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="demo-gwc_files/dt-core/js/jquery.dataTables.min.js"></script>
+    <link href="demo-gwc_files/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="demo-gwc_files/crosstalk/js/crosstalk.min.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: middle, left, title-slide
+
+# Presentation Ninja
+## ⚔️ xaringan +<br/>😎 xaringanthemer
+### Yihui Xie
+### Garrick Aden-Buie
+### 2021-04-01
+
+---
+
+
+
+
+
+
+
+
+
+# Photography &amp; Type
+
+.pull-left[
+#### Adjacent
+
+Adipiscing aliquet molestie tempus mattis et curabitur dapibus aliquet natoque facilisi velit dapibus. Congue ultricies nunc.
+]
+
+.pull-right[
+#### Overlapping
+
+Elit ullamcorper porttitor rhoncus dis enim mollis curae tortor enim est mus erat etiam dis maecenas condimentum! Aptent litora sagittis faucibus scelerisque condimentum integer ridiculus curabitur gravida tincidunt? 
+
+*Ad tellus vivamus **mus fringilla interdum** et imperdiet donec. Gravida.*
+]
+
+&lt;style&gt;
+h4 {
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+em {
+  color: var(--teal);
+}
+em strong {
+  color: var(--blue);
+}
+&lt;/style&gt;
+
+---
+
+# Photography and Type
+
+```html
+&lt;div class="photo-box"&gt;
+  &lt;div class="photo"&gt;
+    &lt;p&gt;&lt;img src="Campus2019-5151.jpg" alt=""&gt;&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="content"&gt;
+    &lt;p&gt;Lorem quis ornare pharetra ...!&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+```
+
+.photo-box.w-half[
+.photo[
+![](Campus2019-5151.jpg)
+]
+
+.content[
+Lorem quis ornare pharetra sociis bibendum hac taciti volutpat. 
+At morbi orci habitasse sodales conubia sociosqu metus gravida 
+condimentum laoreet semper enim placerat rhoncus placerat ad tellus!
+]
+]
+
+&lt;style&gt;
+.w-half {
+  width: 50%
+}
+.photo-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1.5em;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--teal);
+  padding: 1.5em;
+  color: white;
+  font-weight: bold;
+}
+&lt;/style&gt;
+
+---
+
+## Typography
+
+Text can be **bold**, _italic_, ~~strikethrough~~, or `inline code`.
+
+[Link to another slide](#colors).
+
+### Lorem Ipsum
+
+Dolor imperdiet nostra sapien scelerisque praesent curae metus facilisis dignissim tortor. 
+Lacinia neque mollis nascetur neque urna velit bibendum. 
+Himenaeos suspendisse leo varius mus risus sagittis aliquet venenatis duis nec.
+
+- Dolor cubilia nostra nunc sodales
+
+- Consectetur aliquet mauris blandit
+
+- Ipsum dis nec porttitor urna sed
+
+---
+name: colors
+
+## Colors
+
+- &lt;span style="color: var(--text-color)"&gt;Text Color&lt;/span&gt;
+
+- &lt;span style="color: var(--header-color); font-family: var(--header-font-family);"&gt;Header Color&lt;/span&gt;
+
+- &lt;span style="color: var(--link-color)"&gt;Link Color&lt;/span&gt;
+
+- &lt;span style="color: var(--text-bold-color); font-weight: bold;"&gt;Bold Color&lt;/span&gt;
+
+- `inline code color`
+
+---
+
+# Big Topic or Inverse Slides `#`
+
+## Slide Headings `##`
+
+### Sub-slide Headings `###`
+
+#### Bold Call-Out `####`
+
+This is a normal paragraph text. Only use header levels 1-4.
+
+##### Possible, but not recommended `#####`
+
+###### Definitely don't use h6 `######`
+
+---
+class: inverse center middle
+
+# Topic Changing Interstitial
+
+--
+
+```
+class: inverse center middle
+```
+
+---
+layout: true
+
+## Blocks
+
+---
+
+### Blockquote
+
+&gt; This is a blockquote following a header.
+&gt;
+&gt; When something is important enough, you do it even if the odds are not in your favor.
+
+---
+
+### Code Blocks
+
+#### R Code
+
+
+```r
+ggplot(gapminder) +
+  aes(x = gdpPercap, y = lifeExp, size = pop, color = country) +
+  geom_point() +
+  facet_wrap(~year)
+```
+
+#### JavaScript
+
+```js
+var fun = function lang(l) {
+  dateformat.i18n = require('./lang/' + l)
+  return true;
+}
+```
+
+---
+
+### More R Code
+
+
+```r
+dplyr::starwars %&gt;% dplyr::slice_sample(n = 4)
+```
+
+---
+
+
+```r
+cli::cli_alert_success("It worked!")
+```
+
+```
+## ✓ It worked!
+```
+
+--
+
+
+```r
+message("Just a friendly message")
+```
+
+```
+## Just a friendly message
+```
+
+--
+
+
+```r
+warning("This could be bad...")
+```
+
+```
+## Warning: This could be bad...
+```
+
+--
+
+
+```r
+stop("I hope you're sitting down for this")
+```
+
+```
+## Error in eval(expr, envir, enclos): I hope you're sitting down for this
+```
+
+
+---
+layout: true
+
+## Tables
+
+---
+
+
+```r
+tibble::as_tibble(mtcars)
+```
+
+```
+## # A tibble: 32 x 11
+##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  21       6  160    110  3.9   2.62  16.5     0     1     4     4
+##  2  21       6  160    110  3.9   2.88  17.0     0     1     4     4
+##  3  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
+##  4  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
+##  5  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
+##  6  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
+##  7  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
+##  8  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
+##  9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
+## 10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
+## # … with 22 more rows
+```
+
+---
+
+
+```r
+knitr::kable(head(mtcars), format = 'html')
+```
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; mpg &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; cyl &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; disp &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; hp &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; drat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; wt &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; qsec &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; vs &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; am &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; gear &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; carb &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Mazda RX4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 160 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 110 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.90 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.620 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.46 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Mazda RX4 Wag &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 160 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 110 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.90 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.875 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 17.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Datsun 710 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 22.8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 108 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 93 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.85 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.320 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.61 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Hornet 4 Drive &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 258 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 110 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.215 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Hornet Sportabout &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 360 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 175 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.15 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.440 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 17.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Valiant &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 225 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 105 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.76 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.460 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20.22 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+
+```r
+DT::datatable(head(mtcars), fillContainer = FALSE, options = list(pageLength = 4))
+```
+
+<div id="htmlwidget-a2ca43bdf385733ce2b6" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a2ca43bdf385733ce2b6">{"x":{"filter":"none","fillContainer":false,"data":[["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant"],[21,21,22.8,21.4,18.7,18.1],[6,6,4,6,8,6],[160,160,108,258,360,225],[110,110,93,110,175,105],[3.9,3.9,3.85,3.08,3.15,2.76],[2.62,2.875,2.32,3.215,3.44,3.46],[16.46,17.02,18.61,19.44,17.02,20.22],[0,0,1,1,0,1],[1,1,1,0,0,0],[4,4,4,3,3,3],[4,4,1,1,2,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>mpg<\/th>\n      <th>cyl<\/th>\n      <th>disp<\/th>\n      <th>hp<\/th>\n      <th>drat<\/th>\n      <th>wt<\/th>\n      <th>qsec<\/th>\n      <th>vs<\/th>\n      <th>am<\/th>\n      <th>gear<\/th>\n      <th>carb<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+---
+layout: true
+
+## Lists
+
+---
+
+.pull-left[
+#### Here is an unordered list:
+
+*   Item foo
+*   Item bar
+*   Item baz
+*   Item zip
+]
+
+.pull-right[
+
+#### And an ordered list:
+
+1.  Item one
+1.  Item two
+1.  Item three
+1.  Item four
+]
+
+---
+
+### And a nested list:
+
+- level 1 item
+  - level 2 item
+  - level 2 item
+    - level 3 item
+    - level 3 item
+- level 1 item
+  - level 2 item
+  - level 2 item
+  - level 2 item
+- level 1 item
+  - level 2 item
+  - level 2 item
+- level 1 item
+
+---
+
+### Nesting an ol in ul in an ol
+
+- level 1 item (ul)
+  1. level 2 item (ol)
+  1. level 2 item (ol)
+    - level 3 item (ul)
+    - level 3 item (ul)
+- level 1 item (ul)
+  1. level 2 item (ol)
+  1. level 2 item (ol)
+    - level 3 item (ul)
+    - level 3 item (ul)
+  1. level 4 item (ol)
+  1. level 4 item (ol)
+    - level 3 item (ul)
+    - level 3 item (ul)
+- level 1 item (ul)
+
+---
+layout: true
+
+## Plots
+
+---
+
+
+```r
+library(ggplot2)
+(g &lt;- ggplot(mpg) + aes(hwy, cty, color = class) + geom_point())
+```
+
+&lt;img src="demo-gwc_files/figure-html/plot-example-1.png" width="100%" /&gt;
+
+---
+
+
+```r
+g + xaringanthemer::theme_xaringan(text_font_size = 16, title_font_size = 18) +
+  ggtitle("A Plot About Cars")
+```
+
+&lt;img src="demo-gwc_files/figure-html/plot-example-themed-1.png" width="100%" /&gt;
+
+---
+layout: false
+
+## Square image
+
+&lt;center&gt;&lt;img src="https://octodex.github.com/images/labtocat.png" height="400px" /&gt;&lt;/center&gt;
+
+.footnote[GitHub Octocat]
+
+---
+
+### Wide image
+
+![](https://guides.github.com/activities/hello-world/branching.png)
+
+.footnote[Wide images scale to 100% slide width]
+
+---
+
+## Two images
+
+.pull-left[
+![](https://octodex.github.com/images/motherhubbertocat.png)
+]
+
+.pull-right[
+![](https://octodex.github.com/images/dinotocat.png)
+]
+
+---
+
+### Definition lists can be used with HTML syntax.
+
+&lt;dl&gt;
+&lt;dt&gt;Name&lt;/dt&gt;
+&lt;dd&gt;Godzilla&lt;/dd&gt;
+&lt;dt&gt;Born&lt;/dt&gt;
+&lt;dd&gt;1952&lt;/dd&gt;
+&lt;dt&gt;Birthplace&lt;/dt&gt;
+&lt;dd&gt;Japan&lt;/dd&gt;
+&lt;dt&gt;Color&lt;/dt&gt;
+&lt;dd&gt;Green&lt;/dd&gt;
+&lt;/dl&gt;
+
+---
+class: center, middle
+
+# Thanks!
+
+Slides created via the R packages:
+
+[**xaringan**](https://github.com/yihui/xaringan)&lt;br&gt;
+[gadenbuie/xaringanthemer](https://github.com/gadenbuie/xaringanthemer)
+
+The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](http://yihui.name/knitr), and [R Markdown](https://rmarkdown.rstudio.com).
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

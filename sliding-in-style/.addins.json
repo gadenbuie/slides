@@ -1,0 +1,6 @@
+{
+    "rsthemes::use_theme_favorite": "Ctrl+Cmd+N",
+    "xaringan::inf_mr": "Ctrl+Shift+Cmd+I",
+    "js4shiny::live_preview_addin": "Ctrl+Shift+Cmd+L",
+    "js4shiny::live_preview_stop": "Ctrl+Alt+Shift+Cmd+L"
+}
