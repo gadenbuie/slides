@@ -79,7 +79,7 @@ style_duo_accent(
     ".smallish, .smallish .remark-code-line" = list(`font-size` = "0.9em")
   )
 )
-xaringanExtra::use_xaringan_extra(c("tile_view", "animate_css", "tachyons"))#, "share_again"))
+xaringanExtra::use_xaringan_extra(c("tile_view", "animate_css", "tachyons", "share_again"))
 xaringanExtra::use_extra_styles()
 ```
 
@@ -136,7 +136,7 @@ slides_from_images <- function(
 
   paste(txt, sep = "", collapse = "")
 }
-options("slide_image_placeholder" = TRUE)
+options("slide_image_placeholder" = FALSE)
 ```
 
 class: left title-slide
