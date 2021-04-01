@@ -263,6 +263,18 @@ docker run -d --rm -p 8787:8787 -e DISABLE_AUTH=true grrrck/sliding-in-style
 ]
 
 ---
+class: middle
+
+<img src="https://pbs.twimg.com/profile_images/1253886218820968449/JQUt4DWD_400x400.jpg"  class="br-100 w-25 shadow-4 center" />
+
+.f3.primary.w-60.center.lh-copy[
+.silver[Thank you] Katie Jolly
+
+[Applying design guidelines to slides with {xaringanthemer}](https://www.katiejolly.io/blog/2021-03-16/designing-slides)
+]
+
+
+---
 class: inverse, center, middle
 
 # xaringan crash course
