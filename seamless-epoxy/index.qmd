@@ -1,0 +1,70 @@
+---
+title: "Seamless data-driven reporting with {epoxy}"
+author: Garrick Aden-Buie
+institute: Posit Software, PBC
+format:
+  letterbox-revealjs:
+    theme: [default, slides.scss]
+editor:
+  render-on-save: true
+---
+
+## National Database of Childcare Prices {transition="slide-in fade-out"}
+
+## National Database of Childcare Prices {transition="fade"}
+
+::: {class="fancy-quote ignore-muted ignore-mark" style="font-size: 1.25em; margin-top: 1em;"}
+A study of childcare prices in
+<span>2,360</span>
+U.S. counties across
+<span>47</span>
+states shows that childcare prices
+[for a single child]{.muted}
+range from
+<span>$4,810</span>
+[for school-age home-based care in small counties]{.muted}
+to <span>$15,417</span>
+[for infant center-based care in very large counties]{.muted}.
+This is equivalent to between
+<span>8%</span> and <span>19.3%</span>
+of median family income [per child in paid care]{.muted}.
+:::
+
+## National Database of Childcare Prices {transition="fade"}
+
+::: {class="fancy-quote ignore-mark" style="font-size: 1.25em; margin-top: 1em;"}
+A study of childcare prices in
+<mark>2,360</mark>
+U.S. counties across
+<mark>47</mark>
+states shows that childcare prices
+[for a single child]{.muted}
+range from
+<mark>$4,810</mark>
+[for school-age home-based care in small counties]{.muted}
+to <mark>$15,417</mark>
+[for infant center-based care in very large counties]{.muted}.
+This is equivalent to between
+<mark>8%</mark> and <mark>19.3%</mark>
+of median family income [per child in paid care]{.muted}.
+:::
+
+
+## National Database of Childcare Prices {transition="fade"}
+
+::: {class="fancy-quote" style="font-size: 1.25em; margin-top: 1em;"}
+A study of childcare prices in
+<mark>2,360</mark>
+U.S. counties across
+<mark>47</mark>
+states shows that childcare prices
+[for a single child]{.muted}
+range from
+<mark>$4,810</mark>
+[for school-age home-based care in small counties]{.muted}
+to <mark>$15,417</mark>
+[for infant center-based care in very large counties]{.muted}.
+This is equivalent to between
+<mark>8%</mark> and <mark>19.3%</mark>
+of median family income [per child in paid care]{.muted}.
+:::
