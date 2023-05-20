@@ -123,3 +123,7 @@ pre.markdown {
 .hljs {
   background: transparent;
 }
+
+.remark-slide-container {
+  display: block !important;
+}

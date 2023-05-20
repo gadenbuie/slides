@@ -1,7 +1,7 @@
 ---
 pagetitle: "R Markdown: An Incomplete History"
 title: R Markdown
-subtitle: 
+subtitle:
   - "R's Secret Ingredient"
   - "R's Special Sauce"
   - "An Incomplete History"
@@ -12,7 +12,7 @@ date: "2021-02-11"
 output:
   xaringan::moon_reader:
     lib_dir: assets/libs
-    css: 
+    css:
       - assets/css/a11y-light.css
       - assets/css/xaringan-rstudio.css
       - assets/css/title-slide.css
@@ -20,6 +20,7 @@ output:
     seal: false
     anchor_sections: false
     self_contained: false
+    mathjax: null
     # includes:
     #   after_body: assets/html/extras.html
     nature:
@@ -27,7 +28,7 @@ output:
       slideNumberFormat: "%current%"
       highlightStyle: foo
       highlightLines: true
-      highlightLanguage: [r, latex, yaml, markdown, javascript, html]
+      highlightLanguage: [r, latex, yaml, markdown]
       ratio: 16:9
       countIncrementalSlides: true
 ---
@@ -66,9 +67,9 @@ rewrite_chunk <- function(label, include_label = FALSE, nbt = 3) {
   opts <- paste(
     vapply(names(opts), FUN.VALUE = character(1), function(on) {
       paste0(
-        if (on != "label") paste(on, "= "), 
+        if (on != "label") paste(on, "= "),
         if (is.character(opts[[on]])) {
-          if (on == "label") label else dQuote(opts[[on]], q = 0) 
+          if (on == "label") label else dQuote(opts[[on]], q = 0)
         } else {
           deparse(opts[[on]])
         }
@@ -176,8 +177,8 @@ two
 class: pv0 ph3 middle
 
 <div class="f1 lh-title f-zilla">
-.b[Break Free From Plastic] engaged 14,734 volunteers in 
-55 countries to conduct 575 brand audits. 
+.b[Break Free From Plastic] engaged 14,734 volunteers in
+55 countries to conduct 575 brand audits.
 These volunteers collected 346,494 pieces of plastic waste.
 </div>
 
@@ -185,8 +186,8 @@ These volunteers collected 346,494 pieces of plastic waste.
 class: pv0 ph3 middle
 
 <div class="f1 lh-title f-zilla">
-.b[Break Free From Plastic] engaged .hl[14,734] volunteers in 
-.hl[55] countries to conduct .hl[575] brand audits. 
+.b[Break Free From Plastic] engaged .hl[14,734] volunteers in
+.hl[55] countries to conduct .hl[575] brand audits.
 These volunteers collected .hl[346,494] pieces of plastic waste.
 </div>
 
@@ -384,7 +385,7 @@ background-position: center center
 \author{Charles J. Geyer}
 \maketitle
 
-% .... 
+% ....
 
 ```
 
@@ -406,7 +407,7 @@ background-position: center center
 \author{Charles J. Geyer}
 \maketitle
 
-% .... 
+% ....
 
 ```
 ]
@@ -948,7 +949,7 @@ glue("\n- In {years} we collected {grand_total} pieces of plastic.")
 `r rewrite_chunk("glue-demo-1")`
 ````
 
-```{glue glue-demo-1}
+```{epoxy glue-demo-1}
 - In {years} we collected {grand_total} pieces of plastic.
 
 ```
@@ -965,13 +966,13 @@ library(dplyr)
 # plastics <- tidytuesdayR::tt_load(2021, week = 5)$plastics
 plastics <- readr::read_csv(here::here("data", "plastics.csv"))
 
-plastics_grand_summary <- 
-  plastics %>% 
-  group_by(country, year, num_events, volunteers) %>% 
+plastics_grand_summary <-
+  plastics %>%
+  group_by(country, year, num_events, volunteers) %>%
   summarize(
     grand_total = sum(grand_total, na.rm = TRUE),
     .groups = "drop"
-  ) %>% 
+  ) %>%
   arrange(year, desc(grand_total))
 ```
 
@@ -984,9 +985,9 @@ plastics_grand_summary
 ---
 
 ```{r echo=TRUE}
-plastics_year_summary <- 
-  plastics_grand_summary %>% 
-  group_by(year) %>% 
+plastics_year_summary <-
+  plastics_grand_summary %>%
+  group_by(year) %>%
   summarize(
     countries = n(),
     across(c(num_events, volunteers, grand_total), sum, na.rm = TRUE)
@@ -1009,9 +1010,9 @@ plastics_year_summary
 ---
 
 .f3[
-```{glue glue-all-summary, data = plastics_year_summary}
-- **In {year}**, _Break Free From Plastic_ engaged {volunteers} volunteers in 
-  {countries} countries to conduct {num_events} brand audits. 
+```{epoxy glue-all-summary, data = plastics_year_summary}
+- **In {year}**, _Break Free From Plastic_ engaged {volunteers} volunteers in
+  {countries} countries to conduct {num_events} brand audits.
   These volunteers collected {grand_total} pieces of plastic waste.
 
 ```
@@ -1085,7 +1086,7 @@ document.querySelectorAll('code').forEach(function(el) {
 ```{r metathis, echo=FALSE}
 library(metathis)
 meta() %>%
-  meta_name("github-repo" = "gadenbuie/slide") %>% 
+  meta_name("github-repo" = "gadenbuie/slides") %>%
   meta_social(
     title = "R Markdown: An Incomplete Hitsory",
     description = paste(
