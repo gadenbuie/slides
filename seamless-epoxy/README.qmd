@@ -31,7 +31,7 @@ One sentence with a whole lot of context.
 Starting with an example from the [Childcare Costs dataset](https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-05-09/readme.md) from TidyTuesday but provided by the [National Database of Childcare Prices](https://www.dol.gov/agencies/wb/topics/featured-childcare).
 
 Acknowledge that there are often many many decisions packed into very tight spaces in our reports.
-Beyond the obvious issues of putting together the data in the first place, even once you have the data in your handles (or your console), you still face a journey from table to narrative.
+Beyond the obvious issues of putting together the data in the first place, even once you have the data in your hands (or your console), you still face a journey from table to narrative.
 
 Here, let's see what I mean:
 

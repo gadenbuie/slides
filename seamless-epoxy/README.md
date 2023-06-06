@@ -36,7 +36,7 @@ Prices](https://www.dol.gov/agencies/wb/topics/featured-childcare).
 Acknowledge that there are often many many decisions packed into very
 tight spaces in our reports. Beyond the obvious issues of putting
 together the data in the first place, even once you have the data in
-your handles (or your console), you still face a journey from table to
+your hands (or your console), you still face a journey from table to
 narrative.
 
 Here, let’s see what I mean:
