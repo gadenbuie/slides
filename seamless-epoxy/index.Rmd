@@ -2,7 +2,7 @@
 title: "Seamless data-driven reporting with {epoxy}"
 author: Garrick Aden-Buie
 affiliation: Posit Software, PBC
-date: "R/Medicine: 2021-02-11"
+date: "R/Medicine: 2023-06-08"
 output:
   xaringan::moon_reader:
     lib_dir: assets/libs
