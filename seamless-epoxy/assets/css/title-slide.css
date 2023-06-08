@@ -1,0 +1,75 @@
+.talk-title h1 {
+  padding-bottom: 0.2em;
+  margin-bottom: 0;
+  font-size: 7em;
+  line-height: 1;
+  text-align: center;
+  font-weight: 400;
+  background-position: center;
+}
+.talk-title {
+  margin-top: 6em;
+}
+
+.talk-band {
+  position: absolute;
+}
+
+.talk-band > * {
+  padding: 1em 4em;
+  margin-bottom: 0;
+  font-family: var(--code-font-family);
+  font-weight: 600;
+  text-align: center;
+  width: 500px;
+  white-space: nowrap;
+  box-shadow: 0px -10px 15px -3px rgba(0,0,0,0.2) , 0px -4px 6px -2px rgba(0,0,0,0.05);
+}
+
+.talk-band :first-child {
+  background-color: var(--blue);
+  color: var(--white);
+  height: 80px;
+}
+
+.talk-band :last-child {
+  margin-top: -4px;
+  background-color: var(--pink);
+  color: var(--white);
+  height: 200px
+}
+
+.talk-band.left {
+  left: -20px;
+  bottom: 60px;
+  transform: rotate(45deg);
+  transform-origin: top left;
+  box-shadow: ;
+}
+
+.talk-band.right {
+  right: -20px;
+  bottom: 60px;
+  transform: rotate(-45deg);
+  transform-origin: top right;
+}
+
+/*
+.talk-author {
+	font-weight: bold;
+	color: var(--blue);
+	margin-bottom: 0.1em;
+	font-size: 2rem;
+	margin-top: 1.2em;
+}
+.talk-date {
+	margin-top: 0;
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
+}
+.talk-twitter {
+	position: absolute;
+	bottom: 1em;
+}
+*/

@@ -67,3 +67,35 @@ childcare_costs <-
 #     "counties.csv"
 #   )
 # )
+
+
+childcare_costs_raw |>
+  filter(study_year == 2018, !is.na(mc_infant)) |>
+  select(1:2, total_pop, mhi_2018, matches("mf?cc?"), -ends_with("_flag")) |>
+  mutate(
+    county_size = case_when(
+      total_pop < 1e5 ~ "small",
+      total_pop < 5e5 ~ "mid",
+      total_pop < 1e6 ~ "large",
+      TRUE ~ "very large"
+    )
+  ) |>
+  pivot_longer(
+    cols = matches("mf?cc?"),
+    names_to = c("type", "age"),
+    names_pattern = "(mf?cc?)(.*)",
+    values_to = "price"
+  ) |>
+  mutate(
+    age = str_remove(age, "^_"),
+    age = recode(age, sa = "school age"),
+    type = recode(type, mfcc = "home", mc = "center"),
+    price = price * 52
+  ) |>
+  summarize(
+    across(price, \(x) median(x, na.rm = TRUE)),
+    across(mhi_2018, \(x) median(x, na.rm = TRUE)),
+    .by = c(county_size, type, age)
+  ) |>
+  filter(price == min(price) | price == max(price)) |>
+  mutate(pct_income = price / mhi_2018)
