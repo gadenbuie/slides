@@ -17,3 +17,77 @@ R Markdown, Quarto, and Shiny are powerful frameworks that allow authors to crea
 {epoxy} is a new package that uses {glue} to give authors templating super powers. First, authors can use epoxy chunks to write sentences or paragraphs in markdown with glue-like inline variables. Then, they can use inline formatting for common numerical or character transformations.
 
 Epoxy works in R Markdown and Quarto, in markdown, LaTeX and HTML outputs. It also provides easy templating for Shiny apps for dynamic data-driven reporting. Beyond epoxy's features, this talk will also touch on tips and approaches for data-driven reporting that will be useful to a wide audience, from R Markdown experts to the Quarto and Shiny curious.
+
+## Outline (draft)
+
+### Connect data to your prose
+
+- Big quote with a number
+    - But how did that number get there?
+    - Not copy and paste.
+    - There was some R code that took some data and calculated that number.
+    - And then when we wrote about it, we used an inline R chunk to insert the number into the text.
+
+- The promise and magic of R Markdown:
+    - connecting your data with your prose
+    - makes your document reproducible
+    - that render into PDFs, websites, HTML, Word, slides, and more
+
+- But... When you render it's actually not great
+
+- epoxy syntax first contact
+    - From inline chunk to epoxy chunk
+    - From backticks to curly braces
+    - Then add in `.dollar` to format the number
+
+### Inline formatting
+
+- Pre-built options
+    - e.g. `.emph`, `.strong`, `.pct`, `.comma`
+- Can be nested
+    - `{.strong {.dollar value}}`
+- Can be customized
+    - Choosing defaults for `.pct`
+- Can bring your own
+    - Replace `.dollar` with `.euro`
+
+### Wherever you explain data
+
+- In knitr chunks
+    - we've seen general purpose markdown chunks
+    - auto-complete in chunks is pretty neat
+    - latex chunks: changes the delimiters
+    - html chunks: changes delimiters & adds HTML transformations
+
+- In a re-usable way
+    - Chunks are vectorized!
+        - Self-templating
+        - Use `.data` option
+    - Or re-use a chunk or file as a template
+
+- Powered by `glue`, inspired by `cli`
+    - Built on the glue package for developers
+    - But with all the batteries included
+    - And inspired by the cli package
+    - which means...
+
+- Everything we've seen can be used in R scripts too
+    - `epoxy()`
+    - `epoxy_html()`
+    - `epoxy_latex()`
+    - chunk options === arguments
+
+### And also Shiny!
+
+- `ui_epoxy_html()`
+    - Use the `{{ }}` syntax (from `epoxy_html()`) in any UI element
+- `render_epoxy()`
+    - Send specific values to regions of the UI, updated reactively
+- Profit.
+
+### But wait, there's more...
+
+There is (mustache templates)!
+But that's enough for this talk.
+Check out the package site.
+Tell great stories with your words and your data.
