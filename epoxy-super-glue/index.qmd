@@ -1,0 +1,217 @@
+---
+title: "epoxy"
+subtitle: "super glue for data-driven reports and Shiny apps"
+
+author:
+  - Garrick Aden-Buie
+  - "<code>posit::conf(2023)</code>"
+
+format:
+  revealjs:
+    theme:
+      - scss/slides.scss
+      - scss/utilities.scss
+      - scss/typewriter.scss
+    width: 100%
+    height: 100%
+    margin: 0
+
+engine: knitr
+
+editor:
+  render-on-save: true
+---
+
+## {.center}
+
+::: {.d-flex .flex-column .align-items-center}
+::: quote-sans
+<div>Infant day care costs</div>
+<div>up to [$15,417]{.text-orange} a year</div>
+:::
+:::
+
+::: notes
+As a parent, this is more than just a number...
+
+But as a data scientist... I can't help but think about how that number got there.
+:::
+
+## {.center}
+
+<!-- type out quote up to number -->
+
+::: {.d-flex .flex-column .align-items-center}
+::: quote-sans
+<div class="d-if"><div class="d-ib typewriter" data-id="preamble" style="--steps:22;--blinks:0">Infant day care costs</div></div><br>
+<div class="d-if"><div class="d-ib typewriter" data-id="before" style="--steps:6;--delay:1680ms;--blinks:50">up to&nbsp;</div></div>
+:::
+:::
+
+
+## {.center}
+
+<!-- copy paste the number -->
+
+::: {.d-flex .flex-column .align-items-center}
+::: quote-sans
+<div class="d-ib" data-id="preamble">Infant day care costs</div> \
+<div class="d-ib" data-id="before">up to</div>
+<div class="d-if" style="width:min-content"><div class="d-ib text-orange typewriter" data-id="var" style="--duration:500ms;--steps:1;--blinks:2">$15,417</div></div>
+<div class="d-if"><div class="d-ib typewriter" data-id="after" style="--delay:2s;--steps:5;--blinks:3">a year</div></div>
+:::
+:::
+
+## {auto-animate="true"}
+
+<!-- now in an Rmd -->
+
+:::: {.content .d-flex .flex-column .justify-content-center}
+
+::: {.code-chunk .offscreen-up style="font-size: 4vw" data-id="code-chunk"}
+&#x60;&#x60;&#x60;{r} \
+avg_cost_inf <- \
+&nbsp;&nbsp;childcare |> \
+&nbsp;&nbsp;filter(...) |> \
+&nbsp;&nbsp;summarize(cost = mean(cost)) |> \
+&nbsp;&nbsp;pull(cost) \
+&#x60;&#x60;&#x60;
+:::
+
+::: {.d-flex .flex-column .align-items-center}
+::: {.quote-code}
+<div class="d-if"><div class="d-ib typewriter" data-id="preamble" style="--steps:22;--blinks:0">Infant day care costs</div></div><br>
+<div class="d-if"><div class="d-ib typewriter" data-id="before" style="--steps:6;--delay:1680ms;--blinks:50">up to&nbsp;</div></div>
+<div>&nbsp;<!-- placeholder for last line --></div>
+:::
+:::
+::::
+
+## {.p-10 auto-animate="true"}
+
+<!-- reveal code chunk -->
+
+:::: {.content .d-flex .flex-column .justify-content-center}
+
+::: {.code-chunk .mb-6 style="font-size: 4vw;"}
+&#x60;&#x60;&#x60;{r} \
+avg_cost_inf <- \
+&nbsp;&nbsp;childcare |> \
+&nbsp;&nbsp;filter(...) |> \
+&nbsp;&nbsp;summarize(cost = mean(cost)) |> \
+&nbsp;&nbsp;pull(cost) \
+&#x60;&#x60;&#x60;
+:::
+
+::: {.quote-code style="font-size: 4vw; line-height: 1.2;"}
+<div>Infant day care costs</div>
+<div class="d-if"><div class="typewriter" style="--steps:1;--duration:10ms;--blinks:50">up to&nbsp;</div></div>
+<div>&nbsp;<!-- placeholder for last line --></div>
+:::
+::::
+
+
+
+## {.p-10 auto-animate="true" auto-animate-unmatched="false"}
+
+<!-- highlight variable and type it out -->
+
+:::: {.content .d-flex .flex-column .justify-content-center}
+
+::: {.ff-mono .mb-6 style="font-size: 4vw; background:var(--gray-1);"}
+&#x60;&#x60;&#x60;{r} \
+[avg_cost_inf]{.text-orange .fw-6} <- \
+&nbsp;&nbsp;childcare |> \
+&nbsp;&nbsp;filter(...) |> \
+&nbsp;&nbsp;summarize(cost = mean(cost)) |> \
+&nbsp;&nbsp;pull(cost) \
+&#x60;&#x60;&#x60;
+:::
+
+::: {.quote-code style="font-size: 4vw; line-height: 1.2;" data-id="quote"}
+<div>Infant day care costs</div>
+<div>up to
+<div class="d-if"><div class="d-ib typewriter" style="--delay:1s;--steps:17;--blinks:0;">[&#x60;r [avg_cost_inf]{.text-orange}&#x60;]{.text-blue}</div></div>
+</div>
+<div><div class="d-if"><div class="d-ib typewriter" style="--delay:2360ms;--steps:6;--blinks:2;">a year.</div></div></div>
+:::
+::::
+
+## {.p-10 auto-animate="true"}
+
+<!-- highlight variable and type it out -->
+
+:::: {.content .d-flex .flex-column .justify-content-center}
+
+::: {.quote-code .text-muted data-id="quote"}
+<div>Infant day care costs</div>
+<div>up to [&#x60;r [avg_cost_inf]{.text-orange}&#x60;]{.text-blue}</div>
+<div>a year.</div>
+:::
+::::
+
+## {.p-10 transition="fade"}
+
+:::: {.content .d-flex .flex-column .justify-content-center}
+
+```{r}
+#| include: false
+avg_cost_inf <- 15417.24928
+```
+
+::: {.quote-sans style="color: var(--gray-7);"}
+<div>Infant day care costs</div>
+<div>up to [`r avg_cost_inf`]{.text-orange .d-ib data-id="quote-var"}</div>
+<div>a year.</div>
+:::
+::::
+
+<!-- here
+
+## {.center .p-10 auto-animate="true" auto-animate-unmatched="false"}
+
+::: {.ff-mono style="font-size: 4vw; background-color:#f4f4fa;" data-id="chunk"}
+&#x60;&#x60;&#x60;{r} \
+avg_cost_inf <- \
+&nbsp;&nbsp;childcare |> \
+&nbsp;&nbsp;filter(...) |> \
+&nbsp;&nbsp;summarize(cost = mean(cost)) |> \
+&nbsp;&nbsp;pull(cost) \
+&#x60;&#x60;&#x60;
+:::
+
+::: {.quote-code style="font-size: 4vw; line-height: 1.2;" data-id="quote"}
+<div>Infant day care costs</div>
+<div>up to [&#x60;r avg_cost_inf&#x60;]{.text-blue}</div>
+<div>a year.</div>
+:::
+
+
+## {.center .p-10 auto-animate="true"}
+
+::: {.ff-mono style="font-size: 4vw; background-color:#f4f4fa;"}
+&#x60;&#x60;&#x60;{r} \
+[avg_cost_inf]{.text-orange .d-ib data-id="quote-var"} <- \
+&nbsp;&nbsp;childcare |> \
+&nbsp;&nbsp;filter(...) |> \
+&nbsp;&nbsp;summarize(cost = mean(cost)) |> \
+&nbsp;&nbsp;pull(cost) \
+&#x60;&#x60;&#x60;
+:::
+
+::: {.quote-code style="font-size: 4vw; line-height: 1.2;"}
+<div>Infant day care costs</div>
+<div>up to [&#x60;r [avg_cost_inf]{.text-orange}&#x60;]{.text-blue}</div>
+<div>a year.</div>
+:::
+
+## {.center .p-10 auto-animate="true"}
+
+::: {.quote-code .text-muted}
+<div>Infant day care costs</div>
+<div>up to [&#x60;r [avg_cost_inf]{.text-orange .d-ib data-id="quote-var"}&#x60;]{.text-blue}</div>
+<div>a year.</div>
+:::
+
+
+-->

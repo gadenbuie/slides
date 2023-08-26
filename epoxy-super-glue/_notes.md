@@ -15,5 +15,7 @@ If you were to do X1, X2, X3, you'll be able to do Y with Z impact.
 context setting: giving some background etc.
 hook: through-line
 
+When you connect data to your prose with inline formatting wherever you explain data, you'll be able to write polished, data-driven reports and apps that help you tell your story and connect with your audience.
+
 
 **Next:** Outline the talk, bullet points, don't script.

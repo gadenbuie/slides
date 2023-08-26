@@ -20,6 +20,15 @@ Epoxy works in R Markdown and Quarto, in markdown, LaTeX and HTML outputs. It al
 
 ## Outline (draft)
 
+When you
+connect data to your prose with inline formatting
+reusable (template)
+wherever you explain data,
+you'll be able to
+write polished, data-driven reports and apps
+that help you
+tell your story and connect with your audience.
+
 ### Connect data to your prose
 
 - Big quote with a number
@@ -40,16 +49,23 @@ Epoxy works in R Markdown and Quarto, in markdown, LaTeX and HTML outputs. It al
     - From backticks to curly braces
     - Then add in `.dollar` to format the number
 
-### Inline formatting
+- inline-formatting
+    - Pre-built options
+        - e.g. `.emph`, `.strong`, `.pct`, `.comma`
+    - Can be nested
+        - `{.strong {.dollar value}}`
+    - Can be customized
+        - Choosing defaults for `.pct`
+    - Can bring your own
+        - Replace `.dollar` with `.euro`
 
-- Pre-built options
-    - e.g. `.emph`, `.strong`, `.pct`, `.comma`
-- Can be nested
-    - `{.strong {.dollar value}}`
-- Can be customized
-    - Choosing defaults for `.pct`
-- Can bring your own
-    - Replace `.dollar` with `.euro`
+### Reusable
+
+- In a re-usable way
+    - Chunks are vectorized!
+        - Self-templating
+        - Use `.data` option
+    - Or re-use a chunk or file as a template
 
 ### Wherever you explain data
 
@@ -58,12 +74,6 @@ Epoxy works in R Markdown and Quarto, in markdown, LaTeX and HTML outputs. It al
     - auto-complete in chunks is pretty neat
     - latex chunks: changes the delimiters
     - html chunks: changes delimiters & adds HTML transformations
-
-- In a re-usable way
-    - Chunks are vectorized!
-        - Self-templating
-        - Use `.data` option
-    - Or re-use a chunk or file as a template
 
 - Powered by `glue`, inspired by `cli`
     - Built on the glue package for developers
