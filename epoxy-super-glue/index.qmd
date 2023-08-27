@@ -22,6 +22,10 @@ editor:
   render-on-save: true
 ---
 
+```{r setup, include=FALSE}
+source("R/utils.R")
+```
+
 ## {.center}
 
 ::: {.d-flex .flex-column .align-items-center}
@@ -70,7 +74,7 @@ But as a data scientist... I can't help but think about how that number got ther
 
 ::: {.code-chunk .offscreen-up style="font-size: 4vw" data-id="code-chunk"}
 &#x60;&#x60;&#x60;{r} \
-med_cost_max <- \
+max_med_cost <- \
 &nbsp;&nbsp;childcare_costs |> \
 &nbsp;&nbsp;[# group and summarize... |>]{.text-muted} \
 &nbsp;&nbsp;filter(cost = max(cost)) |> \
@@ -95,7 +99,7 @@ med_cost_max <- \
 
 ::: {.code-chunk .mb-6 style="font-size: 4vw;" data-id="code-chunk"}
 &#x60;&#x60;&#x60;{r} \
-med_cost_max <- \
+max_med_cost <- \
 &nbsp;&nbsp;childcare_costs |> \
 &nbsp;&nbsp;[# group and summarize... |>]{.text-muted} \
 &nbsp;&nbsp;filter(cost = max(cost)) |> \
@@ -120,7 +124,7 @@ med_cost_max <- \
 
 ::: {.ff-mono .mb-6 style="font-size: 4vw; background:var(--gray-1);"}
 &#x60;&#x60;&#x60;{r} \
-[med_cost_max]{.text-orange .fw-6} <- \
+[max_med_cost]{.text-orange .fw-6} <- \
 &nbsp;&nbsp;childcare_costs |> \
 &nbsp;&nbsp;[# group and summarize... |>]{.text-muted} \
 &nbsp;&nbsp;filter(cost = max(cost)) |> \
@@ -131,7 +135,7 @@ med_cost_max <- \
 ::: {.quote-code style="font-size: 4vw; line-height: 1.2;" data-id="quote"}
 <div>Infant day care costs</div>
 <div>up to
-<div class="d-if"><div class="d-ib typewriter" style="--delay:1s;--steps:17;--blinks:0;">[&#x60;r [med_cost_max]{.text-orange}&#x60;]{.text-blue}</div></div>
+<div class="d-if"><div class="d-ib typewriter" style="--delay:1s;--steps:17;--blinks:0;">[&#x60;r [max_med_cost]{.text-orange}&#x60;]{.text-blue}</div></div>
 </div>
 <div><div class="d-if"><div class="d-ib typewriter" style="--delay:2360ms;--steps:6;--blinks:2;">a year.</div></div></div>
 :::
@@ -139,32 +143,76 @@ med_cost_max <- \
 
 ## {.p-10 auto-animate="true"}
 
-<!-- highlight variable and type it out -->
+<!-- promise and magic of rmd -->
 
 :::: {.content .d-flex .flex-column .justify-content-center}
 
 ::: {.quote-code .text-muted data-id="quote"}
 <div>Infant day care costs</div>
-<div>up to [&#x60;r [med_cost_max]{.text-orange}&#x60;]{.text-blue}</div>
+<div>up to [&#x60;r [max_med_cost]{.text-orange}&#x60;]{.text-blue}</div>
 <div>a year.</div>
 :::
 ::::
 
+::: notes
+This is the promise and magic of R Markdown.
+
+* prose in same document as code
+* reproducible writing
+* update data or analysis and re-render
+* output changes!
+
+When rendered, max median cost is woven into the prose...
+:::
+
 ## {.p-10 transition="fade"}
+
+<!-- rendered version of the document, number isn't great -->
 
 :::: {.content .d-flex .flex-column .justify-content-center}
 
 ```{r}
 #| include: false
-med_cost_max <- 15416.96
+max_med_cost <- 15416.96
 ```
 
 ::: {.quote-sans style="color: var(--gray-7);"}
 <div>Infant day care costs</div>
-<div>up to [`r med_cost_max`]{.text-orange .d-ib data-id="quote-var"}</div>
+<div>up to [`r max_med_cost`]{.text-orange .d-ib data-id="quote-var"}</div>
 <div>a year.</div>
 :::
 ::::
+
+## {.p-10}
+
+::: content-center
+
+```{r}
+#| echo: false
+fake_chunk(
+  class = "fs-4vw",
+  engine = "epoxy",
+  "Infant day care costs
+up to {.dollar max_med_cost}
+a year."
+)
+```
+
+* From Rmd text, wrap the text in an epoxy chunk
+* replace back-tick r with braces
+* Insert the `.dollar` formatter
+* render...
+
+:::
+
+## {.p-10}
+
+::: content-center
+::: quote-sans
+<div>Infant day care costs</div>
+<div>up to [$15,417]{.text-orange} a year</div>
+:::
+:::
 
 <!-- here
 
@@ -172,7 +220,7 @@ med_cost_max <- 15416.96
 
 ::: {.ff-mono style="font-size: 4vw; background-color:#f4f4fa;" data-id="chunk"}
 &#x60;&#x60;&#x60;{r} \
-med_cost_max <- \
+max_med_cost <- \
 &nbsp;&nbsp;childcare_costs |> \
 &nbsp;&nbsp;[# group and summarize... |>]{.text-muted} \
 &nbsp;&nbsp;filter(cost = max(cost)) |> \
@@ -182,7 +230,7 @@ med_cost_max <- \
 
 ::: {.quote-code style="font-size: 4vw; line-height: 1.2;" data-id="quote"}
 <div>Infant day care costs</div>
-<div>up to [&#x60;r med_cost_max&#x60;]{.text-blue}</div>
+<div>up to [&#x60;r max_med_cost&#x60;]{.text-blue}</div>
 <div>a year.</div>
 :::
 
@@ -191,7 +239,7 @@ med_cost_max <- \
 
 ::: {.ff-mono style="font-size: 4vw; background-color:#f4f4fa;"}
 &#x60;&#x60;&#x60;{r} \
-[med_cost_max]{.text-orange .d-ib data-id="quote-var"} <- \
+[max_med_cost]{.text-orange .d-ib data-id="quote-var"} <- \
 &nbsp;&nbsp;childcare_costs |> \
 &nbsp;&nbsp;[# group and summarize... |>]{.text-muted} \
 &nbsp;&nbsp;filter(cost = max(cost)) |> \
@@ -201,7 +249,7 @@ med_cost_max <- \
 
 ::: {.quote-code style="font-size: 4vw; line-height: 1.2;"}
 <div>Infant day care costs</div>
-<div>up to [&#x60;r [med_cost_max]{.text-orange}&#x60;]{.text-blue}</div>
+<div>up to [&#x60;r [max_med_cost]{.text-orange}&#x60;]{.text-blue}</div>
 <div>a year.</div>
 :::
 
@@ -209,7 +257,7 @@ med_cost_max <- \
 
 ::: {.quote-code .text-muted}
 <div>Infant day care costs</div>
-<div>up to [&#x60;r [med_cost_max]{.text-orange .d-ib data-id="quote-var"}&#x60;]{.text-blue}</div>
+<div>up to [&#x60;r [max_med_cost]{.text-orange .d-ib data-id="quote-var"}&#x60;]{.text-blue}</div>
 <div>a year.</div>
 :::
 

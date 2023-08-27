@@ -71,6 +71,13 @@ $selection-bg: $pink !default;
     width: 100%;
   }
 
+  .content-center {
+    @extend .content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   &.bg-blue {
     background-color: $blue;
     color: white;
@@ -122,6 +129,7 @@ $selection-bg: $pink !default;
   .code-chunk {
     font-family: $font-family-monospace;
     background-color: var(--gray-1);
+    margin-bottom: var(--size-6);
   }
 
   .quote-sans {
