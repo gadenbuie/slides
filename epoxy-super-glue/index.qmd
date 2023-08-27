@@ -15,6 +15,8 @@ format:
     width: 100%
     height: 100%
     margin: 0
+    code-copy: false
+    code-line-numbers: false
 
 engine: knitr
 
@@ -23,6 +25,8 @@ editor:
 ---
 
 ```{r setup, include=FALSE}
+library(epoxy)
+options(width = 120)
 source("R/utils.R")
 ```
 
@@ -183,6 +187,29 @@ max_med_cost <- 15416.96
 :::
 ::::
 
+::: notes
+There's a lot to love about R Markdown,
+:::
+
+## Which plot would you send to a client? {.p-10 transition="slide"}
+
+
+::: {.content .d-flex .flex-row .gap-9 .mt-8 .justify-content-center}
+
+::: {.flex-center .w-100 .h-60 style="background-color:var(--gray-3);"}
+Plot with bad labels
+:::
+
+::: {.flex-center .w-100 .h-60 style="background-color:var(--purple);color:white;"}
+Plot with good labels
+:::
+:::
+
+::: notes
+* effective communication
+* without taking you out of the flow of writing
+:::
+
 ## {.p-10}
 
 ::: content-center
@@ -214,52 +241,146 @@ a year."
 :::
 :::
 
-<!-- here
+## {.p-10}
 
-## {.center .p-10 auto-animate="true" auto-animate-unmatched="false"}
+```{r}
+#| include: false
+childcare_summary <- readr::read_rds("data-raw/childcare_summary_top_10.rds")
+```
 
-::: {.ff-mono style="font-size: 4vw; background-color:#f4f4fa;" data-id="chunk"}
-&#x60;&#x60;&#x60;{r} \
-max_med_cost <- \
-&nbsp;&nbsp;childcare_costs |> \
-&nbsp;&nbsp;[# group and summarize... |>]{.text-muted} \
-&nbsp;&nbsp;filter(cost = max(cost)) |> \
-&nbsp;&nbsp;pull(cost) \ \
-&#x60;&#x60;&#x60;
+::: content-center
+
+```{epoxy .data = childcare_summary[1, ]}
+| Variable | Value | Inline | Result |
+|:---------|:------|:-------|:-------|
+| `max_med_cost` | {max_med_cost} | `.dollar` | {.dollar max_med_cost} |
+| `mhi_pct` | {mhi_pct} | `.percent` | {.percent mhi_pct} |
+| `county_pop_med` | {county_pop_med} | `.number` | {.comma county_pop_med} |
+| `cost_rank` | {cost_rank} | `.ordinal` | {.ordinal cost_rank} |
+| `age` | {age} | `.titlecase` | {.titlecase age} |
+| `county_size` | {county_size} | `.strong` | {.strong county_size} |
+| `type` | {type} | `.emph` | {.emph type} |
+```
+
 :::
 
-::: {.quote-code style="font-size: 4vw; line-height: 1.2;" data-id="quote"}
-<div>Infant day care costs</div>
-<div>up to [&#x60;r max_med_cost&#x60;]{.text-blue}</div>
-<div>a year.</div>
+## {.p-10}
+
+::: {.content-center}
+Write out a full sentence using these variables in an epoxy chunk.
+Make sure that the chunk has a name.
+
+Assumes we've pulled the data out into individual variables
 :::
 
+## {.p-10}
 
-## {.center .p-10 auto-animate="true"}
+<!-- of course we probably have this in a data frame -->
 
-::: {.ff-mono style="font-size: 4vw; background-color:#f4f4fa;"}
-&#x60;&#x60;&#x60;{r} \
-[max_med_cost]{.text-orange .d-ib data-id="quote-var"} <- \
-&nbsp;&nbsp;childcare_costs |> \
-&nbsp;&nbsp;[# group and summarize... |>]{.text-muted} \
-&nbsp;&nbsp;filter(cost = max(cost)) |> \
-&nbsp;&nbsp;pull(cost) \
-&#x60;&#x60;&#x60;
+::: {.content-center style="font-size:2.5vw;"}
+```{r}
+#| echo: true
+childcare_summary
+```
 :::
 
-::: {.quote-code style="font-size: 4vw; line-height: 1.2;"}
-<div>Infant day care costs</div>
-<div>up to [&#x60;r [max_med_cost]{.text-orange}&#x60;]{.text-blue}</div>
-<div>a year.</div>
+## {.p-10}
+
+::: {.content}
+Update the epoxy chunk to use the `.data` argument
+and the first row of `childcare_summary`
+(these are the values)
+
+```{epoxy .data = childcare_summary[1, ]}
+| Variable | Value | Inline | Result |
+|:---------|:------|:-------|:-------|
+| `max_med_cost` | {max_med_cost} | `.dollar` | {.dollar max_med_cost} |
+| `mhi_pct` | {mhi_pct} | `.percent` | {.percent mhi_pct} |
+| `county_pop_med` | {county_pop_med} | `.number` | {.comma county_pop_med} |
+| `cost_rank` | {cost_rank} | `.ordinal` | {.ordinal cost_rank} |
+| `age` | {age} | `.titlecase` | {.titlecase age} |
+| `county_size` | {county_size} | `.strong` | {.strong county_size} |
+| `type` | {type} | `.emph` | {.emph type} |
+```
 :::
 
-## {.center .p-10 auto-animate="true"}
+## {.p-10}
 
-::: {.quote-code .text-muted}
-<div>Infant day care costs</div>
-<div>up to [&#x60;r [max_med_cost]{.text-orange .d-ib data-id="quote-var"}&#x60;]{.text-blue}</div>
-<div>a year.</div>
+
+::: {.content}
+then swap out for the 8th row
+which effectively compares day care to home care
+
+```{epoxy .data = childcare_summary[8, ]}
+| Variable | Value | Inline | Result |
+|:---------|:------|:-------|:-------|
+| `max_med_cost` | {max_med_cost} | `.dollar` | {.dollar max_med_cost} |
+| `mhi_pct` | {mhi_pct} | `.percent` | {.percent mhi_pct} |
+| `county_pop_med` | {county_pop_med} | `.number` | {.comma county_pop_med} |
+| `cost_rank` | {cost_rank} | `.ordinal` | {.ordinal cost_rank} |
+| `age` | {age} | `.titlecase` | {.titlecase age} |
+| `county_size` | {county_size} | `.strong` | {.strong county_size} |
+| `type` | {type} | `.emph` | {.emph type} |
+```
 :::
 
+## {.p-10}
 
--->
+Then highlight the chunk name and use `data |> filter |> epoxy_use_chunk()`.
+
+## {.p-10}
+
+Inline transformers are tiny functions that take a single input
+and return text.
+
+* `.dollar` is `scales::label_dollar()`
+* `.percent` is `scales::label_percent()`
+
+## {.p-10}
+
+What if you want to change the default behavior?
+
+```{r}
+#| echo: true
+#| output: asis
+epoxy(
+  "{.dollar max_med_cost} represents {.percent mhi_pct} of median household income.",
+  .data = childcare_summary[1, ]
+)
+```
+
+Use `epoxy_transform_set()`
+
+```{r}
+#| echo: true
+#| output: asis
+epoxy(
+  "{.dollar max_med_cost} represents {.percent mhi_pct} of median household income.",
+  .data = childcare_summary[1, ],
+  .transformer = epoxy_transform_inline(
+    .dollar = scales::label_dollar(accuracy = 10),
+    .percent = scales::label_percent(accuracy = 0.1)
+  )
+)
+```
+
+## {.p-10}
+
+Let's make our own inline transformer.
+This currently isn't a great example.
+The example should showcase that chunks are vectorized
+
+```{r}
+#| echo: true
+#| output: asis
+epoxy_transform_set(
+  .fa = function(x) purrr::map_chr(x, fontawesome::fa, a11y = "sem"),
+)
+
+tasks <- c("Use", "Make", "Enjoy the")
+icons <- c("r-project", "sack-dollar", "umbrella-beach")
+
+epoxy(
+  "- {tasks} {.fa icons}"
+)
+```

@@ -46,24 +46,31 @@ $selection-bg: $pink !default;
   display: none;
 }
 
-.reveal a {
-  line-height: 1.3em;
-}
-
 .reveal {
+  a {
+    line-height: 1.3em;
+  }
+
   .slide-menu-button > a {
     opacity: 0.5;
     color: #808080;
   }
+
+  .content-center pre code {
+    max-height: unset;
+  }
 }
 
 .reveal .slide {
+  max-height: calc(1080px * 1.25);
+  max-width: calc(1920px * 1.25);
+  aspect-ratio: 16 / 9;
+  outline: 2px solid red;
 
   &,
   * {
     box-sizing: border-box;
   }
-
 
   .content {
     position: relative;

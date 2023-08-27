@@ -61,12 +61,14 @@ childcare_step_2 <-
 childcare_summary <-
   childcare_step_2 |>
   summarize(
-    across(cost, \(x) median(x, na.rm = TRUE)),
-    across(mhi_2018, \(x) median(x, na.rm = TRUE)),
+    across(
+      c(cost, mhi_2018, total_pop),
+      \(x) median(x, na.rm = TRUE)
+    ),
+    n_counties = n(),
     .by = c(county_size, type, age)
   ) |>
-  mutate(mhi_pct = cost / mhi_2018) |>
-  select(-mhi_2018)
+  mutate(mhi_pct = cost / mhi_2018)
 
 saveRDS(childcare_summary, file = path_data_raw("childcare_summary.rds"))
 
@@ -85,3 +87,22 @@ med_cost_max  <-
   filter(cost == max(cost)) |>
   pull(cost)
 
+childcare_summary |>
+  filter(cost == max(cost)) |>
+  rename(max_med_cost = cost) |>
+  as.list() |>
+  map_if(is.factor, as.character) |>
+  iwalk(function(val, var) {
+    val <- capture.output(dput(val))
+    cat(var, "<-", val, "\n")
+  })
+
+childcare_summary |>
+  rename(
+    max_med_cost = cost,
+    county_pop_med = total_pop,
+  ) |>
+  slice_max(max_med_cost, n = 10) |>
+  mutate(cost_rank = row_number(), .before = 1) |>
+  mutate(across(where(is.factor), as.character)) |>
+  write_rds(path_data_raw("childcare_summary_top_10.rds"))
