@@ -70,11 +70,11 @@ But as a data scientist... I can't help but think about how that number got ther
 
 ::: {.code-chunk .offscreen-up style="font-size: 4vw" data-id="code-chunk"}
 &#x60;&#x60;&#x60;{r} \
-avg_cost_inf <- \
-&nbsp;&nbsp;childcare |> \
-&nbsp;&nbsp;filter(...) |> \
-&nbsp;&nbsp;summarize(cost = mean(cost)) |> \
-&nbsp;&nbsp;pull(cost) \
+med_cost_max <- \
+&nbsp;&nbsp;childcare_costs |> \
+&nbsp;&nbsp;[# group and summarize... |>]{.text-muted} \
+&nbsp;&nbsp;filter(cost = max(cost)) |> \
+&nbsp;&nbsp;pull(cost) \ \
 &#x60;&#x60;&#x60;
 :::
 
@@ -93,13 +93,13 @@ avg_cost_inf <- \
 
 :::: {.content .d-flex .flex-column .justify-content-center}
 
-::: {.code-chunk .mb-6 style="font-size: 4vw;"}
+::: {.code-chunk .mb-6 style="font-size: 4vw;" data-id="code-chunk"}
 &#x60;&#x60;&#x60;{r} \
-avg_cost_inf <- \
-&nbsp;&nbsp;childcare |> \
-&nbsp;&nbsp;filter(...) |> \
-&nbsp;&nbsp;summarize(cost = mean(cost)) |> \
-&nbsp;&nbsp;pull(cost) \
+med_cost_max <- \
+&nbsp;&nbsp;childcare_costs |> \
+&nbsp;&nbsp;[# group and summarize... |>]{.text-muted} \
+&nbsp;&nbsp;filter(cost = max(cost)) |> \
+&nbsp;&nbsp;pull(cost) \ \
 &#x60;&#x60;&#x60;
 :::
 
@@ -120,18 +120,18 @@ avg_cost_inf <- \
 
 ::: {.ff-mono .mb-6 style="font-size: 4vw; background:var(--gray-1);"}
 &#x60;&#x60;&#x60;{r} \
-[avg_cost_inf]{.text-orange .fw-6} <- \
-&nbsp;&nbsp;childcare |> \
-&nbsp;&nbsp;filter(...) |> \
-&nbsp;&nbsp;summarize(cost = mean(cost)) |> \
-&nbsp;&nbsp;pull(cost) \
+[med_cost_max]{.text-orange .fw-6} <- \
+&nbsp;&nbsp;childcare_costs |> \
+&nbsp;&nbsp;[# group and summarize... |>]{.text-muted} \
+&nbsp;&nbsp;filter(cost = max(cost)) |> \
+&nbsp;&nbsp;pull(cost) \ \
 &#x60;&#x60;&#x60;
 :::
 
 ::: {.quote-code style="font-size: 4vw; line-height: 1.2;" data-id="quote"}
 <div>Infant day care costs</div>
 <div>up to
-<div class="d-if"><div class="d-ib typewriter" style="--delay:1s;--steps:17;--blinks:0;">[&#x60;r [avg_cost_inf]{.text-orange}&#x60;]{.text-blue}</div></div>
+<div class="d-if"><div class="d-ib typewriter" style="--delay:1s;--steps:17;--blinks:0;">[&#x60;r [med_cost_max]{.text-orange}&#x60;]{.text-blue}</div></div>
 </div>
 <div><div class="d-if"><div class="d-ib typewriter" style="--delay:2360ms;--steps:6;--blinks:2;">a year.</div></div></div>
 :::
@@ -145,7 +145,7 @@ avg_cost_inf <- \
 
 ::: {.quote-code .text-muted data-id="quote"}
 <div>Infant day care costs</div>
-<div>up to [&#x60;r [avg_cost_inf]{.text-orange}&#x60;]{.text-blue}</div>
+<div>up to [&#x60;r [med_cost_max]{.text-orange}&#x60;]{.text-blue}</div>
 <div>a year.</div>
 :::
 ::::
@@ -156,12 +156,12 @@ avg_cost_inf <- \
 
 ```{r}
 #| include: false
-avg_cost_inf <- 15417.24928
+med_cost_max <- 15416.96
 ```
 
 ::: {.quote-sans style="color: var(--gray-7);"}
 <div>Infant day care costs</div>
-<div>up to [`r avg_cost_inf`]{.text-orange .d-ib data-id="quote-var"}</div>
+<div>up to [`r med_cost_max`]{.text-orange .d-ib data-id="quote-var"}</div>
 <div>a year.</div>
 :::
 ::::
@@ -172,17 +172,17 @@ avg_cost_inf <- 15417.24928
 
 ::: {.ff-mono style="font-size: 4vw; background-color:#f4f4fa;" data-id="chunk"}
 &#x60;&#x60;&#x60;{r} \
-avg_cost_inf <- \
-&nbsp;&nbsp;childcare |> \
-&nbsp;&nbsp;filter(...) |> \
-&nbsp;&nbsp;summarize(cost = mean(cost)) |> \
-&nbsp;&nbsp;pull(cost) \
+med_cost_max <- \
+&nbsp;&nbsp;childcare_costs |> \
+&nbsp;&nbsp;[# group and summarize... |>]{.text-muted} \
+&nbsp;&nbsp;filter(cost = max(cost)) |> \
+&nbsp;&nbsp;pull(cost) \ \
 &#x60;&#x60;&#x60;
 :::
 
 ::: {.quote-code style="font-size: 4vw; line-height: 1.2;" data-id="quote"}
 <div>Infant day care costs</div>
-<div>up to [&#x60;r avg_cost_inf&#x60;]{.text-blue}</div>
+<div>up to [&#x60;r med_cost_max&#x60;]{.text-blue}</div>
 <div>a year.</div>
 :::
 
@@ -191,17 +191,17 @@ avg_cost_inf <- \
 
 ::: {.ff-mono style="font-size: 4vw; background-color:#f4f4fa;"}
 &#x60;&#x60;&#x60;{r} \
-[avg_cost_inf]{.text-orange .d-ib data-id="quote-var"} <- \
-&nbsp;&nbsp;childcare |> \
-&nbsp;&nbsp;filter(...) |> \
-&nbsp;&nbsp;summarize(cost = mean(cost)) |> \
+[med_cost_max]{.text-orange .d-ib data-id="quote-var"} <- \
+&nbsp;&nbsp;childcare_costs |> \
+&nbsp;&nbsp;[# group and summarize... |>]{.text-muted} \
+&nbsp;&nbsp;filter(cost = max(cost)) |> \
 &nbsp;&nbsp;pull(cost) \
 &#x60;&#x60;&#x60;
 :::
 
 ::: {.quote-code style="font-size: 4vw; line-height: 1.2;"}
 <div>Infant day care costs</div>
-<div>up to [&#x60;r [avg_cost_inf]{.text-orange}&#x60;]{.text-blue}</div>
+<div>up to [&#x60;r [med_cost_max]{.text-orange}&#x60;]{.text-blue}</div>
 <div>a year.</div>
 :::
 
@@ -209,7 +209,7 @@ avg_cost_inf <- \
 
 ::: {.quote-code .text-muted}
 <div>Infant day care costs</div>
-<div>up to [&#x60;r [avg_cost_inf]{.text-orange .d-ib data-id="quote-var"}&#x60;]{.text-blue}</div>
+<div>up to [&#x60;r [med_cost_max]{.text-orange .d-ib data-id="quote-var"}&#x60;]{.text-blue}</div>
 <div>a year.</div>
 :::
 

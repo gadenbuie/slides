@@ -6,9 +6,8 @@
   border-right-style: solid;
   border-right-color: var(--blue);
   border-color: transparent;
-  white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto 0 0; /* Gives that scrolling effect as the typing happens */
-  // letter-spacing: .15em; /* Adjust as needed */
+  white-space: nowrap;
+  margin: 0 auto 0 0;
   --duration: calc(var(--steps, 20) * 80ms);
   --delay-blinks: calc(var(--duration, 3.5s) + var(--delay, 0s));
   --blinks: calc(var(--duration, 3.5s) / .75);
