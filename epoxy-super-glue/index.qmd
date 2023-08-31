@@ -30,9 +30,9 @@ options(width = 120)
 source("R/utils.R")
 ```
 
-## {.center}
+##
 
-::: {.d-flex .flex-column .align-items-center}
+::: {.content-center .text-center}
 ::: quote-sans
 <div>Infant day care costs</div>
 <div>up to [$15,417]{.text-orange} a year</div>
@@ -45,11 +45,11 @@ As a parent, this is more than just a number...
 But as a data scientist... I can't help but think about how that number got there.
 :::
 
-## {.center}
+## {.p-10}
 
 <!-- type out quote up to number -->
 
-::: {.d-flex .flex-column .align-items-center}
+::: {.content-center}
 ::: quote-sans
 <div class="d-if"><div class="d-ib typewriter" data-id="preamble" style="--steps:22;--blinks:0">Infant day care costs</div></div><br>
 <div class="d-if"><div class="d-ib typewriter" data-id="before" style="--steps:6;--delay:1680ms;--blinks:50">up to&nbsp;</div></div>
@@ -57,11 +57,11 @@ But as a data scientist... I can't help but think about how that number got ther
 :::
 
 
-## {.center}
+## {.p-10}
 
 <!-- copy paste the number -->
 
-::: {.d-flex .flex-column .align-items-center}
+::: {.content-center}
 ::: quote-sans
 <div class="d-ib" data-id="preamble">Infant day care costs</div> \
 <div class="d-ib" data-id="before">up to</div>
@@ -74,9 +74,9 @@ But as a data scientist... I can't help but think about how that number got ther
 
 <!-- now in an Rmd -->
 
-:::: {.content .d-flex .flex-column .justify-content-center}
+:::: {.content-center}
 
-::: {.code-chunk .offscreen-up style="font-size: 4vw" data-id="code-chunk"}
+::: {.code-chunk .fs-4vw .offscreen-up data-id="code-chunk"}
 &#x60;&#x60;&#x60;{r} \
 max_med_cost <- \
 &nbsp;&nbsp;childcare_costs |> \
@@ -111,7 +111,7 @@ max_med_cost <- \
 &#x60;&#x60;&#x60;
 :::
 
-::: {.quote-code style="font-size: 4vw; line-height: 1.2;"}
+::: {.quote-code .fs-4vw style="line-height: 1.2;"}
 <div>Infant day care costs</div>
 <div class="d-if"><div class="typewriter" style="--steps:1;--duration:10ms;--blinks:50">up to&nbsp;</div></div>
 <div>&nbsp;<!-- placeholder for last line --></div>
@@ -126,7 +126,7 @@ max_med_cost <- \
 
 :::: {.content .d-flex .flex-column .justify-content-center}
 
-::: {.ff-mono .mb-6 style="font-size: 4vw; background:var(--gray-1);"}
+::: {.ff-mono .fs-4vw .mb-6 style="background:var(--gray-1);"}
 &#x60;&#x60;&#x60;{r} \
 [max_med_cost]{.text-orange .fw-6} <- \
 &nbsp;&nbsp;childcare_costs |> \
@@ -136,7 +136,7 @@ max_med_cost <- \
 &#x60;&#x60;&#x60;
 :::
 
-::: {.quote-code style="font-size: 4vw; line-height: 1.2;" data-id="quote"}
+::: {.quote-code .fs-4vw style="line-height: 1.2;" data-id="quote"}
 <div>Infant day care costs</div>
 <div>up to
 <div class="d-if"><div class="d-ib typewriter" style="--delay:1s;--steps:17;--blinks:0;">[&#x60;r [max_med_cost]{.text-orange}&#x60;]{.text-blue}</div></div>
@@ -248,14 +248,16 @@ a year."
 childcare_summary <- readr::read_rds("data-raw/childcare_summary_top_10.rds")
 ```
 
-::: content-center
+::: {.content-center .fs-2vw}
+
+Reveal sequentially, in this order...
 
 ```{epoxy .data = childcare_summary[1, ]}
 | Variable | Value | Inline | Result |
 |:---------|:------|:-------|:-------|
 | `max_med_cost` | {max_med_cost} | `.dollar` | {.dollar max_med_cost} |
 | `mhi_pct` | {mhi_pct} | `.percent` | {.percent mhi_pct} |
-| `county_pop_med` | {county_pop_med} | `.number` | {.comma county_pop_med} |
+| `county_pop_med` | {county_pop_med} | `.comma` | {.comma county_pop_med} |
 | `cost_rank` | {cost_rank} | `.ordinal` | {.ordinal cost_rank} |
 | `age` | {age} | `.titlecase` | {.titlecase age} |
 | `county_size` | {county_size} | `.strong` | {.strong county_size} |
@@ -266,12 +268,85 @@ childcare_summary <- readr::read_rds("data-raw/childcare_summary_top_10.rds")
 
 ## {.p-10}
 
-::: {.content-center}
-Write out a full sentence using these variables in an epoxy chunk.
-Make sure that the chunk has a name.
+````{verbatim cost-summary-verbatim}
+```{epoxy cost-summary}
+{.titlecase age} {type} in {county_size} counties
+ranks {.ordinal cost_rank} in childcare costs
+at {.dollar max_med_cost} per year,
+or {.percent mhi_pct} of median household income.
+```
+````
 
-Assumes we've pulled the data out into individual variables
+```{epoxy cost-summary, .data = childcare_summary[1, ]}
+{.titlecase age} {type} in {county_size} counties
+ranks {.ordinal cost_rank} in childcare costs
+at {.dollar max_med_cost} per year,
+or {.percent mhi_pct} of median household income.
+```
+
+::: notes
+Write out a full sentence using these variables in an epoxy chunk.
+
+There are still a few things that bug me about the formatting in this sentence, though.
 :::
+
+
+## {.p-10}
+
+What if you want to change the default behavior?
+
+Behind the scenes, inline transformers are tiny functions that take a single input
+and return text.
+
+* `.dollar` is `scales::label_dollar()`
+* `.percent` is `scales::label_percent()`
+
+## Use `epoxy_transform_set()` {.p-10}
+
+```{r}
+#| echo: true
+epoxy_transform_set(
+  .dollar = scales::label_dollar(accuracy = 100),
+  .percent = scales::label_percent(accuracy = 0.1)
+)
+```
+
+```{verbatim ref.label="cost-summary-verbatim"}
+```
+
+```{r}
+epoxy_use_chunk(label = "cost-summary")
+```
+
+## {.p-10}
+
+Let's make our own inline transformer.
+
+```{r}
+#| echo: true
+epoxy_transform_set(
+  .cpm = function(x) x / 12,
+)
+```
+
+````{verbatim cost-summary-cpm-verbatim}
+```{epoxy cost-summary}
+{.titlecase age} {type} in {county_size} counties
+ranks {.ordinal cost_rank} in childcare costs
+at {.dollar max_med_cost} per year,
+about {.dollar {.cpm max_med_cost}} per month
+or {.percent mhi_pct} of median household income.
+```
+````
+
+```{epoxy cost-summary-cpm, .data = childcare_summary[1, ]}
+{.titlecase age} {type} in {county_size} counties
+ranks {.ordinal cost_rank} in childcare costs
+at {.dollar max_med_cost} per year,
+about {.dollar {.cpm max_med_cost}} per month
+or {.percent mhi_pct} of median household income.
+```
+
 
 ## {.p-10}
 
@@ -286,7 +361,20 @@ childcare_summary
 
 ## {.p-10}
 
-::: {.content}
+````{verbatim}
+```{epoxy cost-summary, .data = childcare_summary[1, ]}
+{.titlecase age} {type} in {county_size} counties
+ranks {.ordinal cost_rank} in childcare costs
+at {.dollar max_med_cost} per year,
+or {.percent mhi_pct} of median household income.
+```
+````
+
+```{r}
+epoxy_use_chunk(label = "cost-summary")
+```
+
+::: {.notes}
 Update the epoxy chunk to use the `.data` argument
 and the first row of `childcare_summary`
 (these are the values)
@@ -304,10 +392,23 @@ and the first row of `childcare_summary`
 ```
 :::
 
+
 ## {.p-10}
 
+````{verbatim}
+```{epoxy cost-summary-8th, .data = childcare_summary[8, ]}
+{.titlecase age} {type} in {county_size} counties
+ranks {.ordinal cost_rank} in childcare costs
+at {.dollar max_med_cost} per year,
+or {.percent mhi_pct} of median household income.
+```
+````
 
-::: {.content}
+```{r}
+epoxy_use_chunk(childcare_summary[8, ], label = "cost-summary")
+```
+
+::: {.notes}
 then swap out for the 8th row
 which effectively compares day care to home care
 
@@ -326,61 +427,25 @@ which effectively compares day care to home care
 
 ## {.p-10}
 
-Then highlight the chunk name and use `data |> filter |> epoxy_use_chunk()`.
-
-## {.p-10}
-
-Inline transformers are tiny functions that take a single input
-and return text.
-
-* `.dollar` is `scales::label_dollar()`
-* `.percent` is `scales::label_percent()`
-
-## {.p-10}
-
-What if you want to change the default behavior?
+````{verbatim}
+```{r}
+childcare_summary |>
+  filter(
+    age == "infant",
+    county_size == "very large",
+    type == "home care"
+  ) |>
+  epoxy_use_chunk(label = "cost-summary")
+```
+````
 
 ```{r}
-#| echo: true
-#| output: asis
-epoxy(
-  "{.dollar max_med_cost} represents {.percent mhi_pct} of median household income.",
-  .data = childcare_summary[1, ]
-)
+childcare_summary |>
+  dplyr::filter(
+    age == "infant",
+    county_size == "very large",
+    type == "home care"
+  ) |>
+  epoxy_use_chunk(label = "cost-summary")
 ```
 
-Use `epoxy_transform_set()`
-
-```{r}
-#| echo: true
-#| output: asis
-epoxy(
-  "{.dollar max_med_cost} represents {.percent mhi_pct} of median household income.",
-  .data = childcare_summary[1, ],
-  .transformer = epoxy_transform_inline(
-    .dollar = scales::label_dollar(accuracy = 10),
-    .percent = scales::label_percent(accuracy = 0.1)
-  )
-)
-```
-
-## {.p-10}
-
-Let's make our own inline transformer.
-This currently isn't a great example.
-The example should showcase that chunks are vectorized
-
-```{r}
-#| echo: true
-#| output: asis
-epoxy_transform_set(
-  .fa = function(x) purrr::map_chr(x, fontawesome::fa, a11y = "sem"),
-)
-
-tasks <- c("Use", "Make", "Enjoy the")
-icons <- c("r-project", "sack-dollar", "umbrella-beach")
-
-epoxy(
-  "- {tasks} {.fa icons}"
-)
-```

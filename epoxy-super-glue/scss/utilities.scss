@@ -150,26 +150,15 @@ $sizes: (
 .fw-9 { font-weight: var(--font-weight-9); }
 
 .fs-1vw { font-size: 1vw; }
-.fs-2vw { font-size: 2vw; }
-.fs-3vw { font-size: 3vw; }
-.fs-4vw { font-size: 4vw; }
+.fs-2vw { font-size: clamp(1rem, 2vw, 11rem); }
+.fs-3vw { font-size: clamp(1rem, 3vw, 9rem); }
+.fs-4vw { font-size: clamp(1rem, 4vw, 7rem); }
 .fs-5vw { font-size: 5vw; }
 .fs-6vw { font-size: 6vw; }
 .fs-7vw { font-size: 7vw; }
 .fs-8vw { font-size: 8vw; }
 .fs-9vw { font-size: 9vw; }
 .fs-10vw { font-size: 10vw; }
-
-.fs-1cqw { font-size: 1cqw; }
-.fs-2cqw { font-size: 2cqw; }
-.fs-3cqw { font-size: 3cqw; }
-.fs-4cqw { font-size: 4cqw; }
-.fs-5cqw { font-size: 5cqw; }
-.fs-6cqw { font-size: 6cqw; }
-.fs-7cqw { font-size: 7cqw; }
-.fs-8cqw { font-size: 8cqw; }
-.fs-9cqw { font-size: 9cqw; }
-.fs-10cqw { font-size: 10cqw; }
 
 .d-ib { display: inline-block; }
 .d-if { display: inline-flex; }

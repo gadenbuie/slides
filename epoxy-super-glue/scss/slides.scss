@@ -66,6 +66,7 @@ $selection-bg: $pink !default;
   max-width: calc(1920px * 1.25);
   aspect-ratio: 16 / 9;
   outline: 2px solid red;
+  container-type: inline-size;
 
   &,
   * {
@@ -141,14 +142,14 @@ $selection-bg: $pink !default;
 
   .quote-sans {
     min-width: 88vw;
-    font-size: 10vw;
+    font-size: clamp(3rem, 10vw, 15rem);
     font-family: $font-family-sans-serif;
   }
 
   .quote-code {
     min-width: 94vw;
     font-family: $font-family-monospace;
-    font-size: 7vw;
+    font-size: clamp(2rem, 7vw, 10rem);
     line-height: 1.6;
   }
 
