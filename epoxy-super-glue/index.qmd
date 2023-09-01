@@ -40,12 +40,24 @@ source("R/utils.R")
 :::
 
 ::: notes
-As a parent, this is more than just a number...
+I want to share a interesting fact I read recently.
+Did you know that...
 
-But as a data scientist... I can't help but think about how that number got there.
+Your first thought is probably, "woah, children are expensive!"
+And as a parent, I can say. Yeah, you're right.
+
+But also as a parent, I know that this isn't just a boring statistic from an executive report.
+Behind this number are real conversations I've had with my partner as we figure out how we'll care for our children and provide for them too.
+
+As a data scientist, though, I bet we're all wondering "how did that number get there?"
+Is that an average or a mean? Where did the data come from exactly?
+(It's from the US Dept. of Labor's National Database of Childcare Price, by the way.)
+
+As someone who's spent a lot of time working on reporting tools for data scientists, I really mean it.
+Like "how _exactly_ did that number get there?"
 :::
 
-## {.p-10}
+## {.p-9}
 
 <!-- type out quote up to number -->
 
@@ -57,7 +69,7 @@ But as a data scientist... I can't help but think about how that number got ther
 :::
 
 
-## {.p-10}
+## {.p-9}
 
 <!-- copy paste the number -->
 
@@ -76,7 +88,7 @@ But as a data scientist... I can't help but think about how that number got ther
 
 :::: {.content-center}
 
-::: {.code-chunk .fs-4vw .offscreen-up data-id="code-chunk"}
+::: {.code-chunk .fs-3vw .offscreen-up data-id="code-chunk"}
 &#x60;&#x60;&#x60;{r} \
 max_med_cost <- \
 &nbsp;&nbsp;childcare_costs |> \
@@ -101,7 +113,7 @@ max_med_cost <- \
 
 :::: {.content .d-flex .flex-column .justify-content-center}
 
-::: {.code-chunk .mb-6 style="font-size: 4vw;" data-id="code-chunk"}
+::: {.code-chunk .mb-6 style="font-size: 3vw;" data-id="code-chunk"}
 &#x60;&#x60;&#x60;{r} \
 max_med_cost <- \
 &nbsp;&nbsp;childcare_costs |> \
@@ -111,7 +123,7 @@ max_med_cost <- \
 &#x60;&#x60;&#x60;
 :::
 
-::: {.quote-code .fs-4vw style="line-height: 1.2;"}
+::: {.quote-code style="font-size: clamp(2rem, 3vw, 8rem); line-height: 1.2;"}
 <div>Infant day care costs</div>
 <div class="d-if"><div class="typewriter" style="--steps:1;--duration:10ms;--blinks:50">up to&nbsp;</div></div>
 <div>&nbsp;<!-- placeholder for last line --></div>
@@ -126,7 +138,7 @@ max_med_cost <- \
 
 :::: {.content .d-flex .flex-column .justify-content-center}
 
-::: {.ff-mono .fs-4vw .mb-6 style="background:var(--gray-1);"}
+::: {.code-chunk .mb-6 style="font-size: 3vw;" data-id="code-chunk"}
 &#x60;&#x60;&#x60;{r} \
 [max_med_cost]{.text-orange .fw-6} <- \
 &nbsp;&nbsp;childcare_costs |> \
@@ -136,7 +148,7 @@ max_med_cost <- \
 &#x60;&#x60;&#x60;
 :::
 
-::: {.quote-code .fs-4vw style="line-height: 1.2;" data-id="quote"}
+::: {.quote-code style="font-size: clamp(2rem, 3vw, 8rem); line-height: 1.2;" data-id="quote"}
 <div>Infant day care costs</div>
 <div>up to
 <div class="d-if"><div class="d-ib typewriter" style="--delay:1s;--steps:17;--blinks:0;">[&#x60;r [max_med_cost]{.text-orange}&#x60;]{.text-blue}</div></div>
@@ -173,7 +185,7 @@ When rendered, max median cost is woven into the prose...
 
 <!-- rendered version of the document, number isn't great -->
 
-:::: {.content .d-flex .flex-column .justify-content-center}
+:::: {.content-center}
 
 ```{r}
 #| include: false
@@ -183,7 +195,7 @@ max_med_cost <- 15416.96
 ::: {.quote-sans style="color: var(--gray-7);"}
 <div>Infant day care costs</div>
 <div>up to [`r max_med_cost`]{.text-orange .d-ib data-id="quote-var"}</div>
-<div>a year.</div>
+<div data-id="final">a year.</div>
 :::
 ::::
 
@@ -191,17 +203,74 @@ max_med_cost <- 15416.96
 There's a lot to love about R Markdown,
 :::
 
+## {.p-10 transition="fade"}
+
+::: {.content-center}
+::: {.quote-sans style="color: var(--gray-7);"}
+<div>Infant day care costs</div>
+<div>up to [$15,416]{.text-orange .d-ib data-id="quote-var"}</div>
+<div>a year.</div>
+:::
+:::
+
 ## Which plot would you send to a client? {.p-10 transition="slide"}
 
+```{r load-childcare-summary}
+#| include: false
+
+library(ggplot2)
+childcare_costs <- readr::read_rds("data-raw/childcare_summary.rds")
+```
 
 ::: {.content .d-flex .flex-row .gap-9 .mt-8 .justify-content-center}
 
-::: {.flex-center .w-100 .h-60 style="background-color:var(--gray-3);"}
-Plot with bad labels
+::: {.fragment .w-100}
+```{r plot-bad-labels}
+#| echo: false
+#| fig.width: 7
+#| fig.height: 5
+#| dpi: 300
+#| out.width: 100%
+
+ggplot(childcare_costs) +
+  aes(cost, forcats::fct_rev(age), fill = type) +
+  geom_col(position = "dodge") +
+  labs(y = "age") +
+  facet_wrap(~ county_size) +
+  theme_grey(14)
+```
 :::
 
-::: {.flex-center .w-100 .h-60 style="background-color:var(--purple);color:white;"}
-Plot with good labels
+::: {.fragment .w-100}
+```{r plot-good-labels}
+#| echo: false
+#| fig.width: 7
+#| fig.height: 5
+#| dpi: 300
+#| out.width: 100%
+
+ggplot(childcare_costs) +
+  aes(cost, forcats::fct_rev(age), fill = type) +
+  geom_col(position = "dodge") +
+  facet_wrap(
+    ~ county_size,
+    labeller = labeller(
+      county_size = \(x) tools::toTitleCase(paste(x, "County"))
+    )
+  ) +
+  labs(
+    x = "Median yearly cost",
+    # y = "Age group",
+    y = NULL,
+    fill = "Type of care"
+  ) +
+  scale_fill_discrete(labels = tools::toTitleCase) +
+  scale_y_discrete(labels = tools::toTitleCase) +
+  scale_x_continuous(
+    labels = scales::dollar_format(scale_cut = scales::cut_short_scale())
+  ) +
+  theme_gray(14)
+```
 :::
 :::
 
