@@ -213,66 +213,7 @@ There's a lot to love about R Markdown,
 :::
 :::
 
-## Which plot would you send to a client? {.p-10 transition="slide"}
-
-```{r load-childcare-summary}
-#| include: false
-
-library(ggplot2)
-childcare_costs <- readr::read_rds("data-raw/childcare_summary.rds")
-```
-
-::: {.content .d-flex .flex-row .gap-9 .mt-8 .justify-content-center}
-
-::: {.fragment .w-100}
-```{r plot-bad-labels}
-#| echo: false
-#| fig.width: 7
-#| fig.height: 5
-#| dpi: 300
-#| out.width: 100%
-
-ggplot(childcare_costs) +
-  aes(cost, forcats::fct_rev(age), fill = type) +
-  geom_col(position = "dodge") +
-  labs(y = "age") +
-  facet_wrap(~ county_size) +
-  theme_grey(14)
-```
-:::
-
-::: {.fragment .w-100}
-```{r plot-good-labels}
-#| echo: false
-#| fig.width: 7
-#| fig.height: 5
-#| dpi: 300
-#| out.width: 100%
-
-ggplot(childcare_costs) +
-  aes(cost, forcats::fct_rev(age), fill = type) +
-  geom_col(position = "dodge") +
-  facet_wrap(
-    ~ county_size,
-    labeller = labeller(
-      county_size = \(x) tools::toTitleCase(paste(x, "County"))
-    )
-  ) +
-  labs(
-    x = "Median yearly cost",
-    # y = "Age group",
-    y = NULL,
-    fill = "Type of care"
-  ) +
-  scale_fill_discrete(labels = tools::toTitleCase) +
-  scale_y_discrete(labels = tools::toTitleCase) +
-  scale_x_continuous(
-    labels = scales::dollar_format(scale_cut = scales::cut_short_scale())
-  ) +
-  theme_gray(14)
-```
-:::
-:::
+## epoxy {.p-10}
 
 ::: notes
 * effective communication
