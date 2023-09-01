@@ -26,6 +26,8 @@ $font-family-sans-serif: $font-system-stack;
 // $font-family-monospace: "IBM Plex Mono", "Source Code Pro", monospace;
 $font-family-monospace: "Fira Mono", "Source Code Pro", monospace;
 
+$presentation-font-size-root: 65px;
+
 // colors
 $dark-slides: true;
 $body-bg: #fff !default;
@@ -64,8 +66,8 @@ $selection-bg: $pink !default;
 .reveal .slide {
   max-height: calc(1080px * 1.25);
   max-width: calc(1920px * 1.25);
-  aspect-ratio: 16 / 9;
-  outline: 2px solid red;
+  // aspect-ratio: 16 / 9;
+  // outline: 2px solid red;
   container-type: inline-size;
 
   &,
