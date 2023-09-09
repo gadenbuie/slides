@@ -17,8 +17,10 @@
   animation-fill-mode: var(--mode, forwards, none);
 }
 
-[hidden] .typewriter {
-  animation: unset;
+[hidden] {
+  .typewriter {
+    animation: unset;
+  }
 }
 
 /* The typing effect */

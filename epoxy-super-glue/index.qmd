@@ -21,6 +21,9 @@ format:
     slide-number: c
     highlight-style: github
 
+revealjs-plugins:
+  - codewindow
+
 engine: knitr
 
 knitr:
@@ -40,11 +43,11 @@ options(width = 120)
 source("R/utils.R")
 ```
 
-## {background-image="images/kids.jpg" background-size="cover" background-position="center" background-repeat="no-repeat"}
+## {background-image="images/kids.jpg" background-size="cover" background-position="center 25%" background-repeat="no-repeat"}
 
-##
+## {.p-9}
 
-::: {.content-center .text-center}
+::: {.content-center}
 ::: quote-sans
 <div>Infant day care costs</div>
 <div>up to [$15,417]{.text-orange} a year</div>
@@ -94,13 +97,16 @@ Like "how _exactly_ did that number get there?"
 :::
 :::
 
-## {auto-animate="true"}
+##
 
 <!-- now in an Rmd -->
 
-:::: {.content-center}
+:::: {.content .d-flex .flex-column .justify-content-center .align-items-center}
+::: {.codewindow .r style="min-height:50vh"}
+report.Rmd
 
-::: {.code-chunk .fs-3vw .offscreen-up data-id="code-chunk"}
+::: {data-is-rmd="true"}
+::: {.code-chunk .fs-2vw .fragment data-id="code-chunk"}
 &#x60;&#x60;&#x60;{r} \
 max_med_cost <- \
 &nbsp;&nbsp;childcare_costs |> \
@@ -110,47 +116,28 @@ max_med_cost <- \
 &#x60;&#x60;&#x60;
 :::
 
-::: {.d-flex .flex-column .align-items-center}
-::: {.quote-code}
+::: {.quote-code data-id="rmd-text" style="font-size: clamp(1rem, 2vw, 8rem); line-height: 1.2;"}
 <div class="d-if"><div class="d-ib typewriter" data-id="preamble" style="--steps:22;--blinks:0">Infant day care costs</div></div><br>
 <div class="d-if"><div class="d-ib typewriter" data-id="before" style="--steps:6;--delay:1680ms;--blinks:50">up to&nbsp;</div></div>
 <div>&nbsp;<!-- placeholder for last line --></div>
 :::
 :::
-::::
 
-## {.p-10 auto-animate="true"}
-
-<!-- reveal code chunk -->
-
-:::: {.content .d-flex .flex-column .justify-content-center}
-
-::: {.code-chunk .mb-6 style="font-size: 3vw;" data-id="code-chunk"}
-&#x60;&#x60;&#x60;{r} \
-max_med_cost <- \
-&nbsp;&nbsp;childcare_costs |> \
-&nbsp;&nbsp;[# group and summarize... |>]{.text-muted} \
-&nbsp;&nbsp;filter(cost = max(cost)) |> \
-&nbsp;&nbsp;pull(cost) \ \
-&#x60;&#x60;&#x60;
-:::
-
-::: {.quote-code style="font-size: clamp(2rem, 3vw, 8rem); line-height: 1.2;"}
-<div>Infant day care costs</div>
-<div class="d-if"><div class="typewriter" style="--steps:1;--duration:10ms;--blinks:50">up to&nbsp;</div></div>
-<div>&nbsp;<!-- placeholder for last line --></div>
 :::
 ::::
 
 
-
-## {.p-10 auto-animate="true" auto-animate-unmatched="false"}
+##
 
 <!-- highlight variable and type it out -->
+<!-- promise and magic of rmarkdown -->
 
-:::: {.content .d-flex .flex-column .justify-content-center}
+:::: {.content .d-flex .flex-column .justify-content-center .align-items-center}
+::: {.codewindow .r style="min-height:50vh"}
+report.Rmd
 
-::: {.code-chunk .mb-6 style="font-size: 3vw;" data-id="code-chunk"}
+::: {data-is-rmd="true"}
+::: {.code-chunk .fs-2vw data-id="code-chunk"}
 &#x60;&#x60;&#x60;{r} \
 [max_med_cost]{.text-orange .fw-6} <- \
 &nbsp;&nbsp;childcare_costs |> \
@@ -160,25 +147,15 @@ max_med_cost <- \
 &#x60;&#x60;&#x60;
 :::
 
-::: {.quote-code style="font-size: clamp(2rem, 3vw, 8rem); line-height: 1.2;" data-id="quote"}
+::: {.quote-code style="font-size: clamp(1rem, 2vw, 8rem); line-height: 1.2;" data-id="quote"}
 <div>Infant day care costs</div>
 <div>up to
 <div class="d-if"><div class="d-ib typewriter" style="--delay:1s;--steps:17;--blinks:0;">[&#x60;r [max_med_cost]{.text-orange}&#x60;]{.text-blue}</div></div>
 </div>
 <div><div class="d-if"><div class="d-ib typewriter" style="--delay:2360ms;--steps:6;--blinks:2;">a year.</div></div></div>
 :::
-::::
+:::
 
-## {.p-10 auto-animate="true"}
-
-<!-- promise and magic of rmd -->
-
-:::: {.content .d-flex .flex-column .justify-content-center}
-
-::: {.quote-code .text-muted data-id="quote"}
-<div>Infant day care costs</div>
-<div>up to [&#x60;r [max_med_cost]{.text-orange}&#x60;]{.text-blue}</div>
-<div>a year.</div>
 :::
 ::::
 
@@ -193,9 +170,11 @@ This is the promise and magic of R Markdown.
 When rendered, max median cost is woven into the prose...
 :::
 
-## {.p-10 transition="fade"}
+## {auto-animate="true" auto-animate-unmatched="false"}
 
-<!-- rendered version of the document, number isn't great -->
+:::: {.content .d-flex .flex-column .justify-content-center .align-items-center}
+::: {.codewindow .html style="min-height:50vh"}
+report.html
 
 :::: {.content-center}
 
@@ -204,26 +183,44 @@ When rendered, max median cost is woven into the prose...
 max_med_cost <- 15416.96
 ```
 
-::: {.quote-sans style="color: var(--gray-7);"}
+::: {.quote-sans .p-5 style="color: var(--gray-7);"}
+::: {style="font-size: 75%"}
 <div>Infant day care costs</div>
 <div>up to [`r max_med_cost`]{.text-orange .d-ib data-id="quote-var"}</div>
 <div data-id="final">a year.</div>
 :::
+:::
+:::
+
+:::
 ::::
 
-::: notes
-There's a lot to love about R Markdown,
-:::
+## {auto-animate="true" auto-animate-unmatched="false"}
 
-## {.p-10 transition="fade"}
+:::: {.content .d-flex .flex-column .justify-content-center .align-items-center}
+::: {.codewindow .html style="min-height:50vh"}
+report.html
 
-::: {.content-center}
-::: {.quote-sans style="color: var(--gray-7);"}
+:::: {.content-center}
+
+```{r}
+#| include: false
+max_med_cost <- 15416.96
+```
+
+::: {.quote-sans .p-5 style="color: var(--gray-7);"}
+::: {style="font-size: 75%"}
 <div>Infant day care costs</div>
 <div>up to [$15,416]{.text-orange .d-ib data-id="quote-var"}</div>
-<div>a year.</div>
+<div data-id="final">a year.</div>
 :::
 :::
+:::
+
+:::
+::::
+
+<!-------- Introducing epoxy -------------------------------------------------->
 
 ## {.p-10 .bg-gradient-deep-blue transition="fade" transition-speed="slow"}
 
@@ -360,7 +357,7 @@ a year. \
 :::
 :::
 
-## {.p-10 transition="fade"}
+## {.p-10}
 
 ::: content-center
 ::: quote-sans
