@@ -134,7 +134,10 @@ $sizes: (
 .text-orange { color: $orange; }
 .text-yellow { color: $yellow; }
 .text-red { color: $red; }
-.text-muted { color: var(--gray-5); }
+
+@for $i from 1 through 12 {
+  .text-gray-#{$i} { color: var(--gray-#{$i}); }
+}
 
 .ff-mono { font-family: var(--r-code-font, #{$font-family-monospace}); }
 .ff-sans { font-family: var(--r-sans-font, #{$font-family-sans-serif}); }
@@ -182,3 +185,6 @@ $sizes: (
   align-items: center;
   justify-content: center;
 }
+
+.float-right { float: right }
+.float-left { float: left }

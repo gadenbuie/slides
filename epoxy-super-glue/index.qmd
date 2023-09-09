@@ -12,6 +12,7 @@ format:
       - scss/slides.scss
       - scss/utilities.scss
       - scss/typewriter.scss
+      - scss/hexagon.scss
     width: 100%
     height: 100%
     margin: 0
@@ -213,7 +214,49 @@ There's a lot to love about R Markdown,
 :::
 :::
 
-## epoxy {.p-10}
+## {.p-10 .bg-gradient-deep-blue transition="fade" transition-speed="slow"}
+
+::: {.hex-content}
+<div class="hexagon">
+  <div class="front reveal-up"></div>
+</div>
+
+::: {.incremental}
+- Powerful inline syntax
+- Blend data and prose
+- Reusable templates
+:::
+:::
+
+## {.p-10 .bg-gradient-deep-blue}
+
+::: {.hex-content}
+<div class="hexagon spin-flip">
+  <div class="front"></div>
+  <div class="back"></div>
+</div>
+
+::: {.incremental}
+- Made for developers
+- Very light-weight
+- Files that end in `.R`
+:::
+:::
+
+## {.p-10 .bg-gradient-deep-blue}
+
+::: {.hex-content}
+<div class="hexagon quick-flip-back">
+  <div class="front"></div>
+  <div class="back"></div>
+</div>
+
+::: {.incremental}
+- Made for data scientists
+- Using familiar packages
+- Scripts, reports, apps
+:::
+:::
 
 ::: notes
 * effective communication
@@ -227,7 +270,6 @@ There's a lot to love about R Markdown,
 ```{r}
 #| echo: false
 fake_chunk(
-  class = "fs-4vw",
   engine = "epoxy",
   "Infant day care costs
 up to {.dollar max_med_cost}
@@ -244,6 +286,56 @@ a year."
 
 ## {.p-10}
 
+::: {.content-center}
+
+::: {.ff-mono .fs-5vw}
+Infant day care costs \
+up to &#x60;r max_med_cost&#x60; \
+a year.
+:::
+:::
+
+## {.p-10}
+
+::: {.content-center}
+
+::: {.code-chunk .fs-5vw .text-gray-6}
+[&#x60;&#x60;&#x60;{epoxy}]{.text-gray-12} \
+Infant day care costs \
+up to &#x60;r max_med_cost&#x60; \
+a year. \
+[&#x60;&#x60;&#x60;]{.text-gray-12}
+:::
+:::
+
+## {.p-10}
+
+::: {.content-center}
+
+::: {.code-chunk .fs-5vw .text-gray-6}
+&#x60;&#x60;&#x60;{epoxy} \
+Infant day care costs \
+up to [{max_med_cost}]{.text-gray-12} \
+a year. \
+&#x60;&#x60;&#x60;
+:::
+:::
+
+## {.p-10}
+
+::: {.content-center}
+
+::: {.code-chunk .fs-5vw .text-gray-6}
+&#x60;&#x60;&#x60;{epoxy} \
+Infant day care costs \
+up to [{[.dollar]{.text-blue} max_med_cost}]{.text-gray-12} \
+a year. \
+&#x60;&#x60;&#x60;
+:::
+:::
+
+## {.p-10}
+
 ::: content-center
 ::: quote-sans
 <div>Infant day care costs</div>
@@ -251,11 +343,13 @@ a year."
 :::
 :::
 
-## {.p-10}
+## {.p-10 visibility="hidden"}
 
 ```{r}
 #| include: false
 childcare_summary <- readr::read_rds("data-raw/childcare_summary_top_10.rds")
+
+attach(childcare_summary[1, ])
 ```
 
 ::: {.content-center .fs-2vw}
@@ -276,23 +370,84 @@ Reveal sequentially, in this order...
 
 :::
 
-## {.p-10}
+## {.inline-examples}
 
-````{verbatim cost-summary-verbatim}
-```{epoxy cost-summary}
+::::: {.content-center .align-items-center}
+:::: {.w-66}
+::: {.fragment data-fade-from="2"}
+<code>{<span class="fragment">.dollar </span>max_med_cost}</code>
+<code class="float-right" data-show-on="0">`r max_med_cost`</code>
+<code class="float-right" data-show-from="1">`r epoxy("{.dollar max_med_cost}")`</code>
+:::
+
+::: {.fragment data-fade-from="4"}
+<code>{<span class="fragment">.percent </span>mhi_pct}</code>
+<code class="float-right" data-show-on="2">`r mhi_pct`</code>
+<code class="float-right" data-show-from="3">`r epoxy("{.percent mhi_pct}")`</code>
+:::
+
+::: {.fragment data-fade-from="6"}
+<code>{<span class="fragment">.comma </span>county_pop_med}</code>
+<code class="float-right" data-show-on="4">`r county_pop_med`</code>
+<code class="float-right" data-show-from="5">`r epoxy("{.comma county_pop_med}")`</code>
+:::
+
+::: {.fragment data-fade-from="8"}
+<code>{<span class="fragment">.ordinal </span>cost_rank}</code>
+<code class="float-right" data-show-on="6">`r cost_rank`</code>
+<code class="float-right" data-show-from="7">`r epoxy("{.ordinal cost_rank}")`</code>
+:::
+
+::: {.fragment data-fade-from="10"}
+<code>{<span class="fragment">.titlecase </span>age}</code>
+<code class="float-right" data-show-on="8">`r age`</code>
+<code class="float-right" data-show-from="9">`r epoxy("{.titlecase age}")`</code>
+:::
+
+::: {.fragment data-fade-from="12"}
+<code>{<span class="fragment">.strong </span>county_size}</code>
+<code class="float-right" data-show-on="10">`r county_size`</code>
+<code class="float-right" data-show-from="11">`r epoxy("{.strong county_size}")`</code>
+:::
+
+::: {.fragment}
+<code>{<span class="fragment">.emph </span>type}</code>
+<code class="float-right" data-show-on="12">`r type`</code>
+<code class="float-right" data-show-from="13">`r epoxy("{.emph type}")`</code>
+:::
+::::
+:::::
+
+
+## {.p-9}
+
+::::: {.content-center .align-items-center}
+:::: {.w-80}
+```{r}
+#| echo: false
+fake_chunk(
+  engine = "epoxy",
+  opts_head = "cost-summary",
+  '<span class="text-yellow">{.titlecase age}</span> <span class="text-mint">{type}</span> in <span class="text-red">{county_size}</span> counties
+ranks <span class="text-orange">{.ordinal cost_rank}</span> in childcare costs
+at <span class="text-blue">{.dollar max_med_cost}</span> per year,
+or <span class="text-pink">{.percent mhi_pct}</span> of median household income.'
+)
+```
+
+
+```{epoxy cost-summary, .data = childcare_summary[1, ], eval = FALSE, include = FALSE}
 {.titlecase age} {type} in {county_size} counties
 ranks {.ordinal cost_rank} in childcare costs
 at {.dollar max_med_cost} per year,
 or {.percent mhi_pct} of median household income.
 ```
-````
 
-```{epoxy cost-summary, .data = childcare_summary[1, ]}
-{.titlecase age} {type} in {county_size} counties
-ranks {.ordinal cost_rank} in childcare costs
-at {.dollar max_med_cost} per year,
-or {.percent mhi_pct} of median household income.
-```
+::: epoxy-ex-output
+[Infant]{.bg-yellow} [day care]{.bg-mint} in [very large]{.bg-red} counties ranks [1st]{.bg-orange} in childcare costs at [$15,416.96]{.bg-blue} per year, or [24%]{.bg-pink} of median household income.
+:::
+::::
+:::::
 
 ::: notes
 Write out a full sentence using these variables in an epoxy chunk.
@@ -459,3 +614,13 @@ childcare_summary |>
   epoxy_use_chunk(label = "cost-summary")
 ```
 
+## {.p-10}
+
+```{r}
+childcare_summary |>
+  dplyr::filter(
+    age == "infant",
+    county_size == "very large"
+  ) |>
+  epoxy_use_chunk(label = "cost-summary")
+```
