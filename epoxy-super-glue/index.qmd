@@ -102,7 +102,7 @@ Like "how _exactly_ did that number get there?"
 <!-- now in an Rmd -->
 
 :::: {.content .d-flex .flex-column .justify-content-center .align-items-center}
-::: {.codewindow .r style="min-height:50vh"}
+::: {.codewindow .r .rmd style="min-height:50vh"}
 report.Rmd
 
 ::: {data-is-rmd="true"}
@@ -133,7 +133,7 @@ max_med_cost <- \
 <!-- promise and magic of rmarkdown -->
 
 :::: {.content .d-flex .flex-column .justify-content-center .align-items-center}
-::: {.codewindow .r style="min-height:50vh"}
+::: {.codewindow .r .rmd style="min-height:50vh"}
 report.Rmd
 
 ::: {data-is-rmd="true"}
@@ -174,7 +174,7 @@ When rendered, max median cost is woven into the prose...
 
 :::: {.content .d-flex .flex-column .justify-content-center .align-items-center}
 ::: {.codewindow .html style="min-height:50vh"}
-report.html
+Report: Childcare Costs
 
 :::: {.content-center}
 
@@ -199,7 +199,7 @@ max_med_cost <- 15416.96
 
 :::: {.content .d-flex .flex-column .justify-content-center .align-items-center}
 ::: {.codewindow .html style="min-height:50vh"}
-report.html
+Report: Childcare Costs
 
 :::: {.content-center}
 
@@ -455,8 +455,13 @@ Reveal sequentially, in this order...
 
 ## {.inline-examples}
 
+
 ::::: {.content-center .align-items-center}
-:::: {.w-66}
+::: {.text-center .fs-3vw .mb-6}
+Inline epoxy transformers
+:::
+
+:::: {.w-66 .pb-9}
 ::: {.fragment data-fade-from="2"}
 <code>{<span class="fragment">.dollar </span>max_med_cost}</code>
 <code class="float-right" data-show-on="0">`r max_med_cost`</code>
@@ -567,17 +572,6 @@ at {.dollar max_med_cost} per year,
 about {.dollar {.cpm max_med_cost}} per month
 or {.percent mhi_pct} of median household income.
 ```
-
-
-## {.p-10}
-
-What if you want to change the default behavior?
-
-Behind the scenes, inline transformers are tiny functions that take a single input
-and return text.
-
-* `.dollar` is `scales::label_dollar()`
-* `.percent` is `scales::label_percent()`
 
 ## Use `epoxy_transform_set()` {.p-10}
 
@@ -706,5 +700,5 @@ childcare_summary |>
     age == "infant",
     county_size == "very large"
   ) |>
-  epoxy_use_chunk(label = "cost-summary")
+  epoxy_use_chunk(label = "cost-summary", .collapse = "\n\n")
 ```

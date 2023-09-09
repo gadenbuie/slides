@@ -376,3 +376,21 @@ $selection-bg: $pink !default;
     }
   }
 }
+
+.codewindow.r.rmd .file svg {
+  display: none;
+}
+
+.codewindow.r.rmd .file::before {
+  content: " ";
+  background-image: url(../../../../../images/text-x-r-markdown.png);
+  width: 1.5em;
+  height: 100%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.codewindow.html .file {
+  font-family: var(--r-main-font) !important;
+}
