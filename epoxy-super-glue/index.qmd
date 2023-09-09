@@ -670,19 +670,8 @@ which effectively compares day care to home care
 
 ## {.p-10}
 
-````{verbatim}
 ```{r}
-childcare_summary |>
-  filter(
-    age == "infant",
-    county_size == "very large",
-    type == "home care"
-  ) |>
-  epoxy_use_chunk(label = "cost-summary")
-```
-````
-
-```{r}
+#| echo: true
 childcare_summary |>
   dplyr::filter(
     age == "infant",
@@ -695,6 +684,7 @@ childcare_summary |>
 ## {.p-10}
 
 ```{r}
+#| echo: true
 childcare_summary |>
   dplyr::filter(
     age == "infant",
@@ -702,3 +692,61 @@ childcare_summary |>
   ) |>
   epoxy_use_chunk(label = "cost-summary", .collapse = "\n\n")
 ```
+
+## {background-image="images/james-coleman-cevIeBV1A3I-unsplash.jpg" background-size="cover" background-position="center" background-repeat="no-repeat"}
+
+
+::: notes
+Photo by <a href="https://unsplash.com/@jhc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">James Coleman</a> on <a href="https://unsplash.com/photos/cevIeBV1A3I?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+
+Audience participation
+
+- Who here writes reports with Quarto or R Markdown?
+
+- + Have you ever written an HTML report? Keep your hand up if you've had write actual HTML in that report.
+
+- + Have you ever written a PDF report using LaTeX? Keep if your hand up if you've ever had to resort to using actual LaTeX in that report.
+:::
+
+##
+
+::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
+
+::: {.codewindow .r .rmd style="font-size: clamp(1rem, 2vw, 2rem)"}
+report-html.Rmd
+
+::: {.chunk}
+````{verbatim}
+```{epoxy_html}
+in {{.strong county_size}} counties
+```
+````
+
+::: {.fragment fragment-index=2}
+```{verbatim}
+in <strong>very large</strong> counties
+```
+:::
+:::
+:::
+
+::: {.codewindow .r .rmd .fragment fragment-index=1 style="font-size: clamp(1rem, 2vw, 2rem)"}
+report-latex.Rmd
+
+::: {.chunk}
+````{verbatim}
+```{epoxy_latex}
+in <<.strong county_size>> counties
+```
+````
+
+::: {.fragment fragment-index=3}
+```{verbatim}
+in \textbf{very large} counties
+```
+:::
+:::
+:::
+
+:::
