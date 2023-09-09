@@ -254,6 +254,15 @@ $selection-bg: $pink !default;
   &.glue-to-epoxy {
     font-size: clamp(1rem, 3vw, 4rem);
   }
+
+  .codewindow.epoxy-engines {
+    font-size: clamp(1rem, 2vw, 2rem) !important;
+
+    &.epoxy-focused {
+      min-width: 66vw;
+      min-height: 66vh;
+    }
+  }
 }
 
 [hidden] {

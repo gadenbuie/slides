@@ -709,17 +709,17 @@ Audience participation
 - + Have you ever written a PDF report using LaTeX? Keep if your hand up if you've ever had to resort to using actual LaTeX in that report.
 :::
 
-##
+## {auto-animate="true"}
 
 ::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
 
-::: {.codewindow .r .rmd style="font-size: clamp(1rem, 2vw, 2rem)"}
+::: {.codewindow .r .rmd .epoxy-engines data-id="codewindow"}
 report-html.Rmd
 
 ::: {.chunk}
 ````{verbatim}
 ```{epoxy_html}
-in {{.strong county_size}} counties
+in {{strong county_size}} counties
 ```
 ````
 
@@ -731,7 +731,7 @@ in <strong>very large</strong> counties
 :::
 :::
 
-::: {.codewindow .r .rmd .fragment fragment-index=1 style="font-size: clamp(1rem, 2vw, 2rem)"}
+::: {.codewindow .r .rmd .fragment fragment-index=1 .epoxy-engines}
 report-latex.Rmd
 
 ::: {.chunk}
@@ -746,6 +746,113 @@ in <<.strong county_size>> counties
 in \textbf{very large} counties
 ```
 :::
+:::
+:::
+
+:::
+
+## {auto-animate="true" auto-animate-unmatched="false"}
+
+::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
+
+::: {.codewindow .r .rmd .epoxy-engines .epoxy-focused data-id="codewindow"}
+report-html.Rmd
+
+::: {.chunk data-id="foo"}
+````{verbatim}
+```{epoxy_html}
+in {{strong county_size}} counties
+```
+
+in <strong>very large</strong> counties
+````
+:::
+:::
+
+:::
+
+##
+
+::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
+
+::: {.codewindow .r .rmd .epoxy-engines .epoxy-focused}
+report-html.Rmd
+
+::: {.chunk data-id="foo"}
+````{verbatim}
+```{epoxy_html}
+in {{strong.text-blue county_size}} counties
+```
+
+in <strong class="text-blue">very large</strong> counties
+````
+:::
+:::
+
+:::
+
+
+##
+
+::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
+
+::: {.codewindow .r .rmd .epoxy-engines .epoxy-focused}
+report-html.Rmd
+
+::: {.chunk data-id="foo"}
+````{verbatim}
+```{epoxy_html}
+in {{.text-blue county_size}} counties
+```
+
+in <span class="text-blue">very large</span> counties
+````
+:::
+:::
+
+:::
+
+
+##
+
+::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
+
+::: {.codewindow .r .rmd .epoxy-engines .epoxy-focused}
+report-html.Rmd
+
+::: {.chunk data-id="foo"}
+````{verbatim}
+```{epoxy_html}
+in {{.text-blue {{.strong county_size }} }} counties
+```
+
+in <span class="text-blue"><strong>very large</strong></span> counties
+````
+
+```{=html}
+<p class="fragment ff-sans pt-10 ps-2">in <span class="text-blue"><strong>very large</strong></span> counties</p>
+```
+:::
+:::
+
+:::
+
+##
+
+::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
+
+::: {.codewindow .r .epoxy-engines .epoxy-focused}
+R Console
+
+::: {.chunk}
+```{r}
+#| echo: true
+epoxy("{.dollar {.cpm max_med_cost}} per month")
+
+epoxy_html("{{@dollar {{@cpm max_med_cost }} }} per month")
+
+epoxy_latex("<<.dollar <<.cpm max_med_cost>> >> per month")
+```
 :::
 :::
 
