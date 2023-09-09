@@ -18,8 +18,15 @@ format:
     margin: 0
     code-copy: false
     code-line-numbers: false
+    slide-number: c
+    highlight-style: github
 
 engine: knitr
+
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: "#>"
 
 editor:
   render-on-save: true
@@ -27,6 +34,8 @@ editor:
 
 ```{r setup, include=FALSE}
 library(epoxy)
+library(glue)
+
 options(width = 120)
 source("R/utils.R")
 ```
@@ -263,7 +272,7 @@ There's a lot to love about R Markdown,
 * without taking you out of the flow of writing
 :::
 
-## {.p-10}
+## {.p-10 visibility="hidden"}
 
 ::: content-center
 
@@ -284,23 +293,25 @@ a year."
 
 :::
 
-## {.p-10}
+## {.p-10 transition="fade"}
 
 ::: {.content-center}
 
 ::: {.ff-mono .fs-5vw}
+&nbsp; \
 Infant day care costs \
 up to &#x60;r max_med_cost&#x60; \
-a year.
+a year. \
+&nbsp;
 :::
 :::
 
-## {.p-10}
+## {.p-10 transition="fade"}
 
 ::: {.content-center}
 
-::: {.code-chunk .fs-5vw .text-gray-6}
-[&#x60;&#x60;&#x60;{epoxy}]{.text-gray-12} \
+::: {.code-chunk .fs-5vw .text-gray-6 style="margin-bottom: 0;"}
+[&#x60;&#x60;&#x60;{[epoxy]{.text-orange}}]{.text-gray-12} \
 Infant day care costs \
 up to &#x60;r max_med_cost&#x60; \
 a year. \
@@ -308,33 +319,46 @@ a year. \
 :::
 :::
 
-## {.p-10}
+## {.p-10 transition="fade"}
 
 ::: {.content-center}
 
-::: {.code-chunk .fs-5vw .text-gray-6}
+::: {.code-chunk .fs-5vw .text-gray-6 style="margin-bottom: 0;"}
 &#x60;&#x60;&#x60;{epoxy} \
 Infant day care costs \
-up to [{max_med_cost}]{.text-gray-12} \
+up to [[&#x60;r]{.text-orange} max_med_cost[&#x60;]{.text-orange}]{.text-gray-12} \
 a year. \
 &#x60;&#x60;&#x60;
 :::
 :::
 
-## {.p-10}
+## {.p-10 transition="fade"}
 
 ::: {.content-center}
 
-::: {.code-chunk .fs-5vw .text-gray-6}
+::: {.code-chunk .fs-5vw .text-gray-6 style="margin-bottom: 0;"}
 &#x60;&#x60;&#x60;{epoxy} \
 Infant day care costs \
-up to [{[.dollar]{.text-blue} max_med_cost}]{.text-gray-12} \
+up to [{]{.text-orange}[max_med_cost]{.text-gray-12}[}]{.text-orange} \
 a year. \
 &#x60;&#x60;&#x60;
 :::
 :::
 
-## {.p-10}
+## {.p-10 transition="fade"}
+
+::: {.content-center}
+
+::: {.code-chunk .fs-5vw .text-gray-6 style="margin-bottom: 0;"}
+&#x60;&#x60;&#x60;{epoxy} \
+Infant day care costs \
+up to [{[.dollar]{.text-orange} max_med_cost}]{.text-gray-12} \
+a year. \
+&#x60;&#x60;&#x60;
+:::
+:::
+
+## {.p-10 transition="fade"}
 
 ::: content-center
 ::: quote-sans
@@ -342,6 +366,66 @@ a year. \
 <div>up to [$15,417]{.text-orange} a year</div>
 :::
 :::
+
+<!---------- Walk from glue() to epoxy() -------------------------------------->
+
+## {.p-10 .glue-to-epoxy auto-animate="true"}
+
+::: content-center
+```{r}
+#| echo: true
+glue(
+  "{max_med_cost}"
+)
+```
+:::
+
+## {.p-10 .glue-to-epoxy auto-animate="true"}
+
+::: content-center
+```{r}
+#| echo: true
+glue(
+  "{max_med_cost}",
+  .transformer = identity_transformer
+)
+```
+:::
+
+## {.p-10 .glue-to-epoxy auto-animate="true"}
+
+::: content-center
+```{r}
+#| echo: true
+glue(
+  "{max_med_cost}",
+  .transformer = epoxy_transform_inline()
+)
+```
+:::
+
+## {.p-10 .glue-to-epoxy auto-animate="true"}
+
+::: content-center
+```{r}
+#| echo: true
+glue(
+  "{.dollar max_med_cost}",
+  .transformer = epoxy_transform_inline()
+)
+```
+:::
+
+## {.p-10 .glue-to-epoxy auto-animate="true"}
+
+::: content-center
+```{r}
+#| echo: true
+epoxy("{.dollar max_med_cost}")
+```
+:::
+
+<!---------- Reveal other inline transformers --------------------------------->
 
 ## {.p-10 visibility="hidden"}
 
@@ -458,33 +542,6 @@ There are still a few things that bug me about the formatting in this sentence, 
 
 ## {.p-10}
 
-What if you want to change the default behavior?
-
-Behind the scenes, inline transformers are tiny functions that take a single input
-and return text.
-
-* `.dollar` is `scales::label_dollar()`
-* `.percent` is `scales::label_percent()`
-
-## Use `epoxy_transform_set()` {.p-10}
-
-```{r}
-#| echo: true
-epoxy_transform_set(
-  .dollar = scales::label_dollar(accuracy = 100),
-  .percent = scales::label_percent(accuracy = 0.1)
-)
-```
-
-```{verbatim ref.label="cost-summary-verbatim"}
-```
-
-```{r}
-epoxy_use_chunk(label = "cost-summary")
-```
-
-## {.p-10}
-
 Let's make our own inline transformer.
 
 ```{r}
@@ -515,9 +572,37 @@ or {.percent mhi_pct} of median household income.
 
 ## {.p-10}
 
+What if you want to change the default behavior?
+
+Behind the scenes, inline transformers are tiny functions that take a single input
+and return text.
+
+* `.dollar` is `scales::label_dollar()`
+* `.percent` is `scales::label_percent()`
+
+## Use `epoxy_transform_set()` {.p-10}
+
+```{r}
+#| echo: true
+epoxy_transform_set(
+  .cpm = function(x) x / 12,
+  .dollar = scales::label_dollar(accuracy = 100),
+  .percent = scales::label_percent(accuracy = 0.1)
+)
+```
+
+```{verbatim ref.label="cost-summary-cpm-verbatim"}
+```
+
+```{r}
+epoxy_use_chunk(label = "cost-summary-cpm")
+```
+
+## {.p-10}
+
 <!-- of course we probably have this in a data frame -->
 
-::: {.content-center style="font-size:2.5vw;"}
+::: {.content-center style="font-size:1.4vw;"}
 ```{r}
 #| echo: true
 childcare_summary
