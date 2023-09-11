@@ -104,6 +104,18 @@ $selection-bg: $pink !default;
   }
 
   code span.st { color: #1f883d; } /* String */
+
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    margin: var(--r-heading-margin);
+    color: var(--r-heading-color);
+    font-family: var(--r-heading-font);
+    font-weight: var(--r-heading-font-weight);
+    line-height: var(--r-heading-line-height);
+    letter-spacing: var(--r-heading-letter-spacing);
+    text-transform: var(--r-heading-text-transform);
+    text-shadow: var(--r-heading-text-shadow);
+    word-wrap: break-word;
+  }
 }
 
 .reveal .slide {
@@ -256,11 +268,91 @@ $selection-bg: $pink !default;
   }
 
   .codewindow.epoxy-engines {
-    font-size: clamp(1rem, 2vw, 2rem) !important;
+    font-size: clamp(1rem, 1.5vw, 2rem) !important;
 
     &.epoxy-focused {
       min-width: 66vw;
       min-height: 66vh;
+    }
+  }
+
+  .yes-list > ul {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    justify-content: space-evenly;
+    align-items: start;
+    margin: 0;
+
+    > li {
+      width: 33%;
+    }
+    > li::marker {
+      content: '\2714  ';
+      color: var(--mint);
+      font-size: 1.25em;
+      text-align: end !important;
+    }
+
+     ul > li::marker {
+        content: '\279C  ';
+        color: var(--pink);
+        font-size: 1em;
+        text-align: end !important;
+    }
+
+     ul > li {
+        margin-left: 0.5em;
+    }
+  }
+
+
+  .app-code-preview {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    justify-content: center;
+    align-items: center;
+    background-color: #24292e;
+
+    > * {
+      min-width: 0;
+    }
+
+    pre.sourceCode code {
+      max-height: 100%;
+    }
+
+    .app-code {
+      font-size: clamp(25px, 1.5vw, 55px);
+      pre.numberSource code > span {
+        left: 0;
+      }
+      pre.numberSource code > span > a:first-child::before {
+        display: none;
+      }
+    }
+
+    .app-preview {
+      height: 100%;
+      width: 100%;
+      background-color: white;
+
+      .cell {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        width: 100%;
+        height: 100%;
+
+        iframe {
+          max-width: 100%;
+          max-height: 100%;
+          margin: 0;
+        }
+      }
     }
   }
 }

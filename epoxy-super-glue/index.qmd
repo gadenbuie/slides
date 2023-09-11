@@ -13,6 +13,9 @@ format:
       - scss/utilities.scss
       - scss/typewriter.scss
       - scss/hexagon.scss
+      - scss/github-dark.scss
+    css:
+      - https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css
     width: 100%
     height: 100%
     margin: 0
@@ -457,11 +460,12 @@ Reveal sequentially, in this order...
 
 
 ::::: {.content-center .align-items-center}
-::: {.text-center .fs-3vw .mb-6}
+
+::: {.text-center .fs-3vw .mb-6 .h4}
 Inline epoxy transformers
 :::
 
-:::: {.w-66 .pb-9}
+:::: {.w-66 .pb-11}
 ::: {.fragment data-fade-from="2"}
 <code>{<span class="fragment">.dollar </span>max_med_cost}</code>
 <code class="float-right" data-show-on="0">`r max_med_cost`</code>
@@ -719,7 +723,7 @@ report-html.Rmd
 ::: {.chunk}
 ````{verbatim}
 ```{epoxy_html}
-in {{strong county_size}} counties
+in {{@strong county_size}} counties
 ```
 ````
 
@@ -761,7 +765,7 @@ report-html.Rmd
 ::: {.chunk data-id="foo"}
 ````{verbatim}
 ```{epoxy_html}
-in {{strong county_size}} counties
+in {{@strong county_size}} counties
 ```
 
 in <strong>very large</strong> counties
@@ -781,10 +785,10 @@ report-html.Rmd
 ::: {.chunk data-id="foo"}
 ````{verbatim}
 ```{epoxy_html}
-in {{strong.text-blue county_size}} counties
+in {{.strong county_size}} counties
 ```
 
-in <strong class="text-blue">very large</strong> counties
+in <span class="strong">very large</span> counties
 ````
 :::
 :::
@@ -823,7 +827,7 @@ report-html.Rmd
 ::: {.chunk data-id="foo"}
 ````{verbatim}
 ```{epoxy_html}
-in {{.text-blue {{.strong county_size }} }} counties
+in {{.text-blue {{@strong county_size }} }} counties
 ```
 
 in <span class="text-blue"><strong>very large</strong></span> counties
@@ -847,13 +851,154 @@ R Console
 ::: {.chunk}
 ```{r}
 #| echo: true
+#| eval: false
 epoxy("{.dollar {.cpm max_med_cost}} per month")
+#> $1,300 per month
 
 epoxy_html("{{@dollar {{@cpm max_med_cost }} }} per month")
+#> $1,300 per month
 
 epoxy_latex("<<.dollar <<.cpm max_med_cost>> >> per month")
+#> $1,300 per month
+```
+
+```{r}
+#| echo: true
+#| eval: false
+#| classes: fragment
+
+
+epoxy_use_file(file = "cpm-snippet.md")
+#> $1,300 per month
 ```
 :::
+:::
+
+:::
+
+## {.center .text-center}
+
+::: {.incremental .yes-list}
+* `{epoxy}` in Reports
+  * R Markdown and Quarto
+  * Markdown, HTML, or LaTeX
+
+* `{epoxy}` in scripts
+  * `epoxy()`
+  * `epoxy_html()`
+  * `epoxy_latex()`
+:::
+
+## Shiny {.center .text-center .bg-blue transition="fade"}
+
+## {transition="fade" transition-speed="slow"}
+
+::: {.app-code-preview .gap-10}
+
+::: {.app-code .p-10 highlight-theme="github-dark"}
+```{r}
+#| code-line-numbers: "|5-7|16-18|9-11"
+#| eval: false
+#| echo: true
+
+library(shiny)
+library(bslib)
+
+ui <- page_fixed(
+  textInput("greetings", "Greeting", "Hello"),
+  textInput("company", "Company", "rstudio"),
+  textInput("year", "Year", "2023"),
+  p(
+    textOutput("greetings"), ",",
+    textOutput("company"), "::conf(",
+    textOutput("year"), ")"
+  )
+)
+
+server <- function(input, output, session) {
+  output$greetings <- renderText(input$greetings)
+  output$company <- renderText(input$company)
+  output$year <- renderText(input$year)
+}
+
+shinyApp(ui, server)
+```
+:::
+
+::: {.app-preview .fragment fragment-index=1}
+```{r}
+#| out.extra: 'seamless="seamless" frameBorder="0" loading="lazy"'
+#| out.width: "100%"
+
+path_src <- "apps/shiny-text-output.R"
+path_html <- sub("[.]R$", ".html", path_src)
+
+ui <- source(path_src)$value
+ui <- htmltools::tagList(
+  htmltools::tags$head(htmltools::tags$style("html { font-size: clamp(25px, 5vw, 65px) }")),
+  ui
+)
+htmltools::save_html(ui, path_html)
+
+knitr::include_url(path_html, height = "675px")
+```
+:::
+
+:::
+
+
+## {transition="fade" transition-speed="slow"}
+
+::: {.app-code-preview .gap-10}
+
+::: {.app-code .p-10 highlight-theme="github-dark"}
+```{r}
+#| code-line-numbers: "|8-9,11|10|15,19|16-18|10,16-18"
+#| eval: false
+#| echo: true
+
+library(shiny)
+library(bslib)
+
+ui <- page_fixed(
+  textInput("greetings", "Greeting", "Hello"),
+  textInput("company", "Company", "rstudio"),
+  textInput("year", "Year", "2023"),
+  ui_epoxy_html(
+    .id = "hello",
+    p("{{greetings}}, {{company}}::conf({{year}})")
+  )
+)
+
+server <- function(input, output, session) {
+  output$hello <- render_epoxy(
+    greetings = input$greetings,
+    company = input$company,
+    year = input$year
+  )
+}
+
+shinyApp(ui, server)
+```
+:::
+
+::: {.app-preview}
+```{r}
+#| out.extra: 'seamless="seamless" frameBorder="0" loading="lazy"'
+#| out.width: "100%"
+
+path_src <- "apps/shiny-epoxy.R"
+path_html <- sub("[.]R$", ".html", path_src)
+
+ui <- source(path_src)$value
+ui <- htmltools::tagList(
+  htmltools::tags$head(htmltools::tags$style("html { font-size: clamp(25px, 5vw, 65px) }")),
+  ui
+)
+htmltools::save_html(ui, path_html)
+
+knitr::include_url(path_html, height = "675px")
+```
 :::
 
 :::
