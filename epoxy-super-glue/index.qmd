@@ -889,7 +889,13 @@ epoxy_use_file(file = "cpm-snippet.md")
   * `epoxy_latex()`
 :::
 
-## Shiny {.center .text-center .bg-blue transition="fade"}
+## {transition="fade"}
+
+::: {.content-center .text-center}
+```{=html}
+<div class="shiny-text">Shiny</div>
+```
+:::
 
 ## {transition="fade" transition-speed="slow"}
 
@@ -897,7 +903,7 @@ epoxy_use_file(file = "cpm-snippet.md")
 
 ::: {.app-code .p-10 highlight-theme="github-dark"}
 ```{r}
-#| code-line-numbers: "|5-7|16-18|9-11"
+#| code-line-numbers: "|5-7|16-18|8,12|9-11"
 #| eval: false
 #| echo: true
 
@@ -999,6 +1005,51 @@ htmltools::save_html(ui, path_html)
 
 knitr::include_url(path_html, height = "675px")
 ```
+:::
+
+:::
+
+## {auto-animate="true"}
+
+::: {.content-center .text-center}
+
+:::: {.d-flex .flex-row .justify-content-center .align-items-center}
+::: {.w-50}
+![](images/epoxy-hex.png){width="40%" style="filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.25));" data-id="epoxy-hex"}
+:::
+
+::: {.w-50 .text-left}
+* Blend data and prose
+
+* Easily format for presentation
+
+* Reusable templates
+
+* Reports, scripts and apps
+:::
+::::
+
+:::
+
+## {auto-animate="true"}
+
+::: {.content-center .text-center}
+
+:::: {.d-flex .flex-row .justify-content-center .align-items-center}
+::: {.w-60}
+![](images/epoxy-hex.png){width="40%" style="filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.25));" data-id="epoxy-hex"}
+:::
+
+::: {.w-40}
+{{< qrcode https://pkg.garrickadenbuie.com/epoxy width=300 height=300 colorDark="#343a40" >}}
+
+:::
+::::
+
+::: ff-mono
+[pkg.garrickadenbuie.com/]{.text-gray-6}[epoxy]{.text-orange}
+
+[grrrck]{.text-orange}[&commat;fosstodon.org]{.text-gray-6}
 :::
 
 :::

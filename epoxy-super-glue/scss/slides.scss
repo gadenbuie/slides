@@ -1,7 +1,6 @@
 /*-- scss:defaults --*/
 // FIXME: remove unneeded style
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono&family=IBM+Plex+Mono&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Red+Hat+Mono&family=Source+Code+Pro:ital,wght@0,400;0,600;1,400;1,600&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono&family=IBM+Plex+Mono&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Red+Hat+Mono&family=Source+Code+Pro:ital,wght@0,400;0,600;1,400;1,600&family=Galada&display=swap');
 
 $blue: #125AF3;
 $purple: #785EF0;
@@ -307,7 +306,6 @@ $selection-bg: $pink !default;
     }
   }
 
-
   .app-code-preview {
     height: 100%;
     width: 100%;
@@ -494,4 +492,31 @@ $selection-bg: $pink !default;
 
 .codewindow.html .file {
   font-family: var(--r-main-font) !important;
+}
+
+.shiny-text {
+  font-family: Galada, var(--r-main-font);
+  font-size: clamp(3rem, 30vw, 35rem);
+  letter-spacing: 32px;
+  transform: skewX(-3deg) skewY(-10deg);
+  background: linear-gradient(267deg, #202020, #202020, #007BC2, #007BC2, #74149C, #007BC2, #007BC2, #007BC2, #202020, #202020);
+  background-size: 800%;
+  animation: animated_text 15s ease-in-out infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(0,0,0,0);
+  text-shadow: 1px 4px 6px rgba(255,255,255,0.3);
+}
+
+@keyframes animated_text {
+  from {
+    background-position: 100% 50%;
+  }
+  to {
+    background-position: 0 50%;
+  }
+}
+
+.qrcode {
+  margin-left: auto;
+  margin-right: auto;
 }
