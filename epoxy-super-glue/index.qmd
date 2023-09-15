@@ -1,0 +1,1294 @@
+---
+title: "{epoxy}"
+subtitle: "super glue for data-driven reports and Shiny apps"
+
+author: Garrick Aden-Buie
+event: "posit::conf(2023)"
+
+format:
+  revealjs:
+    theme:
+      - scss/slides.scss
+      - scss/utilities.scss
+      - scss/typewriter.scss
+      - scss/hexagon.scss
+      - scss/github-dark.scss
+    # css:
+    #   - https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css
+    template-partials:
+      - title-slide.html
+    width: 100%
+    height: 100%
+    margin: 0
+    code-copy: false
+    code-line-numbers: false
+    slide-number: c
+    highlight-style: github
+    history: false
+    hash-one-based-index: true
+    hash-type: number
+    fragment-in-url: false
+    respond-to-hash-changes: true
+
+revealjs-plugins:
+  - codewindow
+
+engine: knitr
+
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: "#>"
+
+editor:
+  render-on-save: true
+---
+
+```{r setup, include=FALSE}
+library(epoxy)
+library(glue)
+
+options(width = 120)
+source("R/utils.R")
+```
+
+## {background-image="images/kids.jpg" background-size="cover" background-position="center 25%" background-repeat="no-repeat"}
+
+## {.p-9}
+
+::: {.content-center}
+::: quote-sans
+<div>Infant day care costs</div>
+<div>up to [$15,417]{.text-orange} a year</div>
+:::
+:::
+
+::: notes
+I want to share a interesting fact I read recently.
+Did you know that...
+
+Your first thought is probably, "woah, children are expensive!"
+And as a parent, I can say. Yeah, you're right.
+
+But also as a parent, I know that this isn't just a boring statistic from an executive report.
+Behind this number are real conversations I've had with my partner as we figure out how we'll care for our children and provide for them too.
+
+As a data scientist, though, I bet we're all wondering "how did that number get there?"
+Is that an average or a mean? Where did the data come from exactly?
+(It's from the US Dept. of Labor's National Database of Childcare Price, by the way.)
+
+As someone who's spent a lot of time working on reporting tools for data scientists, I really mean it.
+Like "how _exactly_ did that number get there?"
+:::
+
+## {.p-9}
+
+<!-- type out quote up to number -->
+
+::: {.content-center}
+::: quote-sans
+<div class="d-if"><div class="d-ib typewriter" data-id="preamble" style="--steps:22;--blinks:0">Infant day care costs</div></div><br>
+<div class="d-if"><div class="d-ib typewriter" data-id="before" style="--steps:6;--delay:1680ms;--blinks:50">up to&nbsp;</div></div>
+:::
+:::
+
+
+## {.p-9}
+
+<!-- copy paste the number -->
+
+::: {.content-center}
+::: quote-sans
+<div class="d-ib" data-id="preamble">Infant day care costs</div> \
+<div class="d-ib" data-id="before">up to</div>
+<div class="d-if" style="width:min-content"><div class="d-ib text-orange typewriter" data-id="var" style="--duration:500ms;--steps:1;--blinks:2">$15,417</div></div>
+<div class="d-if"><div class="d-ib typewriter" data-id="after" style="--delay:2s;--steps:5;--blinks:3">a year</div></div>
+:::
+:::
+
+##
+
+<!-- now in an Rmd -->
+
+:::: {.content .d-flex .flex-column .justify-content-center .align-items-center}
+::: {.codewindow .r .rmd style="min-height:50vh"}
+report.Rmd
+
+::: {data-is-rmd="true"}
+::: {.code-chunk .fs-2vw .fragment data-id="code-chunk"}
+&#x60;&#x60;&#x60;{r} \
+max_med_cost <- \
+&nbsp;&nbsp;childcare_costs |> \
+&nbsp;&nbsp;[# group and summarize... |>]{.text-muted} \
+&nbsp;&nbsp;filter(cost = max(cost)) |> \
+&nbsp;&nbsp;pull(cost) \ \
+&#x60;&#x60;&#x60;
+:::
+
+::: {.quote-code data-id="rmd-text" style="font-size: clamp(1rem, 2vw, 8rem); line-height: 1.2;"}
+<div class="d-if"><div class="d-ib typewriter" data-id="preamble" style="--steps:22;--blinks:0">Infant day care costs</div></div><br>
+<div class="d-if"><div class="d-ib typewriter" data-id="before" style="--steps:6;--delay:1680ms;--blinks:50">up to&nbsp;</div></div>
+<div>&nbsp;<!-- placeholder for last line --></div>
+:::
+:::
+
+:::
+::::
+
+
+##
+
+<!-- highlight variable and type it out -->
+<!-- promise and magic of rmarkdown -->
+
+:::: {.content .d-flex .flex-column .justify-content-center .align-items-center}
+::: {.codewindow .r .rmd style="min-height:50vh"}
+report.Rmd
+
+::: {data-is-rmd="true"}
+::: {.code-chunk .fs-2vw data-id="code-chunk"}
+&#x60;&#x60;&#x60;{r} \
+[max_med_cost]{.text-orange .fw-6} <- \
+&nbsp;&nbsp;childcare_costs |> \
+&nbsp;&nbsp;[# group and summarize... |>]{.text-muted} \
+&nbsp;&nbsp;filter(cost = max(cost)) |> \
+&nbsp;&nbsp;pull(cost) \ \
+&#x60;&#x60;&#x60;
+:::
+
+::: {.quote-code style="font-size: clamp(1rem, 2vw, 8rem); line-height: 1.2;" data-id="quote"}
+<div>Infant day care costs</div>
+<div>up to
+<div class="d-if"><div class="d-ib typewriter" style="--delay:1s;--steps:17;--blinks:0;">[&#x60;r [max_med_cost]{.text-orange}&#x60;]{.text-blue}</div></div>
+</div>
+<div><div class="d-if"><div class="d-ib typewriter" style="--delay:2360ms;--steps:6;--blinks:2;">a year.</div></div></div>
+:::
+:::
+
+:::
+::::
+
+::: notes
+This is the promise and magic of R Markdown.
+
+* prose in same document as code
+* reproducible writing
+* update data or analysis and re-render
+* output changes!
+
+When rendered, max median cost is woven into the prose...
+:::
+
+## {auto-animate="true" auto-animate-unmatched="false"}
+
+:::: {.content .d-flex .flex-column .justify-content-center .align-items-center}
+::: {.codewindow .html style="min-height:50vh"}
+Report: Childcare Costs
+
+:::: {.content-center}
+
+```{r}
+#| include: false
+max_med_cost <- 15416.96
+```
+
+::: {.quote-sans .p-5 style="color: var(--gray-7);"}
+::: {style="font-size: 75%"}
+<div>Infant day care costs</div>
+<div>up to [`r max_med_cost`]{.text-orange .d-ib data-id="quote-var"}</div>
+<div data-id="final">a year.</div>
+:::
+:::
+:::
+
+:::
+::::
+
+## {auto-animate="true" auto-animate-unmatched="false"}
+
+:::: {.content .d-flex .flex-column .justify-content-center .align-items-center}
+::: {.codewindow .html style="min-height:50vh"}
+Report: Childcare Costs
+
+:::: {.content-center}
+
+```{r}
+#| include: false
+max_med_cost <- 15416.96
+```
+
+::: {.quote-sans .p-5 style="color: var(--gray-7);"}
+::: {style="font-size: 75%"}
+<div>Infant day care costs</div>
+<div>up to [$15,416]{.text-orange .d-ib data-id="quote-var"}</div>
+<div data-id="final">a year.</div>
+:::
+:::
+:::
+
+:::
+::::
+
+<!-------- Introducing epoxy -------------------------------------------------->
+
+## {.p-10 .bg-gradient-deep-blue transition="fade" transition-speed="slow"}
+
+::: {.hex-content}
+<div class="hexagon">
+  <div class="front reveal-up"></div>
+</div>
+
+::: {.incremental}
+- Inline syntax
+- Just-in-time formatting
+- Reusable templates
+:::
+:::
+
+## {.p-10 .bg-gradient-deep-blue}
+
+::: {.hex-content}
+<div class="hexagon spin-flip">
+  <div class="front"></div>
+  <div class="back"></div>
+</div>
+
+::: {.incremental}
+- Made for developers
+- Very light-weight
+- Files that end in `.R`
+:::
+:::
+
+## {.p-10 .bg-gradient-deep-blue}
+
+::: {.hex-content}
+<div class="hexagon quick-flip-back">
+  <div class="front"></div>
+  <div class="back"></div>
+</div>
+
+::: {.incremental}
+- Made for data scientists
+- Using familiar packages
+- Scripts, reports, apps
+:::
+:::
+
+::: notes
+* effective communication
+* without taking you out of the flow of writing
+:::
+
+## {.p-10 visibility="hidden"}
+
+::: content-center
+
+```{r}
+#| echo: false
+fake_chunk(
+  engine = "epoxy",
+  "Infant day care costs
+up to {.dollar max_med_cost}
+a year."
+)
+```
+
+* From Rmd text, wrap the text in an epoxy chunk
+* replace back-tick r with braces
+* Insert the `.dollar` formatter
+* render...
+
+:::
+
+## {.p-10 transition="fade"}
+
+::: {.content-center}
+
+::: {.ff-mono .fs-5vw}
+&nbsp; \
+Infant day care costs \
+up to &#x60;r max_med_cost&#x60; \
+a year. \
+&nbsp;
+:::
+:::
+
+## {.p-10 transition="fade"}
+
+::: {.content-center}
+
+::: {.code-chunk .fs-5vw .text-gray-6 style="margin-bottom: 0;"}
+[&#x60;&#x60;&#x60;{[epoxy]{.text-orange}}]{.text-gray-12} \
+Infant day care costs \
+up to &#x60;r max_med_cost&#x60; \
+a year. \
+[&#x60;&#x60;&#x60;]{.text-gray-12}
+:::
+:::
+
+## {.p-10 transition="fade"}
+
+::: {.content-center}
+
+::: {.code-chunk .fs-5vw .text-gray-6 style="margin-bottom: 0;"}
+&#x60;&#x60;&#x60;{epoxy} \
+Infant day care costs \
+up to [[&#x60;r]{.text-orange} max_med_cost[&#x60;]{.text-orange}]{.text-gray-12} \
+a year. \
+&#x60;&#x60;&#x60;
+:::
+:::
+
+## {.p-10 transition="fade"}
+
+::: {.content-center}
+
+::: {.code-chunk .fs-5vw .text-gray-6 style="margin-bottom: 0;"}
+&#x60;&#x60;&#x60;{epoxy} \
+Infant day care costs \
+up to [{]{.text-orange}[max_med_cost]{.text-gray-12}[}]{.text-orange} \
+a year. \
+&#x60;&#x60;&#x60;
+:::
+:::
+
+## {.p-10 transition="fade"}
+
+::: {.content-center}
+
+::: {.code-chunk .fs-5vw .text-gray-6 style="margin-bottom: 0;"}
+&#x60;&#x60;&#x60;{epoxy} \
+Infant day care costs \
+up to [{[.dollar]{.text-orange} max_med_cost}]{.text-gray-12} \
+a year. \
+&#x60;&#x60;&#x60;
+:::
+:::
+
+## {.p-10}
+
+::: content-center
+::: quote-sans
+<div>Infant day care costs</div>
+<div>up to [$15,417]{.text-orange} a year</div>
+:::
+:::
+
+<!---------- Walk from glue() to epoxy() -------------------------------------->
+
+## {.p-10 .glue-to-epoxy auto-animate="true"}
+
+::: content-center
+```{r}
+#| echo: true
+glue(
+  "{max_med_cost}"
+)
+```
+:::
+
+## {.p-10 .glue-to-epoxy auto-animate="true"}
+
+::: content-center
+```{r}
+#| echo: true
+glue(
+  "{max_med_cost}",
+  .transformer = identity_transformer
+)
+```
+:::
+
+## {.p-10 .glue-to-epoxy auto-animate="true"}
+
+::: content-center
+```{r}
+#| echo: true
+glue(
+  "{max_med_cost}",
+  .transformer = epoxy_transform_inline()
+)
+```
+:::
+
+## {.p-10 .glue-to-epoxy auto-animate="true"}
+
+::: content-center
+```{r}
+#| echo: true
+glue(
+  "{.dollar max_med_cost}",
+  .transformer = epoxy_transform_inline()
+)
+```
+:::
+
+## {.p-10 .glue-to-epoxy auto-animate="true"}
+
+::: content-center
+```{r}
+#| echo: true
+epoxy("{.dollar max_med_cost}")
+```
+:::
+
+<!---------- Reveal other inline transformers --------------------------------->
+
+## {.p-10 visibility="hidden"}
+
+```{r}
+#| include: false
+childcare_summary <- readr::read_rds("data-raw/childcare_summary_top_10.rds")
+
+attach(childcare_summary[1, ])
+```
+
+::: {.content-center .fs-2vw}
+
+Reveal sequentially, in this order...
+
+```{epoxy .data = childcare_summary[1, ]}
+| Variable | Value | Inline | Result |
+|:---------|:------|:-------|:-------|
+| `max_med_cost` | {max_med_cost} | `.dollar` | {.dollar max_med_cost} |
+| `mhi_pct` | {mhi_pct} | `.percent` | {.percent mhi_pct} |
+| `county_pop_med` | {county_pop_med} | `.comma` | {.comma county_pop_med} |
+| `cost_rank` | {cost_rank} | `.ordinal` | {.ordinal cost_rank} |
+| `age` | {age} | `.titlecase` | {.titlecase age} |
+| `county_size` | {county_size} | `.strong` | {.bold county_size} |
+| `type` | {type} | `.emph` | {.italic type} |
+```
+
+:::
+
+## {.inline-examples}
+
+
+::::: {.content-center .align-items-center}
+
+::: {.text-center .fs-3vw .mb-6 .h4}
+Inline epoxy transformers
+:::
+
+:::: {.w-66 .pb-11}
+::: {.fragment data-fade-from="2"}
+<code>{<span class="fragment">.dollar </span>max_med_cost}</code>
+<code class="float-right" data-show-on="0">`r max_med_cost`</code>
+<code class="float-right" data-show-from="1">`r epoxy("{.dollar max_med_cost}")`</code>
+:::
+
+::: {.fragment data-fade-from="4"}
+<code>{<span class="fragment">.percent </span>mhi_pct}</code>
+<code class="float-right" data-show-on="2">`r mhi_pct`</code>
+<code class="float-right" data-show-from="3">`r epoxy("{.percent mhi_pct}")`</code>
+:::
+
+::: {.fragment data-fade-from="6"}
+<code>{<span class="fragment">.comma </span>county_pop_med}</code>
+<code class="float-right" data-show-on="4">`r county_pop_med`</code>
+<code class="float-right" data-show-from="5">`r epoxy("{.comma county_pop_med}")`</code>
+:::
+
+::: {.fragment data-fade-from="8"}
+<code>{<span class="fragment">.ordinal </span>cost_rank}</code>
+<code class="float-right" data-show-on="6">`r cost_rank`</code>
+<code class="float-right" data-show-from="7">`r epoxy("{.ordinal cost_rank}")`</code>
+:::
+
+::: {.fragment data-fade-from="10"}
+<code>{<span class="fragment">.titlecase </span>age}</code>
+<code class="float-right" data-show-on="8">`r age`</code>
+<code class="float-right" data-show-from="9">`r epoxy("{.titlecase age}")`</code>
+:::
+
+::: {.fragment data-fade-from="12"}
+<code>{<span class="fragment">.bold </span>county_size}</code>
+<code class="float-right" data-show-on="10">`r county_size`</code>
+<code class="float-right" data-show-from="11">`r epoxy("{.bold county_size}")`</code>
+:::
+
+::: {.fragment}
+<code>{<span class="fragment">.italic </span>type}</code>
+<code class="float-right" data-show-on="12">`r type`</code>
+<code class="float-right" data-show-from="13">`r epoxy("{.italic type}")`</code>
+:::
+::::
+:::::
+
+
+## {.p-10}
+
+````{comment slide-template}
+::::: {.content-center .align-items-center}
+:::: {.w-75}
+<!-- chunk -->
+
+::: {.epoxy-ex-output .px-7 .text-gray-6}
+<!-- output -->
+:::
+
+::::
+:::::
+````
+
+::::: {.content-center .align-items-center}
+:::: {.w-75}
+```{r}
+#| echo: false
+fake_chunk(
+  engine = "epoxy",
+  opts_head = "cost-summary",
+  class = "epoxy-ex-chunk",
+  paste0(
+    show_from(0, '<span class="text-yellow">{.titlecase age}</span> <span class="text-mint">{.italic type}</span>'), "\n",
+    show_from(1, 'in <span class="text-red">{.bold county_size}</span> counties\n'),
+    show_from(2, 'ranks <span class="text-orange">{.ordinal cost_rank}</span> in childcare costs\n'),
+    show_from(3, 'at <span class="text-blue">{.dollar max_med_cost}</span> per year,\n'),
+    show_from(4, 'or <span class="text-pink">{.percent mhi_pct}</span> of median household income.')
+  )
+)
+```
+
+```{epoxy cost-summary, .data = childcare_summary[1, ], eval = FALSE, include = FALSE}
+{.titlecase age} {type} in {county_size} counties
+ranks {.ordinal cost_rank} in childcare costs
+at {.dollar max_med_cost} per year,
+or {.percent mhi_pct} of median household income.
+```
+
+::: {.epoxy-ex-output .px-6}
+[[Infant]{.bg-yellow} [day care]{.bg-mint .italic}]{.fragment}
+[in [very large]{.bg-red .fw-bold} counties]{.fragment}
+[ranks [1st]{.bg-orange} in childcare costs]{.fragment}
+[at [$15,416.96]{.bg-blue} per year,]{.fragment}
+[or [24%]{.bg-pink} of median household income.]{.fragment}
+:::
+::::
+:::::
+
+::: notes
+Write out a full sentence using these variables in an epoxy chunk.
+
+These inline transformers are just little tiny functions. Let's write our own...
+:::
+
+##
+
+::: {.content-center .align-items-center}
+
+```{=html}
+<pre class="sourceCode r" style="width:max-content"><code class="sourceCode r"><span class="fragment" data-fragment-index=1><span class="fu">epoxy_transform_set</span>(</span>
+  <span class="at fragment" data-fragment-index=2>.cpm =</span> <span><span class="cf">function</span>(x) x / 12</span>
+<span class="fragment" data-fragment-index=1>)</span></code></pre>
+```
+
+:::
+
+##
+
+::::: {.content-center .align-items-center}
+:::: {.w-75 .px-6}
+```{r}
+#| echo: false
+fake_chunk(
+  engine = "epoxy",
+  opts_head = "cost-summary",
+  class = "epoxy-ex-chunk text-gray-6",
+  paste0(
+    '{.titlecase age} {.italic type}\n',
+    'in {.bold county_size} counties\n',
+    'ranks {.ordinal cost_rank} in childcare costs\n',
+    'at {.dollar max_med_cost} per year,\n',
+    show_on(0, '<span class="text-gray-12">about <span class="text-blue">{.cpm max_med_cost}</span> per month</span>'),
+    show_on(1, '<span class="text-gray-12">about <span class="text-blue">{.dollar <span style="opacity: 0.6">{.cpm max_med_cost}</span>}</span> per month</span>'),
+    '\nor {.percent mhi_pct} of median household income.'
+  )
+)
+```
+
+```{epoxy cost-summary-cpm, .data = childcare_summary[1, ], eval = FALSE}
+{.titlecase age} {.italic type} in {.bold county_size} counties
+ranks {.ordinal cost_rank} in childcare costs
+at {.dollar max_med_cost} per year,
+about {.dollar {.cpm max_med_cost}} per month
+or {.percent mhi_pct} of median household income.
+```
+
+::: {.epoxy-ex-output .text-gray-6}
+Infant [day care]{.italic}
+in [very large]{.fw-bold} counties
+ranks 1st in childcare costs
+at $15,416.96 per year,
+[about [12864.75]{.bg-blue} per month]{.fragment .text-gray-12 show-on=0 style="--display: inline"}
+[about [$1,284.75]{.bg-blue} per month]{.fragment .text-gray-12 show-on=1 style="--display: inline"}
+or 24% of median household income.
+:::
+
+::::
+:::::
+
+##
+
+::::: {.content-center .align-items-center}
+:::: {.w-75 .px-7}
+```{r}
+#| echo: true
+#| eval: false
+#| classes: epoxy-ex-chunk
+epoxy_transform_set(
+  .cpm = function(x) x / 12,
+  .dollar = scales::label_dollar(),
+  .percent = scales::label_percent()
+)
+```
+
+::: {.epoxy-ex-output .mt-6 .text-gray-6 style="--min-height:40vh;"}
+```{r}
+epoxy_use_chunk(
+  label = "cost-summary-cpm",
+  .transformer = epoxy_transform_inline(.cpm = function(x) x / 12)
+)
+```
+:::
+
+::::
+:::::
+
+##
+
+::::: {.content-center .align-items-center}
+:::: {.w-75 .px-7 .hide-code-line-numbers}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "3-4"
+#| classes: epoxy-ex-chunk
+epoxy_transform_set(
+  .cpm = function(x) x / 12,
+  .dollar = scales::label_dollar(accuracy = 100),
+  .percent = scales::label_percent(accuracy = 0.1)
+)
+```
+
+::: {.epoxy-ex-output .mt-6  style="--min-height:40vh;"}
+```{r}
+epoxy_transform_set(
+  .cpm = function(x) x / 12,
+  .dollar = scales::label_dollar(accuracy = 100),
+  .percent = scales::label_percent(accuracy = 0.1)
+)
+epoxy_use_chunk(label = "cost-summary-cpm")
+```
+:::
+
+::::
+:::::
+
+
+## {.p-10}
+
+<!-- of course we probably have this in a data frame -->
+
+::: {.content-center .childcare-summary-tibble style="font-size:1.4vw;"}
+```{r}
+#| echo: true
+childcare_summary
+```
+:::
+
+## {.p-10}
+
+::::: {.content-center .align-items-center}
+:::: {.w-75 .px-6}
+```{r}
+#| echo: false
+fake_chunk(
+  engine = "epoxy",
+  opts_head = "cost-summary, <span class=\"text-gray-12\">.data = childcare_summary[1, ]</span>",
+  class = "epoxy-ex-chunk text-gray-6",
+  paste0(
+    '{.titlecase age} {.italic type}\n',
+    'in {.bold county_size} counties\n',
+    'ranks {.ordinal cost_rank} in childcare costs\n',
+    'at {.dollar max_med_cost} per year,\n',
+    'about {.dollar {.cpm max_med_cost}} per month\n',
+    'or {.percent mhi_pct} of median household income.'
+  )
+)
+```
+
+::: {.epoxy-ex-output .text-gray-6}
+```{r}
+enclassen <- function(class, transformer = NULL) {
+  function(text, envir) {
+    text <- transformer(text, envir)
+    format(htmltools::span(class = class, text))
+  }
+}
+epoxy_use_chunk(
+  label = "cost-summary-cpm",
+  .transformer = epoxy_transform("inline", enclassen("text-gray-12"))
+)
+```
+:::
+
+::::
+:::::
+
+::: {.notes}
+Update the epoxy chunk to use the `.data` argument
+and the first row of `childcare_summary`
+(these are the values)
+:::
+
+
+## {.p-10}
+
+::::: {.content-center .align-items-center}
+:::: {.w-75 .px-6}
+```{r}
+#| echo: false
+fake_chunk(
+  engine = "epoxy",
+  opts_head = "cost-summary, <span class=\"text-orange\">.data = childcare_summary[8, ]</span>",
+  class = "epoxy-ex-chunk text-gray-6",
+  paste0(
+    '{.titlecase age} {.italic type}\n',
+    'in {.bold county_size} counties\n',
+    'ranks {.ordinal cost_rank} in childcare costs\n',
+    'at {.dollar max_med_cost} per year,\n',
+    'about {.dollar {.cpm max_med_cost}} per month\n',
+    'or {.percent mhi_pct} of median household income.'
+  )
+)
+```
+
+::: {.epoxy-ex-output .text-gray-6}
+```{r}
+epoxy_use_chunk(
+  label = "cost-summary-cpm",
+  .data = childcare_summary[8, ],
+  .transformer = epoxy_transform("inline", enclassen("text-orange"))
+)
+```
+:::
+
+::::
+:::::
+
+::: {.notes}
+then swap out for the 8th row
+which effectively compares day care to home care
+:::
+
+##
+
+::::: {.content-center .align-items-center}
+:::: {.w-75 .px-7 .hide-code-line-numbers}
+```{r epoxy-use-chunk-example}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "1-6|7"
+childcare_summary |>
+  dplyr::filter(
+    age == "infant",
+    type == "home care",
+    county_size == "very large"
+  ) |>
+  epoxy_use_chunk(label = "cost-summary")
+```
+
+::: {.fragment .epoxy-ex-output .text-gray-10}
+```{r}
+#| ref.label: epoxy-use-chunk-example
+#| eval: true
+```
+:::
+
+::::
+:::::
+
+
+## {visibility="hidden" background-image="images/james-coleman-cevIeBV1A3I-unsplash.jpg" background-size="cover" background-position="center" background-repeat="no-repeat"}
+
+
+::: notes
+Photo by <a href="https://unsplash.com/@jhc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">James Coleman</a> on <a href="https://unsplash.com/photos/cevIeBV1A3I?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+
+Audience participation
+
+- Who here writes reports with Quarto or R Markdown?
+
+- + Have you ever written an HTML report? Keep your hand up if you've had write actual HTML in that report.
+
+- + Have you ever written a PDF report using LaTeX? Keep if your hand up if you've ever had to resort to using actual LaTeX in that report.
+:::
+
+## {visibility="hidden" auto-animate="true"}
+
+::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
+
+::: {.codewindow .r .rmd .epoxy-engines data-id="codewindow"}
+report-html.Rmd
+
+::: {.chunk}
+````{verbatim}
+```{epoxy_html}
+in {{@strong county_size}} counties
+```
+````
+
+::: {.fragment fragment-index=2}
+```{verbatim}
+in <strong>very large</strong> counties
+```
+:::
+:::
+:::
+
+::: {.codewindow .r .rmd .fragment fragment-index=1 .epoxy-engines}
+report-latex.Rmd
+
+::: {.chunk}
+````{verbatim}
+```{epoxy_latex}
+in <<.strong county_size>> counties
+```
+````
+
+::: {.fragment fragment-index=3}
+```{verbatim}
+in \textbf{very large} counties
+```
+:::
+:::
+:::
+
+:::
+
+## {auto-animate="true"}
+
+```{=html}
+<div class="d-flex w-100 h-100 flex-row justify-content-center align-items-center gap-10">
+<div class="codewindow r rmd epoxy-engines" data-id="codewindow">
+<p>report-html.Rmd</p>
+<div>
+<pre><code>```{<span class="text-orange" data-show-on="-1">epoxy_html</span><span data-show-from="0">epoxy_html</span>}
+<span class="fragment" data-fragment-index="2">in <span class="text-orange" data-show-on="1">{{@bold county_size}}</span><span data-show-from="2">{{@bold county_size}}</span> counties</span>
+```</code></pre>
+
+<div class="fragment" data-fragment-index="3">
+<pre><code>in <span class="text-orange" data-show-on="2">&lt;strong&gt;</span><span data-show-from="3">&lt;strong&gt;</span>very large<span class="text-orange" data-show-on="2">&lt;/strong&gt;</span><span data-show-from="3">&lt;/strong&gt;</span> counties</code></pre>
+</div>
+</div>
+</div>
+
+<div class="codewindow r rmd epoxy-engines fragment" data-fragment-index="1">
+<p>report-latex.Rmd</p>
+<div>
+<pre><code>```{<span class="text-orange" data-show-on="0">epoxy_latex</span><span data-show-from="1">epoxy_latex</span>}
+<span class="fragment" data-fragment-index="4">in <span class="text-orange" data-show-on="3">&lt;&lt;.bold county_size&gt;&gt;</span><span data-show-from="4">&lt;&lt;.bold county_size&gt;&gt;</span> counties</span>
+```</code></pre>
+
+<div class="fragment" data-fragment-index="5">
+<pre><code>in <span class="text-orange">\textbf{</span>very large<span class="text-orange">}</span> counties</code></pre>
+</div>
+</div>
+</div>
+```
+
+## {visibility="hidden" auto-animate="true" auto-animate-unmatched="false"}
+
+::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
+
+::: {.codewindow .r .rmd .epoxy-engines .epoxy-focused data-id="codewindow"}
+report-html.Rmd
+
+::: {.chunk data-id="foo"}
+````{verbatim}
+```{epoxy_html}
+in {{@strong county_size}} counties
+```
+
+in <strong>very large</strong> counties
+````
+:::
+:::
+
+:::
+
+## {visibility="hidden"}
+
+::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
+
+::: {.codewindow .r .rmd .epoxy-engines .epoxy-focused}
+report-html.Rmd
+
+::: {.chunk data-id="foo"}
+````{verbatim}
+```{epoxy_html}
+in {{.bold county_size}} counties
+```
+
+in <span class="strong">very large</span> counties
+````
+:::
+:::
+
+:::
+
+
+## {visibility="hidden"}
+
+::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
+
+::: {.codewindow .r .rmd .epoxy-engines .epoxy-focused}
+report-html.Rmd
+
+::: {.chunk data-id="foo"}
+````{verbatim}
+```{epoxy_html}
+in {{.text-blue county_size}} counties
+```
+
+in <span class="text-blue">very large</span> counties
+````
+:::
+:::
+
+:::
+
+
+## {visibility="hidden"}
+
+::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
+
+::: {.codewindow .r .rmd .epoxy-engines .epoxy-focused}
+report-html.Rmd
+
+::: {.chunk data-id="foo"}
+````{verbatim}
+```{epoxy_html}
+in {{.text-blue {{@strong county_size }} }} counties
+```
+
+in <span class="text-blue"><strong>very large</strong></span> counties
+````
+
+```{=html}
+<p class="fragment ff-sans pt-10 ps-2">in <span class="text-blue"><strong>very large</strong></span> counties</p>
+```
+:::
+:::
+
+:::
+
+## {auto-animate="true"}
+
+::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
+
+::: {.codewindow .r .epoxy-engines .epoxy-focused data-id="codewindow"}
+R Console
+
+::: {.chunk}
+```{r}
+#| echo: true
+#| eval: false
+epoxy("{.dollar {.cpm max_med_cost}} per month")
+#> $1,300 per month
+
+epoxy_html("{{@dollar {{@cpm max_med_cost }} }} per month")
+#> $1,300 per month
+
+epoxy_latex("<<.dollar <<.cpm max_med_cost>> >> per month")
+#> $1,300 per month
+```
+
+```{r}
+#| echo: true
+#| eval: false
+#| classes: fragment
+
+
+epoxy_use_file(file = "cpm-snippet.md")
+#> $1,300 per month
+```
+:::
+:::
+
+:::
+
+## {.center .text-center}
+
+::: {.incremental .yes-list}
+* `{epoxy}` in Reports
+  * R Markdown and Quarto
+  * Markdown, HTML, or LaTeX
+
+* `{epoxy}` in scripts
+  * `epoxy()`
+  * `epoxy_html()`
+  * `epoxy_latex()`
+:::
+
+## {transition="fade"}
+
+::: {.content-center .text-center}
+```{=html}
+<div class="shiny-text">Shiny</div>
+```
+:::
+
+## {transition="fade" transition-speed="slow"}
+
+::: {.app-code-preview .gap-10}
+
+::: {.app-code .p-10 highlight-theme="github-dark"}
+```{r}
+#| code-line-numbers: "|5-7|16-18|9-11|8-12"
+#| eval: false
+#| echo: true
+
+library(shiny)
+library(bslib)
+
+ui <- page_fixed(
+  textInput("greetings", "Greeting", "Hello"),
+  textInput("company", "Company", "rstudio"),
+  textInput("year", "Year", "2023"),
+  p(
+    textOutput("greetings"), ",",
+    textOutput("company"), "::conf(",
+    textOutput("year"), ")!"
+  )
+)
+
+server <- function(input, output, session) {
+  output$greetings <- renderText(input$greetings)
+  output$company <- renderText(input$company)
+  output$year <- renderText(input$year)
+}
+
+shinyApp(ui, server)
+```
+:::
+
+::: {.app-preview .fragment fragment-index=1}
+```{r}
+#| out.extra: 'seamless="seamless" frameBorder="0" loading="lazy"'
+#| out.width: "100%"
+
+path_src <- "apps/shiny-text-output.R"
+path_html <- sub("[.]R$", ".html", path_src)
+
+ui <- source(path_src)$value
+ui <- htmltools::tagList(
+  htmltools::tags$head(htmltools::tags$style("html { font-size: clamp(25px, 5vw, 65px) }")),
+  ui
+)
+htmltools::save_html(ui, path_html)
+
+knitr::include_url(path_html, height = "750px")
+```
+:::
+
+:::
+
+
+## {transition="fade" transition-speed="slow"}
+
+::: {.app-code-preview .gap-10}
+
+::: {.app-code .p-10 highlight-theme="github-dark"}
+```{r}
+#| code-line-numbers: "|8-9,11|10|15,19|16-18|10,16-18"
+#| eval: false
+#| echo: true
+
+library(shiny)
+library(bslib)
+
+ui <- page_fixed(
+  textInput("greetings", "Greeting", "Hello"),
+  textInput("company", "Company", "rstudio"),
+  textInput("year", "Year", "2023"),
+  ui_epoxy_html(
+    .id = "hello",
+    p("{{greetings}}, {{company}}::conf({{year}})!")
+  )
+)
+
+server <- function(input, output, session) {
+  output$hello <- render_epoxy(
+    greetings = input$greetings,
+    company = input$company,
+    year = input$year
+  )
+}
+
+shinyApp(ui, server)
+```
+:::
+
+::: {.app-preview}
+```{r}
+#| out.extra: 'seamless="seamless" frameBorder="0" loading="lazy"'
+#| out.width: "100%"
+
+path_src <- "apps/shiny-epoxy.R"
+path_html <- sub("[.]R$", ".html", path_src)
+
+ui <- source(path_src)$value
+ui <- htmltools::tagList(
+  htmltools::tags$head(htmltools::tags$style("html { font-size: clamp(25px, 5vw, 65px) }")),
+  ui
+)
+htmltools::save_html(ui, path_html)
+
+knitr::include_url(path_html, height = "750px")
+```
+:::
+
+:::
+
+## {auto-animate="true"}
+
+::: {.content-center .text-center}
+
+:::: {.d-flex .flex-row .justify-content-center .align-items-center}
+::: {.w-50}
+![](images/epoxy-hex.png){width="40%" style="filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.25));" data-id="epoxy-hex"}
+:::
+
+::: {.w-50 .text-left}
+* Blend data and prose
+
+* Reusable templates
+
+* Just-in-time formatting
+
+* Reports, scripts and apps
+:::
+::::
+
+:::
+
+## {auto-animate="true"}
+
+::: {.content-center .text-center}
+
+:::: {.d-flex .flex-row .justify-content-center .align-items-center}
+::: {.w-60}
+![](images/epoxy-hex.png){width="40%" style="filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.25));" data-id="epoxy-hex"}
+:::
+
+::: {.w-40}
+{{< qrcode https://pkg.garrickadenbuie.com/epoxy width=500 height=500 colorDark="#343a40" >}}
+
+:::
+::::
+
+::: ff-mono
+[pkg.garrickadenbuie.com/]{.text-gray-6}[epoxy]{.text-orange}
+
+[grrrck]{.text-orange}[&commat;fosstodon.org]{.text-gray-6}
+:::
+
+:::
+
+```{=html}
+<script>
+(function() {
+  let resizeTimeout;
+  let lastWidth = window.innerWidth
+  let lastHeight = window.innerHeight
+  let keepWidth = false
+  let keepHeight = false
+
+  const svgs = {
+    collapse: {
+      horizontal: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-collapse-vertical" viewBox="0 0 16 16"><path d="M8 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM0 8a.5.5 0 0 1 .5-.5h3.793L3.146 6.354a.5.5 0 1 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8.5H.5A.5.5 0 0 1 0 8Zm11.707.5 1.147 1.146a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708l2-2a.5.5 0 0 1 .708.708L11.707 7.5H15.5a.5.5 0 0 1 0 1h-3.793Z"/></svg>`,
+      vertical: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-collapse" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8Zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0Zm-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793Z"/></svg>`,
+    },
+    expand: {
+      horizontal: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-expand-vertical" viewBox="0 0 16 16"><path d="M8 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L1.707 7.5H5.5a.5.5 0 0 1 0 1H1.707l1.147 1.146a.5.5 0 0 1-.708.708l-2-2ZM10 8a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L14.293 8.5H10.5A.5.5 0 0 1 10 8Z"/></svg>`,
+      vertical: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-expand" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8ZM7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2ZM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10Z"/></svg>`
+    }
+  }
+
+  function indicator(current, expected, syms) {
+    let diff = expected - current
+
+    let indicator =
+      Math.abs(diff) < 3
+      ? "&checkmark;"
+      : diff < 0 ? syms.over : syms.under
+
+    diff = Math.abs(diff)
+    if (diff > 50) {
+      indicator = indicator.replace('width="16" height="16"', 'width="22" height="22"')
+    } else if (diff > 25) {
+      indicator = indicator.replace('width="16" height="16"', 'width="18" height="18"')
+    }
+
+    return indicator
+  }
+
+  function handleViewportChange() {
+    const {innerWidth, innerHeight} = window
+    const id = 'window___dims'
+
+    let dimsEl = document.getElementById(id)
+    if (!dimsEl) {
+      dimsEl = document.createElement('div')
+      dimsEl.id = id
+      dimsEl.style.position = 'absolute'
+      dimsEl.style.display = 'flex'
+      dimsEl.style.alignItems = 'end'
+      dimsEl.style.justifyContent = 'center'
+      dimsEl.style.paddingBottom = '10px'
+      dimsEl.style.bottom = 0
+      dimsEl.style.left = 0
+      dimsEl.style.right = 0
+      dimsEl.style.height = '4rem'
+      dimsEl.style.textAlign = 'center'
+      dimsEl.style.fontFamily = 'sans-serif'
+      document.body.appendChild(dimsEl)
+    }
+
+    clearTimeout(resizeTimeout)
+
+    const w_16_9 = Math.floor(innerHeight / 9 * 16)
+    const h_16_9 = Math.floor(innerWidth / 16 * 9)
+    let indWidth = ''
+    let indHeight = ''
+
+    if (keepWidth || lastWidth != innerWidth) {
+      keepWidth = true
+      indWidth = indicator(innerWidth, w_16_9, {over: svgs.collapse.horizontal, under: svgs.expand.horizontal})
+    }
+    if (keepHeight || lastHeight != innerHeight) {
+      keepHeight = true
+      indHeight = indicator(innerHeight, h_16_9, {over: svgs.collapse.vertical, under: svgs.expand.vertical})
+    }
+
+    dimsEl.innerHTML = `${indWidth} ${innerWidth} x ${innerHeight} ${indHeight}`
+
+    lastWidth = innerWidth
+    lastHeight = innerHeight
+
+    resizeTimeout = setTimeout(() => {
+      const dimensionsElement = document.getElementById(id)
+      if (dimensionsElement) dimensionsElement.remove()
+      keepHeight = undefined;
+      keepWidth = undefined;
+    }, 3000)
+  }
+
+  window.addEventListener('resize', handleViewportChange)
+  window.addEventListener('mousedown', ev => console.log('mousedown at', { y: ev.clientY, x: ev.clientX }))
+})()
+</script>
+```

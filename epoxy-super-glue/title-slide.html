@@ -1,0 +1,25 @@
+<section id="title-slide" class="title-slide slide h-100 w-100" data-background-image="images/kids.jpg" data-background-size="cover" data-background-position="center 25%" data-background-repeat="no-repeat" data-transition="fade" data-transition-speed="slow">
+  <div class="d-flex flex-column justify-content-end pb-4 h-100 w-100 text-center text-white align-items-center">
+    <p class="fs-9vw ff-mono fw-6">$title$</p>
+    <div class="fs-3vw text-white"> 
+      $if(subtitle)$<p>$subtitle$</p>$endif$
+      <div class="flex flex-row justify-between">
+        $for(author)$
+        <p class="author">$author$</p>
+        $endfor$
+        $if(date)$
+        <p class="date">$date$</p>
+        $endif$
+        $for(event)$
+        <p class="event ff-mono">$event$</p>
+        $endfor$
+      </div>
+    </div>
+  </div>
+  <script>
+    window.addEventListener('ready', ev => {
+      document.body.style.setProperty('--slide-height', '100%')
+      document.body.style.setProperty('--slide-width', '100%')
+    })
+  </script>
+</section>

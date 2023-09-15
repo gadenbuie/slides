@@ -1,0 +1,45 @@
+/*-- scss:rules --*/
+.typewriter {
+  overflow: hidden;
+  width: 0;
+  border-right-width: 0.15em;
+  border-right-style: solid;
+  border-right-color: var(--blue);
+  border-color: transparent;
+  white-space: nowrap;
+  margin: 0 auto 0 0;
+  --duration: calc(var(--steps, 20) * 80ms);
+  --delay-blinks: calc(var(--duration, 3.5s) + var(--delay, 0s));
+  --blinks: calc(var(--duration, 3.5s) / .75);
+  animation:
+    typing var(--duration, 3.5s) steps(var(--steps, 20)) var(--delay, 0s),
+    blink-caret .75s step-end var(--delay-blinks, 3.5s) var(--blinks, 0);
+  animation-fill-mode: var(--mode, forwards, none);
+}
+
+[hidden] {
+  .typewriter {
+    animation: unset;
+  }
+}
+
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+    border-right-color: var(--blue);
+  }
+  99% {
+    border-right-color: var(--blue);
+  }
+  to {
+    width: 100%;
+    border-right-color: transparent;
+  }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  50% { border-right-color: var(--blue); }
+  from,to { border-right-color: transparent }
+}
