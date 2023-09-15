@@ -115,8 +115,8 @@ $selection-bg: $pink !default;
 }
 
 .reveal .slide {
-  max-height: calc(1080px * 1.25);
-  max-width: calc(1920px * 1.25);
+  // max-height: calc(1080px * 1.25);
+  // max-width: calc(1920px * 1.25);
   // aspect-ratio: 16 / 9;
   // outline: 2px solid red;
   container-type: inline-size;
@@ -194,6 +194,15 @@ $selection-bg: $pink !default;
   &.auto-layout {
     display: flex;
     flex-direction: column;
+  }
+  
+  &.title-slide > div {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(7px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
   }
 
   .code-chunk {

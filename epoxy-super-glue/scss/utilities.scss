@@ -146,6 +146,8 @@ $sizes: (
 .text-orange { color: $orange; }
 .text-yellow { color: $yellow; }
 .text-red { color: $red; }
+.text-white { color: var(--gray-0) }
+.text-black { color: var(--gray-12) }
 
 @for $i from 1 through 12 {
   .text-gray-#{$i} { color: var(--gray-#{$i}); }

@@ -1,10 +1,9 @@
 ---
-title: "epoxy"
+title: "{epoxy}"
 subtitle: "super glue for data-driven reports and Shiny apps"
 
-author:
-  - Garrick Aden-Buie
-  - "<code>posit::conf(2023)</code>"
+author: Garrick Aden-Buie
+event: "posit::conf(2023)"
 
 format:
   revealjs:
@@ -14,8 +13,10 @@ format:
       - scss/typewriter.scss
       - scss/hexagon.scss
       - scss/github-dark.scss
-    css:
-      - https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css
+    # css:
+    #   - https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css
+    template-partials:
+      - title-slide.html
     width: 100%
     height: 100%
     margin: 0
@@ -540,7 +541,7 @@ fake_chunk(
   opts_head = "cost-summary",
   class = "epoxy-ex-chunk",
   paste0(
-    show_from(0, '<span class="text-yellow">{.titlecase age}</span> <span class="text-mint">{.emph type}</span>\n'),
+    show_from(0, '<span class="text-yellow">{.titlecase age}</span> <span class="text-mint">{.emph type}</span>'), "\n",
     show_from(1, 'in <span class="text-red">{.strong county_size}</span> counties\n'),
     show_from(2, 'ranks <span class="text-orange">{.ordinal cost_rank}</span> in childcare costs\n'),
     show_from(3, 'at <span class="text-blue">{.dollar max_med_cost}</span> per year,\n'),
@@ -587,7 +588,7 @@ These inline transformers are just little tiny functions. Let's write our own...
 ##
 
 ::::: {.content-center .align-items-center}
-:::: {.w-75}
+:::: {.w-75 .px-6}
 ```{r}
 #| echo: false
 fake_chunk(
@@ -598,7 +599,7 @@ fake_chunk(
     '{.titlecase age} {.emph type}\n',
     'in {.strong county_size} counties\n',
     'ranks {.ordinal cost_rank} in childcare costs\n',
-    'at {.dollar max_med_cost} per year,',
+    'at {.dollar max_med_cost} per year,\n',
     show_on(0, '<span class="text-gray-12">about <span class="text-blue">{.cpm max_med_cost}</span> per month</span>'),
     show_on(1, '<span class="text-gray-12">about <span class="text-blue">{.dollar <span style="opacity: 0.6">{.cpm max_med_cost}</span>}</span> per month</span>'),
     '\nor {.percent mhi_pct} of median household income.'
@@ -614,7 +615,7 @@ about {.dollar {.cpm max_med_cost}} per month
 or {.percent mhi_pct} of median household income.
 ```
 
-::: {.epoxy-ex-output .px-7 .text-gray-6}
+::: {.epoxy-ex-output .text-gray-6}
 Infant [day care]{.italic}
 in [very large]{.fw-bold} counties
 ranks 1st in childcare costs
@@ -781,10 +782,14 @@ then swap out for the 8th row
 which effectively compares day care to home care
 :::
 
-## {.p-10}
+##
 
-```{r}
+::::: {.content-center .align-items-center}
+:::: {.w-75 .px-7 .hide-code-line-numbers}
+```{r epoxy-use-chunk-example}
 #| echo: true
+#| eval: false
+#| code-line-numbers: "1-6|7"
 childcare_summary |>
   dplyr::filter(
     age == "infant",
@@ -794,19 +799,18 @@ childcare_summary |>
   epoxy_use_chunk(label = "cost-summary")
 ```
 
-## {.p-10}
-
+::: {.fragment .epoxy-ex-output .text-gray-10}
 ```{r}
-#| echo: true
-childcare_summary |>
-  dplyr::filter(
-    age == "infant",
-    county_size == "very large"
-  ) |>
-  epoxy_use_chunk(label = "cost-summary", .collapse = "\n\n")
+#| ref.label: epoxy-use-chunk-example
+#| eval: true
 ```
+:::
 
-## {background-image="images/james-coleman-cevIeBV1A3I-unsplash.jpg" background-size="cover" background-position="center" background-repeat="no-repeat"}
+::::
+:::::
+
+
+## {visibility="hidden" background-image="images/james-coleman-cevIeBV1A3I-unsplash.jpg" background-size="cover" background-position="center" background-repeat="no-repeat"}
 
 
 ::: notes
@@ -864,7 +868,7 @@ in \textbf{very large} counties
 
 :::
 
-## {auto-animate="true" auto-animate-unmatched="false"}
+## {visibility="hidden" auto-animate="true" auto-animate-unmatched="false"}
 
 ::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
 
@@ -884,7 +888,7 @@ in <strong>very large</strong> counties
 
 :::
 
-##
+## {visibility="hidden"}
 
 ::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
 
@@ -905,7 +909,7 @@ in <span class="strong">very large</span> counties
 :::
 
 
-##
+## {visibility="hidden"}
 
 ::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
 
@@ -926,7 +930,7 @@ in <span class="text-blue">very large</span> counties
 :::
 
 
-##
+## {visibility="hidden"}
 
 ::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
 
@@ -950,11 +954,11 @@ in <span class="text-blue"><strong>very large</strong></span> counties
 
 :::
 
-##
+## {auto-animate="true"}
 
 ::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
 
-::: {.codewindow .r .epoxy-engines .epoxy-focused}
+::: {.codewindow .r .epoxy-engines .epoxy-focused data-id="codewindow"}
 R Console
 
 ::: {.chunk}
