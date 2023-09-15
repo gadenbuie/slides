@@ -238,8 +238,8 @@ max_med_cost <- 15416.96
 </div>
 
 ::: {.incremental}
-- Powerful inline syntax
-- Blend data and prose
+- Inline syntax
+- Just-in-time formatting
 - Reusable templates
 :::
 :::
