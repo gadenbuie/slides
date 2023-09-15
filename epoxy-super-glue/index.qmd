@@ -1061,7 +1061,7 @@ ui <- page_fixed(
   p(
     textOutput("greetings"), ",",
     textOutput("company"), "::conf(",
-    textOutput("year"), ")"
+    textOutput("year"), ")!"
   )
 )
 
@@ -1090,7 +1090,7 @@ ui <- htmltools::tagList(
 )
 htmltools::save_html(ui, path_html)
 
-knitr::include_url(path_html, height = "675px")
+knitr::include_url(path_html, height = "750px")
 ```
 :::
 
@@ -1116,7 +1116,7 @@ ui <- page_fixed(
   textInput("year", "Year", "2023"),
   ui_epoxy_html(
     .id = "hello",
-    p("{{greetings}}, {{company}}::conf({{year}})")
+    p("{{greetings}}, {{company}}::conf({{year}})!")
   )
 )
 
@@ -1147,7 +1147,7 @@ ui <- htmltools::tagList(
 )
 htmltools::save_html(ui, path_html)
 
-knitr::include_url(path_html, height = "675px")
+knitr::include_url(path_html, height = "750px")
 ```
 :::
 
@@ -1185,7 +1185,7 @@ knitr::include_url(path_html, height = "675px")
 :::
 
 ::: {.w-40}
-{{< qrcode https://pkg.garrickadenbuie.com/epoxy width=300 height=300 colorDark="#343a40" >}}
+{{< qrcode https://pkg.garrickadenbuie.com/epoxy width=500 height=500 colorDark="#343a40" >}}
 
 :::
 ::::

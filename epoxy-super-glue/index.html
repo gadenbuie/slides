@@ -1170,7 +1170,7 @@ up to <span class="text-orange">$15,417</span> a year
 <span id="cb20-8"><a href="#cb20-8"></a>  <span class="fu">p</span>(</span>
 <span id="cb20-9"><a href="#cb20-9"></a>    <span class="fu">textOutput</span>(<span class="st">"greetings"</span>), <span class="st">","</span>,</span>
 <span id="cb20-10"><a href="#cb20-10"></a>    <span class="fu">textOutput</span>(<span class="st">"company"</span>), <span class="st">"::conf("</span>,</span>
-<span id="cb20-11"><a href="#cb20-11"></a>    <span class="fu">textOutput</span>(<span class="st">"year"</span>), <span class="st">")"</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a>    <span class="fu">textOutput</span>(<span class="st">"year"</span>), <span class="st">")!"</span></span>
 <span id="cb20-12"><a href="#cb20-12"></a>  )</span>
 <span id="cb20-13"><a href="#cb20-13"></a>)</span>
 <span id="cb20-14"><a href="#cb20-14"></a></span>
@@ -1185,7 +1185,7 @@ up to <span class="text-orange">$15,417</span> a year
 </div>
 <div class="app-preview fragment" data-fragment-index="1">
 <div class="cell">
-<iframe src="apps/shiny-text-output.html" width="100%" height="675px" data-external="1" seamless="seamless" frameborder="0" loading="lazy">
+<iframe src="apps/shiny-text-output.html" width="100%" height="750px" data-external="1" seamless="seamless" frameborder="0" loading="lazy">
 </iframe>
 </div>
 </div>
@@ -1205,7 +1205,7 @@ up to <span class="text-orange">$15,417</span> a year
 <span id="cb21-7"><a href="#cb21-7"></a>  <span class="fu">textInput</span>(<span class="st">"year"</span>, <span class="st">"Year"</span>, <span class="st">"2023"</span>),</span>
 <span id="cb21-8"><a href="#cb21-8"></a>  <span class="fu">ui_epoxy_html</span>(</span>
 <span id="cb21-9"><a href="#cb21-9"></a>    <span class="at">.id =</span> <span class="st">"hello"</span>,</span>
-<span id="cb21-10"><a href="#cb21-10"></a>    <span class="fu">p</span>(<span class="st">"{{greetings}}, {{company}}::conf({{year}})"</span>)</span>
+<span id="cb21-10"><a href="#cb21-10"></a>    <span class="fu">p</span>(<span class="st">"{{greetings}}, {{company}}::conf({{year}})!"</span>)</span>
 <span id="cb21-11"><a href="#cb21-11"></a>  )</span>
 <span id="cb21-12"><a href="#cb21-12"></a>)</span>
 <span id="cb21-13"><a href="#cb21-13"></a></span>
@@ -1222,7 +1222,7 @@ up to <span class="text-orange">$15,417</span> a year
 </div>
 <div class="app-preview">
 <div class="cell">
-<iframe src="apps/shiny-epoxy.html" width="100%" height="675px" data-external="1" seamless="seamless" frameborder="0" loading="lazy">
+<iframe src="apps/shiny-epoxy.html" width="100%" height="750px" data-external="1" seamless="seamless" frameborder="0" loading="lazy">
 </iframe>
 </div>
 </div>
@@ -1256,7 +1256,7 @@ up to <span class="text-orange">$15,417</span> a year
 <div class="w-40">
 <div id="qrcode" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qrcode", {"width":"300","colorLight":"#ffffff","height":"300","colorDark":"#343a40","text":"https://pkg.garrickadenbuie.com/epoxy"});
+var qrcode = new QRCode("qrcode", {"width":"500","colorDark":"#343a40","height":"500","text":"https://pkg.garrickadenbuie.com/epoxy","colorLight":"#ffffff"});
 </script>
     
 </div>
