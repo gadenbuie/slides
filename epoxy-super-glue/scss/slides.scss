@@ -1,6 +1,6 @@
 /*-- scss:defaults --*/
 // FIXME: remove unneeded style
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono&family=IBM+Plex+Mono&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Red+Hat+Mono&family=Source+Code+Pro:ital,wght@0,400;0,600;1,400;1,600&family=Galada&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:ital,wght@0,400;0,600;1,400;1,600&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Galada&display=swap');
 
 $blue: #125AF3;
 $purple: #785EF0;
@@ -48,7 +48,7 @@ $font-system-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxyge
 $font-family-sans-serif: $font-system-stack;
 // $font-family-monospace: "Red Hat Mono", "Source Code Pro", monospace;
 // $font-family-monospace: "IBM Plex Mono", "Source Code Pro", monospace;
-$font-family-monospace: "Fira Mono", "Source Code Pro", monospace;
+$font-family-monospace: "B612 Mono", "Fira Mono", "Source Code Pro", monospace;
 
 $presentation-font-size-root: clamp(25px, 2.5vw, 65px);
 
@@ -178,6 +178,7 @@ $selection-bg: $pink !default;
         140% 110% at 50% 5% in oklab,
         oklch(0% 0.26 188) 0%, oklch(17% 0.26 206) 98%
       );
+    background-color: #000e2b;
   }
 
   &.bold-lower-left .content {
@@ -255,8 +256,16 @@ $selection-bg: $pink !default;
     li + li { padding-top: 2rem; }
   }
 
+  .epoxy-ex-chunk {
+    font-size: clamp(1rem, 2vw, 2rem);
+  }
+
+  .epoxy-ex-chunk [class^="text-"] {
+    font-weight: var(--font-weight-6);
+  }
+
   .epoxy-ex-output {
-    font-size: clamp(3rem, 3vw, 10rem);
+    font-size: clamp(1rem, 3vw, 10rem);
     p {
       line-height: 1.66;
     }
@@ -410,13 +419,13 @@ $selection-bg: $pink !default;
 @for $idx from 0 to 15 {
   [data-fragment="#{$idx}"] {
     [data-show-on="#{$idx}"] {
-      display: inline-block;
+      display: var(--display, inline-block);
     }
   }
 
   @for $idx2 from $idx to 15 {
     [data-fragment="#{$idx2}"] [data-show-from="#{$idx}"] {
-      display: inline-block;
+      display: var(--display, inline-block);
     }
     [data-fragment="#{$idx2}"] [data-fade-from="#{$idx}"] {
       opacity: 0.6 !important;

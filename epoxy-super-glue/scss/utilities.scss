@@ -88,6 +88,10 @@ $sizes: (
   .gap-#{$num} { gap: $value; }
 }
 
+@for $num from 1 through 9 {
+  .fw-#{$num} { font-weight: var(--font-weight-#{$num}) }
+}
+
 .w-0 { width: 0%; }
 .w-10 { width: 10%; }
 .w-20 { width: 20%; }
