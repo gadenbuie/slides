@@ -22,3 +22,11 @@ fake_chunk <- function(code, ..., engine = "r", opts_head = "", n_ticks = 3) {
     htmltools::HTML(code)
   )
 }
+
+show_from <- function(idx, x) {
+  sprintf('<span data-show-from="%s">%s</span>', idx, x)
+}
+
+show_on <- function(idx, x) {
+  sprintf('<span data-show-on="%s">%s</span>', idx, x)
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:white;}</style>
+<script src="lib/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link href="lib/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet" />
+<script src="lib/bootstrap-5.3.1/bootstrap.bundle.min.js"></script>
+<script src="lib/bs3compat-0.5.1.9000/transition.js"></script>
+<script src="lib/bs3compat-0.5.1.9000/tabs.js"></script>
+<script src="lib/bs3compat-0.5.1.9000/bs3compat.js"></script>
+<link href="lib/epoxy-0.0.1/output-epoxy.css" rel="stylesheet" />
+<script src="lib/epoxy-0.0.1/output-epoxy.js"></script>
+<link href="lib/hint.css-2.7.0/hint.min.css" rel="stylesheet" />
+  <style>html { font-size: clamp(25px, 5vw, 65px) }</style>
+</head>
+<body>
+<div class="container">
+  <div class="form-group shiny-input-container">
+    <label class="control-label" id="greetings-label" for="greetings">Greeting</label>
+    <input id="greetings" type="text" class="shiny-input-text form-control" value="Hello"/>
+  </div>
+  <div class="form-group shiny-input-container">
+    <label class="control-label" id="company-label" for="company">Company</label>
+    <input id="company" type="text" class="shiny-input-text form-control" value="posit"/>
+  </div>
+  <div class="form-group shiny-input-container">
+    <label class="control-label" id="year-label" for="year">Year</label>
+    <input id="year" type="text" class="shiny-input-text form-control" value="2023"/>
+  </div>
+  <epoxy-html id="output" class="epoxy-html epoxy-init" aria-atomic="true" aria-live="polite"><p><span class="epoxy-item__placeholder" data-epoxy-item="greetings" data-epoxy-as-html="false" data-epoxy-placeholder=""></span>, <span class="epoxy-item__placeholder" data-epoxy-item="company" data-epoxy-as-html="false" data-epoxy-placeholder=""></span>::conf(<span class="epoxy-item__placeholder" data-epoxy-item="year" data-epoxy-as-html="false" data-epoxy-placeholder=""></span>)!</p></epoxy-html>
+  <script>/* global EpoxyHTML */
+function sendUpdatesToEpoxy (id) {
+  return (event, value) => {
+    if (typeof value === 'undefined') {
+      value = { [event.target.id]: event.target.value }
+    }
+    if (typeof value === 'function') {
+      value = value(event)
+    }
+
+    const data = { [id]: value }
+    EpoxyHTML.update_all(data, true)
+  }
+}
+
+function initApp () {
+  const initData = {
+    output: {
+      greetings: document.getElementById('greetings').value,
+      company: document.getElementById('company').value,
+      year: document.getElementById('year').value
+    }
+  }
+  EpoxyHTML.update_all(initData)
+  Object.keys(initData.output).forEach(inputId => {
+    document
+      .getElementById(inputId)
+      .addEventListener('input', sendUpdatesToEpoxy('output'))
+  })
+}
+
+initApp()
+// document.documentElement.setAttribute('data-bs-theme', 'dark')</script>
+</div>
+</body>
+</html>

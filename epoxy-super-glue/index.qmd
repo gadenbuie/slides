@@ -456,8 +456,8 @@ Reveal sequentially, in this order...
 | `county_pop_med` | {county_pop_med} | `.comma` | {.comma county_pop_med} |
 | `cost_rank` | {cost_rank} | `.ordinal` | {.ordinal cost_rank} |
 | `age` | {age} | `.titlecase` | {.titlecase age} |
-| `county_size` | {county_size} | `.strong` | {.strong county_size} |
-| `type` | {type} | `.emph` | {.emph type} |
+| `county_size` | {county_size} | `.strong` | {.bold county_size} |
+| `type` | {type} | `.emph` | {.italic type} |
 ```
 
 :::
@@ -503,15 +503,15 @@ Inline epoxy transformers
 :::
 
 ::: {.fragment data-fade-from="12"}
-<code>{<span class="fragment">.strong </span>county_size}</code>
+<code>{<span class="fragment">.bold </span>county_size}</code>
 <code class="float-right" data-show-on="10">`r county_size`</code>
-<code class="float-right" data-show-from="11">`r epoxy("{.strong county_size}")`</code>
+<code class="float-right" data-show-from="11">`r epoxy("{.bold county_size}")`</code>
 :::
 
 ::: {.fragment}
-<code>{<span class="fragment">.emph </span>type}</code>
+<code>{<span class="fragment">.italic </span>type}</code>
 <code class="float-right" data-show-on="12">`r type`</code>
-<code class="float-right" data-show-from="13">`r epoxy("{.emph type}")`</code>
+<code class="float-right" data-show-from="13">`r epoxy("{.italic type}")`</code>
 :::
 ::::
 :::::
@@ -541,8 +541,8 @@ fake_chunk(
   opts_head = "cost-summary",
   class = "epoxy-ex-chunk",
   paste0(
-    show_from(0, '<span class="text-yellow">{.titlecase age}</span> <span class="text-mint">{.emph type}</span>'), "\n",
-    show_from(1, 'in <span class="text-red">{.strong county_size}</span> counties\n'),
+    show_from(0, '<span class="text-yellow">{.titlecase age}</span> <span class="text-mint">{.italic type}</span>'), "\n",
+    show_from(1, 'in <span class="text-red">{.bold county_size}</span> counties\n'),
     show_from(2, 'ranks <span class="text-orange">{.ordinal cost_rank}</span> in childcare costs\n'),
     show_from(3, 'at <span class="text-blue">{.dollar max_med_cost}</span> per year,\n'),
     show_from(4, 'or <span class="text-pink">{.percent mhi_pct}</span> of median household income.')
@@ -596,8 +596,8 @@ fake_chunk(
   opts_head = "cost-summary",
   class = "epoxy-ex-chunk text-gray-6",
   paste0(
-    '{.titlecase age} {.emph type}\n',
-    'in {.strong county_size} counties\n',
+    '{.titlecase age} {.italic type}\n',
+    'in {.bold county_size} counties\n',
     'ranks {.ordinal cost_rank} in childcare costs\n',
     'at {.dollar max_med_cost} per year,\n',
     show_on(0, '<span class="text-gray-12">about <span class="text-blue">{.cpm max_med_cost}</span> per month</span>'),
@@ -608,7 +608,7 @@ fake_chunk(
 ```
 
 ```{epoxy cost-summary-cpm, .data = childcare_summary[1, ], eval = FALSE}
-{.titlecase age} {.emph type} in {.strong county_size} counties
+{.titlecase age} {.italic type} in {.bold county_size} counties
 ranks {.ordinal cost_rank} in childcare costs
 at {.dollar max_med_cost} per year,
 about {.dollar {.cpm max_med_cost}} per month
@@ -700,7 +700,7 @@ childcare_summary
 ## {.p-10}
 
 ::::: {.content-center .align-items-center}
-:::: {.w-90}
+:::: {.w-75 .px-6}
 ```{r}
 #| echo: false
 fake_chunk(
@@ -708,8 +708,8 @@ fake_chunk(
   opts_head = "cost-summary, <span class=\"text-gray-12\">.data = childcare_summary[1, ]</span>",
   class = "epoxy-ex-chunk text-gray-6",
   paste0(
-    '{.titlecase age} {type} ',
-    'in {county_size} counties\n',
+    '{.titlecase age} {.italic type}\n',
+    'in {.bold county_size} counties\n',
     'ranks {.ordinal cost_rank} in childcare costs\n',
     'at {.dollar max_med_cost} per year,\n',
     'about {.dollar {.cpm max_med_cost}} per month\n',
@@ -718,7 +718,7 @@ fake_chunk(
 )
 ```
 
-::: {.epoxy-ex-output .px-7 .text-gray-6}
+::: {.epoxy-ex-output .text-gray-6}
 ```{r}
 enclassen <- function(class, transformer = NULL) {
   function(text, envir) {
@@ -746,7 +746,7 @@ and the first row of `childcare_summary`
 ## {.p-10}
 
 ::::: {.content-center .align-items-center}
-:::: {.w-90}
+:::: {.w-75 .px-6}
 ```{r}
 #| echo: false
 fake_chunk(
@@ -754,8 +754,8 @@ fake_chunk(
   opts_head = "cost-summary, <span class=\"text-orange\">.data = childcare_summary[8, ]</span>",
   class = "epoxy-ex-chunk text-gray-6",
   paste0(
-    '{.titlecase age} {type} ',
-    'in {county_size} counties\n',
+    '{.titlecase age} {.italic type}\n',
+    'in {.bold county_size} counties\n',
     'ranks {.ordinal cost_rank} in childcare costs\n',
     'at {.dollar max_med_cost} per year,\n',
     'about {.dollar {.cpm max_med_cost}} per month\n',
@@ -764,7 +764,7 @@ fake_chunk(
 )
 ```
 
-::: {.epoxy-ex-output .px-7 .text-gray-6}
+::: {.epoxy-ex-output .text-gray-6}
 ```{r}
 epoxy_use_chunk(
   label = "cost-summary-cpm",
@@ -793,8 +793,8 @@ which effectively compares day care to home care
 childcare_summary |>
   dplyr::filter(
     age == "infant",
-    county_size == "very large",
-    type == "home care"
+    type == "home care",
+    county_size == "very large"
   ) |>
   epoxy_use_chunk(label = "cost-summary")
 ```
@@ -826,7 +826,7 @@ Audience participation
 - + Have you ever written a PDF report using LaTeX? Keep if your hand up if you've ever had to resort to using actual LaTeX in that report.
 :::
 
-## {auto-animate="true"}
+## {visibility="hidden" auto-animate="true"}
 
 ::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
 
@@ -868,6 +868,37 @@ in \textbf{very large} counties
 
 :::
 
+## {auto-animate="true"}
+
+```{=html}
+<div class="d-flex w-100 h-100 flex-row justify-content-center align-items-center gap-10">
+<div class="codewindow r rmd epoxy-engines" data-id="codewindow">
+<p>report-html.Rmd</p>
+<div>
+<pre><code>```{<span class="text-orange" data-show-on="-1">epoxy_html</span><span data-show-from="0">epoxy_html</span>}
+<span class="fragment" data-fragment-index="2">in <span class="text-orange" data-show-on="1">{{@bold county_size}}</span><span data-show-from="2">{{@bold county_size}}</span> counties</span>
+```</code></pre>
+
+<div class="fragment" data-fragment-index="3">
+<pre><code>in <span class="text-orange" data-show-on="2">&lt;strong&gt;</span><span data-show-from="3">&lt;strong&gt;</span>very large<span class="text-orange" data-show-on="2">&lt;/strong&gt;</span><span data-show-from="3">&lt;/strong&gt;</span> counties</code></pre>
+</div>
+</div>
+</div>
+
+<div class="codewindow r rmd epoxy-engines fragment" data-fragment-index="1">
+<p>report-latex.Rmd</p>
+<div>
+<pre><code>```{<span class="text-orange" data-show-on="0">epoxy_latex</span><span data-show-from="1">epoxy_latex</span>}
+<span class="fragment" data-fragment-index="4">in <span class="text-orange" data-show-on="3">&lt;&lt;.bold county_size&gt;&gt;</span><span data-show-from="4">&lt;&lt;.bold county_size&gt;&gt;</span> counties</span>
+```</code></pre>
+
+<div class="fragment" data-fragment-index="5">
+<pre><code>in <span class="text-orange">\textbf{</span>very large<span class="text-orange">}</span> counties</code></pre>
+</div>
+</div>
+</div>
+```
+
 ## {visibility="hidden" auto-animate="true" auto-animate-unmatched="false"}
 
 ::: {.d-flex .w-100 .h-100 .flex-row .justify-content-center .align-items-center .gap-10}
@@ -898,7 +929,7 @@ report-html.Rmd
 ::: {.chunk data-id="foo"}
 ````{verbatim}
 ```{epoxy_html}
-in {{.strong county_size}} counties
+in {{.bold county_size}} counties
 ```
 
 in <span class="strong">very large</span> counties
@@ -1016,7 +1047,7 @@ epoxy_use_file(file = "cpm-snippet.md")
 
 ::: {.app-code .p-10 highlight-theme="github-dark"}
 ```{r}
-#| code-line-numbers: "|5-7|16-18|8,12|9-11"
+#| code-line-numbers: "|5-7|16-18|9-11|8-12"
 #| eval: false
 #| echo: true
 
@@ -1134,9 +1165,9 @@ knitr::include_url(path_html, height = "675px")
 ::: {.w-50 .text-left}
 * Blend data and prose
 
-* Easily format for presentation
-
 * Reusable templates
+
+* Just-in-time formatting
 
 * Reports, scripts and apps
 :::
