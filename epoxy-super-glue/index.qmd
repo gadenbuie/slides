@@ -699,17 +699,15 @@ fake_chunk(
 
 ::: {.epoxy-ex-output .px-7 .text-gray-6}
 ```{r}
-enclassen <- function(class) {
-  function(transformer = glue::identity_transformer) {
-    function(text, envir) {
-      text <- transformer(text, envir)
-      format(htmltools::span(class = class, text))
-    }
+enclassen <- function(class, transformer = NULL) {
+  function(text, envir) {
+    text <- transformer(text, envir)
+    format(htmltools::span(class = class, text))
   }
 }
 epoxy_use_chunk(
   label = "cost-summary-cpm",
-  .transformer = list(epoxy_transform_inline, enclassen("text-gray-12"))
+  .transformer = epoxy_transform("inline", enclassen("text-gray-12"))
 )
 ```
 :::
@@ -750,7 +748,7 @@ fake_chunk(
 epoxy_use_chunk(
   label = "cost-summary-cpm",
   .data = childcare_summary[8, ],
-  .transformer = list(epoxy_transform_inline, enclassen("text-orange"))
+  .transformer = epoxy_transform("inline", enclassen("text-orange"))
 )
 ```
 :::
