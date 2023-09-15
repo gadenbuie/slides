@@ -362,6 +362,15 @@ $selection-bg: $pink !default;
       }
     }
   }
+
+  .hide-code-line-numbers {
+    pre.numberSource code > span {
+      left: 0;
+    }
+    pre.numberSource code > span > a:first-child::before {
+      display: none;
+    }
+  }
 }
 
 [hidden] {

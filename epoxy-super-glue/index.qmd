@@ -519,7 +519,7 @@ Inline epoxy transformers
 ## {.p-10}
 
 ::::: {.content-center .align-items-center}
-:::: {.w-70}
+:::: {.w-75}
 ```{r}
 #| echo: false
 show_from <- function(idx, x) {
@@ -548,11 +548,11 @@ at {.dollar max_med_cost} per year,
 or {.percent mhi_pct} of median household income.
 ```
 
-::: epoxy-ex-output
-[[Infant]{.bg-yellow} [day care]{.bg-mint}]{.fragment} 
+::: {.epoxy-ex-output .px-7}
+[[Infant]{.bg-yellow} [day care]{.bg-mint}]{.fragment}
 [in [very large]{.bg-red} counties]{.fragment}
 [ranks [1st]{.bg-orange} in childcare costs]{.fragment}
-[at [$15,416.96]{.bg-blue} per year,]{.fragment} 
+[at [$15,416.96]{.bg-blue} per year,]{.fragment}
 [or [24%]{.bg-pink} of median household income.]{.fragment}
 :::
 ::::
@@ -564,7 +564,7 @@ Write out a full sentence using these variables in an epoxy chunk.
 These inline transformers are just little tiny functions. Let's write our own...
 :::
 
-## 
+##
 
 ::: {.content-center .align-items-center}
 
@@ -576,10 +576,10 @@ These inline transformers are just little tiny functions. Let's write our own...
 
 :::
 
-## {.p-10}
+##
 
 ::::: {.content-center .align-items-center}
-:::: {.w-70}
+:::: {.w-75}
 ```{r}
 #| echo: false
 fake_chunk(
@@ -605,7 +605,7 @@ about {.dollar {.cpm max_med_cost}} per month
 or {.percent mhi_pct} of median household income.
 ```
 
-::: {.epoxy-ex-output .text-gray-6}
+::: {.epoxy-ex-output .px-7 .text-gray-6}
 Infant day care
 in very large counties
 ranks 1st in childcare costs
@@ -617,10 +617,34 @@ or 24% of median household income.
 ::::
 :::::
 
-## Use `epoxy_transform_set()` {.p-10}
+## {.p-10}
 
+::: {.fragment show-on="0"}
 ```{r}
 #| echo: true
+#| eval: false
+#| classes: epoxy-ex-chunk
+epoxy_transform_set(
+  .cpm = function(x) x / 12
+  
+  
+)
+```
+
+```{verbatim ref.label="cost-summary-cpm-verbatim"}
+```
+
+```{r}
+epoxy_use_chunk(label = "cost-summary-cpm")
+```
+:::
+
+::: {.fragment .hide-code-line-numbers show-on="1"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "3-4"
+#| classes: epoxy-ex-chunk
 epoxy_transform_set(
   .cpm = function(x) x / 12,
   .dollar = scales::label_dollar(accuracy = 100),
@@ -632,8 +656,14 @@ epoxy_transform_set(
 ```
 
 ```{r}
+epoxy_transform_set(
+  .cpm = function(x) x / 12,
+  .dollar = scales::label_dollar(accuracy = 100),
+  .percent = scales::label_percent(accuracy = 0.1)
+)
 epoxy_use_chunk(label = "cost-summary-cpm")
 ```
+:::
 
 ## {.p-10}
 
@@ -648,68 +678,89 @@ childcare_summary
 
 ## {.p-10}
 
-````{verbatim}
-```{epoxy cost-summary, .data = childcare_summary[1, ]}
-{.titlecase age} {type} in {county_size} counties
-ranks {.ordinal cost_rank} in childcare costs
-at {.dollar max_med_cost} per year,
-or {.percent mhi_pct} of median household income.
-```
-````
-
+::::: {.content-center .align-items-center}
+:::: {.w-90}
 ```{r}
-epoxy_use_chunk(label = "cost-summary")
+#| echo: false
+fake_chunk(
+  engine = "epoxy",
+  opts_head = "cost-summary, <span class=\"text-gray-12\">.data = childcare_summary[1, ]</span>",
+  class = "epoxy-ex-chunk text-gray-6",
+  paste0(
+    '{.titlecase age} {type} ',
+    'in {county_size} counties\n',
+    'ranks {.ordinal cost_rank} in childcare costs\n',
+    'at {.dollar max_med_cost} per year,\n',
+    'about {.dollar {.cpm max_med_cost}} per month\n',
+    'or {.percent mhi_pct} of median household income.'
+  )
+)
 ```
+
+::: {.epoxy-ex-output .px-7 .text-gray-6}
+```{r}
+enclassen <- function(class) {
+  function(transformer = glue::identity_transformer) {
+    function(text, envir) {
+      text <- transformer(text, envir)
+      format(htmltools::span(class = class, text))
+    }
+  }
+}
+epoxy_use_chunk(
+  label = "cost-summary-cpm",
+  .transformer = list(epoxy_transform_inline, enclassen("text-gray-12"))
+)
+```
+:::
+
+::::
+:::::
 
 ::: {.notes}
 Update the epoxy chunk to use the `.data` argument
 and the first row of `childcare_summary`
 (these are the values)
-
-```{epoxy .data = childcare_summary[1, ]}
-| Variable | Value | Inline | Result |
-|:---------|:------|:-------|:-------|
-| `max_med_cost` | {max_med_cost} | `.dollar` | {.dollar max_med_cost} |
-| `mhi_pct` | {mhi_pct} | `.percent` | {.percent mhi_pct} |
-| `county_pop_med` | {county_pop_med} | `.number` | {.comma county_pop_med} |
-| `cost_rank` | {cost_rank} | `.ordinal` | {.ordinal cost_rank} |
-| `age` | {age} | `.titlecase` | {.titlecase age} |
-| `county_size` | {county_size} | `.strong` | {.strong county_size} |
-| `type` | {type} | `.emph` | {.emph type} |
-```
 :::
 
 
 ## {.p-10}
 
-````{verbatim}
-```{epoxy cost-summary-8th, .data = childcare_summary[8, ]}
-{.titlecase age} {type} in {county_size} counties
-ranks {.ordinal cost_rank} in childcare costs
-at {.dollar max_med_cost} per year,
-or {.percent mhi_pct} of median household income.
-```
-````
-
+::::: {.content-center .align-items-center}
+:::: {.w-90}
 ```{r}
-epoxy_use_chunk(childcare_summary[8, ], label = "cost-summary")
+#| echo: false
+fake_chunk(
+  engine = "epoxy",
+  opts_head = "cost-summary, <span class=\"text-orange\">.data = childcare_summary[8, ]</span>",
+  class = "epoxy-ex-chunk text-gray-6",
+  paste0(
+    '{.titlecase age} {type} ',
+    'in {county_size} counties\n',
+    'ranks {.ordinal cost_rank} in childcare costs\n',
+    'at {.dollar max_med_cost} per year,\n',
+    'about {.dollar {.cpm max_med_cost}} per month\n',
+    'or {.percent mhi_pct} of median household income.'
+  )
+)
 ```
+
+::: {.epoxy-ex-output .px-7 .text-gray-6}
+```{r}
+epoxy_use_chunk(
+  label = "cost-summary-cpm",
+  .data = childcare_summary[8, ],
+  .transformer = list(epoxy_transform_inline, enclassen("text-orange"))
+)
+```
+:::
+
+::::
+:::::
 
 ::: {.notes}
 then swap out for the 8th row
 which effectively compares day care to home care
-
-```{epoxy .data = childcare_summary[8, ]}
-| Variable | Value | Inline | Result |
-|:---------|:------|:-------|:-------|
-| `max_med_cost` | {max_med_cost} | `.dollar` | {.dollar max_med_cost} |
-| `mhi_pct` | {mhi_pct} | `.percent` | {.percent mhi_pct} |
-| `county_pop_med` | {county_pop_med} | `.number` | {.comma county_pop_med} |
-| `cost_rank` | {cost_rank} | `.ordinal` | {.ordinal cost_rank} |
-| `age` | {age} | `.titlecase` | {.titlecase age} |
-| `county_size` | {county_size} | `.strong` | {.strong county_size} |
-| `type` | {type} | `.emph` | {.emph type} |
-```
 :::
 
 ## {.p-10}
@@ -1110,16 +1161,16 @@ knitr::include_url(path_html, height = "675px")
     },
     expand: {
       horizontal: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-expand-vertical" viewBox="0 0 16 16"><path d="M8 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L1.707 7.5H5.5a.5.5 0 0 1 0 1H1.707l1.147 1.146a.5.5 0 0 1-.708.708l-2-2ZM10 8a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L14.293 8.5H10.5A.5.5 0 0 1 10 8Z"/></svg>`,
-      vertical: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-expand" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8ZM7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2ZM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10Z"/></svg>` 
+      vertical: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-expand" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8ZM7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2ZM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10Z"/></svg>`
     }
   }
 
   function indicator(current, expected, syms) {
     let diff = expected - current
 
-    let indicator = 
+    let indicator =
       Math.abs(diff) < 3
-      ? "&checkmark;" 
+      ? "&checkmark;"
       : diff < 0 ? syms.over : syms.under
 
     diff = Math.abs(diff)
@@ -1131,11 +1182,11 @@ knitr::include_url(path_html, height = "675px")
 
     return indicator
   }
-  
+
   function handleViewportChange() {
     const {innerWidth, innerHeight} = window
     const id = 'window___dims'
-  
+
     let dimsEl = document.getElementById(id)
     if (!dimsEl) {
       dimsEl = document.createElement('div')
@@ -1155,12 +1206,12 @@ knitr::include_url(path_html, height = "675px")
     }
 
     clearTimeout(resizeTimeout)
-    
+
     const w_16_9 = Math.floor(innerHeight / 9 * 16)
     const h_16_9 = Math.floor(innerWidth / 16 * 9)
     let indWidth = ''
     let indHeight = ''
-    
+
     if (keepWidth || lastWidth != innerWidth) {
       keepWidth = true
       indWidth = indicator(innerWidth, w_16_9, {over: svgs.collapse.horizontal, under: svgs.expand.horizontal})
@@ -1169,9 +1220,9 @@ knitr::include_url(path_html, height = "675px")
       keepHeight = true
       indHeight = indicator(innerHeight, h_16_9, {over: svgs.collapse.vertical, under: svgs.expand.vertical})
     }
-    
+
     dimsEl.innerHTML = `${indWidth} ${innerWidth} x ${innerHeight} ${indHeight}`
-    
+
     lastWidth = innerWidth
     lastHeight = innerHeight
 
@@ -1182,7 +1233,7 @@ knitr::include_url(path_html, height = "675px")
       keepWidth = undefined;
     }, 3000)
   }
-  
+
   window.addEventListener('resize', handleViewportChange)
   window.addEventListener('mousedown', ev => console.log('mousedown at', { y: ev.clientY, x: ev.clientX }))
 })()
