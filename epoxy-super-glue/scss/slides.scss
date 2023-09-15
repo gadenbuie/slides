@@ -34,13 +34,10 @@ $colors: (
 }
 
 :root {
-  --blue: #{$blue};
-  --purple: #{$purple};
-  --pink: #{$pink};
-  --orange: #{$orange};
-  --yellow: #{$yellow};
-  --red: #{$red};
-  --mint: #{$mint};
+  @each $name, $color in $colors {
+    --#{$name}: #{$color};
+    --#{$name}-rgb: #{red($color)}, #{green($color)}, #{blue($color)};
+  }
 }
 
 $font-system-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
@@ -266,6 +263,7 @@ $selection-bg: $pink !default;
 
   .epoxy-ex-output {
     font-size: clamp(1rem, 3vw, 10rem);
+    min-height: var(--min-height);
     p {
       line-height: 1.66;
     }
@@ -281,6 +279,21 @@ $selection-bg: $pink !default;
     &.epoxy-focused {
       min-width: 66vw;
       min-height: 66vh;
+    }
+  }
+  
+  .childcare-summary-tibble pre > code {
+    > span:first-child {
+      font-size: 1.5em;
+    }
+    > span:nth-child(3) {
+      font-weight: var(--font-weight-8);
+      background-color: rgba(var(--yellow-rgb), 0.15);
+      outline: 4px solid rgba(var(--yellow-rgb), 0.15);
+      
+      > span {
+        color: var(--gray-10);
+      }
     }
   }
 

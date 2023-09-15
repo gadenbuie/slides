@@ -518,28 +518,36 @@ Inline epoxy transformers
 
 ## {.p-10}
 
+````{comment slide-template}
+::::: {.content-center .align-items-center}
+:::: {.w-75}
+<!-- chunk -->
+
+::: {.epoxy-ex-output .px-7 .text-gray-6}
+<!-- output -->
+:::
+
+::::
+:::::
+````
+
 ::::: {.content-center .align-items-center}
 :::: {.w-75}
 ```{r}
 #| echo: false
-show_from <- function(idx, x) {
-  sprintf('<span data-show-from="%s">%s</span>', idx, x)
-}
-
 fake_chunk(
   engine = "epoxy",
   opts_head = "cost-summary",
   class = "epoxy-ex-chunk",
   paste0(
-    show_from(0, '<span class="text-yellow">{.titlecase age}</span> <span class="text-mint">{type}</span>&nbsp;'),
-    show_from(1, 'in <span class="text-red">{county_size}</span> counties\n'),
+    show_from(0, '<span class="text-yellow">{.titlecase age}</span> <span class="text-mint">{.emph type}</span>\n'),
+    show_from(1, 'in <span class="text-red">{.strong county_size}</span> counties\n'),
     show_from(2, 'ranks <span class="text-orange">{.ordinal cost_rank}</span> in childcare costs\n'),
     show_from(3, 'at <span class="text-blue">{.dollar max_med_cost}</span> per year,\n'),
     show_from(4, 'or <span class="text-pink">{.percent mhi_pct}</span> of median household income.')
   )
 )
 ```
-
 
 ```{epoxy cost-summary, .data = childcare_summary[1, ], eval = FALSE, include = FALSE}
 {.titlecase age} {type} in {county_size} counties
@@ -548,9 +556,9 @@ at {.dollar max_med_cost} per year,
 or {.percent mhi_pct} of median household income.
 ```
 
-::: {.epoxy-ex-output .px-7}
-[[Infant]{.bg-yellow} [day care]{.bg-mint}]{.fragment}
-[in [very large]{.bg-red} counties]{.fragment}
+::: {.epoxy-ex-output .px-6}
+[[Infant]{.bg-yellow} [day care]{.bg-mint .italic}]{.fragment}
+[in [very large]{.bg-red .fw-bold} counties]{.fragment}
 [ranks [1st]{.bg-orange} in childcare costs]{.fragment}
 [at [$15,416.96]{.bg-blue} per year,]{.fragment}
 [or [24%]{.bg-pink} of median household income.]{.fragment}
@@ -587,18 +595,19 @@ fake_chunk(
   opts_head = "cost-summary",
   class = "epoxy-ex-chunk text-gray-6",
   paste0(
-    '{.titlecase age} {type} ',
-    'in {county_size} counties\n',
+    '{.titlecase age} {.emph type}\n',
+    'in {.strong county_size} counties\n',
     'ranks {.ordinal cost_rank} in childcare costs\n',
     'at {.dollar max_med_cost} per year,',
-    show_from(0, '<span class="text-gray-12">about <span class="text-blue">{.dollar {.cpm max_med_cost}}</span> per month</span>'),
+    show_on(0, '<span class="text-gray-12">about <span class="text-blue">{.cpm max_med_cost}</span> per month</span>'),
+    show_on(1, '<span class="text-gray-12">about <span class="text-blue">{.dollar <span style="opacity: 0.6">{.cpm max_med_cost}</span>}</span> per month</span>'),
     '\nor {.percent mhi_pct} of median household income.'
   )
 )
 ```
 
 ```{epoxy cost-summary-cpm, .data = childcare_summary[1, ], eval = FALSE}
-{.titlecase age} {type} in {county_size} counties
+{.titlecase age} {.emph type} in {.strong county_size} counties
 ranks {.ordinal cost_rank} in childcare costs
 at {.dollar max_med_cost} per year,
 about {.dollar {.cpm max_med_cost}} per month
@@ -606,40 +615,49 @@ or {.percent mhi_pct} of median household income.
 ```
 
 ::: {.epoxy-ex-output .px-7 .text-gray-6}
-Infant day care
-in very large counties
+Infant [day care]{.italic}
+in [very large]{.fw-bold} counties
 ranks 1st in childcare costs
 at $15,416.96 per year,
-[about [$1,284.75]{.bg-blue} per month]{.fragment .text-gray-12 show-from=0 style="--display: inline"}
+[about [12864.75]{.bg-blue} per month]{.fragment .text-gray-12 show-on=0 style="--display: inline"}
+[about [$1,284.75]{.bg-blue} per month]{.fragment .text-gray-12 show-on=1 style="--display: inline"}
 or 24% of median household income.
 :::
 
 ::::
 :::::
 
-## {.p-10}
+##
 
-::: {.fragment show-on="0"}
+::::: {.content-center .align-items-center}
+:::: {.w-75 .px-7}
 ```{r}
 #| echo: true
 #| eval: false
 #| classes: epoxy-ex-chunk
 epoxy_transform_set(
-  .cpm = function(x) x / 12
-  
-  
+  .cpm = function(x) x / 12,
+  .dollar = scales::label_dollar(),
+  .percent = scales::label_percent()
 )
 ```
 
-```{verbatim ref.label="cost-summary-cpm-verbatim"}
-```
-
+::: {.epoxy-ex-output .mt-6 .text-gray-6 style="--min-height:40vh;"}
 ```{r}
-epoxy_use_chunk(label = "cost-summary-cpm")
+epoxy_use_chunk(
+  label = "cost-summary-cpm",
+  .transformer = epoxy_transform_inline(.cpm = function(x) x / 12)
+)
 ```
 :::
 
-::: {.fragment .hide-code-line-numbers show-on="1"}
+::::
+:::::
+
+##
+
+::::: {.content-center .align-items-center}
+:::: {.w-75 .px-7 .hide-code-line-numbers}
 ```{r}
 #| echo: true
 #| eval: false
@@ -652,9 +670,7 @@ epoxy_transform_set(
 )
 ```
 
-```{verbatim ref.label="cost-summary-cpm-verbatim"}
-```
-
+::: {.epoxy-ex-output .mt-6  style="--min-height:40vh;"}
 ```{r}
 epoxy_transform_set(
   .cpm = function(x) x / 12,
@@ -665,11 +681,15 @@ epoxy_use_chunk(label = "cost-summary-cpm")
 ```
 :::
 
+::::
+:::::
+
+
 ## {.p-10}
 
 <!-- of course we probably have this in a data frame -->
 
-::: {.content-center style="font-size:1.4vw;"}
+::: {.content-center .childcare-summary-tibble style="font-size:1.4vw;"}
 ```{r}
 #| echo: true
 childcare_summary

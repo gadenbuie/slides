@@ -92,6 +92,14 @@ $sizes: (
   .fw-#{$num} { font-weight: var(--font-weight-#{$num}) }
 }
 
+.italic { font-style: italic; }
+.normal { font-style: normal; font-weight: normal;}
+
+.fw-lighter { font-weight: lighter; }
+.fw-normal { font-weight: normal; }
+.fw-bold { font-weight: bold; }
+.fw-bolder { font-weight: bolder; }
+
 .w-0 { width: 0%; }
 .w-10 { width: 10%; }
 .w-20 { width: 20%; }
