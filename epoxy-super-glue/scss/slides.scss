@@ -546,7 +546,7 @@ $selection-bg: $pink !default;
   transform: skewX(-3deg) skewY(-10deg);
   background: linear-gradient(267deg, #202020, #202020, #007BC2, #007BC2, #74149C, #007BC2, #007BC2, #007BC2, #202020, #202020);
   background-size: 800%;
-  animation: animated_text 15s ease-in-out infinite;
+  animation: animated_text 10s ease-in-out infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: rgba(0,0,0,0);
   text-shadow: 1px 4px 6px rgba(255,255,255,0.3);

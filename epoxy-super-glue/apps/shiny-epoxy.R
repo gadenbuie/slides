@@ -5,7 +5,7 @@ library(epoxy)
 ui <- page_fixed(
   theme = bs_theme(version = 5, preset = "shiny"),
   textInput("greetings", "Greeting", "Hello"),
-  textInput("company", "Company", "posit"),
+  textInput("company", "Company", "rstudio"),
   textInput("year", "Year", "2023"),
   ui_epoxy_html(
     .id = "output",

@@ -17,8 +17,8 @@ format:
     #   - https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css
     template-partials:
       - title-slide.html
-    # include-after-body:
-    #   file: _resize-guide.html
+    include-after-body:
+      file: _resize-guide.html
     width: 100%
     height: 100%
     margin: 0
@@ -699,7 +699,7 @@ childcare_summary
 ```
 :::
 
-## {.p-10}
+##
 
 ::::: {.content-center .align-items-center}
 :::: {.w-75 .px-6}
@@ -745,7 +745,7 @@ and the first row of `childcare_summary`
 :::
 
 
-## {.p-10}
+##
 
 ::::: {.content-center .align-items-center}
 :::: {.w-75 .px-6}
@@ -1024,6 +1024,7 @@ epoxy_use_file(file = "cpm-snippet.md")
 
 ## {.center .text-center}
 
+```{comment}
 ::: {.incremental .yes-list}
 * `{epoxy}` in Reports
   * R Markdown and Quarto
@@ -1034,6 +1035,25 @@ epoxy_use_file(file = "cpm-snippet.md")
   * `epoxy_html()`
   * `epoxy_latex()`
 :::
+```
+
+```{=html}
+<div class="yes-list">
+<ul>
+<li class="fragment"><code>{epoxy}</code> in Reports
+<ul>
+<li>R Markdown and Quarto</li>
+<li>Markdown, HTML, or LaTeX</li>
+</ul></li>
+<li class="fragment"><code>{epoxy}</code> in scripts
+<ul>
+<li><code>epoxy()</code></li>
+<li><code>epoxy_html()</code></li>
+<li><code>epoxy_latex()</code></li>
+</ul></li>
+</ul>
+</div>
+```
 
 ## {transition="fade"}
 
@@ -1043,7 +1063,7 @@ epoxy_use_file(file = "cpm-snippet.md")
 ```
 :::
 
-## {transition="fade" transition-speed="slow"}
+## {transition="fade" transition-speed="slow" visibility="hidden"}
 
 ::: {.app-code-preview .gap-10}
 
@@ -1101,11 +1121,11 @@ knitr::include_url(path_html, height = "750px")
 
 ## {transition="fade" transition-speed="slow"}
 
-::: {.app-code-preview .gap-10}
+::: {.app-code-preview}
 
-::: {.app-code .p-10 highlight-theme="github-dark"}
+::: {.app-code .ps-8 highlight-theme="github-dark"}
 ```{r}
-#| code-line-numbers: "|8-9,11|10|15,19|16-18|10,16-18"
+#| code-line-numbers: "|5-7|8-9,13|10-12|17,21|18-20|11,18-20"
 #| eval: false
 #| echo: true
 
@@ -1118,7 +1138,9 @@ ui <- page_fixed(
   textInput("year", "Year", "2023"),
   ui_epoxy_html(
     .id = "hello",
-    p("{{greetings}}, {{company}}::conf({{year}})!")
+    p(
+      "{{greetings}}, {{company}}::conf({{year}})!"
+    )
   )
 )
 
@@ -1134,7 +1156,7 @@ shinyApp(ui, server)
 ```
 :::
 
-::: {.app-preview}
+::: {.app-preview .fragment fragment-index=1}
 ```{r}
 #| out.extra: 'seamless="seamless" frameBorder="0" loading="lazy"'
 #| out.width: "100%"
