@@ -1185,7 +1185,7 @@ knitr::include_url(path_html, height = "750px")
 :::
 
 ::: {.w-40}
-{{< qrcode https://pkg.garrickadenbuie.com/epoxy width=500 height=500 colorDark="#343a40" >}}
+{{< qrcode https://epoxy.grrrck.xyz width=500 height=500 colorDark="#343a40" >}}
 
 :::
 ::::
@@ -1244,17 +1244,22 @@ knitr::include_url(path_html, height = "750px")
     if (!dimsEl) {
       dimsEl = document.createElement('div')
       dimsEl.id = id
-      dimsEl.style.position = 'absolute'
-      dimsEl.style.display = 'flex'
-      dimsEl.style.alignItems = 'end'
-      dimsEl.style.justifyContent = 'center'
-      dimsEl.style.paddingBottom = '10px'
-      dimsEl.style.bottom = 0
-      dimsEl.style.left = 0
-      dimsEl.style.right = 0
-      dimsEl.style.height = '4rem'
-      dimsEl.style.textAlign = 'center'
-      dimsEl.style.fontFamily = 'sans-serif'
+      Object.assign(dimsEl.style, {
+        background: 'rgba(255, 255, 255, 0.5)',
+        color: 'black',
+        zIndex: 100000,
+        position: 'absolute',
+        display: 'flex',
+        alignItems: 'end',
+        justifyContent: 'center',
+        paddingBottom: '10px',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: '2rem',
+        textAlign: 'center',
+        fontFamily: 'sans-serif',
+      })
       document.body.appendChild(dimsEl)
     }
 
