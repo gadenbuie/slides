@@ -112,6 +112,10 @@ $selection-bg: $pink !default;
     text-shadow: var(--r-heading-text-shadow);
     word-wrap: break-word;
   }
+
+  .slide-menu-button {
+    transform: scale(0.75);
+  }
 }
 
 .reveal .slide {
@@ -195,7 +199,7 @@ $selection-bg: $pink !default;
     display: flex;
     flex-direction: column;
   }
-  
+
   &.title-slide > div {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 16px;
@@ -291,7 +295,7 @@ $selection-bg: $pink !default;
       min-height: 66vh;
     }
   }
-  
+
   .childcare-summary-tibble pre > code {
     > span:first-child {
       font-size: 1.5em;
@@ -300,7 +304,7 @@ $selection-bg: $pink !default;
       font-weight: var(--font-weight-8);
       background-color: rgba(var(--yellow-rgb), 0.15);
       outline: 4px solid rgba(var(--yellow-rgb), 0.15);
-      
+
       > span {
         color: var(--gray-10);
       }

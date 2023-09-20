@@ -1,0 +1,97 @@
+<script>
+  (function() {
+    let resizeTimeout;
+    let lastWidth = window.innerWidth
+    let lastHeight = window.innerHeight
+    let keepWidth = false
+    let keepHeight = false
+
+    const svgs = {
+      collapse: {
+        horizontal: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-collapse-vertical" viewBox="0 0 16 16"><path d="M8 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM0 8a.5.5 0 0 1 .5-.5h3.793L3.146 6.354a.5.5 0 1 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8.5H.5A.5.5 0 0 1 0 8Zm11.707.5 1.147 1.146a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708l2-2a.5.5 0 0 1 .708.708L11.707 7.5H15.5a.5.5 0 0 1 0 1h-3.793Z"/></svg>`,
+        vertical: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-collapse" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8Zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0Zm-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793Z"/></svg>`,
+      },
+      expand: {
+        horizontal: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-expand-vertical" viewBox="0 0 16 16"><path d="M8 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L1.707 7.5H5.5a.5.5 0 0 1 0 1H1.707l1.147 1.146a.5.5 0 0 1-.708.708l-2-2ZM10 8a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L14.293 8.5H10.5A.5.5 0 0 1 10 8Z"/></svg>`,
+        vertical: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-expand" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8ZM7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2ZM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10Z"/></svg>`
+      }
+    }
+
+    function indicator(current, expected, syms) {
+      let diff = expected - current
+
+      let indicator =
+        Math.abs(diff) < 3
+        ? "&checkmark;"
+        : diff < 0 ? syms.over : syms.under
+
+      diff = Math.abs(diff)
+      if (diff > 50) {
+        indicator = indicator.replace('width="16" height="16"', 'width="22" height="22"')
+      } else if (diff > 25) {
+        indicator = indicator.replace('width="16" height="16"', 'width="18" height="18"')
+      }
+
+      return indicator
+    }
+
+    function handleViewportChange() {
+      const {innerWidth, innerHeight} = window
+      const id = 'window___dims'
+
+      let dimsEl = document.getElementById(id)
+      if (!dimsEl) {
+        dimsEl = document.createElement('div')
+        dimsEl.id = id
+        Object.assign(dimsEl.style, {
+          background: 'rgba(255, 255, 255, 0.5)',
+          color: 'black',
+          zIndex: 100000,
+          position: 'absolute',
+          display: 'flex',
+          alignItems: 'end',
+          justifyContent: 'center',
+          paddingBottom: '10px',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '2rem',
+          textAlign: 'center',
+          fontFamily: 'sans-serif',
+        })
+        document.body.appendChild(dimsEl)
+      }
+
+      clearTimeout(resizeTimeout)
+
+      const w_16_9 = Math.floor(innerHeight / 9 * 16)
+      const h_16_9 = Math.floor(innerWidth / 16 * 9)
+      let indWidth = ''
+      let indHeight = ''
+
+      if (keepWidth || lastWidth != innerWidth) {
+        keepWidth = true
+        indWidth = indicator(innerWidth, w_16_9, {over: svgs.collapse.horizontal, under: svgs.expand.horizontal})
+      }
+      if (keepHeight || lastHeight != innerHeight) {
+        keepHeight = true
+        indHeight = indicator(innerHeight, h_16_9, {over: svgs.collapse.vertical, under: svgs.expand.vertical})
+      }
+
+      dimsEl.innerHTML = `${indWidth} ${innerWidth} x ${innerHeight} ${indHeight}`
+
+      lastWidth = innerWidth
+      lastHeight = innerHeight
+
+      resizeTimeout = setTimeout(() => {
+        const dimensionsElement = document.getElementById(id)
+        if (dimensionsElement) dimensionsElement.remove()
+        keepHeight = undefined;
+        keepWidth = undefined;
+      }, 3000)
+    }
+
+    window.addEventListener('resize', handleViewportChange)
+    window.addEventListener('mousedown', ev => console.log('mousedown at', { y: ev.clientY, x: ev.clientX }))
+  })()
+  </script>
