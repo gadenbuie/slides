@@ -17,8 +17,8 @@ format:
     #   - https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css
     template-partials:
       - title-slide.html
-    include-after-body:
-      file: _resize-guide.html
+    # include-after-body:
+    #   file: _resize-guide.html
     width: 100%
     height: 100%
     margin: 0
@@ -622,7 +622,7 @@ Infant [day care]{.italic}
 in [very large]{.fw-bold} counties
 ranks 1st in childcare costs
 at $15,416.96 per year,
-[about [12864.75]{.bg-blue} per month]{.fragment .text-gray-12 show-on=0 style="--display: inline"}
+[about [1284.75]{.bg-blue} per month]{.fragment .text-gray-12 show-on=0 style="--display: inline"}
 [about [$1,284.75]{.bg-blue} per month]{.fragment .text-gray-12 show-on=1 style="--display: inline"}
 or 24% of median household income.
 :::
