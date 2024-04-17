@@ -11,6 +11,27 @@ source("app-shinydashboard.R", local = shinydashboard)
 source("app-bslib.R", local = bslib)
 source("app-quick.R", local = quick)
 
+icon_link_card <- function(href, title, icon) {
+  card(
+    card_body(
+      a(
+        href = paste0(
+          if (identical(Sys.getenv("R_CONFIG_ACTIVE", ""), "shinyapps")) {
+            "/jeep-weather"
+          },
+          href
+        ),
+        as_fill_carrier(),
+        div(
+          class = "fs-1 d-flex h-100 justify-content-center align-items-center flex-column",
+          div(bsicons::bs_icon(icon, size = "10rem")),
+          div(title)
+        )
+      )
+    )
+  )
+}
+
 brochureApp(
   page(
     href = "/",
@@ -20,51 +41,9 @@ brochureApp(
       h1("Is this a dashboard?"),
       input_dark_mode(style = "display: none;"),
       layout_columns(
-        card(
-          card_body(
-            a(
-              href = "/shinydashboard",
-              as_fill_carrier(),
-              div(
-                class = "fs-1 d-flex h-100 justify-content-center align-items-center flex-column",
-                div(
-                  bsicons::bs_icon("speedometer", size = "10rem")
-                ),
-                div("shinydashboard")
-              )
-            )
-          )
-        ),
-        card(
-          card_body(
-            a(
-              href = "/bslib",
-              as_fill_carrier(),
-              div(
-                class = "fs-1 d-flex h-100 justify-content-center align-items-center flex-column",
-                div(
-                  bsicons::bs_icon("balloon-fill", size = "10rem")
-                ),
-                div("bslib")
-              )
-            )
-          )
-        ),
-        card(
-          card_body(
-            a(
-              href = "/quick?show=none",
-              as_fill_carrier(),
-              div(
-                class = "fs-1 d-flex flex-column h-100 justify-content-center align-items-center",
-                div(
-                  bsicons::bs_icon("chat-square-heart-fill", size = "10rem")
-                ),
-                div("something else")
-              )
-            )
-          )
-        )
+        icon_link_card("/shinydashboard", "shinydashboard", "speedometer"),
+        icon_link_card("/bslib", "bslib", "balloon-fill"),
+        icon_link_card("/quick?show=none", "something else", "chat-square-heart-fill")
       )
     )
   ),

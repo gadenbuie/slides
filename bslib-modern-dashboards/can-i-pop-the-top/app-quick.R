@@ -202,15 +202,23 @@ ui <- page_fillable(
 )
 
 server <- function(input, output, session) {
-  weather <- reactiveVal(INIT_WEATHER)
+  location <- reactiveVal(INIT_LOCATION)
+
+  observeEvent(input$save_location, {
+    req(input$new_location)
+    location(input$new_location)
+  })
+
+  weather <- reactive({
+    city <- cities[cities$full_name == location(), ]
+    w <- get_city_weather(city)
+    removeModal()
+    w
+  }) |> bindEvent(location())
 
   forecast <- reactive({
     summarize_daytime_weather(weather())
   })
-
-  get_weather <-
-    ExtendedTask$new(\(city) future_promise(get_city_weather(city))) |>
-    bind_task_button("save_location")
 
   observeEvent(input$show_location_modal, {
     showModal(
@@ -265,16 +273,6 @@ server <- function(input, output, session) {
         server = TRUE
       )
     })
-  })
-
-  observeEvent(input$save_location, {
-    city <- cities[cities$full_name == input$new_location, ]
-    get_weather$invoke(city)
-  })
-
-  observe({
-    weather(get_weather$result())
-    removeModal()
   })
 
   show <- reactive(get_show_from_query(session$clientData$url_search))
