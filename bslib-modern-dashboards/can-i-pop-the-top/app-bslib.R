@@ -131,6 +131,9 @@ server <- function(input, output, session) {
   observeEvent(input$location, {
     req(input$location)
     location(input$location)
+    if (grepl("United States", input$location)) {
+      toggle_switch("celsius", value = FALSE)
+    }
   })
 
   weather <- reactive({
