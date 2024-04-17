@@ -1,5 +1,6 @@
 library(shiny)
 library(bslib)
+library(epoxy)
 library(plotly, warn.conflicts = FALSE)
 library(lubridate)
 
@@ -28,55 +29,60 @@ ui <- page_sidebar(
     ),
     input_dark_mode(class = "position-absolute", style = "right: 1rem;")
   ),
-  layout_columns(
-    min_height = 150,
-    value_box(
-      title = textOutput("day1"),
-      value = uiOutput("day1_forecast"),
-      showcase = uiOutput("day1_forecast_icon"),
-      showcase_layout = "top right",
-      theme = "bg-gradient-blue-purple"
+  ui_epoxy_html(
+    .id = "forecast",
+    .class = "bslib-gap-spacing",
+    .style = "display: contents;",
+    layout_columns(
+      min_height = 150,
+      value_box(
+        title = "{{ day1 }}",
+        value = "{{ day1_forecast }}",
+        showcase = "{{ !!day1_forecast_icon }}",
+        showcase_layout = "top right",
+        theme = "bg-gradient-blue-purple"
+      ),
+      value_box(
+        title = "{{ day2 }}",
+        value = "{{ day2_forecast }}",
+        showcase = "{{ !!day2_forecast_icon }}",
+        showcase_layout = "top right",
+        theme = "bg-gradient-blue-purple"
+      ),
+      value_box(
+        title = "{{ day3 }}",
+        value = "{{ day3_forecast }}",
+        showcase = "{{ !!day3_forecast_icon }}",
+        showcase_layout = "top right",
+        theme = "bg-gradient-blue-purple"
+      )
     ),
-    value_box(
-      title = textOutput("day2"),
-      value = uiOutput("day2_forecast"),
-      showcase = uiOutput("day2_forecast_icon"),
-      showcase_layout = "top right",
-      theme = "bg-gradient-blue-purple"
-    ),
-    value_box(
-      title = textOutput("day3"),
-      value = uiOutput("day3_forecast"),
-      showcase = uiOutput("day3_forecast_icon"),
-      showcase_layout = "top right",
-      theme = "bg-gradient-blue-purple"
-    )
-  ),
-  layout_columns(
-    min_height = 225,
-    value_box(
-      textOutput("day1_2"),
-      textOutput("day1_temp_mean"),
-      textOutput("day1_temp_range"),
-      showcase_layout = "bottom",
-      showcase = plotlyOutput("day1_temp_plot"),
-      full_screen = TRUE
-    ),
-    value_box(
-      textOutput("day2_2"),
-      textOutput("day2_temp_mean"),
-      textOutput("day2_temp_range"),
-      showcase_layout = "bottom",
-      showcase = plotlyOutput("day2_temp_plot"),
-      full_screen = TRUE
-    ),
-    value_box(
-      textOutput("day3_2"),
-      textOutput("day3_temp_mean"),
-      textOutput("day3_temp_range"),
-      showcase_layout = "bottom",
-      showcase = plotlyOutput("day3_temp_plot"),
-      full_screen = TRUE
+    layout_columns(
+      min_height = 225,
+      value_box(
+        "{{ day1 }}",
+        "{{ day1_temp_mean }}",
+        "{{ day1_temp_range }}",
+        showcase_layout = "bottom",
+        showcase = plotlyOutput("day1_temp_plot"),
+        full_screen = TRUE
+      ),
+      value_box(
+        "{{ day2 }}",
+        "{{ day1_temp_mean }}",
+        "{{ day1_temp_range }}",
+        showcase_layout = "bottom",
+        showcase = plotlyOutput("day2_temp_plot"),
+        full_screen = TRUE
+      ),
+      value_box(
+        "{{ day3 }}",
+        "{{ day3_temp_mean }}",
+        "{{ day3_temp_range }}",
+        showcase_layout = "bottom",
+        showcase = plotlyOutput("day3_temp_plot"),
+        full_screen = TRUE
+      )
     )
   ),
   value_box(
@@ -130,37 +136,28 @@ server <- function(input, output, session) {
     summarize_daytime_weather(weather())
   })
 
-  day_names <- reactive({
+  value_box_data <- reactive({
     req(forecast())
 
-    strftime(forecast()$day, "%A")
+    ret <- list()
+
+    days <- strftime(forecast()$day, "%A")
+    temp_range <- sprintf("L:%0.0f H:%0.0f", forecast()$temp_low, forecast()$temp_high)
+    temp_mean <- sprintf("%0.0f\u00baF", forecast()$temp_mean)
+
+    for (i in 1:3) {
+      day <- paste0("day", i)
+      ret[[day]] <- days[i]
+      ret[[paste0(day, "_forecast")]] <- forecast()$description[i]
+      ret[[paste0(day, "_forecast_icon")]] <- HTML(format(img(src = forecast()$image[i], alt = "")))
+      ret[[paste0(day, "_temp_range")]] <- temp_range[i]
+      ret[[paste0(day, "_temp_mean")]] <- temp_mean[i]
+    }
+
+    ret
   })
 
-  temp_ranges <- reactive({
-    req(forecast())
-
-    sprintf("L:%0.0f H:%0.0f", forecast()$temp_low, forecast()$temp_high)
-  })
-
-  output$day1 <- output$day1_2 <- renderText(day_names()[1])
-  output$day2 <- output$day2_2 <- renderText(day_names()[2])
-  output$day3 <- output$day3_2 <- renderText(day_names()[3])
-
-  output$day1_forecast <- renderText(forecast()$description[1])
-  output$day2_forecast <- renderText(forecast()$description[2])
-  output$day3_forecast <- renderText(forecast()$description[3])
-
-  output$day1_forecast_icon <- renderUI(img(src = forecast()$image[1], alt = ""))
-  output$day2_forecast_icon <- renderUI(img(src = forecast()$image[2], alt = ""))
-  output$day3_forecast_icon <- renderUI(img(src = forecast()$image[3], alt = ""))
-
-  output$day1_temp_range <- renderText(temp_ranges()[1])
-  output$day2_temp_range <- renderText(temp_ranges()[2])
-  output$day3_temp_range <- renderText(temp_ranges()[3])
-
-  output$day1_temp_mean <- renderText(sprintf("%0.0f\u00baF", forecast()$temp_mean[1]))
-  output$day2_temp_mean <- renderText(sprintf("%0.0f\u00baF", forecast()$temp_mean[2]))
-  output$day3_temp_mean <- renderText(sprintf("%0.0f\u00baF", forecast()$temp_mean[3]))
+  output$forecast <- render_epoxy(.list = value_box_data())
 
   purrr::walk(1:3, function(i) {
     output[[paste0("day", i, "_temp_plot")]] <- renderPlotly({
