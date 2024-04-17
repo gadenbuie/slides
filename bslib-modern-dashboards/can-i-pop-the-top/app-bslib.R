@@ -46,11 +46,9 @@ ui <- page_sidebar(
           )
         ),
         input_dark_mode(),
-      ),
-      multiple = FALSE
+      )
     ),
   ),
-  style = css(min_width = "600px"),
   ui_epoxy_html(
     .id = "forecast",
     .class = "bslib-gap-spacing",
@@ -130,6 +128,12 @@ ui <- page_sidebar(
       position:  sticky;
       left: 0;
       background-color: var(--bs-dark);
+    }
+
+    @media (min-width: 576px) {
+      .bslib-page-sidebar > .bslib-sidebar-layout.html-fill-item > .main {
+        min-width: max(576px, 100%);
+      }
     }
 
     .bslib-value-box.showcase-top-right .value-box-grid .value-box-area {
