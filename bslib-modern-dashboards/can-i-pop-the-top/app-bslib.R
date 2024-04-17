@@ -3,8 +3,7 @@ library(bslib)
 library(epoxy)
 library(plotly, warn.conflicts = FALSE)
 library(lubridate)
-
-`%||%` <- function(a, b) if (!is.null(a)) a else b
+library(htmltools)
 
 cities <- readRDS("data/cities.rds")
 
@@ -20,17 +19,38 @@ ui <- page_sidebar(
   sidebar = sidebar(
     title = "Settings",
     width = "325px",
-    selectizeInput(
-      "location",
-      "Location",
-      choices = INIT_LOCATION,
-      selected = INIT_LOCATION,
-      multiple = FALSE,
-      width = "100%"
+    accordion(
+      accordion_panel(
+        "Location",
+        icon = bsicons::bs_icon("geo-alt-fill"),
+        selectizeInput(
+          "location",
+          "Location",
+          choices = INIT_LOCATION,
+          selected = INIT_LOCATION,
+          multiple = FALSE,
+          width = "100%"
+        ),
+        input_switch("celsius", "Use celsius", value = FALSE),
+      ),
+      accordion_panel(
+        "Theme",
+        icon = bsicons::bs_icon("palette-fill"),
+        selectizeInput(
+          "theme",
+          "Theme",
+          selected = "shiny",
+          choices = list(
+            "bslib" = list("shiny"),
+            "Bootswatch" = bootswatch_themes(5)
+          )
+        ),
+        input_dark_mode(),
+      ),
+      multiple = FALSE
     ),
-    input_switch("celsius", "Use celsius", value = FALSE),
-    input_dark_mode(class = "position-absolute", style = "right: 1rem;")
   ),
+  style = css(min_width = "600px"),
   ui_epoxy_html(
     .id = "forecast",
     .class = "bslib-gap-spacing",
@@ -39,21 +59,21 @@ ui <- page_sidebar(
       min_height = 150,
       value_box(
         title = "{{ day1 }}",
-        value = "{{ day1_forecast }}",
+        value = "{{ !!day1_forecast }}",
         showcase = "{{ !!day1_forecast_icon }}",
         showcase_layout = "top right",
         theme = "bg-gradient-blue-purple"
       ),
       value_box(
         title = "{{ day2 }}",
-        value = "{{ day2_forecast }}",
+        value = "{{ !!day2_forecast }}",
         showcase = "{{ !!day2_forecast_icon }}",
         showcase_layout = "top right",
         theme = "bg-gradient-blue-purple"
       ),
       value_box(
         title = "{{ day3 }}",
-        value = "{{ day3_forecast }}",
+        value = "{{ !!day3_forecast }}",
         showcase = "{{ !!day3_forecast_icon }}",
         showcase_layout = "top right",
         theme = "bg-gradient-blue-purple"
@@ -93,10 +113,10 @@ ui <- page_sidebar(
     showcase_layout = showcase_bottom(max_height_full_screen = "400px"),
     showcase = plotlyOutput("cloud_cover_plot"),
     full_screen = TRUE,
-    min_height = 150
+    min_height = 100
   ),
   card(
-    class = "text-bg-secondary",
+    class = "text-bg-dark",
     card_header("Hourly Conditions", class = "text-bg-dark"),
     card_body(
       uiOutput("hourly_conditions", fill = TRUE, class = "table-responsive"),
@@ -109,7 +129,15 @@ ui <- page_sidebar(
     ".table-sticky-column-1 > * > tr > :first-child {
       position:  sticky;
       left: 0;
-      background-color: var(--bs-secondary);
+      background-color: var(--bs-dark);
+    }
+
+    .bslib-value-box.showcase-top-right .value-box-grid .value-box-area {
+      grid-column: 1 / 3;
+    }
+
+    .bslib-value-box .value-box-value {
+      font-size: calc(1rem + 3cqi);
     }"
   ))
 )
@@ -124,6 +152,12 @@ server <- function(input, output, session) {
       server = TRUE
     )
   })
+
+  observeEvent(input$theme, {
+    session$setCurrentTheme(
+      bs_theme(5, preset = input$theme)
+    )
+  }, ignoreInit = TRUE)
 
   location <- reactiveVal(INIT_LOCATION)
   deg <- reactiveVal("F")
@@ -163,7 +197,8 @@ server <- function(input, output, session) {
 
     days <- strftime(forecast()$day, "%A")
     temp_range <- sprintf("L:%0.0f H:%0.0f", forecast()$temp_low, forecast()$temp_high)
-    temp_mean <- sprintf("%0.0f\u00ba%s", forecast()$temp_mean, deg())
+    temp_fmt <- switch(deg(), "F" = "%0.0f\u00baF", "C" = "%0.1f\u00baC")
+    temp_mean <- sprintf(temp_fmt, forecast()$temp_mean)
 
     for (i in 1:3) {
       day <- paste0("day", i)
