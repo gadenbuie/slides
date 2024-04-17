@@ -1,6 +1,7 @@
 library(shiny)
 library(bslib)
 library(glue)
+library(htmltools)
 
 library(future)
 library(promises)
@@ -311,11 +312,11 @@ server <- function(input, output, session) {
           class = "pt-3 text-center w-100"
         )
       },
-      h2(answer$decision, style = htmltools::css(font_size = size)),
+      h2(answer$decision, style = css(font_size = size)),
       if (show()$reason) {
         div(
           class = "text-center",
-          style = htmltools::css(
+          style = css(
             width = "100%",
             max_width = "500px"
           ),
@@ -338,7 +339,7 @@ server <- function(input, output, session) {
                 img(
                   src = image,
                   alt = glue("{wday}: {description}"),
-                  style = htmltools::css(
+                  style = css(
                     width = "max(7vw, 80px)",
                     height = "max(7vw, 80px)",
                     background_color = glue(
