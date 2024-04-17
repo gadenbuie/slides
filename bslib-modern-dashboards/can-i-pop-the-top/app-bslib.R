@@ -1,6 +1,6 @@
+# Setup ---------------------------------------
 library(shiny)
 library(bslib)
-library(epoxy)
 library(plotly, warn.conflicts = FALSE)
 library(lubridate)
 library(htmltools)
@@ -12,10 +12,86 @@ INIT_CITY <- find_location(INIT_LOCATION, cities)[1, ]
 INIT_LOCATION <- INIT_CITY$full_name
 INIT_WEATHER <- get_city_weather(INIT_CITY)
 
+# Modules ---------------------------------------
+# ---- > Forecast value box ----
+ui_forecast_value_box <- function(id) {
+  ns <- NS(id)
+
+  value_box(
+    title = textOutput(ns("wday")),
+    value = uiOutput(ns("weather")),
+    showcase = uiOutput(ns("icon")),
+    showcase_layout = "top right",
+    theme = "bg-gradient-blue-purple"
+  )
+}
+
+server_forecast_value_box <- function(id, forecast, day = 1) {
+  moduleServer(id, function(input, output, session, ...) {
+    output$wday <- renderText({
+      strftime(forecast()$day[day], "%A")
+    })
+
+    output$weather <- renderUI({
+      forecast()$description[day]
+    })
+
+    output$icon <- renderUI({
+      img(src = forecast()$image[day], alt = "")
+    })
+
+  })
+}
+
+# ---- > Temperature value box ----
+ui_temp_value_box <- function(id) {
+  ns <- NS(id)
+
+  value_box(
+    title = textOutput(ns("wday")),
+    value = textOutput(ns("mean")),
+    textOutput(ns("range")),
+    showcase = plotlyOutput(ns("plot")),
+    showcase_layout = "bottom"
+  )
+}
+
+server_temp_value_box <- function(id, weather, forecast, deg, day = 1) {
+  moduleServer(id, function(input, output, session, ...) {
+    output$wday <- renderText({
+      strftime(forecast()$day[day], "%A")
+    })
+
+    output$mean <- renderText({
+      temp_fmt <- switch(deg(), "F" = "%0.0f\u00baF", "C" = "%0.1f\u00baC")
+      sprintf(temp_fmt, forecast()$temp_mean[day])
+    })
+
+    output$range <- renderText({
+      sprintf("L:%0.0f H:%0.0f", forecast()$temp_low[day], forecast()$temp_high[day])
+    })
+
+    output$plot <- renderPlotly({
+      req(forecast())
+
+      hourly <- weather()$hourly
+
+      temps <- hourly[floor_date(hourly$time, "day") == forecast()$day[day], ]
+
+      plotly_sparkline(
+        temps$time,
+        temps$temperature_2m,
+        y_title = sprintf("Temperature (\u00ba%s)", deg()),
+        color = getCurrentOutputInfo()$accent()
+      )
+    })
+  })
+}
+
 ui <- page_sidebar(
   title = "Jeep Weather Dashboard",
   class = "bslib-page-dashboard",
-  # theme = bs_theme(5, "shiny"),
+  # ---- Sidebar -----
   sidebar = sidebar(
     title = "Settings",
     width = "325px",
@@ -49,62 +125,22 @@ ui <- page_sidebar(
       )
     ),
   ),
-  ui_epoxy_html(
-    .id = "forecast",
-    .class = "bslib-gap-spacing",
-    .style = "display: contents;",
-    layout_columns(
-      min_height = 150,
-      value_box(
-        title = "{{ day1 }}",
-        value = "{{ !!day1_forecast }}",
-        showcase = "{{ !!day1_forecast_icon }}",
-        showcase_layout = "top right",
-        theme = "bg-gradient-blue-purple"
-      ),
-      value_box(
-        title = "{{ day2 }}",
-        value = "{{ !!day2_forecast }}",
-        showcase = "{{ !!day2_forecast_icon }}",
-        showcase_layout = "top right",
-        theme = "bg-gradient-blue-purple"
-      ),
-      value_box(
-        title = "{{ day3 }}",
-        value = "{{ !!day3_forecast }}",
-        showcase = "{{ !!day3_forecast_icon }}",
-        showcase_layout = "top right",
-        theme = "bg-gradient-blue-purple"
-      )
-    ),
-    layout_columns(
-      min_height = 225,
-      value_box(
-        "{{ day1 }}",
-        "{{ day1_temp_mean }}",
-        "{{ day1_temp_range }}",
-        showcase_layout = "bottom",
-        showcase = plotlyOutput("day1_temp_plot"),
-        full_screen = TRUE
-      ),
-      value_box(
-        "{{ day2 }}",
-        "{{ day1_temp_mean }}",
-        "{{ day1_temp_range }}",
-        showcase_layout = "bottom",
-        showcase = plotlyOutput("day2_temp_plot"),
-        full_screen = TRUE
-      ),
-      value_box(
-        "{{ day3 }}",
-        "{{ day3_temp_mean }}",
-        "{{ day3_temp_range }}",
-        showcase_layout = "bottom",
-        showcase = plotlyOutput("day3_temp_plot"),
-        full_screen = TRUE
-      )
-    )
+  # ---- Main Area ----
+  # ---- > Forecast Summary ----
+  layout_columns(
+    min_height = 150,
+    ui_forecast_value_box("day1"),
+    ui_forecast_value_box("day2"),
+    ui_forecast_value_box("day3"),
   ),
+  # ---- > Temperature Summary ----
+  layout_columns(
+    min_height = 225,
+    ui_temp_value_box("temp_day1"),
+    ui_temp_value_box("temp_day2"),
+    ui_temp_value_box("temp_day3")
+  ),
+  # ---- > Cloud Cover ----
   value_box(
     title = "Cloud Cover",
     value = NULL,
@@ -113,6 +149,7 @@ ui <- page_sidebar(
     full_screen = TRUE,
     min_height = 100
   ),
+  # ---- > Hourly Conditions ----
   card(
     class = "text-bg-dark",
     card_header("Hourly Conditions", class = "text-bg-dark"),
@@ -123,6 +160,7 @@ ui <- page_sidebar(
     height = 300,
     min_height = 300,
   ),
+  # ---- > Small style adjustments ----
   tags$style(HTML(
     ".table-sticky-column-1 > * > tr > :first-child {
       position:  sticky;
@@ -146,7 +184,10 @@ ui <- page_sidebar(
   ))
 )
 
+# Server ---------------------------------------
 server <- function(input, output, session) {
+
+  # ---- > Setup ----
   observe({
     updateSelectizeInput(
       session,
@@ -163,6 +204,7 @@ server <- function(input, output, session) {
     )
   }, ignoreInit = TRUE)
 
+  # ---- > Weather and Location ----
   location <- reactiveVal(INIT_LOCATION)
   deg <- reactiveVal("F")
 
@@ -194,48 +236,17 @@ server <- function(input, output, session) {
     summarize_daytime_weather(weather())
   })
 
-  value_box_data <- reactive({
-    req(forecast())
+  # ---- > Forecast value boxes ----
+  server_forecast_value_box("day1", forecast, day = 1)
+  server_forecast_value_box("day2", forecast, day = 2)
+  server_forecast_value_box("day3", forecast, day = 3)
 
-    ret <- list()
+  # ---- > Temperature value boxes ----
+  server_temp_value_box("temp_day1", weather, forecast, deg, day = 1)
+  server_temp_value_box("temp_day2", weather, forecast, deg, day = 2)
+  server_temp_value_box("temp_day3", weather, forecast, deg, day = 3)
 
-    days <- strftime(forecast()$day, "%A")
-    temp_range <- sprintf("L:%0.0f H:%0.0f", forecast()$temp_low, forecast()$temp_high)
-    temp_fmt <- switch(deg(), "F" = "%0.0f\u00baF", "C" = "%0.1f\u00baC")
-    temp_mean <- sprintf(temp_fmt, forecast()$temp_mean)
-
-    for (i in 1:3) {
-      day <- paste0("day", i)
-      ret[[day]] <- days[i]
-      ret[[paste0(day, "_forecast")]] <- forecast()$description[i]
-      ret[[paste0(day, "_forecast_icon")]] <- HTML(format(img(src = forecast()$image[i], alt = "")))
-      ret[[paste0(day, "_temp_range")]] <- temp_range[i]
-      ret[[paste0(day, "_temp_mean")]] <- temp_mean[i]
-    }
-
-    ret
-  })
-
-  output$forecast <- render_epoxy(.list = value_box_data())
-
-  purrr::walk(1:3, function(i) {
-    output[[paste0("day", i, "_temp_plot")]] <- renderPlotly({
-      req(weather())
-      req(forecast())
-
-      hourly <- weather()$hourly
-
-      temps <- hourly[floor_date(hourly$time, "day") == forecast()$day[i], ]
-
-      plotly_sparkline(
-        temps$time,
-        temps$temperature_2m,
-        y_title = epoxy("Temperature (\u00ba{deg()})"),
-        color = getCurrentOutputInfo()$accent()
-      )
-    })
-  })
-
+  # ---- > Cloud Cover Plot ----
   output$cloud_cover_plot <- renderPlotly({
     req(weather())
 
@@ -249,6 +260,7 @@ server <- function(input, output, session) {
     )
   })
 
+  # ---- > Hourly Conditions Table ----
   output$hourly_conditions <- renderUI({
     req(weather())
 
@@ -269,9 +281,16 @@ server <- function(input, output, session) {
         format = "html",
         escape = FALSE,
         align = "c",
-        table.attr = paste(
+        table.attr = paste0(
           'class="table table-sm table-sticky-column-1 table-striped-columns align-middle h-100 m-0"',
-          'style="--bs-table-bg: inherit; --bs-table-color: inherit; --bs-table-striped-color: inherit; --bs-table-striped-bg: rgba(var(--bs-body-bg-rgb), 0.1);"'
+          'style="',
+          css(
+            "--bs-table-bg" = "inherit",
+            "--bs-table-color" = "inherit",
+            "--bs-table-striped-color" = "inherit",
+            "--bs-table-striped-bg" = "rgba(var(--bs-body-bg-rgb), 0.1)"
+          ),
+          '"'
         )
       ) |>
       HTML()
