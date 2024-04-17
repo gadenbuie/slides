@@ -44,7 +44,14 @@ read_weather_codes <- memoise::memoise(function() {
     jsonlite::fromJSON() |>
     purrr::map_depth(2, dplyr::as_tibble) |>
     purrr::map(\(x) purrr::list_rbind(x, names_to = "time_of_day")) |>
-    purrr::list_rbind(names_to = "code")
+    purrr::list_rbind(names_to = "code") |>
+    dplyr::mutate(
+      description = dplyr::recode(
+        description,
+        "Light Thunderstorms With Hail" = "Light Thunderstorms"
+      ),
+      description = gsub("Thunderstorms", "Thunder&shy;storms", description)
+    )
 })
 
 read_weather_forecast <- function(lat = 33.75, lon = -84.38, timezone = "America/New_York") {
@@ -94,7 +101,8 @@ summarize_daytime_weather <- function(weather) {
       temp_high = max(temperature_2m),
       temp_gt_75 = sum(temperature_2m > 75),
       cloudy = sum(cloud_cover > 50),
-      weather = names(table(weather_code))[which.max(table(weather_code))],
+      # weather = names(table(weather_code))[which.max(table(weather_code))],
+      weather = as.character(max(as.integer(weather_code))),
       inclement_weather = sum(weather_code > 10),
       .by = day
     ) |>

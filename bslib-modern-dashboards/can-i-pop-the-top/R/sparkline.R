@@ -29,13 +29,20 @@ plotly_sparkline <- function(
     plotly::config(displayModeBar = F) %>%
     htmlwidgets::onRender(
       "function(el) {
-      el.closest('.bslib-value-box')
-        .addEventListener('bslib.card', function(ev) {
+        const vb = el.closest('.bslib-value-box')
+        if (!vb) {
           Plotly.relayout(el, {
-            'xaxis.visible': ev.detail.fullScreen,
-            'yaxis.visible': ev.detail.fullScreen,
+            'xaxis.visible': true,
+            'yaxis.visible': true,
           });
-        })
-    }"
+        } else {
+          vb.addEventListener('bslib.card', function(ev) {
+            Plotly.relayout(el, {
+              'xaxis.visible': ev.detail.fullScreen,
+              'yaxis.visible': ev.detail.fullScreen,
+            });
+          })
+        }
+      }"
     )
 }
