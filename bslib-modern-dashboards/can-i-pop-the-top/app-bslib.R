@@ -150,15 +150,9 @@ server <- function(input, output, session) {
   output$day2_forecast <- renderText(forecast()$description[2])
   output$day3_forecast <- renderText(forecast()$description[3])
 
-  output$day1_forecast_icon <- renderUI({
-    img(src = forecast()$image[1], alt = "")
-  })
-  output$day2_forecast_icon <- renderUI({
-    img(src = forecast()$image[2], alt = "")
-  })
-  output$day3_forecast_icon <- renderUI({
-    img(src = forecast()$image[3], alt = "")
-  })
+  output$day1_forecast_icon <- renderUI(img(src = forecast()$image[1], alt = ""))
+  output$day2_forecast_icon <- renderUI(img(src = forecast()$image[2], alt = ""))
+  output$day3_forecast_icon <- renderUI(img(src = forecast()$image[3], alt = ""))
 
   output$day1_temp_range <- renderText(temp_ranges()[1])
   output$day2_temp_range <- renderText(temp_ranges()[2])
