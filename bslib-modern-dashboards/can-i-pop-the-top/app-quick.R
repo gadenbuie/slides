@@ -1,5 +1,7 @@
 library(shiny)
 library(bslib)
+library(glue)
+
 library(future)
 library(promises)
 future::plan(multisession)
@@ -282,15 +284,13 @@ server <- function(input, output, session) {
     answer <- decide_to_pop_the_top(forecast())
     city_name <- weather()$city$full_name
 
-    answer_color <- switch(
-      answer$decision,
+    answer_color <- switch(answer$decision,
       Yes = "success",
       Maybe = "warning",
       No = "danger"
     )
 
-    size <- switch(
-      answer$decision,
+    size <- switch(answer$decision,
       Yes = "min(35vw, 50vh)",
       Maybe = "min(20vw, 50vh)",
       No = "min(46vw, 50vh)"
@@ -299,58 +299,67 @@ server <- function(input, output, session) {
     div(
       class = "justify-content-around align-items-center",
       class = "h-100",
-      class = glue::glue("text-{answer_color}-emphasis bg-{answer_color}-subtle"),
+      class = glue("text-{answer_color}-emphasis bg-{answer_color}-subtle"),
       as_fill_carrier(),
-      if (show()$title) h1(
-        actionLink(
-          "show_location_modal",
-          "Can I pop the top?",
-          style = "color: inherit;"
-        ),
-        class = "pt-3 text-center w-100"
-      ),
+      if (show()$title) {
+        h1(
+          actionLink(
+            "show_location_modal",
+            "Can I pop the top?",
+            style = "color: inherit;"
+          ),
+          class = "pt-3 text-center w-100"
+        )
+      },
       h2(answer$decision, style = htmltools::css(font_size = size)),
-      if (show()$reason) div(
-        class = "text-center",
-        style = htmltools::css(
-          width = "100%",
-          max_width = "500px"
-        ),
-        strong(answer$reason),
-        br(),
-        answer$explanation
-      ),
-      if (show()$forecast) div(
-        class = "text-center w-100",
-        div(city_name),
+      if (show()$reason) {
         div(
-          class = "mt-4 d-flex justify-content-evenly",
-          !!!purrr::pmap(
-            forecast(),
-            function(day, description, image, temp_low, temp_high, ...) {
-              img(
-                src = image,
-                style = htmltools::css(
-                  width = "max(7vw, 80px)",
-                  height = "max(7vw, 80px)",
-                  background_color = glue::glue(
-                    "rgba(var(--bs-{answer_color}-rgb), 0.25)"
-                  ),
-                  border_radius = "50%"
-                )
-              ) |>
-              bslib::tooltip(
-                tags$strong(strftime(day, "%A")),
-                br(),
-                description,
-                br(),
-                temp_low, " \u2013 ", temp_high, "°F",
-                placement = "bottom"
-              )
-            }
+          class = "text-center",
+          style = htmltools::css(
+            width = "100%",
+            max_width = "500px"
+          ),
+          strong(answer$reason),
+          br(),
+          answer$explanation
+        )
+      },
+      if (show()$forecast) {
+        div(
+          class = "text-center w-100",
+          div(city_name),
+          div(
+            class = "mt-4 d-flex justify-content-evenly",
+            !!!purrr::pmap(
+              forecast(),
+              function(day, description, image, temp_low, temp_high, ...) {
+                wday <- strftime(day, "%A")
+
+                img(
+                  src = image,
+                  alt = glue("{wday}: {description}"),
+                  style = htmltools::css(
+                    width = "max(7vw, 80px)",
+                    height = "max(7vw, 80px)",
+                    background_color = glue(
+                      "rgba(var(--bs-{answer_color}-rgb), 0.25)"
+                    ),
+                    border_radius = "50%"
+                  )
+                ) |>
+                  bslib::tooltip(
+                    tags$strong(wday),
+                    br(),
+                    description,
+                    br(),
+                    temp_low, " \u2013 ", temp_high, "°F",
+                    placement = "bottom"
+                  )
+              }
+            )
           )
         )
-      )
+      }
     )
   })
 }
