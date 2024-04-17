@@ -200,7 +200,7 @@ server <- function(input, output, session) {
 
     conditions$cell <- purrr::pmap_chr(conditions, function(description, image, ...) {
       tooltip(
-        img(src = image, alt = "description", width = "40px", height = "40px"),
+        img(src = image, alt = description, width = "40px", height = "40px"),
         description
       ) |>
         format()
