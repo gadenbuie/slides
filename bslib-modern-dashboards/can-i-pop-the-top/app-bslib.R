@@ -16,6 +16,7 @@ INIT_WEATHER <- get_city_weather(INIT_CITY)
 ui <- page_sidebar(
   title = "Jeep Weather Dashboard",
   class = "bslib-page-dashboard",
+  # theme = bs_theme(5, "shiny"),
   sidebar = sidebar(
     title = "Settings",
     width = "325px",
@@ -27,6 +28,7 @@ ui <- page_sidebar(
       multiple = FALSE,
       width = "100%"
     ),
+    input_switch("celsius", "Use celsius", value = FALSE),
     input_dark_mode(class = "position-absolute", style = "right: 1rem;")
   ),
   ui_epoxy_html(
@@ -124,6 +126,7 @@ server <- function(input, output, session) {
   })
 
   location <- reactiveVal(INIT_LOCATION)
+  deg <- reactiveVal("F")
 
   observeEvent(input$location, {
     req(input$location)
@@ -132,7 +135,16 @@ server <- function(input, output, session) {
 
   weather <- reactive({
     city <- cities[cities$full_name == location(), ]
-    get_city_weather(city)
+    w <- get_city_weather(city)
+
+    if (input$celsius) {
+      w$hourly$temperature_2m <- to_celsius(w$hourly$temperature_2m)
+      deg("C")
+    } else {
+      deg("F")
+    }
+
+    w
   })
 
   forecast <- reactive({
@@ -148,7 +160,7 @@ server <- function(input, output, session) {
 
     days <- strftime(forecast()$day, "%A")
     temp_range <- sprintf("L:%0.0f H:%0.0f", forecast()$temp_low, forecast()$temp_high)
-    temp_mean <- sprintf("%0.0f\u00baF", forecast()$temp_mean)
+    temp_mean <- sprintf("%0.0f\u00ba%s", forecast()$temp_mean, deg())
 
     for (i in 1:3) {
       day <- paste0("day", i)
@@ -176,6 +188,7 @@ server <- function(input, output, session) {
       plotly_sparkline(
         temps$time,
         temps$temperature_2m,
+        y_title = epoxy("Temperature (\u00ba{deg()})"),
         color = getCurrentOutputInfo()$accent()
       )
     })
@@ -189,8 +202,7 @@ server <- function(input, output, session) {
     plotly_sparkline(
       hourly$time,
       hourly$cloud_cover,
-      x_axis = list(visible = FALSE, showgrid = FALSE, title = "Time of Day"),
-      y_axis = list(visible = FALSE, showgrid = FALSE, title = "Cloud Cover (%)"),
+      y_title = "Cloud Cover (%)",
       color = getCurrentOutputInfo()$fg()
     )
   })

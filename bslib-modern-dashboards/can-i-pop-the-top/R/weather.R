@@ -124,3 +124,7 @@ summarize_conditions <- function(weather, filter_daytime = TRUE) {
     ) |>
     dplyr::select(day, hour, description, image)
 }
+
+to_celsius <- function(x) {
+  (x - 32) * 5 / 9
+}

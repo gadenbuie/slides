@@ -2,8 +2,8 @@ plotly_sparkline <- function(
   x,
   y,
   color = "#000000",
-  x_axis = list(visible = FALSE, showgrid = FALSE, title = "Time of Day"),
-  y_axis = list(visible = FALSE, showgrid = FALSE, title = "Temperature (°F)"),
+  x_title = "Time of Day",
+  y_title = "Temperature (°F)",
   add_fn = plotly::add_lines,
   add_args = list()
 ) {
@@ -18,8 +18,8 @@ plotly_sparkline <- function(
       !!!add_args
     ) %>%
     plotly::layout(
-      xaxis = x_axis,
-      yaxis = y_axis,
+      xaxis = list(visible = FALSE, showgrid = FALSE, title = x_title),
+      yaxis = list(visible = FALSE, showgrid = FALSE, title = y_title),
       hovermode = "x",
       margin = list(t = 0, r = 0, l = 0, b = 0),
       font = list(color = color),
