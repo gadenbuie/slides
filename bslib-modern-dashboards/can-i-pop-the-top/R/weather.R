@@ -1,5 +1,5 @@
 get_weather_forecast <- memoise::memoise(
-  cache = memoise::cache_filesystem(".weather"),
+  cache = cachem::cache_disk(".weather", max_age = 12 * 3600),
   function(lat, lon, timezone) {
     url <- sprintf(
       "https://api.open-meteo.com/v1/forecast?latitude=%s9&longitude=%s&hourly=temperature_2m,weather_code,cloud_cover&daily=sunrise,sunset,precipitation_sum&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=%s&forecast_days=3",
