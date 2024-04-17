@@ -295,9 +295,12 @@ server <- function(input, output, session) {
       No = "min(46vw, 50vh)"
     )
 
+    n_show <- sum(unlist(show()))
+
     div(
-      class = "justify-content-around align-items-center",
-      class = "h-100",
+      class = "align-items-center",
+      class = if (n_show < 3) "justify-content-center gap-4" else "justify-content-around",
+      class = "h-100 p-2",
       class = glue("text-{answer_color}-emphasis bg-{answer_color}-subtle"),
       as_fill_carrier(),
       if (show()$title) {
