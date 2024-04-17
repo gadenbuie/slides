@@ -123,10 +123,15 @@ server <- function(input, output, session) {
     )
   })
 
-  weather <- reactive({
-    req(input$location)
+  location <- reactiveVal(INIT_LOCATION)
 
-    city <- cities[cities$full_name == input$location, ]
+  observeEvent(input$location, {
+    req(input$location)
+    location(input$location)
+  })
+
+  weather <- reactive({
+    city <- cities[cities$full_name == location(), ]
     get_city_weather(city)
   })
 
