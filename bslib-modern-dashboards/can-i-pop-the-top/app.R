@@ -11,6 +11,13 @@ source("app-shinydashboard.R", local = shinydashboard)
 source("app-bslib.R", local = bslib)
 source("app-quick.R", local = quick)
 
+cities <- readRDS("data/cities.rds")
+
+INIT_LOCATION <- "Atlanta, Georgia"
+INIT_CITY <- find_location(INIT_LOCATION, cities)[1, ]
+INIT_LOCATION <- INIT_CITY$full_name
+INIT_WEATHER <- get_city_weather(INIT_CITY)
+
 icon_link_card <- function(href, title, icon) {
   card(
     card_body(
@@ -43,7 +50,7 @@ brochureApp(
       layout_columns(
         icon_link_card("/shinydashboard", "shinydashboard", "speedometer"),
         icon_link_card("/bslib", "bslib", "balloon-fill"),
-        icon_link_card("/quick?show=none", "something else", "chat-square-heart-fill")
+        icon_link_card("/quick", "something else", "chat-square-heart-fill")
       )
     )
   ),

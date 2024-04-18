@@ -9,12 +9,14 @@ future::plan(multisession)
 
 `%||%` <- function(a, b) if (!is.null(a)) a else b
 
-cities <- readRDS("data/cities.rds")
+if (!exists("cities", globalenv())) {
+  cities <- readRDS("data/cities.rds")
 
-INIT_LOCATION <- "Atlanta, Georgia"
-INIT_CITY <- find_location(INIT_LOCATION, cities)[1, ]
-INIT_LOCATION <- INIT_CITY$full_name
-INIT_WEATHER <- get_city_weather(INIT_CITY)
+  INIT_LOCATION <- "Atlanta, Georgia"
+  INIT_CITY <- find_location(INIT_LOCATION, cities)[1, ]
+  INIT_LOCATION <- INIT_CITY$full_name
+  INIT_WEATHER <- get_city_weather(INIT_CITY)
+}
 
 try_these <- list(
   atlanta = list(
