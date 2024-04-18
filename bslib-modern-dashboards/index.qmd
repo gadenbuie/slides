@@ -122,14 +122,6 @@ of our work to move have bslib do more than just theme your apps.
 ![](images/dashboard-shinydashboard.png){.nostretch width="1600"}
 :::
 
-
-## Is this a dashboard?
-
-::: text-center
-![](images/dashboard-excel.jpg){.nostretch width="1500"}
-:::
-
-
 ## Is this a dashboard? {background-color="#FAFAFA"}
 
 ::: text-center
@@ -138,6 +130,12 @@ of our work to move have bslib do more than just theme your apps.
 
 ::: {.footer}
 [<https://dribbble.com/shots/17581433-Mobile-Sales-Analytics-Figma-UI-Kit>]{style="font-size: 0.8em"}
+:::
+
+## Is this a dashboard?
+
+::: text-center
+![](images/dashboard-excel.jpg){.nostretch width="1500"}
 :::
 
 ## Is this a dashboard?
