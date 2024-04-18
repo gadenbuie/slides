@@ -26,8 +26,8 @@ editor:
 # app-bslib: http://localhost:4241/
 # app-quick: http://localhost:4242/
 
-app-bslib: https://garrick-posit.shinyapps.io/jeep-weather/bslib/
-app-quick: https://garrick-posit.shinyapps.io/jeep-weather/quick/
+app-bslib: https://garrick-posit.shinyapps.io/jeep-weather/bslib
+app-quick: https://garrick-posit.shinyapps.io/jeep-weather/quick
 ---
 
 
