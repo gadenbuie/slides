@@ -493,10 +493,12 @@ input_dark_mode(id = "dark_mode")
 
 # Thanks! {.center}
 
-::: {.r-fit-text .incremental .hide-list-marker}
+::: {.incremental .hide-list-marker style="font-size: 6vw;"}
 * 🏡 [garrickadenbuie.com](https://www.garrickadenbuie.com)
+
+* 🛝 [dub.sh/bslib-modern-dash](https://dub.sh/bslib-modern-dash)
 
 * 🦣 [@grrrck@fosstodon.org](https://fosstodon.org/@grrrck)
 
-* 👾 [dub.sh/shiny-discord](https://dub.sh/shiny-discord)
+* 👾 [pos.it/shiny-discord](https://pos.it/shiny-discord)
 :::
