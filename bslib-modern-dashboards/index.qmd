@@ -9,7 +9,7 @@ date: "2024-04-18"
 format:
   revealjs:
     theme: [default, styles.scss]
-    css: 
+    css:
       - css/devices.min.css
       - css/devices-fixup.css
     width: 1920
@@ -41,16 +41,6 @@ app-quick: https://garrick-posit.shinyapps.io/jeep-weather/quick/
 🎨 `{bslib}` with Carson Sievert
 :::
 
-## {background-image="images/cps-towards-next-gen.jpg" background-position="center" background-size="cover"}
-
-::: notes
-Speaking of Carson, last year he gave two great talks about bslib and the future of Shiny.
-Check out "Towards the next generation of shiny ui".
-
-Carson's talks focused on a lot of work we've done in bslib,
-so let me quickly set the stage for you.
-bslib started life as a theming package for Shiny...
-:::
 
 ## shiny + bslib
 
@@ -87,9 +77,15 @@ Drop in `bs_theme()` to get brand new Bootstrap themes
 ## {background-image="images/cps-towards-next-gen.jpg" background-position="center" background-size="cover"}
 
 ::: notes
+Speaking of Carson, last year he gave two great talks about bslib and the future of Shiny.
+Check out "Towards the next generation of shiny ui".
+
+Carson's talks focused on a lot of work we've done in bslib,
+so let me quickly set the stage for you.
+bslib started life as a theming package for Shiny...
+
 Carson's talks were, essentially, an early preview and a big reveal
 of our work to move have bslib do more than just theme your apps.
-
 :::
 
 
@@ -212,6 +208,13 @@ in a **user-friendly and accessible** format.
 
 ## {background-iframe="https://garrick-posit.shinyapps.io/jeep-weather/bslib/" background-interactive="true"}
 
+## {background-image="images/hill-country-camera-xR34oZzcEVw-unsplash.jpg" background-position="center" background-size="cover"}
+
+::: {.footer .text-white}
+[Photo by <a href="https://unsplash.com/@hillcountry_camera?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Hill Country Camera</a> on <a href="https://unsplash.com/photos/a-blue-truck-parked-inside-of-a-garage-xR34oZzcEVw?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  ]{style="font-size: 1em"}
+:::
+
 ## {.center .text-center transition="fade"}
 
 ```{=html}
@@ -234,7 +237,7 @@ in a **user-friendly and accessible** format.
 			</div>
 			<div class="inner-shadow"></div>
 			<div class="screen">
-        <iframe 
+        <iframe
           class="fragment"
           src="{{< meta app-quick >}}?show=title"
           frameborder="0"
@@ -261,7 +264,12 @@ in a **user-friendly and accessible** format.
 
 ## {.center}
 
+[`install.packages("shiny")`]{.r-fit-text}
+
+## {.center}
+
 [`install.packages(c("shiny", "bslib"))`]{.r-fit-text}
+
 
 ## shiny {transition="fade"}
 
