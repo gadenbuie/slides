@@ -1,6 +1,7 @@
 get_weather_forecast <- memoise::memoise(
   cache = cachem::cache_disk(".weather", max_age = 12 * 3600),
   function(lat, lon, timezone) {
+    message("Fetching weather forecast for ", lat, ", ", lon, "...")
     url <- sprintf(
       "https://api.open-meteo.com/v1/forecast?latitude=%s9&longitude=%s&hourly=temperature_2m,weather_code,cloud_cover&daily=sunrise,sunset,precipitation_sum&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=%s&forecast_days=3",
       as.character(lat),
@@ -40,7 +41,8 @@ find_location <- function(search, cities) {
 }
 
 read_weather_codes <- memoise::memoise(function() {
-  "https://gist.github.com/stellasphere/9490c195ed2b53c707087c8c2db4ec0c/raw/76b0cb0ef0bfd8a2ec988aa54e30ecd1b483495d/descriptions.json" |>
+  # "https://gist.github.com/stellasphere/9490c195ed2b53c707087c8c2db4ec0c/raw/76b0cb0ef0bfd8a2ec988aa54e30ecd1b483495d/descriptions.json" |>
+  "data/weather-codes.json" |>
     jsonlite::fromJSON() |>
     purrr::map_depth(2, dplyr::as_tibble) |>
     purrr::map(\(x) purrr::list_rbind(x, names_to = "time_of_day")) |>

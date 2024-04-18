@@ -12,9 +12,8 @@ future::plan(multisession)
 if (!exists("cities", globalenv())) {
   cities <- readRDS("data/cities.rds")
 
-  INIT_LOCATION <- "Atlanta, Georgia"
-  INIT_CITY <- find_location(INIT_LOCATION, cities)[1, ]
-  INIT_LOCATION <- INIT_CITY$full_name
+  INIT_LOCATION <- "Atlanta, Georgia, United States"
+  INIT_CITY <- cities[cities$full_name == INIT_LOCATION, ]
   INIT_WEATHER <- get_city_weather(INIT_CITY)
 }
 
@@ -31,9 +30,9 @@ try_these <- list(
     display = "Seattle, WA",
     name = "Seattle, Washington, United States"
   ),
-  lexington = list(
-    display = "Lexington, KY",
-    name = "Lexington, Kentucky, United States"
+  charlotte = list(
+    display = "Charlotte, NC",
+    name = "Charlotte, North Carolina, United States"
   ),
   wichita = list(
     display = "Wichita, KS",

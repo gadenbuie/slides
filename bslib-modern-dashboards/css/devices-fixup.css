@@ -1,0 +1,5 @@
+.marvel-device .screen {
+    background-color: black;
+    padding-top: 35px;
+    height: calc(100% - 35px);
+}

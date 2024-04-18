@@ -8,9 +8,8 @@ library(htmltools)
 if (!exists("cities", globalenv())) {
   cities <- readRDS("data/cities.rds")
 
-  INIT_LOCATION <- "Atlanta, Georgia"
-  INIT_CITY <- find_location(INIT_LOCATION, cities)[1, ]
-  INIT_LOCATION <- INIT_CITY$full_name
+  INIT_LOCATION <- "Atlanta, Georgia, United States"
+  INIT_CITY <- cities[cities$full_name == INIT_LOCATION, ]
   INIT_WEATHER <- get_city_weather(INIT_CITY)
 }
 
@@ -35,7 +34,7 @@ server_forecast_value_box <- function(id, forecast, day = 1) {
     })
 
     output$weather <- renderUI({
-      forecast()$description[day]
+      HTML(forecast()$description[day])
     })
 
     output$icon <- renderUI({
@@ -54,7 +53,8 @@ ui_temp_value_box <- function(id) {
     value = textOutput(ns("mean")),
     textOutput(ns("range")),
     showcase = plotlyOutput(ns("plot")),
-    showcase_layout = "bottom"
+    showcase_layout = "bottom",
+    full_screen = TRUE
   )
 }
 

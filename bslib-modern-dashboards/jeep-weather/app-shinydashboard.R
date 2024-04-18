@@ -3,14 +3,11 @@ library(plotly)
 library(glue)
 library(shinydashboard)
 
-cities <- readRDS("data/cities.rds")
-
 if (!exists("cities", globalenv())) {
   cities <- readRDS("data/cities.rds")
 
-  INIT_LOCATION <- "Atlanta, Georgia"
-  INIT_CITY <- find_location(INIT_LOCATION, cities)[1, ]
-  INIT_LOCATION <- INIT_CITY$full_name
+  INIT_LOCATION <- "Atlanta, Georgia, United States"
+  INIT_CITY <- cities[cities$full_name == INIT_LOCATION, ]
   INIT_WEATHER <- get_city_weather(INIT_CITY)
 }
 
@@ -104,7 +101,7 @@ server <- function(input, output, session) {
   lapply(1:3, function(i) {
     output[[paste0("day", i)]] <- renderValueBox({
       valueBox(
-        value = forecast()$description[[i]],
+        value = HTML(forecast()$description[[i]]),
         subtitle = strftime(forecast()$day[i], "%A"),
         color = "purple",
         icon = tags$i(img(src = forecast()$image[i], alt = "", style = "opacity: 0.66;"))
