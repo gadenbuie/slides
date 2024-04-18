@@ -62,16 +62,6 @@ decide_to_pop_the_top <- function(forecast) {
     )
   }
 
-  if (!all(forecast$temp_high[1:2] > 75)) {
-    return(
-      answer(
-        "No",
-        "It won't be warm enough.",
-        "The next two days aren't both above 75ºF."
-      )
-    )
-  }
-
   if (sum(forecast$inclement_weather[1:2]) > 2) {
     return(
       answer(
@@ -81,6 +71,16 @@ decide_to_pop_the_top <- function(forecast) {
         " of the next ",
         sum(forecast$hours[1:2]),
         " daytime hours will have bad weather."
+      )
+    )
+  }
+
+  if (!all(forecast$temp_high[1:2] > 75)) {
+    return(
+      answer(
+        "No",
+        "It won't be warm enough.",
+        "The next two days aren't both above 75ºF."
       )
     )
   }
