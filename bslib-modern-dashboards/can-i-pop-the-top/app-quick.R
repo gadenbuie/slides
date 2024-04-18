@@ -149,13 +149,13 @@ decide_to_pop_the_top <- function(forecast) {
     return(
       answer(
         "Maybe",
-        "There's a little bad weather in the forecast two days from now.",
+        "The weather could take a turn soon.",
+        "Bad weather execpted for ",
         forecast$inclement_weather[3],
-        " of the ",
+        " of ",
         forecast$hours[3],
         " daytime hours on ",
-        strftime(forecast$day[3], "%A"),
-        " will have bad weather."
+        strftime(forecast$day[3], "%A.")
       )
     )
   }
