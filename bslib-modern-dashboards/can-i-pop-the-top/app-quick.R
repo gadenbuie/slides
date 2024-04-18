@@ -200,7 +200,31 @@ ui <- page_fillable(
   gap = 0,
   style = "min-height: 666px",
   uiOutput("answer", fill = TRUE),
-  input_dark_mode(id = "dark_mode", style = "display: none;")
+  input_dark_mode(
+    style = css(
+      position = "absolute",
+      right = "0.5rem",
+      top = "0.5rem",
+      "--text-1" = "rgba(var(--bs-emphasis-color-rgb), 0.5)"
+    )
+  ),
+  popover(
+    bsicons::bs_icon(
+      "three-dots",
+      class = "position-absolute",
+      position = "absolute",
+      margin = "0.5rem",
+      top = 0,
+      opacity = 0.5
+    ),
+    title = "Adjust display...",
+    div(
+      class = "bslib-gap-spacing",
+      input_switch("show_title", "Title", value = TRUE),
+      input_switch("show_reason", "Reason", value = TRUE),
+      input_switch("show_forecast", "Forecast", value = TRUE)
+    )
+  )
 )
 
 server <- function(input, output, session) {
@@ -248,7 +272,6 @@ server <- function(input, output, session) {
         ),
         title = "Can I pop the top in ...?",
         footer = tagList(
-          input_dark_mode(mode = input$dark_mode, style = "position: absolute; left: 1rem"),
           modalButton("Cancel"),
           input_task_button("save_location", "Get Forecast"),
         ),
@@ -277,7 +300,26 @@ server <- function(input, output, session) {
     })
   })
 
-  show <- reactive(get_show_from_query(session$clientData$url_search))
+  observe({
+    q <- get_show_from_query(session$clientData$url_search)
+    for (part in names(q)) {
+      toggle_switch(paste0("show_", part), value = q[[part]])
+    }
+  })
+
+  observe({
+    values <- names(which(c(
+      title = input$show_title,
+      reason = input$show_reason,
+      forecast = input$show_forecast
+    )))
+
+    if (!length(values)) {
+      updateQueryString("?show=none")
+    } else {
+      updateQueryString(sprintf("?show=%s", paste(values, collapse = ",")))
+    }
+  })
 
   output$answer <- renderUI({
     req(forecast())
@@ -297,15 +339,16 @@ server <- function(input, output, session) {
       No = "min(46vw, 50vh)"
     )
 
-    n_show <- sum(unlist(show()))
+    n_show <- input$show_title + input$show_reason + input$show_forecast
 
     div(
       class = "align-items-center",
-      class = if (n_show < 3) "justify-content-center gap-4" else "justify-content-around",
+      class = if (n_show == 1) "justify-content-center gap-4"
+        else "justify-content-evenly",
       class = "h-100 p-2",
       class = glue("text-{answer_color}-emphasis bg-{answer_color}-subtle"),
       as_fill_carrier(),
-      if (show()$title) {
+      if (input$show_title) {
         h1(
           actionLink(
             "show_location_modal",
@@ -316,19 +359,20 @@ server <- function(input, output, session) {
         )
       },
       h2(answer$decision, style = css(font_size = size)),
-      if (show()$reason) {
+      if (input$show_reason) {
         div(
           class = "text-center",
           style = css(
             width = "100%",
-            max_width = "500px"
+            max_width = "500px",
+            text_wrap = "pretty",
           ),
           strong(answer$reason),
           br(),
           answer$explanation
         )
       },
-      if (show()$forecast) {
+      if (input$show_forecast) {
         div(
           class = "text-center w-100",
           div(city_name),
