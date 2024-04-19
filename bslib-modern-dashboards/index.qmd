@@ -23,8 +23,8 @@ format:
 editor:
   render-on-save: true
 
-# app-bslib: http://localhost:4241/
-# app-quick: http://localhost:4242/
+# app-bslib: http://localhost:4241
+# app-quick: http://localhost:4242
 
 app-bslib: https://garrick-posit.shinyapps.io/jeep-weather/bslib
 app-quick: https://garrick-posit.shinyapps.io/jeep-weather/quick
@@ -206,7 +206,7 @@ in a **user-friendly and accessible** format.
 
 ## {background-image="images/jeep-weather-shinydashboard.png" background-position="center" background-size="cover"}
 
-## {background-iframe="https://garrick-posit.shinyapps.io/jeep-weather/bslib/" background-interactive="true"}
+## {background-iframe="https://garrick-posit.shinyapps.io/jeep-weather/bslib" background-interactive="true"}
 
 ## {background-image="images/hill-country-camera-xR34oZzcEVw-unsplash.jpg" background-position="center" background-size="cover"}
 
