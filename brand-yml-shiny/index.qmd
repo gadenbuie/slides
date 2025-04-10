@@ -535,7 +535,7 @@ meta: ...
 
 color:
   palette:
-    pink: "#fa9d28" # T-Mobile's signature magenta
+    pink: "#e20074" # T-Mobile's signature magenta
     white: "#fbfbfb"
     black: "#141414"
     blue: "#4886ff"
