@@ -11,9 +11,9 @@ format:
     theme: [default, styles.scss]
 ---
 
-# Introduction
+# [A long, long time ago...]{.text-white .r-fit-text style="font-family: Open Sans;"} {.center #intro background-color="#4A98D3" transition="fade" transition-speed="slow"}
 
-## {background-image="images/rstudio-conf-2019.png" background-size="cover"}
+## {background-image="images/rstudio-conf-2019.png" background-size="cover" transition="fade" transition-speed="slow"}
 
 ## {.center background-image="images/push-to-prod-welcome.png" background-size="cover"}
 

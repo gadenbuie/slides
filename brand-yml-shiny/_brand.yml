@@ -73,7 +73,7 @@ typography:
       source: google
     - family: Rubik
       source: google
-      weight: [400, 600, 700, 900]
+      weight: [200, 400, 600, 700, 900]
 
   base:
     family: "Open Sans"
