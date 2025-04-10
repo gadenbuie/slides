@@ -13,9 +13,9 @@ format:
 
 # [A long, long time ago...]{.text-white .r-fit-text style="font-family: Open Sans;"} {.center #intro background-color="#4A98D3" transition="fade" transition-speed="slow"}
 
-## {background-image="images/rstudio-conf-2019.png" background-size="cover" transition="fade" transition-speed="slow"}
+## {background-image="images/rstudio-conf-2019.png" background-size="cover" transition="fade" transition-speed="slow" background-transition="fade"}
 
-## {.center background-image="images/push-to-prod-welcome.png" background-size="cover"}
+## {.center background-image="images/push-to-prod-welcome.png" background-size="cover" background-transition="concave"}
 
 ::: {.center-vertical .mx-auto .h-100 .font-blocky .fragment .fade-up style="color:white; gap: 0.25em; width: 66%; margin-top: 10rem;"}
 ::: r-fit-text
@@ -1033,8 +1033,9 @@ $navbar-bg: $brand-pink !default;
 Use the same `_brand.yml` file with...
 
 ::: incremental
-- Shiny for Python
-- Quarto documents
+- [Shiny for R](https://shiny.posit.co/blog/posts/bslib-0.9.0/)
+- [Shiny for Python](https://shiny.posit.co/blog/posts/shiny-python-1.2-brand-yml/)
+- [Quarto documents, websites, slides](https://quarto.org/docs/authoring/brand.html)
 - R Markdown reports
 - `pkgdown` sites
 :::
