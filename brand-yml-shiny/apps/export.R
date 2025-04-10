@@ -1,6 +1,7 @@
 if (FALSE) {
   pak::repo_add("https://rstudio.r-universe.dev")
   pak::pak("bslib")
+  pak::pak("sass")
 }
 
 if (TRUE) fs::dir_delete("../shinylive")

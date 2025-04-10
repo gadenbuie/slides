@@ -179,7 +179,11 @@ polished, professional look
 ## shiny + bslib + brand {.shinylive-fullscreen .text-center transition="fade" transition-speed="slow"}
 
 ::: {.flex-column .align-items-center style="height: 100%; margin-top: 2rem;"}
+
+![](images/tmobile-app.jpg)
+
 ```{=html}
+<!--
 <iframe
     src="shinylive/tmobile/index.html"
     class="shinylive-iframe"
@@ -188,6 +192,7 @@ polished, professional look
     allowtransparency="true"
     style="max-height: 700px; max-width: 1200px"
 ></iframe>
+-->
 ```
 :::
 
