@@ -1,0 +1,45 @@
+meta:
+  name: AI@T-Mobile
+  link: https://www.t-mobile.com
+
+logo:
+  images:
+    logo-black: logos/T-Mobile_Logo_Ltd-Use_RGB_K_2022-03-14.png
+    logo-white: logos/T-Mobile_Logo_PRI_RGB_on-M_2022-03-14.png
+    logo-pink: logos/T-Mobile_Logo_PRI_RGB_on-W_2022-03-14.png
+    icon-black: logos/T-Digit_Logo_Ltd-Use_RGB_K_2022-03-14.png
+    icon-white: logos/T-Digit_Logo_PRI_RGB_on-M_2022-03-14.png
+    icon-pink: logos/T-Digit_Logo_PRI_RGB_on-W_2022-03-14.png
+
+  small: icon-pink
+  medium:
+    light: icon-black
+    dark: icon-white
+  large: logo-pink
+
+
+color:
+  palette:
+    pink: "#E20074" # T-Mobile's signature magenta
+    purple: "#46196E"
+    white: "#fbfbfb"
+    black: "#141414"
+    blue: "#4886ff"
+    green: "#2dbf3b"
+    yellow: "#fa9d28"
+    red: "#f44125"
+
+  primary: pink
+
+typography:
+  fonts:
+    - family: Noto Sans
+      source: google
+
+  base:
+    family: Noto Sans
+    weight: 300
+
+  headings:
+    family: Noto Sans
+    weight: 400
