@@ -9,6 +9,13 @@ date: "2025-04-10"
 format:
   revealjs:
     theme: [default, styles.scss]
+    template-partials:
+      - title-slide.html
+
+title-slide-attributes:
+  data-background-image: images/title-slide.png
+  data-background-size: contain
+  data-background-color: black
 ---
 
 ## {.center}
